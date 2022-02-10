@@ -15,8 +15,23 @@ public class PatientService {
             return List.of(
                     new Patient(
                             123456,
-                            "firstname", 
-                            "lastname"
+                            "bob", 
+                            "xom"
+                    ),
+                    new Patient(
+                            2342354456l,
+                            "sally", 
+                            "broll"
+                    ),
+                    new Patient(
+                            56454612,
+                            "quill", 
+                            "sheer"
+                    ),
+                    new Patient(
+                            2341423,
+                            "jj", 
+                            "filly"
                     )
             );  
         } 
