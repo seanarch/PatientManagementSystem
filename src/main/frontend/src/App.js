@@ -1,42 +1,30 @@
-import React, {useState,useEffect} from "react";
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
-import axios from "axios";
+import Navbar from './components/Navbar';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from './pages';
+import Register from './pages/register';
+import Previsit from './pages/previsit';
+import Visit from './pages/visit';
+import Other from './pages/other';
+import Endvisit from './pages/endvisit';
 
-const Patients = () =>{
-    
-    const [patients, setPatients] =  useState([]);
-    
-    const fetchPatients = () => {
-        axios.get("http://localhost:8080/api/patient/").then(res => {            
-            setPatients(res.data);
-            
-        });
-    };
-    
-    useEffect(() => {
-        fetchPatients();
-    }, []);
-    
-    return patients.map((patients, index) => {
-        return(
-            <div key={index}>
-                <h1>{patients.uli}</h1>
-                        <p>
-                            {patients.firstname}
-                            {patients.lastname}                       
-                        </p>        
-            
-            </div>
-            );
-    });
-};
+
 
 function App() {
   return (
-    <div className="App">
-     <Patients/>
-    </div>
+    <Router>
+      <Navbar />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/previsit" element={<Previsit />} />
+        <Route path="/visit" element={<Visit />} />
+        <Route path="/other" element={<Other />} />
+        <Route path="/endvisit" element={<Endvisit />} />
+      </Routes>
+    </Router>
   );
 }
 
