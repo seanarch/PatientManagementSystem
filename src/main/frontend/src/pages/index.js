@@ -8,7 +8,7 @@ const Home = () => {
                 'center', alignItems: 'center', height: '50vh', marginLeft: '37vh'
         }}>
 
-            <Patients />
+            Index Page
 
         </div>
     )
