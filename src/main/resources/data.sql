@@ -1267,14 +1267,34 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
+INSERT INTO PT_ID ( Lastname, Firstname, Sex, Birthday, ULI, TG, Location) 
+VALUES ('Dervis', 'John', 'M','24-FEB-1972', '732917261', 'GI', 'RRDC');
 
-INSERT INTO `_PT ID` VALUES ("Dervis", 100447161, 0, "Lung", "Inpatient");
-INSERT INTO `_PT ID` VALUES ("Finch", 101042770, 0, "Breast", "Inpatient");
-INSERT INTO `_PT ID` VALUES ("Huey", 101357180, 0, "GI", "HXH");
-INSERT INTO `_PT ID` VALUES ("Dosi", 101748411, 0, "CNS", "TBCC");
-INSERT INTO `_PT ID` VALUES ("Manabdhar", 102404210, 0, "Lung", "Inpatient");
-INSERT INTO `_PT ID` VALUES ("Martzen", 102430300, 0, "GI", "HXH");
-INSERT INTO `_PT ID` VALUES ("Iimura", 102867310, 0, "HPB", "HXH");
-INSERT INTO `_PT ID` VALUES ("Haskell", 103161800, 0, "GI", "TBCC");
-INSERT INTO `_PT ID` VALUES ("Brigandi", 103654610, 0, "Lung", "HXH");
-INSERT INTO `_PT ID` VALUES ("Grassini", 104406680, 0, "Lymphoma", "TBCC");
+INSERT INTO PT_ID ( Lastname, Firstname, Sex, Birthday, ULI, TG, Location) 
+VALUES ('Finch', 'Adam', 'M', '05-MAY-1998', '940733349', 'HN' , 'RRDC');
+
+INSERT INTO PT_ID ( Lastname, Firstname, Sex, Birthday, ULI, TG, Location) 
+VALUES ('Huey', 'Linda', 'F', '17-JULY-1977', '673972108', 'Lung', 'RRDC' );
+
+INSERT INTO PT_ID ( Lastname, Firstname, Sex, Birthday, ULI, TG, Location) 
+VALUES ('Dosi', 'Serena', 'F', '31-DEC-1980', '182560549', 'HPB', 'Inpatient');
+
+INSERT INTO PT_ID ( Lastname, Firstname, Sex, Birthday, ULI, TG, Location) 
+VALUES ('Manabdha', 'Abraham', 'M', '29-FEB-2000', '384266529', 'GU', 'TBCC' );
+
+INSERT INTO PT_ID ( Lastname, Firstname, Sex, Birthday, ULI, TG, Location) 
+VALUES ('Martzen', 'Jane', 'F', '01-AUG-1997', '181641135', 'Sarcoma', 'Inpatient' );
+
+INSERT INTO PT_ID ( Lastname, Firstname, Sex, Birthday, ULI, TG, Location) 
+VALUES ('Iimura','Joe', 'F', '11-MAR-1978', '841180517', 'Breast', 'HXH' );
+
+INSERT INTO PT_ID ( Lastname, Firstname, Sex, Birthday, ULI, TG, Location)  
+VALUES ('Brigandi', 'Sam', 'M', '26-SEP-1976', '287809466', 'HPB', 'HXH');
+
+INSERT INTO PT_ID ( Lastname, Firstname, Sex, Birthday, ULI, TG, Location) 
+VALUES ('Grassini', 'Jay', 'M', '08-APR-1969', '557194155', 'GU', 'HXH');
+
+INSERT INTO PT_ID ( Lastname, Firstname, Sex, Birthday, ULI, TG, Location) 
+VALUES ('Haskell', 'Sarah', 'F', '12-NOV-1999', '857376351', 'HN', 'RRDC');
+
+
