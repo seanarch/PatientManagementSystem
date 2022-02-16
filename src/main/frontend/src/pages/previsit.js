@@ -5,8 +5,8 @@ const Previsit = () => {
     return (
         <div style={{
             display: 'flex', justifyContent:
-                'center', alignItems: 'center', height: '90vh'
-        }}>Pre-visit
+                'center', alignItems: 'center', height: '37vh'
+        }}>
 
             <Previsit_search />
         </div>
