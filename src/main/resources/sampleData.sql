@@ -1,5 +1,5 @@
 INSERT INTO `_PT ID` ( Lastname, Firstname, Sex, Birthday, ULI, TG, Location) 
-VALUES ('Dervis', 'John', 'M','24-FEB-1972', '732917261', 'GI', 'RRDC');
+VALUES ('Dervis', 'John', 'M','1972-02-24', '732917261', 'GI', 'RRDC');
 
 INSERT INTO `_PT ID` ( Lastname, Firstname, Sex, Birthday, ULI, TG, Location) 
 VALUES ('Finch', 'Adam', 'M', '1998-05-05', '940733349', 'HN' , 'RRDC');
