@@ -7,9 +7,8 @@ const Home = () => {
             display: 'flex', justifyContent:
                 'center', alignItems: 'center', height: '50vh', marginLeft: '37vh'
         }}>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-            <Patients />
+            Index Page
 
         </div>
     )
