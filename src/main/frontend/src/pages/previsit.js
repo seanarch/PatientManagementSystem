@@ -9,7 +9,7 @@ const Previsit = () => {
                 'center', alignItems: 'center', height: '37vh'
         }}>
 
-            <Previsit_search placeholder="Enter a Patient Name" data={PatientData} />
+            <Previsit_search placeholder="Enter patient Firstname" data={PatientData} />
         </div>
     )
 }
