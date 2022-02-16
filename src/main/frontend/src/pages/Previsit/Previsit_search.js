@@ -50,7 +50,7 @@ function Previsit_search({ placeholder, data }) {
                     {filteredData.slice(0, 15).map((value, key) => {
                         return (
                             <a className="dataItem" href={value.link} target="_blank">
-                                <p>{value.Firstname} </p>
+                                <p>{value.Firstname} {value.LastName}</p>
                             </a>
                         );
                     })}
