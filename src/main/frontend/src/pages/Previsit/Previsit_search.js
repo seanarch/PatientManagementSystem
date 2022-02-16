@@ -3,7 +3,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import CloseIcon from "@material-ui/icons/Close";
 
 // Init patient information 
-const initialDetails = [
+const data = [
     {
         id: 1,
         LastName: "Doe",
@@ -61,14 +61,14 @@ const initialDetails = [
     },
 ];
 
-function Previsit_search({ placeholder, data: initialDetails }) {
+function Previsit_search({ placeholder, data }) {
     const [filteredData, setFilteredData] = useState([]);
     const [wordEntered, setWordEntered] = useState("");
 
     const handleFilter = (event) => {
         const searchWord = event.target.value;
         setWordEntered(searchWord);
-        const newFilter = initialDetails.filter((value) => {
+        const newFilter = data.filter((value) => {
             return value.title.toLowerCase().includes(searchWord.toLowerCase());
         });
 
