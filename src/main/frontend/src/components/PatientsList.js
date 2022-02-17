@@ -6,8 +6,4 @@ export default function PatientsList() {
     const getAllPatients = () => {
         axios.get(url);
     }
-    axios.get(url)
-            .then((response) => {
-                console.log(response);
-            });
 }
