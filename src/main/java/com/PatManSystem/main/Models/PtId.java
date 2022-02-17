@@ -13,8 +13,8 @@ public class PtId {
     @Column(name = "ULI", nullable = false)
     private Integer id;
 
-    @Column(name = "LastName", length = 45)
-    private String lastName;
+    @Column(name = "Lastname", length = 45)
+    private String lastname;
 
     @Column(name = "Firstname", nullable = false, length = 45)
     private String firstname;
@@ -82,12 +82,12 @@ public class PtId {
         this.firstname = firstname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.lastname = lastname;
     }
 
     public Integer getId() {
