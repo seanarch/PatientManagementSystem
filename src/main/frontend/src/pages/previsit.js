@@ -1,10 +1,7 @@
-import React from 'react'
-import Previsit_search from './Previsit/Previsit_search'
-import PatientsList from '../components/PatientsList'
-// import PatientData from "../data/patientsdata.json"
-// import axios from "axios"
-
-const db = PatientsList();
+import React from 'react';
+import SearchPatient from '../components/SearchPatient';
+//import PatientData from "../data/patientsdata.json"
+//import Previsit_search from './Previsit/Previsit_search';
 
 const Previsit = () => {
     return (
@@ -13,7 +10,7 @@ const Previsit = () => {
                 'center', alignItems: 'center', height: '37vh'
         }}>
 
-            <Previsit_search placeholder="Enter patient Firstname" data={db} />
+            <SearchPatient />
         </div>
     )
 }
