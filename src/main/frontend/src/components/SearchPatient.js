@@ -6,7 +6,7 @@ export default function SearchPatient() {
     const [filteredResults, setFilteredResults] = useState([]);
     const [searchInput, setSearchInput] = useState('');
 
-    // Test performed on the following json format api
+    // Test performed on the following json format api, you can use item.name for test 
 
     // useEffect(() => {
     //     axios.get(`https://jsonplaceholder.typicode.com/users`)
