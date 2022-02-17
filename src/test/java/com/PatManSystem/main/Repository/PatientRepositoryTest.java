@@ -19,8 +19,7 @@ class PatientRepositoryTest {
     public void printAllPatients(){
         List<PtId> ptIdList = studentRepository.findAll();
 
-        System.out.println("ptIdList = " + ptIdList);
-
+        for (PtId ptId : ptIdList) System.out.println(((PtId) ptId).getFirstname());
     }
 
 }
