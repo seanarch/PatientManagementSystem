@@ -21,6 +21,10 @@ public class PatientService{
 
     public List<PtId> getPatients(){
         List<PtId> ptIdList = studentRepository.findAll();
+
+        for (PtId ptId : ptIdList) {
+            System.out.println("ptIdList.get(i).getFirstname() = " + ptId.getFirstname());
+        }
            return ptIdList;
     }
 
