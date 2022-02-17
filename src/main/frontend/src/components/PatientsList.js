@@ -4,6 +4,10 @@ import axios from "axios";
 export default function PatientsList() {
     const url = "http://localhost:8080/api/patient/";
     const getAllPatients = () => {
-        axios.get(url)
+        axios.get(url);
     }
+    axios.get(url)
+            .then((response) => {
+                console.log(response);
+            });
 }
