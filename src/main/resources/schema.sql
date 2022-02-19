@@ -963,7 +963,7 @@ CREATE TABLE IF NOT EXISTS `pmsdb`.`PHx` (
   `AttendedFamily` TINYINT NULL DEFAULT NULL,
   `LacksSocialSupport` TINYINT NULL DEFAULT NULL,
   `LanguageBarrier` TINYINT NULL DEFAULT NULL,
-  `FinanchialChallenge` TINYINT NULL DEFAULT NULL,
+  `FinancialChallenge` TINYINT NULL DEFAULT NULL,
   `PsychosocialChallenge` TINYINT NULL DEFAULT NULL,
   `GOC designation` INT NULL DEFAULT NULL,
   `ETOH/week` VARCHAR(45) NULL DEFAULT NULL,
@@ -1205,7 +1205,7 @@ CREATE TABLE IF NOT EXISTS `pmsdb`.`RT` (
     ON UPDATE NO ACTION,
   CONSTRAINT `SkinReaction_rt_fk`
     FOREIGN KEY (`SkinReaction`)
-    REFERENCES `pmsdb`.`zRTSkin` (`zRTSkinID`)
+    REFERENCES `pms-db`.`zRTSkin` (`zRTSkinID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `LowerGI_rt_fk`
