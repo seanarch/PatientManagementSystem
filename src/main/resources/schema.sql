@@ -5,9 +5,6 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
--- -----------------------------------------------------
--- -----------------------------------------------------
 -- Schema pmsdb
 -- -----------------------------------------------------
 DROP SCHEMA IF EXISTS `pmsdb` ;
@@ -19,15 +16,15 @@ CREATE SCHEMA IF NOT EXISTS `pmsdb` DEFAULT CHARACTER SET utf8 ;
 USE `pmsdb` ;
 
 -- -----------------------------------------------------
--- Table `pmsdb`.`_PT ID`
+-- Table `pmsdb`.`PatientInformation`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `pmsdb`.`_PT ID` ;
+DROP TABLE IF EXISTS `pmsdb`.`PatientInformation` ;
 
-CREATE TABLE IF NOT EXISTS `pmsdb`.`_PT ID` (
+CREATE TABLE IF NOT EXISTS `pmsdb`.`PatientInformation` (
   `Lastname` VARCHAR(45) NULL DEFAULT NULL,
-  `Firstname` VARCHAR(45) NOT NULL,
-  `Sex` CHAR(1) NOT NULL,
-  `Birthday` DATE NOT NULL,
+  `Firstname` VARCHAR(45) NULL,
+  `Sex` CHAR(1) NULL,
+  `Birthday` DATE NULL,
   `ULI` INT NOT NULL,
   `Print` TINYINT NULL DEFAULT NULL,
   `TG` VARCHAR(45) NULL DEFAULT NULL,
@@ -95,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `pmsdb`.`Assess` (
   INDEX `Breathing_fk` (`Breathing` ASC),
   CONSTRAINT `ULI_assess`
     FOREIGN KEY (`ULI`)
-    REFERENCES `pmsdb`.`_PT ID` (`ULI`)
+    REFERENCES `pmsdb`.`PatientInformation` (`ULI`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `ECOG_fk`
@@ -137,7 +134,7 @@ CREATE TABLE IF NOT EXISTS `pmsdb`.`ChildPugh` (
   INDEX `ULI_childPugh` (`ULI` ASC),
   CONSTRAINT `ULI_childPugh`
     FOREIGN KEY (`ULI`)
-    REFERENCES `pmsdb`.`_PT ID` (`ULI`)
+    REFERENCES `pmsdb`.`PatientInformation` (`ULI`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -172,7 +169,7 @@ CREATE TABLE IF NOT EXISTS `pmsdb`.`Consider` (
   INDEX `Consider_consider` (`Consider` ASC),
   CONSTRAINT `ULI_consider`
     FOREIGN KEY (`ULI`)
-    REFERENCES `pmsdb`.`_PT ID` (`ULI`)
+    REFERENCES `pmsdb`.`PatientInformation` (`ULI`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `Consider_consider`
@@ -213,7 +210,7 @@ CREATE TABLE IF NOT EXISTS `pmsdb`.`DI` (
   INDEX `DI_fk` (`TypeDI` ASC),
   CONSTRAINT `ULI_di`
     FOREIGN KEY (`ULI`)
-    REFERENCES `pmsdb`.`_PT ID` (`ULI`)
+    REFERENCES `pmsdb`.`PatientInformation` (`ULI`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `DI_fk`
@@ -239,7 +236,7 @@ CREATE TABLE IF NOT EXISTS `pmsdb`.`Death` (
   INDEX `ULI_death` (`ULI` ASC),
   CONSTRAINT `ULI_death`
     FOREIGN KEY (`ULI`)
-    REFERENCES `pmsdb`.`_PT ID` (`ULI`)
+    REFERENCES `pmsdb`.`PatientInformation` (`ULI`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -274,7 +271,7 @@ CREATE TABLE IF NOT EXISTS `pmsdb`.`Decision` (
   INDEX `decision_fk` (`Decision` ASC),
   CONSTRAINT `ULI_decision`
     FOREIGN KEY (`ULI`)
-    REFERENCES `pmsdb`.`_PT ID` (`ULI`)
+    REFERENCES `pmsdb`.`PatientInformation` (`ULI`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `decision_fk`
@@ -393,7 +390,7 @@ CREATE TABLE IF NOT EXISTS `pmsdb`.`Dx` (
     ON UPDATE NO ACTION,
   CONSTRAINT `ULI_dx`
     FOREIGN KEY (`ULI`)
-    REFERENCES `pmsdb`.`_PT ID` (`ULI`)
+    REFERENCES `pmsdb`.`PatientInformation` (`ULI`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -564,7 +561,7 @@ CREATE TABLE IF NOT EXISTS `pmsdb`.`Exam` (
   INDEX `Breath_fk` (`Breath` ASC),
   CONSTRAINT `ULI_exam`
     FOREIGN KEY (`ULI`)
-    REFERENCES `pmsdb`.`_PT ID` (`ULI`)
+    REFERENCES `pmsdb`.`PatientInformation` (`ULI`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `CNS_fk`
@@ -758,7 +755,7 @@ CREATE TABLE IF NOT EXISTS `pmsdb`.`FU` (
   INDEX `TypeFU_fk` (`Type FU:` ASC),
   CONSTRAINT `ULI_fu`
     FOREIGN KEY (`ULI`)
-    REFERENCES `pmsdb`.`_PT ID` (`ULI`)
+    REFERENCES `pmsdb`.`PatientInformation` (`ULI`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `Clinical Response_fk`
@@ -837,7 +834,7 @@ CREATE TABLE IF NOT EXISTS `pmsdb`.`HPI` (
   INDEX `Descript_fk` (`Descriptor` ASC),
   CONSTRAINT `ULI_hpi`
     FOREIGN KEY (`ULI`)
-    REFERENCES `pmsdb`.`_PT ID` (`ULI`)
+    REFERENCES `pmsdb`.`PatientInformation` (`ULI`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `Descript_fk`
@@ -878,7 +875,7 @@ CREATE TABLE IF NOT EXISTS `pmsdb`.`MNG` (
   INDEX `Intervention_fk` (`Intervention` ASC),
   CONSTRAINT `ULI_mng`
     FOREIGN KEY (`ULI`)
-    REFERENCES `pmsdb`.`_PT ID` (`ULI`)
+    REFERENCES `pmsdb`.`PatientInformation` (`ULI`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `Intervention_fk`
@@ -903,7 +900,7 @@ CREATE TABLE IF NOT EXISTS `pmsdb`.`NP Cons` (
   INDEX `ULI_npCons` (`ULI` ASC),
   CONSTRAINT `ULI_npCons`
     FOREIGN KEY (`ULI`)
-    REFERENCES `pmsdb`.`_PT ID` (`ULI`)
+    REFERENCES `pmsdb`.`PatientInformation` (`ULI`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -929,7 +926,7 @@ CREATE TABLE IF NOT EXISTS `pmsdb`.`PFT` (
   INDEX `ULI_pft` (`ULI` ASC),
   CONSTRAINT `ULI_pft`
     FOREIGN KEY (`ULI`)
-    REFERENCES `pmsdb`.`_PT ID` (`ULI`)
+    REFERENCES `pmsdb`.`PatientInformation` (`ULI`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -950,16 +947,16 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `pmsdb`.`PHx`
+-- Table `pmsdb`.`PastHistory`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `pmsdb`.`PHx` ;
+DROP TABLE IF EXISTS `pmsdb`.`PastHistory` ;
 
-CREATE TABLE IF NOT EXISTS `pmsdb`.`PHx` (
-  `PHXID` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `pmsdb`.`PastHistory` (
+  `PHx` INT NOT NULL,
   `ULI` INT NOT NULL,
-  `FhxDetail` VARCHAR(45) NULL DEFAULT NULL,
+  `FhxDetail` VARCHAR(500) NULL DEFAULT NULL,
   `SmokingPackYears` INT NULL DEFAULT NULL,
-  `SmokeQuit` INT NULL DEFAULT NULL,
+  `SmokeQuit` VARCHAR(45) NULL DEFAULT NULL,
   `AttendedFamily` TINYINT NULL DEFAULT NULL,
   `LacksSocialSupport` TINYINT NULL DEFAULT NULL,
   `LanguageBarrier` TINYINT NULL DEFAULT NULL,
@@ -967,13 +964,13 @@ CREATE TABLE IF NOT EXISTS `pmsdb`.`PHx` (
   `PsychosocialChallenge` TINYINT NULL DEFAULT NULL,
   `GOC designation` INT NULL DEFAULT NULL,
   `ETOH/week` VARCHAR(45) NULL DEFAULT NULL,
-  `Detail` VARCHAR(100) NULL DEFAULT NULL,
-  PRIMARY KEY (`PHXID`),
+  `Detail` VARCHAR(1000) NULL DEFAULT NULL,
+  PRIMARY KEY (`PHx`),
   INDEX `ULI_phx` (`ULI` ASC),
   INDEX `GOC_fk` (`GOC designation` ASC),
   CONSTRAINT `ULI_phx`
     FOREIGN KEY (`ULI`)
-    REFERENCES `pmsdb`.`_PT ID` (`ULI`)
+    REFERENCES `pmsdb`.`PatientInformation` (`ULI`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `GOC_fk`
@@ -986,20 +983,20 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `pmsdb`.`PMhx`
+-- Table `pmsdb`.`PastMedicalHistory`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `pmsdb`.`PMhx` ;
+DROP TABLE IF EXISTS `pmsdb`.`PastMedicalHistory` ;
 
-CREATE TABLE IF NOT EXISTS `pmsdb`.`PMhx` (
+CREATE TABLE IF NOT EXISTS `pmsdb`.`PastMedicalHistory` (
   `PMhx` INT NOT NULL,
   `ULI` INT NOT NULL,
-  `Dx` VARCHAR(200) NULL DEFAULT NULL,
+  `Dx` VARCHAR(8000) NULL DEFAULT NULL,
   `Gen_Dx` VARCHAR(1) NULL DEFAULT NULL,
   PRIMARY KEY (`PMhx`),
   INDEX `ULI_pmhx` (`ULI` ASC),
   CONSTRAINT `ULI_pmhx`
     FOREIGN KEY (`ULI`)
-    REFERENCES `pmsdb`.`_PT ID` (`ULI`)
+    REFERENCES `pmsdb`.`PatientInformation` (`ULI`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -1047,7 +1044,7 @@ CREATE TABLE IF NOT EXISTS `pmsdb`.`ROS` (
   INDEX `ULI_ros` (`ULI` ASC),
   CONSTRAINT `ULI_ros`
     FOREIGN KEY (`ULI`)
-    REFERENCES `pmsdb`.`_PT ID` (`ULI`)
+    REFERENCES `pmsdb`.`PatientInformation` (`ULI`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -1087,7 +1084,7 @@ CREATE TABLE IF NOT EXISTS `pmsdb`.`Symptom` (
     ON UPDATE NO ACTION,
   CONSTRAINT `ULI_symptom`
     FOREIGN KEY (`ULI`)
-    REFERENCES `pmsdb`.`_PT ID` (`ULI`)
+    REFERENCES `pmsdb`.`PatientInformation` (`ULI`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -1175,7 +1172,7 @@ CREATE TABLE IF NOT EXISTS `pmsdb`.`RT` (
   INDEX `GU_fk_idx` (`GU` ASC),
   CONSTRAINT `ULI_rt`
     FOREIGN KEY (`ULI`)
-    REFERENCES `pmsdb`.`_PT ID` (`ULI`)
+    REFERENCES `pmsdb`.`PatientInformation` (`ULI`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `TypeRT_fk`
@@ -1205,7 +1202,7 @@ CREATE TABLE IF NOT EXISTS `pmsdb`.`RT` (
     ON UPDATE NO ACTION,
   CONSTRAINT `SkinReaction_rt_fk`
     FOREIGN KEY (`SkinReaction`)
-    REFERENCES `pms-db`.`zRTSkin` (`zRTSkinID`)
+    REFERENCES `pmsdb`.`zRTSkin` (`zRTSkinID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `LowerGI_rt_fk`
