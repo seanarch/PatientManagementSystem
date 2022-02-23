@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `pmsdb`.`PatientInformation` (
   `Firstname` VARCHAR(45) NULL,
   `Sex` CHAR(1) NULL,
   `Birthday` DATE NULL,
-  `ULI` INT NOT NULL,
+  `ULI` BIGINT NOT NULL,
   `Print` TINYINT NULL DEFAULT NULL,
   `TG` VARCHAR(45) NULL DEFAULT NULL,
   `Location` VARCHAR(45) NULL DEFAULT NULL,
@@ -80,7 +80,7 @@ DROP TABLE IF EXISTS `pmsdb`.`Assess` ;
 
 CREATE TABLE IF NOT EXISTS `pmsdb`.`Assess` (
   `WtID` INT NOT NULL,
-  `ULI` INT NOT NULL,
+  `ULI` BIGINT NOT NULL,
   `Date` DATE NULL DEFAULT NULL,
   `ECOG` INT NULL DEFAULT NULL,
   `Swallowing` INT NULL DEFAULT NULL,
@@ -121,7 +121,7 @@ DROP TABLE IF EXISTS `pmsdb`.`ChildPugh` ;
 
 CREATE TABLE IF NOT EXISTS `pmsdb`.`ChildPugh` (
   `CPID` INT NOT NULL,
-  `ULI` INT NOT NULL,
+  `ULI` BIGINT NOT NULL,
   `Date` DATE NULL DEFAULT NULL,
   `Total Bili (umol/l)` INT NULL DEFAULT NULL,
   `Serum Alb (g/l)` INT NULL DEFAULT NULL,
@@ -161,7 +161,7 @@ DROP TABLE IF EXISTS `pmsdb`.`Consider` ;
 
 CREATE TABLE IF NOT EXISTS `pmsdb`.`Consider` (
   `ConID` INT NOT NULL,
-  `ULI` INT NOT NULL,
+  `ULI` BIGINT NOT NULL,
   `Consider` INT NULL DEFAULT NULL,
   `Detail` VARCHAR(200) NULL DEFAULT NULL,
   PRIMARY KEY (`ConID`),
@@ -182,29 +182,29 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `pmsdb`.`zDI`
+-- Table `pmsdb`.`TypeOfDiagnosticImaging`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `pmsdb`.`zDI` ;
+DROP TABLE IF EXISTS `pmsdb`.`TypeOfDiagnosticImaging` ;
 
-CREATE TABLE IF NOT EXISTS `pmsdb`.`zDI` (
-  `zDIID` INT NOT NULL,
-  `zDIInfo` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`zDIID`))
+CREATE TABLE IF NOT EXISTS `pmsdb`.`TypeOfDiagnosticImaging` (
+  `TypeID` INT NOT NULL,
+  `Description` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`TypeID`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `pmsdb`.`DI`
+-- Table `pmsdb`.`DiagnosticImaging`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `pmsdb`.`DI` ;
+DROP TABLE IF EXISTS `pmsdb`.`DiagnosticImaging` ;
 
-CREATE TABLE IF NOT EXISTS `pmsdb`.`DI` (
+CREATE TABLE IF NOT EXISTS `pmsdb`.`DiagnosticImaging` (
   `DI` INT NOT NULL,
-  `ULI` INT NOT NULL,
+  `ULI` BIGINT NOT NULL,
   `DateDI` DATE NULL DEFAULT NULL,
   `TypeDI` INT NULL DEFAULT NULL,
-  `Finding` VARCHAR(200) NULL DEFAULT NULL,
+  `Finding` VARCHAR(5000) NULL DEFAULT NULL,
   PRIMARY KEY (`DI`),
   INDEX `ULI_di` (`ULI` ASC),
   INDEX `DI_fk` (`TypeDI` ASC),
@@ -215,7 +215,7 @@ CREATE TABLE IF NOT EXISTS `pmsdb`.`DI` (
     ON UPDATE NO ACTION,
   CONSTRAINT `DI_fk`
     FOREIGN KEY (`TypeDI`)
-    REFERENCES `pmsdb`.`zDI` (`zDIID`)
+    REFERENCES `pmsdb`.`TypeOfDiagnosticImaging` (`TypeID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -229,7 +229,7 @@ DROP TABLE IF EXISTS `pmsdb`.`Death` ;
 
 CREATE TABLE IF NOT EXISTS `pmsdb`.`Death` (
   `DeathID` INT NOT NULL,
-  `ULI` INT NOT NULL,
+  `ULI` BIGINT NOT NULL,
   `Date` DATE NULL DEFAULT NULL,
   `Detail` VARCHAR(200) NULL DEFAULT NULL,
   PRIMARY KEY (`DeathID`),
@@ -263,7 +263,7 @@ DROP TABLE IF EXISTS `pmsdb`.`Decision` ;
 
 CREATE TABLE IF NOT EXISTS `pmsdb`.`Decision` (
   `DecID` INT NOT NULL,
-  `ULI` INT NOT NULL,
+  `ULI` BIGINT NOT NULL,
   `Decision` INT NULL DEFAULT NULL,
   `Detail` VARCHAR(200) NULL DEFAULT NULL,
   PRIMARY KEY (`DecID`),
@@ -343,7 +343,7 @@ DROP TABLE IF EXISTS `pmsdb`.`Dx` ;
 CREATE TABLE IF NOT EXISTS `pmsdb`.`Dx` (
   `Bx ID` INT NOT NULL,
   `Nodes +ve` VARCHAR(10) NULL DEFAULT NULL,
-  `ULI` INT NOT NULL,
+  `ULI` BIGINT NOT NULL,
   `OR Date` DATE NULL DEFAULT NULL,
   `Location` INT NULL DEFAULT NULL,
   `OR` INT NULL DEFAULT NULL,
@@ -534,7 +534,7 @@ DROP TABLE IF EXISTS `pmsdb`.`Exam` ;
 
 CREATE TABLE IF NOT EXISTS `pmsdb`.`Exam` (
   `Exam` INT NOT NULL,
-  `ULI` INT NOT NULL,
+  `ULI` BIGINT NOT NULL,
   `Date` DATE NULL DEFAULT NULL,
   `CNS` INT NULL DEFAULT NULL,
   `Lung` INT NULL DEFAULT NULL,
@@ -729,7 +729,7 @@ DROP TABLE IF EXISTS `pmsdb`.`FU` ;
 
 CREATE TABLE IF NOT EXISTS `pmsdb`.`FU` (
   `FU RT` INT NOT NULL,
-  `ULI` INT NOT NULL,
+  `ULI` BIGINT NOT NULL,
   `Date` DATE NULL DEFAULT NULL,
   `Type FU:` INT NULL DEFAULT NULL,
   `Clinical Response` INT NULL DEFAULT NULL,
@@ -827,7 +827,7 @@ DROP TABLE IF EXISTS `pmsdb`.`HPI` ;
 
 CREATE TABLE IF NOT EXISTS `pmsdb`.`HPI` (
   `ID` INT NOT NULL,
-  `ULI` INT NOT NULL,
+  `ULI` BIGINT NOT NULL,
   `Descriptor` INT NULL DEFAULT NULL,
   PRIMARY KEY (`ID`),
   INDEX `ULI_hpi` (`ULI` ASC),
@@ -866,7 +866,7 @@ DROP TABLE IF EXISTS `pmsdb`.`MNG` ;
 
 CREATE TABLE IF NOT EXISTS `pmsdb`.`MNG` (
   `MNG` INT NOT NULL,
-  `ULI` INT NOT NULL,
+  `ULI` BIGINT NOT NULL,
   `Date` DATE NULL DEFAULT NULL,
   `Intervention` INT NULL DEFAULT NULL,
   `Detail` VARCHAR(100) NULL DEFAULT NULL,
@@ -894,7 +894,7 @@ DROP TABLE IF EXISTS `pmsdb`.`NP Cons` ;
 
 CREATE TABLE IF NOT EXISTS `pmsdb`.`NP Cons` (
   `Bx ID` INT NOT NULL,
-  `ULI` INT NOT NULL,
+  `ULI` BIGINT NOT NULL,
   `New Consult` DATE NULL DEFAULT NULL,
   PRIMARY KEY (`Bx ID`),
   INDEX `ULI_npCons` (`ULI` ASC),
@@ -908,13 +908,13 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `pmsdb`.`PFT`
+-- Table `pmsdb`.`PulmonaryFunctionTests`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `pmsdb`.`PFT` ;
+DROP TABLE IF EXISTS `pmsdb`.`PulmonaryFunctionTests` ;
 
-CREATE TABLE IF NOT EXISTS `pmsdb`.`PFT` (
+CREATE TABLE IF NOT EXISTS `pmsdb`.`PulmonaryFunctionTests` (
   `PFT` INT NOT NULL,
-  `ULI` INT NOT NULL,
+  `ULI` BIGINT NOT NULL,
   `Date` DATE NULL DEFAULT NULL,
   `FVC` DOUBLE NULL DEFAULT NULL,
   `FVC%` INT NULL DEFAULT NULL,
@@ -934,14 +934,14 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `pmsdb`.`zGOC`
+-- Table `pmsdb`.`GoalOfCare`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `pmsdb`.`zGOC` ;
+DROP TABLE IF EXISTS `pmsdb`.`GoalOfCare` ;
 
-CREATE TABLE IF NOT EXISTS `pmsdb`.`zGOC` (
-  `zGOCID` INT NOT NULL,
-  `zGOCInfo` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`zGOCID`))
+CREATE TABLE IF NOT EXISTS `pmsdb`.`GoalOfCare` (
+  `TypeID` INT NOT NULL,
+  `Description` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`TypeID`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
@@ -953,7 +953,7 @@ DROP TABLE IF EXISTS `pmsdb`.`PastHistory` ;
 
 CREATE TABLE IF NOT EXISTS `pmsdb`.`PastHistory` (
   `PHx` INT NOT NULL,
-  `ULI` INT NOT NULL,
+  `ULI` BIGINT NOT NULL,
   `FhxDetail` VARCHAR(500) NULL DEFAULT NULL,
   `SmokingPackYears` INT NULL DEFAULT NULL,
   `SmokeQuit` VARCHAR(45) NULL DEFAULT NULL,
@@ -975,7 +975,7 @@ CREATE TABLE IF NOT EXISTS `pmsdb`.`PastHistory` (
     ON UPDATE NO ACTION,
   CONSTRAINT `GOC_fk`
     FOREIGN KEY (`GOC designation`)
-    REFERENCES `pmsdb`.`zGOC` (`zGOCID`)
+    REFERENCES `pmsdb`.`GoalOfCare` (`TypeID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -989,7 +989,7 @@ DROP TABLE IF EXISTS `pmsdb`.`PastMedicalHistory` ;
 
 CREATE TABLE IF NOT EXISTS `pmsdb`.`PastMedicalHistory` (
   `PMhx` INT NOT NULL,
-  `ULI` INT NOT NULL,
+  `ULI` BIGINT NOT NULL,
   `Dx` VARCHAR(8000) NULL DEFAULT NULL,
   `Gen_Dx` VARCHAR(1) NULL DEFAULT NULL,
   PRIMARY KEY (`PMhx`),
@@ -1010,7 +1010,7 @@ DROP TABLE IF EXISTS `pmsdb`.`ROS` ;
 
 CREATE TABLE IF NOT EXISTS `pmsdb`.`ROS` (
   `ROS` INT NOT NULL,
-  `ULI` INT NOT NULL,
+  `ULI` BIGINT NOT NULL,
   `Date` DATE NULL DEFAULT NULL,
   `Fevers / Chills` TINYINT NULL DEFAULT NULL,
   `BADLs` TINYINT NULL DEFAULT NULL,
@@ -1071,7 +1071,7 @@ DROP TABLE IF EXISTS `pmsdb`.`Symptom` ;
 
 CREATE TABLE IF NOT EXISTS `pmsdb`.`Symptom` (
   `SxID` INT NOT NULL,
-  `ULI` INT NOT NULL,
+  `ULI` BIGINT NOT NULL,
   `Symptom` INT NULL DEFAULT NULL,
   `Detail` VARCHAR(100) NULL DEFAULT NULL,
   PRIMARY KEY (`SxID`),
@@ -1137,7 +1137,7 @@ DROP TABLE IF EXISTS `pmsdb`.`RT` ;
 
 CREATE TABLE IF NOT EXISTS `pmsdb`.`RT` (
   `RT` INT NOT NULL,
-  `ULI` INT NOT NULL,
+  `ULI` BIGINT NOT NULL,
   `DateRTStart` DATE NULL DEFAULT NULL,
   `DateRTEnd` DATE NULL DEFAULT NULL,
   `TypeRT` INT NULL DEFAULT NULL,
