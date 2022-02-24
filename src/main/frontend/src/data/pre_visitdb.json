@@ -1,0 +1,40 @@
+{
+    "patients": [
+        {
+            "DateDI": "21-Feb-17",
+            "CT Chest": [
+                {
+                    "id": 1,
+                    "type": "Bone Scane"
+                },
+                {
+                    "id": 2,
+                    "type": "CT CAP"
+                }
+            ],
+            "Comments": "",
+            "Date": "21-Feb-17",
+            "Bili": "",
+            "Checkbox": 1,
+            "id": 1
+        },
+        {
+            "DateDI": "21-Feb-17",
+            "CT Chest": [
+                {
+                    "id": 1,
+                    "type": "Bone Scane"
+                },
+                {
+                    "id": 2,
+                    "type": "CT CAP"
+                }
+            ],
+            "Comments": "",
+            "Date": "21-Feb-17",
+            "Bili": "",
+            "Checkbox": 1,
+            "id": 1
+        }
+    ]
+}
