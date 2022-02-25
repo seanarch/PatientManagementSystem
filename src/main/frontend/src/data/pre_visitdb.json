@@ -12,9 +12,9 @@
                     "type": "CT CAP"
                 }
             ],
-            "Comments": "",
+            "Comments": "comment1",
             "Date": "21-Feb-17",
-            "Bili": "",
+            "Bili": "text",
             "Checkbox": 1,
             "id": 1
         },
@@ -30,9 +30,9 @@
                     "type": "CT CAP"
                 }
             ],
-            "Comments": "",
+            "Comments": "comment2",
             "Date": "21-Feb-17",
-            "Bili": "",
+            "Bili": "text2",
             "Checkbox": 1,
             "id": 1
         }
