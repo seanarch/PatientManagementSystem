@@ -15,7 +15,7 @@
             "Comments": "comment1",
             "Date": "21-Feb-17",
             "Bili": "text",
-            "Checkbox": 1,
+            "Checkbox": false,
             "id": 1
         },
         {
@@ -33,7 +33,7 @@
             "Comments": "comment2",
             "Date": "21-Feb-17",
             "Bili": "text2",
-            "Checkbox": 1,
+            "Checkbox": false,
             "id": 1
         }
     ]
