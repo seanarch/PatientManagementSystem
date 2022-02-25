@@ -1,17 +1,39 @@
 import React from "react";
-import { useState, useEffect } from "react";
 import patientService from "../../services/patient.service";
+import * as Yup from "yup";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link } from 'react-router-dom';
 import { useFormik } from "formik";
 
 const Previsit_patientlist = () => {
-    const [patients, setPatients] = useState([]);
+    // Use traditional way instead of formik
+
+    // const [patients, setPatients] = useState([]);
     // const [comments, setcomments] = useState('');
     // const [textinput, setTextinput] = useState('');
     // const [date, setDate] = useState('');
     // const [dropdown, setDropdown] = useState('');
     // const [checkbox, setCheckbox] = useState('');
+
+
+
+    // useEffect(() => {
+    //     patientService.getAll()
+    //         .then(response => {
+    //             console.log('Printing patients data', response.data);
+    //             setPatients(response.data);
+    //         })
+    //         .catch(error => {
+    //             console.log('Something wrong', error);
+    //         })
+
+    // }, [])
+
+    // console.log(comments);
+    // console.log(textinput);
+    // console.log(date);
+    // console.log(dropdown);
+    // console.log(checkbox);
+
 
     const formik = useFormik({
 
@@ -22,28 +44,18 @@ const Previsit_patientlist = () => {
             dropdown: "",
             checkbox: "",
         },
-    })
+        // added validation
+        validationSchema: Yup.object({
+            comments: Yup.string().max(15, "Must be 15 characters or less").required("Required"),
+        }),
+        onSubmit: (values) => {
+            console.log(values);
+        },
+    });
 
-    console.log(formik.values);
+    console.log(formik.errors);
 
 
-    useEffect(() => {
-        patientService.getAll()
-            .then(response => {
-                console.log('Printing patients data', response.data);
-                setPatients(response.data);
-            })
-            .catch(error => {
-                console.log('Something wrong', error);
-            })
-
-    }, [])
-
-    // console.log(comments);
-    // console.log(textinput);
-    // console.log(date);
-    // console.log(dropdown);
-    // console.log(checkbox);
     return (
         <div className="container">
             <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
@@ -51,7 +63,7 @@ const Previsit_patientlist = () => {
             <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
             <h3>List of patient information</h3>
             <hr />
-            <form>
+            <form onSubmit={formik.handleSubmit}>
 
                 <div className="input-container">
                     <h3>Textarea input component</h3>
@@ -61,6 +73,8 @@ const Previsit_patientlist = () => {
                         rows="5" cols="30"
                         onChange={formik.handleChange}
                         value={formik.values.comments}></textarea>
+                    {/* added error message */}
+                    {formik.errors.comments ? <p>{formik.errors.comments}</p> : null}
                     <hr />
                     <br></br>
                     <h3>Text input component</h3>
@@ -93,7 +107,7 @@ const Previsit_patientlist = () => {
                     <br></br>
                     <div>
 
-                        <button className="btn btn-primary">Submit</button>
+                        <button type="submit" className="btn btn-primary">Save changes</button>
                     </div>
                 </div>
 
