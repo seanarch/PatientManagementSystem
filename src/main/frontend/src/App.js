@@ -8,6 +8,7 @@ import Previsit from './pages/previsit';
 import Visit from './pages/visit';
 import Other from './pages/other';
 import Endvisit from './pages/endvisit';
+import NotFound from './pages/NotFound';
 
 
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/visit" element={<Visit />} />
         <Route path="/other" element={<Other />} />
         <Route path="/endvisit" element={<Endvisit />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
