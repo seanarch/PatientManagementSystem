@@ -1,6 +1,5 @@
 package com.PatManSystem.main.Controllers;
 
-import com.PatManSystem.main.Models.Patient;
 import com.PatManSystem.main.Models.PtId;
 import com.PatManSystem.main.Services.PatientService;
 import java.util.List;
