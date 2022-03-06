@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "`_pt id`")
+@Table(name = "patientinformation")
 public class PtId {
     @Id
     @Column(name = "ULI", nullable = false)
