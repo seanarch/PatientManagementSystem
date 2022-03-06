@@ -12,7 +12,7 @@ function Previsit_search({ placeholder, data }) {
     const handleFilter = (event) => {
         const searchWord = event.target.value;
         setWordEntered(searchWord);
-        const newFilter = data.filter((value) => {
+        const newFilter =  data.filter((value) => {
             return value.Firstname.toLowerCase().includes(searchWord.toLowerCase());
         });
 

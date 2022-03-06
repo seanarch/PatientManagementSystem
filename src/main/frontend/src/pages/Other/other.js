@@ -1,5 +1,5 @@
 import React from 'react';
-import {  useFormik } from 'formik';
+import { useFormik } from 'formik';
 import { FormControl, InputLabel, Select, MenuItem, Box } from '@material-ui/core';
 import TextField from '@mui/material/TextField';
 import { Button } from 'reactstrap';
@@ -8,40 +8,19 @@ import { Button } from 'reactstrap';
 const Other = () => {
     const otherForm = useFormik({
         initialValues: {
-            CNS: {
-                ECOG: ""
-            },
-            Lung: {
-                ECOG: ""
-            },
-            HN: {
-                ECOG: ""
-            },
-            Oral: {
-                ECOG: ""
-            },
-            Cardiac: {
-                ECOG: ""
-            },
-            MSK: {
-                Description:""
-            },
-            Skin: {
-                ECOG: ""
-            },
-            Adbo: {
-                ECOG:""
-            },
-            ABNORMAL: {
-                Description:""
-            },
-            Supine: {
-                Setup:""
-            },
-            Breath: {
-                Breath:""
-            }
+            CNS: { ECOG: "" },
+            Lung: { ECOG: "" },
+            HN: { ECOG: "" },
+            Oral: { ECOG: "" },
+            Cardiac: { ECOG: "" },
+            MSK: { Description: "" },
+            Skin: { ECOG: "" },
+            Adbo: { ECOG: "" },
+            ABNORMAL: { Description: "" },
+            Supine: { Setup: "" },
+            Breath: { Breath: "" },
         },
+
         /*  no validation because these fields can be null in database */
         onSubmit: (values) => {
             console.log(values)
@@ -49,11 +28,14 @@ const Other = () => {
         }
     })
     return (
+ 
         <div style={{
             display: 'flex', justifyContent:
-                'center', alignItems: 'center', marginTop: '30px', lineHeight: '10px'
+                'center', alignItems: 'center', marginTop: '50px', lineHeight: '10px'
         }}>
             <Box component="form" style={{ width: '70vw' }} onSubmit={otherForm.handleSubmit}>
+                <h3>Patient Exam</h3>
+                
                 <Box mb={3}>
                     <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label">CNS</InputLabel>
@@ -258,11 +240,10 @@ const Other = () => {
                         value={otherForm.values.ABNORMAL.Description}
                     />
                 </Box>
-
-                <Button color="primary" type="submit" >Save</Button>
-
+                <Button color="primary" type="submit" >Save</Button> 
             </Box>
         </div>
+ 
     )
 }
 
