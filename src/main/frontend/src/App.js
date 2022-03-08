@@ -4,11 +4,12 @@ import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages';
 import Register from './pages/Register/RegisterPage';
-import Previsit from './pages/previsit';
+import Previsit from './pages/Previsit/PrevisitPage';
 import Visit from './pages/visit';
 import Other from './pages/Other/other';
 import Endvisit from './pages/endvisit';
 import NotFound from './pages/NotFound';
+
 
 
 
