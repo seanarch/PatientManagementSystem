@@ -10,6 +10,7 @@ const Previsit = () => (
     <div>
     
         <GeneralInfo />
+         
         <DetailedInfo />
      
     </div>
