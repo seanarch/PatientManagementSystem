@@ -6,17 +6,8 @@ import TextField from '../../components/TextField/TextFeild';
 import DatePicker from '../../components/Date/DatePicker';
 import axios from "axios"; 
 
-
 const INITIAL_VALUES = {
-    DetailedInformation: {
-        Date1: "2021-03-17",
-        Bili: "2021-04-17",
-        Alb: "2021-05-17",
-        PTINR: "2021-06-17",
-        Ascites: 10.10,
-        HepaticEnch: "String",
-        CPScore: 10,
-        ChildPugh: "S",
+    FVCFEVInformation: {
         Date2: "2021-02-17",
         FVC: 10.10,
         FVCperc: 10,
@@ -27,7 +18,7 @@ const INITIAL_VALUES = {
     },
 }
 
-const DetailedInfo = () => {
+const FVCFEVInfo = () => {
     return (
         <Container maxWidth="md">
         <div className='container' style={{
@@ -40,56 +31,57 @@ const DetailedInfo = () => {
 >
                 {props => (
                     <Form>
-                        <h3>Detailed Information</h3>
+                        <h3>FVC FEV Information</h3>
                         <Grid container spacing={3} width={'70vw'}>
                             <Grid item xs={12}>
                                 <DatePicker
                                         fullWidth
-                                        name="DetailedInformation.Date1"
+                                        name="FVCFEVInformation.Date2"
                                         label="Date"
                                     />
                                 </Grid>
+                        
                             <Grid item xs={12}>
-                                <DatePicker
-                                        fullWidth
-                                        name="DetailedInformation.Bili"
-                                        label="Bili"
-                                    />
-                                </Grid>
-                            <Grid item xs={12}>
-                                <DatePicker
-                                        fullWidth
-                                        name="DetailedInformation.Alb"
-                                        label="Alb"
-                                    />
-                                </Grid>
-                            <Grid item xs={12}>
-                                <DatePicker
-                                        fullWidth
-                                        name="DetailedInformation.PTINR"
-                                        label="PTINR"
+                                    <TextField
+                                        name="FVCFEVInformation.FVC"
+                                        label="FVC"
                                     />
                                 </Grid>
                             <Grid item xs={12}>
                                     <TextField
-                                        name="DetailedInformation.HepaticEnch"
-                                        label="HepaticEnch"
-                                    />
-                                </Grid>
-                            <Grid item xs={12}>
-                                    <TextField
-                                        name="DetailedInformation.CPScore"
-                                        label="CPScore"
-                                    />
-                                </Grid>
-                            <Grid item xs={12}>
-                                    <TextField
-                                        name="DetailedInformation.ChildPugh"
-                                        label="ChildPugh"
+                                        name="FVCFEVInformation.FVCperc"
+                                        label="FVC%"
                                     />
                                 </Grid>
                                 <hr></hr>
-
+                            <Grid item xs={12}>
+                                    <TextField
+                                        name="FVCFEVInformation.FEV1"
+                                        label="FEV1"
+                                    />
+                                </Grid>
+                                <hr></hr>
+                            <Grid item xs={12}>
+                                    <TextField
+                                        name="FVCFEVInformation.FEV1perc"
+                                        label="FEV%"
+                                    />
+                                </Grid>
+                                <hr></hr>
+                            <Grid item xs={12}>
+                                    <TextField
+                                        name="FVCFEVInformation.Ratio"
+                                        label="Ratio"
+                                    />
+                                </Grid>
+                                <hr></hr>
+                            <Grid item xs={12}>
+                                    <TextField
+                                        name="FVCFEVInformation.DLCO"
+                                        label="DLCO"
+                                    />
+                                </Grid>
+                                <hr></hr>
                                 <Grid item xs={12}>
                                     <Button color='primary' type="submit">Save</Button>
                                 </Grid>
@@ -103,4 +95,4 @@ const DetailedInfo = () => {
     )
 }
 
-export default DetailedInfo;
+export default FVCFEVInfo;
