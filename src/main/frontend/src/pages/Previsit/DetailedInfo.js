@@ -1,18 +1,14 @@
-import React, { useState } from "react";
-import patientService from "../../services/patient.service";
-import * as Yup from "yup";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import React from 'react';
+import { Formik, Form } from 'formik';
 import { Button } from 'reactstrap';
 import { Container, Grid, InputLabel, Select, MenuItem, FormControl } from '@material-ui/core';
 import TextField from '../../components/TextField/TextFeild';
 import DatePicker from '../../components/Date/DatePicker';
-import axios from "axios";
-import { TextArea } from "semantic-ui-react";
+import axios from "axios"; 
 
 
 const INITIAL_VALUES = {
-    DetailedInfomration: {
+    DetailedInformation: {
         Date1: "2021-03-17",
         Bili: "2021-04-17",
         Alb: "2021-05-17",
@@ -92,7 +88,7 @@ const DetailedInfo = () => {
                                         label="ChildPugh"
                                     />
                                 </Grid>
-
+                                 
                             <Grid item xs={12}>
                                 <DatePicker
                                         fullWidth
