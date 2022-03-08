@@ -4,13 +4,14 @@ import { Button } from 'reactstrap';
 import { Container, Grid, InputLabel, Select, MenuItem, FormControl } from '@material-ui/core';
 import TextField from '../../components/TextField/TextFeild';
 import DatePicker from '../../components/Date/DatePicker';
+import { TextareaAutosize } from '@mui/base';
 import axios from "axios"; 
 
 const INITIAL_VALUES = {
     GeneralInformation: {
         DateDI: "2021-02-17",
         CTchest: "1",
-        Comments: "Some comments here",
+        Comments: "Some comments here Some comments here Some comments here Some comments here",
     },
 }
 
@@ -43,9 +44,13 @@ const GeneralInfo = () => {
                                     />
                                 </Grid>
                                 <Grid item xs={12}> 
-                                    <TextField  
+                                    <TextareaAutosize  
+                                        maxRows={4}
+                                        aria-label="maximum height" 
+                                        defaultValue={INITIAL_VALUES.GeneralInformation.Comments} 
+                                        style={{ width: 200 }}
                                         name="GeneralInformation.Comments"
-                                        label="Comments"
+                                         
                                     />
                                 </Grid>
 
