@@ -17,13 +17,6 @@ const INITIAL_VALUES = {
         HepaticEnch: "String",
         CPScore: 10,
         ChildPugh: "S",
-        Date2: "2021-02-17",
-        FVC: 10.10,
-        FVCperc: 10,
-        FEV1: 10.10,
-        FEV1perc: 10,
-        Ratio: 10,
-        DLCO: 10,
     },
 }
 
