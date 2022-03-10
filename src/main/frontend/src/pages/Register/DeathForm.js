@@ -11,7 +11,7 @@ import TextField from '../../components/TextField/TextFeild';
 const INITIAL_VALUES = {
   Death: {
     Date: "",
-    Detail: "",
+    Detail: "Details",
   }
 };
 

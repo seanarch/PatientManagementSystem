@@ -57,9 +57,6 @@ const ORinfo = () => {
                                     />
                                 </Grid>
 
-
-                            
-                
                             <Grid item xs={12}>
                             <h5>LVSI</h5>
                                 <label>
