@@ -2,7 +2,7 @@ import React from 'react';
 import { Formik, Form } from 'formik';
 import { Button } from 'reactstrap';
 import { Container, Grid, InputLabel, Select, MenuItem, FormControl } from '@material-ui/core';
-import TextField from '../../components/TextField/TextFeild';
+import TextField from '../../components/TextField/TextField';
 import DatePicker from '../../components/Date/DatePicker';
 import { TextareaAutosize } from '@mui/base';
 import axios from "axios"; 
