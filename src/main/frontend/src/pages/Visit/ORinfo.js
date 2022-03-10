@@ -1,5 +1,5 @@
 import React from 'react';
-import { Formik, Form } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import { Button } from 'reactstrap';
 import { Container, Grid, InputLabel, Select, MenuItem, FormControl } from '@material-ui/core';
 import TextField from '../../components/TextField/TextFeild';
@@ -58,12 +58,22 @@ const ORinfo = () => {
                                 </Grid>
 
 
-                                <hr></hr>
-
-                                <Grid item xs={12}>
-                                    <Button color='primary' type="submit">Save</Button>
-                                </Grid>
+                            
+                
+                            <Grid item xs={12}>
+                            <h5>LVSI</h5>
+                                <label>
+                                    <Field type="checkbox" name="ORInformation.LVSI" />
+                                     
+                                </label>
                             </Grid>
+
+                                <hr></hr>
+                                
+                            <Grid item xs={12}>
+                                    <Button color='primary' type="submit">Save</Button>
+                            </Grid>
+                        </Grid>
                         
                     </Form>
                 )}
