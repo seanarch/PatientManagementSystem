@@ -1,12 +1,13 @@
 import React from 'react'
+import ORinfo from './Visit/ORinfo';
 
-const Visit = () => {
-    return (
-        <div style={{
-            display: 'flex', justifyContent:
-                'center', alignItems: 'center', height: '90vh'
-        }}>Visit</div>
-    )
-}
 
-export default Visit
+const visit = () => (
+    <div>
+    
+        <ORinfo />
+     
+    </div>
+);
+
+export default visit;
