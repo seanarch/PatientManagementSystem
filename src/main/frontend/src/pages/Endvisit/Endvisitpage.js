@@ -38,29 +38,26 @@ const Endvisitpage = () => {
                     <Form>
                         
                         <Grid container spacing={3} width={'70vw'}>
-                        <h3>Consideration</h3>
-                                <Grid item xs={12}> 
-                                    <TextareaAutosize  
-                                        maxRows={10}
-                                        aria-label="maximum height" 
-                                        defaultValue={INITIAL_VALUES.Endvisit.Consideration} 
-                                        style={{ width: 800 }}
-                                        name="Consideration"
-                                         
-                                    />
-                                </Grid>
+                        
+                        <Grid item xs={12}>
+                            <TextField
+                                fullWidth
+                                label="Consideration"
+                                name="Endvisit.Consideration"
+                                multiline
+                                rows={4}
+                            />
+                            </Grid>
 
-                        <h3>Decision</h3>
-                                <Grid item xs={12}> 
-                                    <TextareaAutosize  
-                                        maxRows={10}
-                                        aria-label="maximum height" 
-                                        defaultValue={INITIAL_VALUES.Endvisit.Decision} 
-                                        style={{ width: 800 }}
-                                        name="Decision"
-                                         
-                                    />
-                                </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                fullWidth
+                                label="Decision"
+                                name="Endvisit.Decision"
+                                multiline
+                                rows={4}
+                            />
+                            </Grid>
                                  
 
                                 <Grid item xs={12}>
