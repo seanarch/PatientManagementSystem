@@ -43,17 +43,15 @@ const GeneralInfo = () => {
                                         label="CTchest"
                                     />
                                 </Grid>
-                                <Grid item xs={12}> 
-                                    <TextareaAutosize  
-                                        maxRows={4}
-                                        aria-label="maximum height" 
-                                        defaultValue={INITIAL_VALUES.GeneralInformation.Comments} 
-                                        style={{ width: 200 }}
+                                <Grid item xs={12}>
+                                    <TextField
+                                        fullWidth
+                                        label="Comments"
                                         name="GeneralInformation.Comments"
-                                         
+                                        multiline
+                                        rows={4}
                                     />
-                                </Grid>
-
+                                    </Grid>
                                  
 
                                 <Grid item xs={12}>
