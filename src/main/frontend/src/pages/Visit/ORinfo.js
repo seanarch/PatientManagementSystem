@@ -1,10 +1,12 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import { Button } from 'reactstrap';
-import { Container, Grid, InputLabel, Select, MenuItem, FormControl } from '@material-ui/core';
+import { Container, Grid, InputLabel, Select, MenuItem, FormControl, Checkbox } from '@material-ui/core';
 import TextField from '../../components/TextField/TextField';
 import DatePicker from '../../components/Date/DatePicker';
 import axios from "axios"; 
+ 
+ 
 
 const INITIAL_VALUES = {
     ORInformation: {
@@ -21,13 +23,15 @@ const INITIAL_VALUES = {
 	Ntaken: "Nodes taken",
 	M: "M string",
 	Stage: "Stage string",
-	LVSI: 1,
-	Peri: 1,
+	LVSI: true,
+	Peri: false,
 	Pathology: 10,
     },
 }
 
 const ORinfo = () => {
+    
+
     return (
         <Container maxWidth="md">
         <div className='container' style={{
@@ -61,10 +65,78 @@ const ORinfo = () => {
                             <h5>LVSI</h5>
                                 <label>
                                     <Field type="checkbox" name="ORInformation.LVSI" />
-                                     
                                 </label>
                             </Grid>
 
+                            <Grid item xs={12}>
+                            <h5>PeriNeur</h5>
+                                <label>
+                                    <Field type="checkbox" name="ORInformation.Peri" />
+                                </label>
+                            </Grid>
+ 
+                            <Grid item xs={12}>
+                                <label>
+                                    <TextField 
+                                        name="ORInformation.T"
+                                        label="T"
+                                         />
+                                </label>
+                            </Grid>
+
+                            <Grid item xs={12}>
+                                <label>
+                                    <TextField 
+                                        name="ORInformation.N"
+                                        label="N"
+                                         />
+                                </label>
+                            </Grid>
+
+                            <Grid item xs={12}>
+                                <label>
+                                    <TextField 
+                                        name="ORInformation.Nve"
+                                        label="N+ve"
+                                         />
+                                </label>
+                            </Grid>
+
+                            <Grid item xs={12}>
+                                <label>
+                                    <TextField 
+                                        name="ORInformation.Ntaken"
+                                        label="N Taken"
+                                         />
+                                </label>
+                            </Grid>
+
+                            <Grid item xs={12}>
+                                <label>
+                                    <TextField 
+                                        name="ORInformation.M"
+                                        label="M"
+                                         />
+                                </label>
+                            </Grid>
+
+                            <Grid item xs={12}>
+                                <label>
+                                    <TextField 
+                                        name="ORInformation.Stage"
+                                        label="Stage"
+                                         />
+                                </label>
+                            </Grid>
+ 
+                            <Grid item xs={12}>
+                                <label>
+                                    <TextField 
+                                        name="ORInformation.Pathology"
+                                        label="Pathology"
+                                         />
+                                </label>
+                            </Grid>
                                 <hr></hr>
                                 
                             <Grid item xs={12}>
