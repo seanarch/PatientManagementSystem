@@ -1,9 +1,8 @@
 package com.PatManSystem.main.Models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "headandneck")
@@ -11,6 +10,28 @@ public class Headandneck {
     @Id
     @Column(name = "TypeID", nullable = false)
     private Integer id;
+
+    @Column(name = "Description", nullable = false, length = 200)
+    private String description;
+
+    @OneToMany(mappedBy = "hn")
+    private Set<Exam> exams = new LinkedHashSet<>();
+
+    public Set<Exam> getExams() {
+        return exams;
+    }
+
+    public void setExams(Set<Exam> exams) {
+        this.exams = exams;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public Integer getId() {
         return id;
@@ -20,5 +41,4 @@ public class Headandneck {
         this.id = id;
     }
 
-    //TODO Reverse Engineering! Migrate other columns to the entity
 }
