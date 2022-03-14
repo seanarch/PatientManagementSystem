@@ -1,7 +1,6 @@
 package com.PatManSystem.main.Services;
 
 
-import com.PatManSystem.main.Models.Patient;
 import java.util.List;
 
 import com.PatManSystem.main.Models.PtId;
