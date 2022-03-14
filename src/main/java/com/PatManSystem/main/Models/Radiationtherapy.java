@@ -4,17 +4,15 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "radiationtherapy", indexes = {
-        @Index(name = "GU_fk_idx", columnList = "GU")
-})
-public class RadiationTherapy {
+@Table(name = "radiationtherapy")
+public class Radiationtherapy {
     @Id
     @Column(name = "RT", nullable = false)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ULI", nullable = false)
-    private PtId ptId;
+    private PtId uli;
 
     @Column(name = "DateRTStart")
     private LocalDate dateRTStart;
@@ -24,11 +22,11 @@ public class RadiationTherapy {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TypeRT")
-    private TypeOfRadiationTherapy zrt;
+    private Typeofradiationtherapy typeRT;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Location")
-    private BodyLocation zlocation;
+    private Bodylocation location;
 
     @Column(name = "RTDose")
     private Double rTDose;
@@ -38,59 +36,59 @@ public class RadiationTherapy {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Planning")
-    private Zrtplan zrtplan;
+    private Zrtplan planning;
 
-    @Column(name = "AnatDetail", length = 45)
+    @Column(name = "AnatDetail", length = 1000)
     private String anatDetail;
 
-    @Column(name = "General", length = 45)
+    @Column(name = "General", length = 1000)
     private String general;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Pneumonitis")
-    private Zrtlung zrtlung;
+    private Zrtlung pneumonitis;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "UpperGI")
-    private Zrtugi zrtugi;
+    private Zrtugi upperGI;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SkinReaction")
-    private Zrtskin zrtskin;
+    private Zrtskin skinReaction;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "LowerGI")
-    private Zrtlgi zrtlgi;
+    private Zrtlgi lowerGI;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "GU")
-    private Zrtgu zrtgu;
+    private Zrtgu gu;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Heme")
-    private Zrtheme zrtheme;
+    private Zrtheme heme;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Hepatic")
-    private Zrthep zrthep;
+    private Zrthep hepatic;
 
-    @Column(name = "`Other Toxicity`", length = 100)
+    @Column(name = "`Other Toxicity`", length = 500)
     private String otherToxicity;
 
-    @Column(name = "`Other Toxicity Detail`", length = 100)
+    @Column(name = "`Other Toxicity Detail`", length = 500)
     private String otherToxicityDetail;
 
-    @Column(name = "Details", length = 200)
+    @Column(name = "Details", length = 500)
     private String details;
 
-    @Column(name = "NG", length = 45)
-    private String ng;
+    @Column(name = "NG")
+    private Integer ng;
 
-    public String getNg() {
+    public Integer getNg() {
         return ng;
     }
 
-    public void setNg(String ng) {
+    public void setNg(Integer ng) {
         this.ng = ng;
     }
 
@@ -118,60 +116,60 @@ public class RadiationTherapy {
         this.otherToxicity = otherToxicity;
     }
 
-    public Zrthep getZrthep() {
-        return zrthep;
+    public Zrthep getHepatic() {
+        return hepatic;
     }
 
-    public void setZrthep(Zrthep zrthep) {
-        this.zrthep = zrthep;
+    public void setHepatic(Zrthep hepatic) {
+        this.hepatic = hepatic;
     }
 
-    public Zrtheme getZrtheme() {
-        return zrtheme;
+    public Zrtheme getHeme() {
+        return heme;
     }
 
-    public void setZrtheme(Zrtheme zrtheme) {
-        this.zrtheme = zrtheme;
+    public void setHeme(Zrtheme heme) {
+        this.heme = heme;
     }
 
-    public Zrtgu getZrtgu() {
-        return zrtgu;
+    public Zrtgu getGu() {
+        return gu;
     }
 
-    public void setZrtgu(Zrtgu zrtgu) {
-        this.zrtgu = zrtgu;
+    public void setGu(Zrtgu gu) {
+        this.gu = gu;
     }
 
-    public Zrtlgi getZrtlgi() {
-        return zrtlgi;
+    public Zrtlgi getLowerGI() {
+        return lowerGI;
     }
 
-    public void setZrtlgi(Zrtlgi zrtlgi) {
-        this.zrtlgi = zrtlgi;
+    public void setLowerGI(Zrtlgi lowerGI) {
+        this.lowerGI = lowerGI;
     }
 
-    public Zrtskin getZrtskin() {
-        return zrtskin;
+    public Zrtskin getSkinReaction() {
+        return skinReaction;
     }
 
-    public void setZrtskin(Zrtskin zrtskin) {
-        this.zrtskin = zrtskin;
+    public void setSkinReaction(Zrtskin skinReaction) {
+        this.skinReaction = skinReaction;
     }
 
-    public Zrtugi getZrtugi() {
-        return zrtugi;
+    public Zrtugi getUpperGI() {
+        return upperGI;
     }
 
-    public void setZrtugi(Zrtugi zrtugi) {
-        this.zrtugi = zrtugi;
+    public void setUpperGI(Zrtugi upperGI) {
+        this.upperGI = upperGI;
     }
 
-    public Zrtlung getZrtlung() {
-        return zrtlung;
+    public Zrtlung getPneumonitis() {
+        return pneumonitis;
     }
 
-    public void setZrtlung(Zrtlung zrtlung) {
-        this.zrtlung = zrtlung;
+    public void setPneumonitis(Zrtlung pneumonitis) {
+        this.pneumonitis = pneumonitis;
     }
 
     public String getGeneral() {
@@ -190,12 +188,12 @@ public class RadiationTherapy {
         this.anatDetail = anatDetail;
     }
 
-    public Zrtplan getZrtplan() {
-        return zrtplan;
+    public Zrtplan getPlanning() {
+        return planning;
     }
 
-    public void setZrtplan(Zrtplan zrtplan) {
-        this.zrtplan = zrtplan;
+    public void setPlanning(Zrtplan planning) {
+        this.planning = planning;
     }
 
     public Integer getFraction() {
@@ -214,20 +212,20 @@ public class RadiationTherapy {
         this.rTDose = rTDose;
     }
 
-    public BodyLocation getBodyLocation() {
-        return zlocation;
+    public Bodylocation getLocation() {
+        return location;
     }
 
-    public void setBodyLocation(BodyLocation zlocation) {
-        this.zlocation = zlocation;
+    public void setLocation(Bodylocation location) {
+        this.location = location;
     }
 
-    public TypeOfRadiationTherapy getTypeOfRadiationTherapy() {
-        return zrt;
+    public Typeofradiationtherapy getTypeRT() {
+        return typeRT;
     }
 
-    public void setTypeOfRadiationTherapy(TypeOfRadiationTherapy zrt) {
-        this.zrt = zrt;
+    public void setTypeRT(Typeofradiationtherapy typeRT) {
+        this.typeRT = typeRT;
     }
 
     public LocalDate getDateRTEnd() {
@@ -246,12 +244,12 @@ public class RadiationTherapy {
         this.dateRTStart = dateRTStart;
     }
 
-    public PtId getPtId() {
-        return ptId;
+    public PtId getUli() {
+        return uli;
     }
 
-    public void setPtId(PtId ptId) {
-        this.ptId = ptId;
+    public void setUli(PtId uli) {
+        this.uli = uli;
     }
 
     public Integer getId() {
@@ -261,4 +259,4 @@ public class RadiationTherapy {
     public void setId(Integer id) {
         this.id = id;
     }
-} 
+}

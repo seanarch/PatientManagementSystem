@@ -11,13 +11,13 @@ public class Consider {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ULI", nullable = false)
-    private PtId ptId;
+    private PtId uli;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Consider")
-    private TypeOfConsideration toc;
+    private Typeofconsideration consider;
 
-    @Column(name = "Detail", length = 200)
+    @Column(name = "Detail", length = 5000)
     private String detail;
 
     public String getDetail() {
@@ -28,20 +28,20 @@ public class Consider {
         this.detail = detail;
     }
 
-    public TypeOfConsideration getTypeOfConsideration() {
-        return toc;
+    public Typeofconsideration getConsider() {
+        return consider;
     }
 
-    public void setTypeOfConsideration(TypeOfConsideration toc) {
-        this.toc = toc;
+    public void setConsider(Typeofconsideration consider) {
+        this.consider = consider;
     }
 
-    public PtId getPtId() {
-        return ptId;
+    public PtId getUli() {
+        return uli;
     }
 
-    public void setPtId(PtId ptId) {
-        this.ptId = ptId;
+    public void setUli(PtId uli) {
+        this.uli = uli;
     }
 
     public Integer getId() {
@@ -51,4 +51,4 @@ public class Consider {
     public void setId(Integer id) {
         this.id = id;
     }
-} 
+}

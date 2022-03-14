@@ -6,8 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "zrtskin")
-public class Zrtskin {
+@Table(name = "mellowscore")
+public class Mellowscore {
     @Id
     @Column(name = "TypeID", nullable = false)
     private Integer id;

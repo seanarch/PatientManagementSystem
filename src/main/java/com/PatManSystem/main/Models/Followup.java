@@ -5,53 +5,53 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "followup")
-public class FollowUp {
+public class Followup {
     @Id
     @Column(name = "`FU RT`", nullable = false)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ULI", nullable = false)
-    private PtId ptId;
+    private PtId uli;
 
     @Column(name = "Date")
     private LocalDate date;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "`Type FU:`")
-    private Zfu zfu;
+    @JoinColumn(name = "`Type FU`")
+    private Zfu typeFU;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`Clinical Response`")
-    private ZrtResponse zresponse;
+    private Zrtresponse clinicalResponse;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Pneumonitis")
-    private Lung zpxLung;
+    private Zrtlung pneumonitis;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`Upper GI`")
-    private Zrtugi zrtugi;
+    private Zrtugi upperGI;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`Skin Reaction`")
-    private Zrtskin zrtskin;
+    private Zrtskin skinReaction;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`Lower GI`")
-    private Zrtlgi zrtlgi;
+    private Zrtlgi lowerGI;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "GU")
-    private Zrtgu zrtgu;
+    private Zrtgu gu;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Heme")
-    private Zrtheme zrtheme;
+    private Zrtheme heme;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Hepatic")
-    private Zrthep zrthep;
+    private Zrthep hepatic;
 
     @Column(name = "`Other Toxicity`", length = 45)
     private String otherToxicity;
@@ -75,76 +75,76 @@ public class FollowUp {
         this.otherToxicity = otherToxicity;
     }
 
-    public Zrthep getZrthep() {
-        return zrthep;
+    public Zrthep getHepatic() {
+        return hepatic;
     }
 
-    public void setZrthep(Zrthep zrthep) {
-        this.zrthep = zrthep;
+    public void setHepatic(Zrthep hepatic) {
+        this.hepatic = hepatic;
     }
 
-    public Zrtheme getZrtheme() {
-        return zrtheme;
+    public Zrtheme getHeme() {
+        return heme;
     }
 
-    public void setZrtheme(Zrtheme zrtheme) {
-        this.zrtheme = zrtheme;
+    public void setHeme(Zrtheme heme) {
+        this.heme = heme;
     }
 
-    public Zrtgu getZrtgu() {
-        return zrtgu;
+    public Zrtgu getGu() {
+        return gu;
     }
 
-    public void setZrtgu(Zrtgu zrtgu) {
-        this.zrtgu = zrtgu;
+    public void setGu(Zrtgu gu) {
+        this.gu = gu;
     }
 
-    public Zrtlgi getZrtlgi() {
-        return zrtlgi;
+    public Zrtlgi getLowerGI() {
+        return lowerGI;
     }
 
-    public void setZrtlgi(Zrtlgi zrtlgi) {
-        this.zrtlgi = zrtlgi;
+    public void setLowerGI(Zrtlgi lowerGI) {
+        this.lowerGI = lowerGI;
     }
 
-    public Zrtskin getZrtskin() {
-        return zrtskin;
+    public Zrtskin getSkinReaction() {
+        return skinReaction;
     }
 
-    public void setZrtskin(Zrtskin zrtskin) {
-        this.zrtskin = zrtskin;
+    public void setSkinReaction(Zrtskin skinReaction) {
+        this.skinReaction = skinReaction;
     }
 
-    public Zrtugi getZrtugi() {
-        return zrtugi;
+    public Zrtugi getUpperGI() {
+        return upperGI;
     }
 
-    public void setZrtugi(Zrtugi zrtugi) {
-        this.zrtugi = zrtugi;
+    public void setUpperGI(Zrtugi upperGI) {
+        this.upperGI = upperGI;
     }
 
-    public Lung getLung() {
-        return zpxLung;
+    public Zrtlung getPneumonitis() {
+        return pneumonitis;
     }
 
-    public void setLung(Lung zpxLung) {
-        this.zpxLung = zpxLung;
+    public void setPneumonitis(Zrtlung pneumonitis) {
+        this.pneumonitis = pneumonitis;
     }
 
-    public ZrtResponse getZrtResponse() {
-        return zresponse;
+    public Zrtresponse getClinicalResponse() {
+        return clinicalResponse;
     }
 
-    public void setzrtResponse(ZrtResponse zresponse) {
-        this.zresponse = zresponse;
+    public void setClinicalResponse(Zrtresponse clinicalResponse) {
+        this.clinicalResponse = clinicalResponse;
     }
 
-    public Zfu getZfu() {
-        return zfu;
+    public Zfu getTypeFU() {
+        return typeFU;
     }
 
-    public void setZfu(Zfu zfu) {
-        this.zfu = zfu;
+    public void setTypeFU(Zfu typeFU) {
+        this.typeFU = typeFU;
     }
 
     public LocalDate getDate() {
@@ -155,12 +155,12 @@ public class FollowUp {
         this.date = date;
     }
 
-    public PtId getPtId() {
-        return ptId;
+    public PtId getUli() {
+        return uli;
     }
 
-    public void setPtId(PtId ptId) {
-        this.ptId = ptId;
+    public void setUli(PtId uli) {
+        this.uli = uli;
     }
 
     public Integer getId() {
@@ -170,4 +170,4 @@ public class FollowUp {
     public void setId(Integer id) {
         this.id = id;
     }
-} 
+}

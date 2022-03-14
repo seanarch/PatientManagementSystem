@@ -1,18 +1,20 @@
 package com.PatManSystem.main.Models;
 
+import com.PatManSystem.main.Models.PtId;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "newpatientconsult")
-public class NewPatientConsult {
+public class Newpatientconsult {
     @Id
     @Column(name = "`Bx ID`", nullable = false)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ULI", nullable = false)
-    private PtId ptId;
+    private PtId uli;
 
     @Column(name = "Date")
     private LocalDate date;
@@ -25,12 +27,12 @@ public class NewPatientConsult {
         this.date = date;
     }
 
-    public PtId getPtId() {
-        return ptId;
+    public PtId getUli() {
+        return uli;
     }
 
-    public void setPtId(PtId ptId) {
-        this.ptId = ptId;
+    public void setUli(PtId uli) {
+        this.uli = uli;
     }
 
     public Integer getId() {
@@ -40,4 +42,4 @@ public class NewPatientConsult {
     public void setId(Integer id) {
         this.id = id;
     }
-} 
+}

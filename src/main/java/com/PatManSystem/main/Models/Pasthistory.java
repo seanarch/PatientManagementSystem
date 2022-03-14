@@ -4,23 +4,23 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "pasthistory")
-public class PastHistory {
+public class Pasthistory {
     @Id
     @Column(name = "PHx", nullable = false)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ULI", nullable = false)
-    private PtId ptId;
+    private PtId uli;
 
-    @Column(name = "FhxDetail", length = 45)
+    @Column(name = "FhxDetail", length = 500)
     private String fhxDetail;
 
     @Column(name = "SmokingPackYears")
     private Integer smokingPackYears;
 
-    @Column(name = "SmokeQuit")
-    private Integer smokeQuit;
+    @Column(name = "SmokeQuit", length = 45)
+    private String smokeQuit;
 
     @Column(name = "AttendedFamily")
     private Integer attendedFamily;
@@ -31,20 +31,20 @@ public class PastHistory {
     @Column(name = "LanguageBarrier")
     private Integer languageBarrier;
 
-    @Column(name = "FinanchialChallenge")
-    private Integer financhialChallenge;
+    @Column(name = "FinancialChallenge")
+    private Integer financialChallenge;
 
     @Column(name = "PsychosocialChallenge")
     private Integer psychosocialChallenge;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`GOC designation`")
-    private GoalOfCare zgoc;
+    private Goalofcare gOCDesignation;
 
     @Column(name = "`ETOH/week`", length = 45)
     private String eTOHWeek;
 
-    @Column(name = "Detail", length = 100)
+    @Column(name = "Detail", length = 1000)
     private String detail;
 
     public String getDetail() {
@@ -63,12 +63,12 @@ public class PastHistory {
         this.eTOHWeek = eTOHWeek;
     }
 
-    public GoalOfCare getGoalOfCare() {
-        return zgoc;
+    public Goalofcare getGOCDesignation() {
+        return gOCDesignation;
     }
 
-    public void setGoalOfCare(GoalOfCare zgoc) {
-        this.zgoc = zgoc;
+    public void setGOCDesignation(Goalofcare gOCDesignation) {
+        this.gOCDesignation = gOCDesignation;
     }
 
     public Integer getPsychosocialChallenge() {
@@ -79,12 +79,12 @@ public class PastHistory {
         this.psychosocialChallenge = psychosocialChallenge;
     }
 
-    public Integer getFinanchialChallenge() {
-        return financhialChallenge;
+    public Integer getFinancialChallenge() {
+        return financialChallenge;
     }
 
-    public void setFinanchialChallenge(Integer financhialChallenge) {
-        this.financhialChallenge = financhialChallenge;
+    public void setFinancialChallenge(Integer financialChallenge) {
+        this.financialChallenge = financialChallenge;
     }
 
     public Integer getLanguageBarrier() {
@@ -111,11 +111,11 @@ public class PastHistory {
         this.attendedFamily = attendedFamily;
     }
 
-    public Integer getSmokeQuit() {
+    public String getSmokeQuit() {
         return smokeQuit;
     }
 
-    public void setSmokeQuit(Integer smokeQuit) {
+    public void setSmokeQuit(String smokeQuit) {
         this.smokeQuit = smokeQuit;
     }
 
@@ -135,12 +135,12 @@ public class PastHistory {
         this.fhxDetail = fhxDetail;
     }
 
-    public PtId getPtId() {
-        return ptId;
+    public PtId getUli() {
+        return uli;
     }
 
-    public void setPtId(PtId ptId) {
-        this.ptId = ptId;
+    public void setUli(PtId uli) {
+        this.uli = uli;
     }
 
     public Integer getId() {
@@ -150,4 +150,4 @@ public class PastHistory {
     public void setId(Integer id) {
         this.id = id;
     }
-} 
+}
