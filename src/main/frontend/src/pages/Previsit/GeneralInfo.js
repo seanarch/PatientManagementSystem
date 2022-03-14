@@ -2,7 +2,7 @@ import React from 'react';
 import { Formik, Form } from 'formik';
 import { Button } from 'reactstrap';
 import { Container, Grid, InputLabel, Select, MenuItem, FormControl } from '@material-ui/core';
-import TextField from '../../components/TextField/TextFeild';
+import TextField from '../../components/TextField/TextField';
 import DatePicker from '../../components/Date/DatePicker';
 import { TextareaAutosize } from '@mui/base';
 import axios from "axios"; 
@@ -43,17 +43,15 @@ const GeneralInfo = () => {
                                         label="CTchest"
                                     />
                                 </Grid>
-                                <Grid item xs={12}> 
-                                    <TextareaAutosize  
-                                        maxRows={4}
-                                        aria-label="maximum height" 
-                                        defaultValue={INITIAL_VALUES.GeneralInformation.Comments} 
-                                        style={{ width: 200 }}
+                                <Grid item xs={12}>
+                                    <TextField
+                                        fullWidth
+                                        label="Comments"
                                         name="GeneralInformation.Comments"
-                                         
+                                        multiline
+                                        rows={4}
                                     />
-                                </Grid>
-
+                                    </Grid>
                                  
 
                                 <Grid item xs={12}>

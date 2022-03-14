@@ -6,10 +6,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "childpugh")
-public class ChildPugh {
+@Table(name = "bodylocation")
+public class Bodylocation {
     @Id
-    @Column(name = "CPID", nullable = false)
+    @Column(name = "TypeID", nullable = false)
     private Integer id;
 
     public Integer getId() {

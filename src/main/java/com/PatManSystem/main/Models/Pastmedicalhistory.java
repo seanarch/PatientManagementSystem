@@ -3,39 +3,38 @@ package com.PatManSystem.main.Models;
 import com.PatManSystem.main.Models.PtId;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Entity
-@Table(name = "death")
-public class Death {
+@Table(name = "pastmedicalhistory")
+public class Pastmedicalhistory {
     @Id
-    @Column(name = "DeathID", nullable = false)
+    @Column(name = "PMhx", nullable = false)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ULI", nullable = false)
     private PtId uli;
 
-    @Column(name = "Date")
-    private LocalDate date;
+    @Column(name = "Dx", length = 8000)
+    private String dx;
 
-    @Column(name = "Detail", length = 200)
-    private String detail;
+    @Column(name = "Gen_Dx", length = 1)
+    private String genDx;
 
-    public String getDetail() {
-        return detail;
+    public String getGenDx() {
+        return genDx;
     }
 
-    public void setDetail(String detail) {
-        this.detail = detail;
+    public void setGenDx(String genDx) {
+        this.genDx = genDx;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public String getDx() {
+        return dx;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setDx(String dx) {
+        this.dx = dx;
     }
 
     public PtId getUli() {

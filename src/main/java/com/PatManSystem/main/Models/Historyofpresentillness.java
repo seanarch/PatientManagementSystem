@@ -3,10 +3,10 @@ package com.PatManSystem.main.Models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "symptom")
-public class Symptom {
+@Table(name = "historyofpresentillness")
+public class Historyofpresentillness {
     @Id
-    @Column(name = "SxID", nullable = false)
+    @Column(name = "ID", nullable = false)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -14,26 +14,15 @@ public class Symptom {
     private PtId uli;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Symptom")
-    private Typeofsymptom symptom;
+    @JoinColumn(name = "Descriptor")
+    private Typeofhistoryofpresentillness descriptor;
 
-    @Column(name = "Detail", length = 1000)
-    private String detail;
-
-    public String getDetail() {
-        return detail;
+    public Typeofhistoryofpresentillness getDescriptor() {
+        return descriptor;
     }
 
-    public void setDetail(String detail) {
-        this.detail = detail;
-    }
-
-    public Typeofsymptom getSymptom() {
-        return symptom;
-    }
-
-    public void setSymptom(Typeofsymptom symptom) {
-        this.symptom = symptom;
+    public void setDescriptor(Typeofhistoryofpresentillness descriptor) {
+        this.descriptor = descriptor;
     }
 
     public PtId getUli() {
