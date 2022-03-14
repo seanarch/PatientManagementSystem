@@ -4,33 +4,33 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "historyofpresentillness")
-public class HistoryOfPresentIllness {
+public class Historyofpresentillness {
     @Id
     @Column(name = "ID", nullable = false)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ULI", nullable = false)
-    private PtId ptId;
+    private PtId uli;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Descriptor")
-    private TypeOfHistoryOfPresentIllness zdescript;
+    private Typeofhistoryofpresentillness descriptor;
 
-    public TypeOfHistoryOfPresentIllness getTypeOfHistoryOfPresentIllness() {
-        return zdescript;
+    public Typeofhistoryofpresentillness getDescriptor() {
+        return descriptor;
     }
 
-    public void setTypeOfHistoryOfPresentIllness(TypeOfHistoryOfPresentIllness zdescript) {
-        this.zdescript = zdescript;
+    public void setDescriptor(Typeofhistoryofpresentillness descriptor) {
+        this.descriptor = descriptor;
     }
 
-    public PtId getPtId() {
-        return ptId;
+    public PtId getUli() {
+        return uli;
     }
 
-    public void setPtId(PtId ptId) {
-        this.ptId = ptId;
+    public void setUli(PtId uli) {
+        this.uli = uli;
     }
 
     public Integer getId() {
@@ -40,4 +40,4 @@ public class HistoryOfPresentIllness {
     public void setId(Integer id) {
         this.id = id;
     }
-} 
+}

@@ -5,23 +5,23 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "diagnosticimaging")
-public class DiagnosticImaging {
+public class Diagnosticimaging {
     @Id
     @Column(name = "DI", nullable = false)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ULI", nullable = false)
-    private PtId ptId;
+    private PtId uli;
 
     @Column(name = "DateDI")
     private LocalDate dateDI;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TypeDI")
-    private TypeOfDiagnosticImaging zdi;
+    private Typeofdiagnosticimaging typeDI;
 
-    @Column(name = "Finding", length = 200)
+    @Column(name = "Finding", length = 5000)
     private String finding;
 
     public String getFinding() {
@@ -32,12 +32,12 @@ public class DiagnosticImaging {
         this.finding = finding;
     }
 
-    public TypeOfDiagnosticImaging getTypeOfDiagnosticImaging() {
-        return zdi;
+    public Typeofdiagnosticimaging getTypeDI() {
+        return typeDI;
     }
 
-    public void setTypeOfDiagnosticImaging(TypeOfDiagnosticImaging zdi) {
-        this.zdi = zdi;
+    public void setTypeDI(Typeofdiagnosticimaging typeDI) {
+        this.typeDI = typeDI;
     }
 
     public LocalDate getDateDI() {
@@ -48,12 +48,12 @@ public class DiagnosticImaging {
         this.dateDI = dateDI;
     }
 
-    public PtId getPtId() {
-        return ptId;
+    public PtId getUli() {
+        return uli;
     }
 
-    public void setPtId(PtId ptId) {
-        this.ptId = ptId;
+    public void setUli(PtId uli) {
+        this.uli = uli;
     }
 
     public Integer getId() {
@@ -63,4 +63,4 @@ public class DiagnosticImaging {
     public void setId(Integer id) {
         this.id = id;
     }
-} 
+}

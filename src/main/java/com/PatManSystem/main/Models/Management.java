@@ -12,16 +12,16 @@ public class Management {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ULI", nullable = false)
-    private PtId ptId;
+    private PtId uli;
 
     @Column(name = "Date")
     private LocalDate date;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Intervention")
-    private TypeOfManagement zmng;
+    private Typeofmanagement intervention;
 
-    @Column(name = "Detail", length = 100)
+    @Column(name = "Detail", length = 5000)
     private String detail;
 
     public String getDetail() {
@@ -32,12 +32,12 @@ public class Management {
         this.detail = detail;
     }
 
-    public TypeOfManagement getTypeOfManagement() {
-        return zmng;
+    public Typeofmanagement getIntervention() {
+        return intervention;
     }
 
-    public void setTypeOfManagement(TypeOfManagement zmng) {
-        this.zmng = zmng;
+    public void setIntervention(Typeofmanagement intervention) {
+        this.intervention = intervention;
     }
 
     public LocalDate getDate() {
@@ -48,12 +48,12 @@ public class Management {
         this.date = date;
     }
 
-    public PtId getPtId() {
-        return ptId;
+    public PtId getUli() {
+        return uli;
     }
 
-    public void setPtId(PtId ptId) {
-        this.ptId = ptId;
+    public void setUli(PtId uli) {
+        this.uli = uli;
     }
 
     public Integer getId() {
@@ -63,4 +63,4 @@ public class Management {
     public void setId(Integer id) {
         this.id = id;
     }
-} 
+}

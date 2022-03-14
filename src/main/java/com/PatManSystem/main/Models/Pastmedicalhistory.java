@@ -1,17 +1,19 @@
 package com.PatManSystem.main.Models;
 
+import com.PatManSystem.main.Models.PtId;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "pastmedicalhistory")
-public class PastMedicalHistory {
+public class Pastmedicalhistory {
     @Id
     @Column(name = "PMhx", nullable = false)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ULI", nullable = false)
-    private PtId ptId;
+    private PtId uli;
 
     @Column(name = "Dx", length = 8000)
     private String dx;
@@ -35,12 +37,12 @@ public class PastMedicalHistory {
         this.dx = dx;
     }
 
-    public PtId getPtId() {
-        return ptId;
+    public PtId getUli() {
+        return uli;
     }
 
-    public void setPtId(PtId ptId) {
-        this.ptId = ptId;
+    public void setUli(PtId uli) {
+        this.uli = uli;
     }
 
     public Integer getId() {
@@ -50,4 +52,4 @@ public class PastMedicalHistory {
     public void setId(Integer id) {
         this.id = id;
     }
-} 
+}

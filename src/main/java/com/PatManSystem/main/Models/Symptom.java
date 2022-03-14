@@ -11,13 +11,13 @@ public class Symptom {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ULI", nullable = false)
-    private PtId ptId;
+    private PtId uli;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Symptom")
-    private TypeOfSymptom zsx;
+    private Typeofsymptom symptom;
 
-    @Column(name = "Detail", length = 100)
+    @Column(name = "Detail", length = 1000)
     private String detail;
 
     public String getDetail() {
@@ -28,20 +28,20 @@ public class Symptom {
         this.detail = detail;
     }
 
-    public TypeOfSymptom getTypeOfSymptom() {
-        return zsx;
+    public Typeofsymptom getSymptom() {
+        return symptom;
     }
 
-    public void setTypeOfSymptom(TypeOfSymptom zsx) {
-        this.zsx = zsx;
+    public void setSymptom(Typeofsymptom symptom) {
+        this.symptom = symptom;
     }
 
-    public PtId getPtId() {
-        return ptId;
+    public PtId getUli() {
+        return uli;
     }
 
-    public void setPtId(PtId ptId) {
-        this.ptId = ptId;
+    public void setUli(PtId uli) {
+        this.uli = uli;
     }
 
     public Integer getId() {
@@ -51,4 +51,4 @@ public class Symptom {
     public void setId(Integer id) {
         this.id = id;
     }
-} 
+}
