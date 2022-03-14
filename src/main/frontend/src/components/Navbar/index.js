@@ -17,19 +17,19 @@ const Navbar = () => {
                 </NavLink>
                 <Bars />
                 <NavMenu>
-                    <NavLink to='/register' activeStyle>
+                    <NavLink to='/register' activestyle="true">
                         Register
                     </NavLink>
-                    <NavLink to='/previsit' activeStyle>
+                    <NavLink to='/previsit' activestyle="true">
                         Previsit
                     </NavLink>
-                    <NavLink to='/visit' activeStyle>
+                    <NavLink to='/visit' activestyle="true">
                         Visit
                     </NavLink>
-                    <NavLink to='/other' activeStyle>
+                    <NavLink to='/other' activestyle="true">
                         Other
                     </NavLink>
-                    <NavLink to='/endvisit' activeStyle>
+                    <NavLink to='/endvisit' activestyle="true">
                         End Visit
                     </NavLink>
                     {/* Second Nav */}

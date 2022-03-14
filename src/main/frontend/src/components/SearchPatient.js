@@ -20,6 +20,7 @@ export default function SearchPatient() {
         axios.get(`http://localhost:8080/api/patient/`)
             .then((response) => {
                 setAPIData(response.data);
+                console.log("Here at API req");
             })
     }, [])
 
