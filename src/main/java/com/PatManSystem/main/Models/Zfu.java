@@ -8,20 +8,20 @@ import java.util.Set;
 @Table(name = "zfu")
 public class Zfu {
     @Id
-    @Column(name = "FU", nullable = false)
+    @Column(name = "TypeID", nullable = false)
     private Integer id;
 
-    @Column(name = "Reason", nullable = false, length = 100)
+    @Column(name = "Description", nullable = false, length = 1000)
     private String reason;
 
     @OneToMany(mappedBy = "zfu")
-    private Set<Fu> fus = new LinkedHashSet<>();
+    private Set<FollowUp> fus = new LinkedHashSet<>();
 
-    public Set<Fu> getFus() {
+    public Set<FollowUp> getFus() {
         return fus;
     }
 
-    public void setFus(Set<Fu> fus) {
+    public void setFus(Set<FollowUp> fus) {
         this.fus = fus;
     }
 
@@ -41,4 +41,4 @@ public class Zfu {
         this.id = id;
     }
 
-}
+} 

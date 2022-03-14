@@ -19,37 +19,37 @@ public class Assess {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ECOG")
-    private Zecog zecog;
+    private ECOGPerformanceStatusScale zecog;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Swallowing")
-    private Zmellow zmellow;
+    private MellowScore zmellow;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Breathing")
-    private Zmrc zmrc;
+    private MRCDyspnoeaScale zmrc;
 
-    public Zmrc getZmrc() {
+    public MRCDyspnoeaScale getMRCDyspnoeaScale() {
         return zmrc;
     }
 
-    public void setZmrc(Zmrc zmrc) {
+    public void setMRCDyspnoeaScale(MRCDyspnoeaScale zmrc) {
         this.zmrc = zmrc;
     }
 
-    public Zmellow getZmellow() {
+    public MellowScore getMellowScore() {
         return zmellow;
     }
 
-    public void setZmellow(Zmellow zmellow) {
+    public void setMellowScore(MellowScore zmellow) {
         this.zmellow = zmellow;
     }
 
-    public Zecog getZecog() {
+    public ECOGPerformanceStatusScale getECOGPerformanceStatusScale() {
         return zecog;
     }
 
-    public void setZecog(Zecog zecog) {
+    public void setECOGPerformanceStatusScale(ECOGPerformanceStatusScale zecog) {
         this.zecog = zecog;
     }
 

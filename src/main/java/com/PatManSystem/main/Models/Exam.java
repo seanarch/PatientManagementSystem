@@ -19,60 +19,60 @@ public class Exam {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CNS")
-    private ZpxCn zpxCns;
+    private CentralNervousSystem zpxCns;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Lung")
-    private ZpxLung zpxLung;
+    private Lung zpxLung;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "HN")
-    private ZpxHn zpxHn;
+    private HeadAndNeck zpxHn;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Oral")
-    private ZpxOral zpxOral;
+    private Oral zpxOral;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Cardiac")
-    private ZpxCardiac zpxCardiac;
+    private Cardiac zpxCardiac;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MSK")
-    private ZpxMsk zpxMsk;
+    private Musculoskeletal zpxMsk;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Peripheral")
-    private ZpxSkin zpxSkin;
+    private Skin zpxSkin;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Abdo")
-    private ZpxAbdo zpxAbdo;
+    private Abdomen zpxAbdo;
 
     @Column(name = "ABNORMAL", length = 100)
     private String abnormal;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Supine")
-    private Zsupine zsupine;
+    private Supine zsupine;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Breath")
-    private Zbreath zbreath;
+    private Breath zbreath;
 
-    public Zbreath getZbreath() {
+    public Breath getBreath() {
         return zbreath;
     }
 
-    public void setZbreath(Zbreath zbreath) {
+    public void setBreath(Breath zbreath) {
         this.zbreath = zbreath;
     }
 
-    public Zsupine getZsupine() {
+    public Supine getSupine() {
         return zsupine;
     }
 
-    public void setZsupine(Zsupine zsupine) {
+    public void setSupine(Supine zsupine) {
         this.zsupine = zsupine;
     }
 
@@ -84,67 +84,67 @@ public class Exam {
         this.abnormal = abnormal;
     }
 
-    public ZpxAbdo getZpxAbdo() {
+    public Abdomen getAbdomen() {
         return zpxAbdo;
     }
 
-    public void setZpxAbdo(ZpxAbdo zpxAbdo) {
+    public void setAbdomen(Abdomen zpxAbdo) {
         this.zpxAbdo = zpxAbdo;
     }
 
-    public ZpxSkin getZpxSkin() {
+    public Skin getSkin() {
         return zpxSkin;
     }
 
-    public void setZpxSkin(ZpxSkin zpxSkin) {
+    public void setSkin(Skin zpxSkin) {
         this.zpxSkin = zpxSkin;
     }
 
-    public ZpxMsk getZpxMsk() {
+    public Musculoskeletal getMusculoskeletal() {
         return zpxMsk;
     }
 
-    public void setZpxMsk(ZpxMsk zpxMsk) {
+    public void setMusculoskeletal(Musculoskeletal zpxMsk) {
         this.zpxMsk = zpxMsk;
     }
 
-    public ZpxCardiac getZpxCardiac() {
+    public Cardiac getCardiac() {
         return zpxCardiac;
     }
 
-    public void setZpxCardiac(ZpxCardiac zpxCardiac) {
+    public void setCardiac(Cardiac zpxCardiac) {
         this.zpxCardiac = zpxCardiac;
     }
 
-    public ZpxOral getZpxOral() {
+    public Oral getOral() {
         return zpxOral;
     }
 
-    public void setZpxOral(ZpxOral zpxOral) {
+    public void setOral(Oral zpxOral) {
         this.zpxOral = zpxOral;
     }
 
-    public ZpxHn getZpxHn() {
+    public HeadAndNeck getHeadAndNeck() {
         return zpxHn;
     }
 
-    public void setZpxHn(ZpxHn zpxHn) {
+    public void setHeadAndNeck(HeadAndNeck zpxHn) {
         this.zpxHn = zpxHn;
     }
 
-    public ZpxLung getZpxLung() {
+    public Lung getLung() {
         return zpxLung;
     }
 
-    public void setZpxLung(ZpxLung zpxLung) {
+    public void setLung(Lung zpxLung) {
         this.zpxLung = zpxLung;
     }
 
-    public ZpxCn getZpxCns() {
+    public CentralNervousSystem getCentralNervousSystem() {
         return zpxCns;
     }
 
-    public void setZpxCns(ZpxCn zpxCns) {
+    public void setCentralNervousSystem(CentralNervousSystem zpxCns) {
         this.zpxCns = zpxCns;
     }
 
@@ -171,4 +171,4 @@ public class Exam {
     public void setId(Integer id) {
         this.id = id;
     }
-}
+} 

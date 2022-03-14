@@ -8,20 +8,20 @@ import java.util.Set;
 @Table(name = "zrtplan")
 public class Zrtplan {
     @Id
-    @Column(name = "RT", nullable = false)
+    @Column(name = "TypeID", nullable = false)
     private Integer id;
 
-    @Column(name = "Plan", nullable = false, length = 45)
+    @Column(name = "Description", nullable = false, length = 100)
     private String plan;
 
     @OneToMany(mappedBy = "zrtplan")
-    private Set<Rt> rts = new LinkedHashSet<>();
+    private Set<RadiationTherapy> rts = new LinkedHashSet<>();
 
-    public Set<Rt> getRts() {
+    public Set<RadiationTherapy> getRts() {
         return rts;
     }
 
-    public void setRts(Set<Rt> rts) {
+    public void setRts(Set<RadiationTherapy> rts) {
         this.rts = rts;
     }
 
@@ -41,4 +41,4 @@ public class Zrtplan {
         this.id = id;
     }
 
-}
+} 
