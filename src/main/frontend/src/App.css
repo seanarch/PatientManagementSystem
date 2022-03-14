@@ -7,4 +7,28 @@
   padding: 0;
 }
 
- 
+main.login__form {
+  margin-top: 54px;
+    margin-bottom: 54px;
+    display: flex !important;
+    justify-content: center;
+}
+.register__form {
+  width: 580px;
+  margin-bottom: 40px;
+  border: 1px solid #e5e5e5;
+  border-radius: 30px;
+  padding: 20px 40px;
+  box-shadow: 0 2px 18px rgba(0,0,0,0.25), 0 2px 2px rgba(0,0,0,0.22);
+}
+.register__form input, .register__form select {
+  border: 2px solid #bababa;
+  border-radius: 8px;
+}
+.user__image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 5px solid #999;
+  margin-bottom: 30px;
+}

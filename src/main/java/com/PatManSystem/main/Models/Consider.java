@@ -15,7 +15,7 @@ public class Consider {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Consider")
-    private Zconsider zconsider;
+    private TypeOfConsideration toc;
 
     @Column(name = "Detail", length = 200)
     private String detail;
@@ -28,12 +28,12 @@ public class Consider {
         this.detail = detail;
     }
 
-    public Zconsider getZconsider() {
-        return zconsider;
+    public TypeOfConsideration getTypeOfConsideration() {
+        return toc;
     }
 
-    public void setZconsider(Zconsider zconsider) {
-        this.zconsider = zconsider;
+    public void setTypeOfConsideration(TypeOfConsideration toc) {
+        this.toc = toc;
     }
 
     public PtId getPtId() {
@@ -51,4 +51,4 @@ public class Consider {
     public void setId(Integer id) {
         this.id = id;
     }
-}
+} 

@@ -15,7 +15,7 @@ public class Decision {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Decision")
-    private Zdecide zdecide;
+    private TypeOfDecision zdecide;
 
     @Column(name = "Detail", length = 200)
     private String detail;
@@ -28,11 +28,11 @@ public class Decision {
         this.detail = detail;
     }
 
-    public Zdecide getZdecide() {
+    public TypeOfDecision getTypeOfDecision() {
         return zdecide;
     }
 
-    public void setZdecide(Zdecide zdecide) {
+    public void setTypeOfDecision(TypeOfDecision zdecide) {
         this.zdecide = zdecide;
     }
 
@@ -51,4 +51,4 @@ public class Decision {
     public void setId(Integer id) {
         this.id = id;
     }
-}
+} 

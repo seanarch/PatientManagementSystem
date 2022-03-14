@@ -5,19 +5,16 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "zrtlgi")
-public class Zrtlgi {
+@Table(name = "zrtresponse")
+public class ZrtResponse {
     @Id
     @Column(name = "TypeID", nullable = false)
     private Integer id;
 
-    @Column(name = "Description", nullable = false, length = 100)
-    private String ugi;
+    @Column(name = "Description", nullable = false, length = 500)
+    private String response;
 
-    @OneToMany(mappedBy = "zrtlgi")
-    private Set<RadiationTherapy> rts = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "zrtlgi")
+    @OneToMany(mappedBy = "zrtresponse")
     private Set<FollowUp> fus = new LinkedHashSet<>();
 
     public Set<FollowUp> getFus() {
@@ -28,20 +25,12 @@ public class Zrtlgi {
         this.fus = fus;
     }
 
-    public Set<RadiationTherapy> getRts() {
-        return rts;
+    public String getResponse() {
+        return response;
     }
 
-    public void setRts(Set<RadiationTherapy> rts) {
-        this.rts = rts;
-    }
-
-    public String getUgi() {
-        return ugi;
-    }
-
-    public void setUgi(String ugi) {
-        this.ugi = ugi;
+    public void setResponse(String response) {
+        this.response = response;
     }
 
     public Integer getId() {

@@ -5,19 +5,19 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "zrtskin")
-public class Zrtskin {
+@Table(name = "lung")
+public class Lung {
     @Id
     @Column(name = "TypeID", nullable = false)
     private Integer id;
 
-    @Column(name = "Description", nullable = false, length = 100)
-    private String rtog;
+    @Column(name = "Description", nullable = false, length = 200)
+    private String ecog;
 
-    @OneToMany(mappedBy = "zrtskin")
-    private Set<RadiationTherapy> rts = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "lung")
+    private Set<Exam> exams = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "zrtskin")
+    @OneToMany(mappedBy = "lung")
     private Set<FollowUp> fus = new LinkedHashSet<>();
 
     public Set<FollowUp> getFus() {
@@ -28,20 +28,20 @@ public class Zrtskin {
         this.fus = fus;
     }
 
-    public Set<RadiationTherapy> getRts() {
-        return rts;
+    public Set<Exam> getExams() {
+        return exams;
     }
 
-    public void setRts(Set<RadiationTherapy> rts) {
-        this.rts = rts;
+    public void setExams(Set<Exam> exams) {
+        this.exams = exams;
     }
 
-    public String getRtog() {
-        return rtog;
+    public String getEcog() {
+        return ecog;
     }
 
-    public void setRtog(String rtog) {
-        this.rtog = rtog;
+    public void setEcog(String ecog) {
+        this.ecog = ecog;
     }
 
     public Integer getId() {

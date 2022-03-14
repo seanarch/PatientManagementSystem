@@ -1,21 +1,25 @@
 package com.PatManSystem.main.Models;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "symptom")
-public class Symptom {
+@Table(name = "management")
+public class Management {
     @Id
-    @Column(name = "SxID", nullable = false)
+    @Column(name = "MNG", nullable = false)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ULI", nullable = false)
     private PtId ptId;
 
+    @Column(name = "Date")
+    private LocalDate date;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Symptom")
-    private TypeOfSymptom zsx;
+    @JoinColumn(name = "Intervention")
+    private TypeOfManagement zmng;
 
     @Column(name = "Detail", length = 100)
     private String detail;
@@ -28,12 +32,20 @@ public class Symptom {
         this.detail = detail;
     }
 
-    public TypeOfSymptom getTypeOfSymptom() {
-        return zsx;
+    public TypeOfManagement getTypeOfManagement() {
+        return zmng;
     }
 
-    public void setTypeOfSymptom(TypeOfSymptom zsx) {
-        this.zsx = zsx;
+    public void setTypeOfManagement(TypeOfManagement zmng) {
+        this.zmng = zmng;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public PtId getPtId() {

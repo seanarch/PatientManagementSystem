@@ -4,10 +4,10 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "death")
-public class Death {
+@Table(name = "newpatientconsult")
+public class NewPatientConsult {
     @Id
-    @Column(name = "DeathID", nullable = false)
+    @Column(name = "`Bx ID`", nullable = false)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -16,17 +16,6 @@ public class Death {
 
     @Column(name = "Date")
     private LocalDate date;
-
-    @Column(name = "Detail", length = 200)
-    private String detail;
-
-    public String getDetail() {
-        return detail;
-    }
-
-    public void setDetail(String detail) {
-        this.detail = detail;
-    }
 
     public LocalDate getDate() {
         return date;
