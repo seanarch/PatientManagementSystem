@@ -4,43 +4,41 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "diagnosis", indexes = {
-        @Index(name = "ULI_dx_idx", columnList = "ULI")
-})
+@Table(name = "diagnosis")
 public class Diagnosis {
     @Id
     @Column(name = "`Bx ID`", nullable = false)
     private Integer id;
 
-    @Column(name = "`Nodes +ve`", length = 10)
-    private String nodesVe;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ULI", nullable = false)
-    private PtId ptId;
+    private PtId uli;
+
+    @Column(name = "`Nodes +ve`", length = 100)
+    private String nodesVe;
 
     @Column(name = "`OR Date`")
     private LocalDate oRDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Location")
-    private BodyLocation zlocation;
+    private Bodylocation location;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`OR`")
-    private TypeOfBiopsy zbx;
+    private Typeofbiopsy or;
 
     @Column(name = "`Size Primary (mm)`")
     private Integer sizePrimaryMm;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Pathology")
-    private TypeOfPathology zpath;
+    private Typeofpathology pathology;
 
-    @Column(name = "Grade", length = 10)
+    @Column(name = "Grade", length = 100)
     private String grade;
 
-    @Column(name = "Margin", length = 20)
+    @Column(name = "Margin", length = 200)
     private String margin;
 
     @Column(name = "LVSI")
@@ -49,40 +47,40 @@ public class Diagnosis {
     @Column(name = "`Peri Neural`")
     private Integer periNeural;
 
-    @Column(name = "T", length = 5)
+    @Column(name = "T", length = 100)
     private String t;
 
-    @Column(name = "`Nodes Taken`", length = 5)
+    @Column(name = "`Nodes Taken`", length = 100)
     private String nodesTaken;
 
-    @Column(name = "N", length = 5)
+    @Column(name = "N", length = 100)
     private String n;
 
-    @Column(name = "M", length = 5)
+    @Column(name = "M", length = 100)
     private String m;
 
-    @Column(name = "`Staining +ve IHC`", length = 20)
+    @Column(name = "`Staining +ve IHC`", length = 200)
     private String stainingVeIHC;
 
-    @Column(name = "Stage", length = 5)
+    @Column(name = "Stage", length = 100)
     private String stage;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Recur")
-    private TypeOfRecure zrecur;
+    private Typeofrecure recur;
 
-    @Column(name = "`Site of First Met`", length = 20)
+    @Column(name = "`Site of First Met`", length = 500)
     private String siteOfFirstMet;
 
-    @Column(name = "`Today''s Date`")
-    private LocalDate todaySDate;
+    @Column(name = "Today")
+    private LocalDate today;
 
-    public LocalDate getTodaySDate() {
-        return todaySDate;
+    public LocalDate getToday() {
+        return today;
     }
 
-    public void setTodaySDate(LocalDate todaySDate) {
-        this.todaySDate = todaySDate;
+    public void setToday(LocalDate today) {
+        this.today = today;
     }
 
     public String getSiteOfFirstMet() {
@@ -93,12 +91,12 @@ public class Diagnosis {
         this.siteOfFirstMet = siteOfFirstMet;
     }
 
-    public TypeOfRecure getTypeOfRecure() {
-        return zrecur;
+    public Typeofrecure getRecur() {
+        return recur;
     }
 
-    public void setTypeOfRecure(TypeOfRecure zrecur) {
-        this.zrecur = zrecur;
+    public void setRecur(Typeofrecure recur) {
+        this.recur = recur;
     }
 
     public String getStage() {
@@ -181,12 +179,12 @@ public class Diagnosis {
         this.grade = grade;
     }
 
-    public TypeOfPathology getTypeOfPathology() {
-        return zpath;
+    public Typeofpathology getPathology() {
+        return pathology;
     }
 
-    public void setTypeOfPathology(TypeOfPathology zpath) {
-        this.zpath = zpath;
+    public void setPathology(Typeofpathology pathology) {
+        this.pathology = pathology;
     }
 
     public Integer getSizePrimaryMm() {
@@ -197,20 +195,20 @@ public class Diagnosis {
         this.sizePrimaryMm = sizePrimaryMm;
     }
 
-    public TypeOfBiopsy getTypeOfBiopsy() {
-        return zbx;
+    public Typeofbiopsy getOr() {
+        return or;
     }
 
-    public void setTypeOfBiopsy(TypeOfBiopsy zbx) {
-        this.zbx = zbx;
+    public void setOr(Typeofbiopsy or) {
+        this.or = or;
     }
 
-    public BodyLocation getBodyLocation() {
-        return zlocation;
+    public Bodylocation getLocation() {
+        return location;
     }
 
-    public void setBodyLocation(BodyLocation zlocation) {
-        this.zlocation = zlocation;
+    public void setLocation(Bodylocation location) {
+        this.location = location;
     }
 
     public LocalDate getORDate() {
@@ -221,20 +219,20 @@ public class Diagnosis {
         this.oRDate = oRDate;
     }
 
-    public PtId getPtId() {
-        return ptId;
-    }
-
-    public void setPtId(PtId ptId) {
-        this.ptId = ptId;
-    }
-
     public String getNodesVe() {
         return nodesVe;
     }
 
     public void setNodesVe(String nodesVe) {
         this.nodesVe = nodesVe;
+    }
+
+    public PtId getUli() {
+        return uli;
+    }
+
+    public void setUli(PtId uli) {
+        this.uli = uli;
     }
 
     public Integer getId() {
@@ -244,4 +242,4 @@ public class Diagnosis {
     public void setId(Integer id) {
         this.id = id;
     }
-} 
+}

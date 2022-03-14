@@ -3,7 +3,7 @@ import { Formik, Form } from 'formik';
 import { Button } from 'reactstrap';
 import { Container, Grid } from '@material-ui/core';
 import DatePicker from '../../components/Date/DatePicker';
-import TextField from '../../components/TextField/TextFeild';
+import TextField from '../../components/TextField/TextField';
 
 
 
@@ -11,7 +11,7 @@ import TextField from '../../components/TextField/TextFeild';
 const INITIAL_VALUES = {
   Death: {
     Date: "",
-    Detail: "",
+    Detail: "Details",
   }
 };
 

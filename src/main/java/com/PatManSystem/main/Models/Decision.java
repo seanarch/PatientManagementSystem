@@ -11,13 +11,13 @@ public class Decision {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ULI", nullable = false)
-    private PtId ptId;
+    private PtId uli;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Decision")
-    private TypeOfDecision zdecide;
+    private Typeofdecision decision;
 
-    @Column(name = "Detail", length = 200)
+    @Column(name = "Detail", length = 5000)
     private String detail;
 
     public String getDetail() {
@@ -28,20 +28,20 @@ public class Decision {
         this.detail = detail;
     }
 
-    public TypeOfDecision getTypeOfDecision() {
-        return zdecide;
+    public Typeofdecision getDecision() {
+        return decision;
     }
 
-    public void setTypeOfDecision(TypeOfDecision zdecide) {
-        this.zdecide = zdecide;
+    public void setDecision(Typeofdecision decision) {
+        this.decision = decision;
     }
 
-    public PtId getPtId() {
-        return ptId;
+    public PtId getUli() {
+        return uli;
     }
 
-    public void setPtId(PtId ptId) {
-        this.ptId = ptId;
+    public void setUli(PtId uli) {
+        this.uli = uli;
     }
 
     public Integer getId() {
@@ -51,4 +51,4 @@ public class Decision {
     public void setId(Integer id) {
         this.id = id;
     }
-} 
+}

@@ -6,10 +6,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "childpugh")
-public class ChildPugh {
+@Table(name = "typeofconsideration")
+public class Typeofconsideration {
     @Id
-    @Column(name = "CPID", nullable = false)
+    @Column(name = "TypeID", nullable = false)
     private Integer id;
 
     public Integer getId() {
@@ -19,4 +19,6 @@ public class ChildPugh {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    //TODO Reverse Engineering! Migrate other columns to the entity
 }

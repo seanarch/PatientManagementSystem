@@ -12,9 +12,9 @@ public class Abdomen {
     private Integer id;
 
     @Column(name = "Description", nullable = false, length = 200)
-    private String ecog;
+    private String description;
 
-    @OneToMany(mappedBy = "abdomen")
+    @OneToMany(mappedBy = "abdo")
     private Set<Exam> exams = new LinkedHashSet<>();
 
     public Set<Exam> getExams() {
@@ -25,12 +25,12 @@ public class Abdomen {
         this.exams = exams;
     }
 
-    public String getEcog() {
-        return ecog;
+    public String getDescription() {
+        return description;
     }
 
-    public void setEcog(String ecog) {
-        this.ecog = ecog;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Integer getId() {
@@ -40,5 +40,4 @@ public class Abdomen {
     public void setId(Integer id) {
         this.id = id;
     }
-
-} 
+}

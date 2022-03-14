@@ -9,71 +9,70 @@ public class Exam {
     @Id
     @Column(name = "Exam", nullable = false)
     private Integer id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Abdo")
+    private Abdomen abdo;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ULI", nullable = false)
-    private PtId ptId;
+    private PtId uli;
 
     @Column(name = "Date")
     private LocalDate date;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CNS")
-    private CentralNervousSystem zpxCns;
+    private Centralnervoussystem cns;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Lung")
-    private Lung zpxLung;
+    private Lung lung;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "HN")
-    private HeadAndNeck zpxHn;
+    private Headandneck hn;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Oral")
-    private Oral zpxOral;
+    private Oral oral;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Cardiac")
-    private Cardiac zpxCardiac;
+    private Cardiac cardiac;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MSK")
-    private Musculoskeletal zpxMsk;
+    private Musculoskeletal msk;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Peripheral")
-    private Skin zpxSkin;
+    private Skin peripheral;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Abdo")
-    private Abdomen zpxAbdo;
-
-    @Column(name = "ABNORMAL", length = 100)
+    @Column(name = "ABNORMAL", length = 2000)
     private String abnormal;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Supine")
-    private Supine zsupine;
+    private Supine supine;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Breath")
-    private Breath zbreath;
+    private Breath breath;
 
     public Breath getBreath() {
-        return zbreath;
+        return breath;
     }
 
-    public void setBreath(Breath zbreath) {
-        this.zbreath = zbreath;
+    public void setBreath(Breath breath) {
+        this.breath = breath;
     }
 
     public Supine getSupine() {
-        return zsupine;
+        return supine;
     }
 
-    public void setSupine(Supine zsupine) {
-        this.zsupine = zsupine;
+    public void setSupine(Supine supine) {
+        this.supine = supine;
     }
 
     public String getAbnormal() {
@@ -84,68 +83,60 @@ public class Exam {
         this.abnormal = abnormal;
     }
 
-    public Abdomen getAbdomen() {
-        return zpxAbdo;
+    public Skin getPeripheral() {
+        return peripheral;
     }
 
-    public void setAbdomen(Abdomen zpxAbdo) {
-        this.zpxAbdo = zpxAbdo;
+    public void setPeripheral(Skin peripheral) {
+        this.peripheral = peripheral;
     }
 
-    public Skin getSkin() {
-        return zpxSkin;
+    public Musculoskeletal getMsk() {
+        return msk;
     }
 
-    public void setSkin(Skin zpxSkin) {
-        this.zpxSkin = zpxSkin;
-    }
-
-    public Musculoskeletal getMusculoskeletal() {
-        return zpxMsk;
-    }
-
-    public void setMusculoskeletal(Musculoskeletal zpxMsk) {
-        this.zpxMsk = zpxMsk;
+    public void setMsk(Musculoskeletal msk) {
+        this.msk = msk;
     }
 
     public Cardiac getCardiac() {
-        return zpxCardiac;
+        return cardiac;
     }
 
-    public void setCardiac(Cardiac zpxCardiac) {
-        this.zpxCardiac = zpxCardiac;
+    public void setCardiac(Cardiac cardiac) {
+        this.cardiac = cardiac;
     }
 
     public Oral getOral() {
-        return zpxOral;
+        return oral;
     }
 
-    public void setOral(Oral zpxOral) {
-        this.zpxOral = zpxOral;
+    public void setOral(Oral oral) {
+        this.oral = oral;
     }
 
-    public HeadAndNeck getHeadAndNeck() {
-        return zpxHn;
+    public Headandneck getHn() {
+        return hn;
     }
 
-    public void setHeadAndNeck(HeadAndNeck zpxHn) {
-        this.zpxHn = zpxHn;
+    public void setHn(Headandneck hn) {
+        this.hn = hn;
     }
 
     public Lung getLung() {
-        return zpxLung;
+        return lung;
     }
 
-    public void setLung(Lung zpxLung) {
-        this.zpxLung = zpxLung;
+    public void setLung(Lung lung) {
+        this.lung = lung;
     }
 
-    public CentralNervousSystem getCentralNervousSystem() {
-        return zpxCns;
+    public Centralnervoussystem getCns() {
+        return cns;
     }
 
-    public void setCentralNervousSystem(CentralNervousSystem zpxCns) {
-        this.zpxCns = zpxCns;
+    public void setCns(Centralnervoussystem cns) {
+        this.cns = cns;
     }
 
     public LocalDate getDate() {
@@ -156,12 +147,20 @@ public class Exam {
         this.date = date;
     }
 
-    public PtId getPtId() {
-        return ptId;
+    public PtId getUli() {
+        return uli;
     }
 
-    public void setPtId(PtId ptId) {
-        this.ptId = ptId;
+    public void setUli(PtId uli) {
+        this.uli = uli;
+    }
+
+    public Abdomen getAbdo() {
+        return abdo;
+    }
+
+    public void setAbdo(Abdomen abdo) {
+        this.abdo = abdo;
     }
 
     public Integer getId() {
@@ -171,4 +170,5 @@ public class Exam {
     public void setId(Integer id) {
         this.id = id;
     }
-} 
+
+}

@@ -12,45 +12,45 @@ public class Assess {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ULI", nullable = false)
-    private PtId ptId;
+    private PtId uli;
 
     @Column(name = "Date")
     private LocalDate date;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ECOG")
-    private ECOGPerformanceStatusScale zecog;
+    private Ecogperformancestatusscale ecog;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Swallowing")
-    private MellowScore zmellow;
+    private Mellowscore swallowing;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Breathing")
-    private MRCDyspnoeaScale zmrc;
+    private Mrcdyspnoeascale breathing;
 
-    public MRCDyspnoeaScale getMRCDyspnoeaScale() {
-        return zmrc;
+    public Mrcdyspnoeascale getBreathing() {
+        return breathing;
     }
 
-    public void setMRCDyspnoeaScale(MRCDyspnoeaScale zmrc) {
-        this.zmrc = zmrc;
+    public void setBreathing(Mrcdyspnoeascale breathing) {
+        this.breathing = breathing;
     }
 
-    public MellowScore getMellowScore() {
-        return zmellow;
+    public Mellowscore getSwallowing() {
+        return swallowing;
     }
 
-    public void setMellowScore(MellowScore zmellow) {
-        this.zmellow = zmellow;
+    public void setSwallowing(Mellowscore swallowing) {
+        this.swallowing = swallowing;
     }
 
-    public ECOGPerformanceStatusScale getECOGPerformanceStatusScale() {
-        return zecog;
+    public Ecogperformancestatusscale getEcog() {
+        return ecog;
     }
 
-    public void setECOGPerformanceStatusScale(ECOGPerformanceStatusScale zecog) {
-        this.zecog = zecog;
+    public void setEcog(Ecogperformancestatusscale ecog) {
+        this.ecog = ecog;
     }
 
     public LocalDate getDate() {
@@ -61,12 +61,12 @@ public class Assess {
         this.date = date;
     }
 
-    public PtId getPtId() {
-        return ptId;
+    public PtId getUli() {
+        return uli;
     }
 
-    public void setPtId(PtId ptId) {
-        this.ptId = ptId;
+    public void setUli(PtId uli) {
+        this.uli = uli;
     }
 
     public Integer getId() {
