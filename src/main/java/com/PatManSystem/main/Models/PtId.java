@@ -86,7 +86,7 @@ public class PtId {
         return lastname;
     }
 
-    public void setLastName(String lastName) {
+    public void setLastname(String lastname) {
         this.lastname = lastname;
     }
 
