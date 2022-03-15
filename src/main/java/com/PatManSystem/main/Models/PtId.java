@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public class PtId {
     @Id
     @Column(name = "ULI", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(name = "Lastname", length = 45)
     private String lastname;
@@ -90,11 +90,11 @@ public class PtId {
         this.lastname = lastname;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

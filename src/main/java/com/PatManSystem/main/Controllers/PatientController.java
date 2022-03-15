@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController  
-@RequestMapping(path = "api/patient/")
+@RequestMapping(path = "/api/patient")
 @CrossOrigin("*")
 public class PatientController {
     private final PatientService patientService;
@@ -25,7 +25,7 @@ public class PatientController {
         this.patientService = patientService;
     }
 
-    @GetMapping
+    @GetMapping(path ="/all")
     public List<PtId> getPatients(){
         return patientService.getPatients();
     }
