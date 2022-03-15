@@ -36,7 +36,7 @@ const Endvisitpage = () => {
 >
                 {props => (
                     <Form>
-                        
+                        <h3>Consideration and decision</h3>
                         <Grid container spacing={3} width={'70vw'}>
                         
                         <Grid item xs={12}>
