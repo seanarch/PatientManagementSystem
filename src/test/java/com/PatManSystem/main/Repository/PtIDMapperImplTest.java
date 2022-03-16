@@ -1,6 +1,6 @@
 package com.PatManSystem.main.Repository;
 
-import com.PatManSystem.main.DTO.PtIdDto;
+import com.PatManSystem.main.DTO.PatientinformationDTO;
 
 import com.PatManSystem.main.Mapper.PtIdMapperImpl;
 import com.PatManSystem.main.Models.Patientinformation;
@@ -19,27 +19,27 @@ public class PtIDMapperImplTest {
     @Test
     void ptIdDtoToPtIdTest(){
 
-        PtIdDto ptIdDto = new PtIdDto();
+        PatientinformationDTO patientinformationDTO = new PatientinformationDTO();
         //set up ptIdDto
 
-        ptIdDto.setId(235878);
-        ptIdDto.setFirstname("Jack");
-        ptIdDto.setLastname("Bauer");
-        ptIdDto.setSex('M');
-        ptIdDto.setBirthday(LocalDate.ofEpochDay(2020-12-12));
-        ptIdDto.setLocation("Calgary");
-        ptIdDto.setTg("TG");
-        ptIdDto.setPrint(1);
+        patientinformationDTO.setId(235878);
+        patientinformationDTO.setFirstname("Jack");
+        patientinformationDTO.setLastname("Bauer");
+        patientinformationDTO.setSex('M');
+        patientinformationDTO.setBirthday(LocalDate.ofEpochDay(2020-12-12));
+        patientinformationDTO.setLocation("Calgary");
+        patientinformationDTO.setTg("TG");
+        patientinformationDTO.setPrint(1);
 
-        Patientinformation patientinformationModel = mapper.ptIdDtoToPtId(ptIdDto);
+        Patientinformation patientinformationModel = mapper.ptIdDtoToPtId(patientinformationDTO);
 
-        assertEquals(ptIdDto.getId(), patientinformationModel.getId());
-        assertEquals(ptIdDto.getFirstname(), patientinformationModel.getFirstname());
-        assertEquals(ptIdDto.getLastname(), patientinformationModel.getLastname());
-        assertEquals(ptIdDto.getSex(), patientinformationModel.getSex());
-        assertEquals(ptIdDto.getBirthday(), patientinformationModel.getBirthday());
-        assertEquals(ptIdDto.getLocation(), patientinformationModel.getLocation());
-        assertEquals(ptIdDto.getTg(), patientinformationModel.getTg());
-        assertEquals(ptIdDto.getPrint(), patientinformationModel.getPrint());
+        assertEquals(patientinformationDTO.getId(), patientinformationModel.getId());
+        assertEquals(patientinformationDTO.getFirstname(), patientinformationModel.getFirstname());
+        assertEquals(patientinformationDTO.getLastname(), patientinformationModel.getLastname());
+        assertEquals(patientinformationDTO.getSex(), patientinformationModel.getSex());
+        assertEquals(patientinformationDTO.getBirthday(), patientinformationModel.getBirthday());
+        assertEquals(patientinformationDTO.getLocation(), patientinformationModel.getLocation());
+        assertEquals(patientinformationDTO.getTg(), patientinformationModel.getTg());
+        assertEquals(patientinformationDTO.getPrint(), patientinformationModel.getPrint());
     }
 }

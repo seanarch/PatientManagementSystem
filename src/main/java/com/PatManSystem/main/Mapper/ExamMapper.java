@@ -1,6 +1,6 @@
 package com.PatManSystem.main.Mapper;
 
-import com.PatManSystem.main.DTO.ExamDto;
+import com.PatManSystem.main.DTO.ExamDTO;
 import com.PatManSystem.main.Models.Exam;
 import org.mapstruct.*;
 
@@ -18,12 +18,12 @@ public interface ExamMapper {
     @Mapping(source = "peripheralId", target = "peripheral.id")
     @Mapping(source = "supineId", target = "supine.id")
     @Mapping(source = "breathId", target = "breath.id")
-    Exam examDtoToExam(ExamDto examDto);
+    Exam examDtoToExam(ExamDTO examDto);
 
     @InheritInverseConfiguration(name = "examDtoToExam")
-    ExamDto examToExamDto(Exam exam);
+    ExamDTO examToExamDto(Exam exam);
 
     @InheritConfiguration(name = "examDtoToExam")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateExamFromExamDto(ExamDto examDto, @MappingTarget Exam exam);
+    void updateExamFromExamDto(ExamDTO examDto, @MappingTarget Exam exam);
 }
