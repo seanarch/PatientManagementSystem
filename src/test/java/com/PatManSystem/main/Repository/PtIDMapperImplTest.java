@@ -3,7 +3,7 @@ package com.PatManSystem.main.Repository;
 import com.PatManSystem.main.DTO.PtIdDto;
 
 import com.PatManSystem.main.Mapper.PtIdMapperImpl;
-import com.PatManSystem.main.Models.PtId;
+import com.PatManSystem.main.Models.Patientinformation;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -31,15 +31,15 @@ public class PtIDMapperImplTest {
         ptIdDto.setTg("TG");
         ptIdDto.setPrint(1);
 
-        PtId ptIdModel = mapper.ptIdDtoToPtId(ptIdDto);
+        Patientinformation patientinformationModel = mapper.ptIdDtoToPtId(ptIdDto);
 
-        assertEquals(ptIdDto.getId(), ptIdModel.getId());
-        assertEquals(ptIdDto.getFirstname(), ptIdModel.getFirstname());
-        assertEquals(ptIdDto.getLastname(),ptIdModel.getLastname());
-        assertEquals(ptIdDto.getSex(),ptIdModel.getSex());
-        assertEquals(ptIdDto.getBirthday(), ptIdModel.getBirthday());
-        assertEquals(ptIdDto.getLocation(), ptIdModel.getLocation());
-        assertEquals(ptIdDto.getTg(), ptIdModel.getTg());
-        assertEquals(ptIdDto.getPrint(), ptIdModel.getPrint());
+        assertEquals(ptIdDto.getId(), patientinformationModel.getId());
+        assertEquals(ptIdDto.getFirstname(), patientinformationModel.getFirstname());
+        assertEquals(ptIdDto.getLastname(), patientinformationModel.getLastname());
+        assertEquals(ptIdDto.getSex(), patientinformationModel.getSex());
+        assertEquals(ptIdDto.getBirthday(), patientinformationModel.getBirthday());
+        assertEquals(ptIdDto.getLocation(), patientinformationModel.getLocation());
+        assertEquals(ptIdDto.getTg(), patientinformationModel.getTg());
+        assertEquals(ptIdDto.getPrint(), patientinformationModel.getPrint());
     }
 }

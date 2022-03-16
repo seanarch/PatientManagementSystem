@@ -1,6 +1,6 @@
 package com.PatManSystem.main.Controllers;
 
-import com.PatManSystem.main.Models.PtId;
+import com.PatManSystem.main.Models.Patientinformation;
 import com.PatManSystem.main.Services.PatientService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class PatientController {
     }
 
     @GetMapping(path ="/all")
-    public List<PtId> getPatients(){
+    public List<Patientinformation> getPatients(){
         return patientService.getPatients();
     }
 }

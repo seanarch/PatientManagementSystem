@@ -1,10 +1,12 @@
 package com.PatManSystem.main.Models;
 
-import com.PatManSystem.main.Models.PtId;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-
+@Getter
+@Setter
 @Entity
 @Table(name = "newpatientconsult")
 public class Newpatientconsult {
@@ -14,32 +16,9 @@ public class Newpatientconsult {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ULI", nullable = false)
-    private PtId uli;
+    private Patientinformation uli;
 
     @Column(name = "Date")
     private LocalDate date;
 
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public PtId getUli() {
-        return uli;
-    }
-
-    public void setUli(PtId uli) {
-        this.uli = uli;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 }

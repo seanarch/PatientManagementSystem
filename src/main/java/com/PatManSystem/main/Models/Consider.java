@@ -1,7 +1,11 @@
 package com.PatManSystem.main.Models;
 
-import javax.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.persistence.*;
+@Getter
+@Setter
 @Entity
 @Table(name = "consider")
 public class Consider {
@@ -11,7 +15,7 @@ public class Consider {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ULI", nullable = false)
-    private PtId uli;
+    private Patientinformation uli;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Consider")
@@ -20,35 +24,4 @@ public class Consider {
     @Column(name = "Detail", length = 5000)
     private String detail;
 
-    public String getDetail() {
-        return detail;
-    }
-
-    public void setDetail(String detail) {
-        this.detail = detail;
-    }
-
-    public Typeofconsideration getConsider() {
-        return consider;
-    }
-
-    public void setConsider(Typeofconsideration consider) {
-        this.consider = consider;
-    }
-
-    public PtId getUli() {
-        return uli;
-    }
-
-    public void setUli(PtId uli) {
-        this.uli = uli;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 }
