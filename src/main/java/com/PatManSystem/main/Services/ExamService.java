@@ -2,11 +2,10 @@ package com.PatManSystem.main.Services;
 
 import com.PatManSystem.main.DTO.ExamDTO;
 import com.PatManSystem.main.Mapper.ExamMapperImpl;
-import com.PatManSystem.main.Models.Exam;
 import com.PatManSystem.main.Repository.ExamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,7 +23,4 @@ public class ExamService {
                })
                .collect(Collectors.toList());
     }
-
-
-
 }
