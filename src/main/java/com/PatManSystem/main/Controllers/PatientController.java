@@ -1,7 +1,7 @@
 package com.PatManSystem.main.Controllers;
 
 import com.PatManSystem.main.Models.Patientinformation;
-import com.PatManSystem.main.Services.PatientService;
+import com.PatManSystem.main.Services.PatientInformationService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/api/patient")
 @CrossOrigin("*")
 public class PatientController {
-    private final PatientService patientService;
+    private final PatientInformationService patientService;
     
     @Autowired
-    public PatientController(PatientService patientService) {
+    public PatientController(PatientInformationService patientService) {
         this.patientService = patientService;
     }
 
