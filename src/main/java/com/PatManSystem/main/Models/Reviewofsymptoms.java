@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Setter
 @Entity
 @Table(name = "reviewofsystems")
-public class Reviewofsystem {
+public class Reviewofsymptoms {
     @Id
     @Column(name = "ROS", nullable = false)
     private Integer id;
