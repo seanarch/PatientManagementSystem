@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ExamService {
@@ -15,19 +16,13 @@ public class ExamService {
     @Autowired
     private ExamRepository examRepository;
 
-    ExamMapperImpl examMapperImpl =  new ExamMapperImpl();
-
     public List<ExamDTO> getExams(){
-
-       List<Exam> examList =  examRepository.findAll();
-       List<ExamDTO> examDTOList = new ArrayList<ExamDTO>();
-
-        for(Exam exam: examList){
-           examDTOList.add(examMapperImpl.examToExamDto(exam));
-       }
-
-        return examDTOList;
-
+       return examRepository.findAll()
+               .stream()
+               .map(exam -> {
+                   return new ExamMapperImpl().examToExamDto(exam);
+               })
+               .collect(Collectors.toList());
     }
 
 
