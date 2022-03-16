@@ -1,9 +1,13 @@
 package com.PatManSystem.main.Models;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
-
+@Getter
+@Setter
 @Entity
 @Table(name = "typeofconsideration")
 public class Typeofconsideration {
@@ -19,26 +23,6 @@ public class Typeofconsideration {
 
     public Set<Consider> getConsiders() {
         return considers;
-    }
-
-    public void setConsiders(Set<Consider> considers) {
-        this.considers = considers;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
 }

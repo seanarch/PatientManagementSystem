@@ -1,9 +1,13 @@
 package com.PatManSystem.main.Models;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
-
+@Getter
+@Setter
 @Entity
 @Table(name = "typeofdiagnosticimaging")
 public class Typeofdiagnosticimaging {
@@ -19,26 +23,6 @@ public class Typeofdiagnosticimaging {
 
     public Set<Diagnosticimaging> getDiagnosticimagings() {
         return diagnosticimagings;
-    }
-
-    public void setDiagnosticimagings(Set<Diagnosticimaging> diagnosticimagings) {
-        this.diagnosticimagings = diagnosticimagings;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
 }

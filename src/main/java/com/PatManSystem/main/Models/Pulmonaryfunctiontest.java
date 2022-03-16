@@ -1,10 +1,12 @@
 package com.PatManSystem.main.Models;
 
-import com.PatManSystem.main.Models.PtId;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-
+@Getter
+@Setter
 @Entity
 @Table(name = "pulmonaryfunctiontests")
 public class Pulmonaryfunctiontest {
@@ -14,7 +16,7 @@ public class Pulmonaryfunctiontest {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ULI", nullable = false)
-    private PtId uli;
+    private Patientinformation uli;
 
     @Column(name = "Date")
     private LocalDate date;
@@ -37,75 +39,4 @@ public class Pulmonaryfunctiontest {
     @Column(name = "DLCO")
     private Integer dlco;
 
-    public Integer getDlco() {
-        return dlco;
-    }
-
-    public void setDlco(Integer dlco) {
-        this.dlco = dlco;
-    }
-
-    public Integer getRatio() {
-        return ratio;
-    }
-
-    public void setRatio(Integer ratio) {
-        this.ratio = ratio;
-    }
-
-    public Integer getFev11() {
-        return fev11;
-    }
-
-    public void setFev11(Integer fev11) {
-        this.fev11 = fev11;
-    }
-
-    public Double getFev1() {
-        return fev1;
-    }
-
-    public void setFev1(Double fev1) {
-        this.fev1 = fev1;
-    }
-
-    public Integer getFvc1() {
-        return fvc1;
-    }
-
-    public void setFvc1(Integer fvc1) {
-        this.fvc1 = fvc1;
-    }
-
-    public Double getFvc() {
-        return fvc;
-    }
-
-    public void setFvc(Double fvc) {
-        this.fvc = fvc;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public PtId getUli() {
-        return uli;
-    }
-
-    public void setUli(PtId uli) {
-        this.uli = uli;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 }

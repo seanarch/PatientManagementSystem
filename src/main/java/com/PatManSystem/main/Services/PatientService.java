@@ -3,7 +3,7 @@ package com.PatManSystem.main.Services;
 
 import java.util.List;
 
-import com.PatManSystem.main.Models.PtId;
+import com.PatManSystem.main.Models.Patientinformation;
 import com.PatManSystem.main.Repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,10 +16,13 @@ import org.springframework.stereotype.Service;
 public class PatientService{
 
     @Autowired
-    private PatientRepository  studentRepository;
+    private PatientRepository  patientRepository;
 
-    public List<PtId> getPatients(){
-        return studentRepository.findAll();
+    public List<Patientinformation> getPatients(){
+
+        return patientRepository.findAll();
+
     }
+
 
 }
