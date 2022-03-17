@@ -46,7 +46,7 @@ const DetailedInfo = () => {
                                 <DatePicker
                                         fullWidth
                                         name="DetailedInformation.Bili"
-                                        label="Bili"
+                                        label="Bilirubin"
                                     />
                                 </Grid>
                             <Grid item xs={12}>
@@ -72,7 +72,7 @@ const DetailedInfo = () => {
                             <Grid item xs={12}>
                                     <TextField
                                         name="DetailedInformation.CPScore"
-                                        label="CPScore"
+                                        label="Cognitive Performance Scale"
                                     />
                                 </Grid>
                             <Grid item xs={12}>
