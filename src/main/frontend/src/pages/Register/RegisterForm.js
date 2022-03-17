@@ -5,6 +5,11 @@ import { Container, Grid, InputLabel, Select, MenuItem, FormControl } from '@mat
 import TextField from '../../components/TextField/TextField';
 import DatePicker from '../../components/Date/DatePicker';
 
+var curr = new Date();
+curr.setDate(curr.getDate());
+var date = curr.toISOString().substr(0,10);
+
+const firstname = "John";
 
 const INITIAL_VALUES = {
     PatientInformation: {
@@ -17,9 +22,12 @@ const INITIAL_VALUES = {
         Location: ""
     },
     NewPatientConsult: {
-        Date: ""
-    }
+        Date: {date}
+    },
 }
+
+console.log(date)
+console.log(firstname)
 
 const RegisterForm = () => {
     return (
