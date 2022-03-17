@@ -149,7 +149,7 @@ const Other = () => {
                 {/* Peripheral is displayed according to doctor's existing UI, however it's only the foreign key, instead of table name, which should be Skin */}
                 <Box mb={3}>
                     <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">Periph </InputLabel>
+                        <InputLabel id="demo-simple-select-label">Peripheral/Skin </InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
