@@ -5,16 +5,16 @@ import { Container, Grid, InputLabel, Select, MenuItem, FormControl } from '@mat
 import TextField from '../../components/TextField/TextField';
 import DatePicker from '../../components/Date/DatePicker';
 
-var curr = new Date();
-curr.setDate(curr.getDate());
-var date = curr.toISOString().substr(0,10);
-
+const today = new Date(); 
+const date = today.setDate(today.getDate()); 
+const ymddate = new Date(date).toISOString().split('T')[0] // yyyy-mm-dd
+ 
 const firstname = "John";
 
 const INITIAL_VALUES = {
     PatientInformation: {
         Lastname: "",
-        Firstname: "",
+        Firstname: {firstname}.firstname,
         Sex: "",
         Birthday: "",
         ULI: "",
@@ -22,11 +22,11 @@ const INITIAL_VALUES = {
         Location: ""
     },
     NewPatientConsult: {
-        Date: {date}
+        Date: {ymddate}.ymddate
     },
 }
 
-console.log(date)
+console.log(ymddate)
 console.log(firstname)
 
 const RegisterForm = () => {
