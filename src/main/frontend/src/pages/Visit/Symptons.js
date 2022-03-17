@@ -5,6 +5,7 @@ import { Container, Grid, InputLabel, Select, MenuItem, FormControl, Checkbox } 
 import TextField from '../../components/TextField/TextField';
 import DatePicker from '../../components/Date/DatePicker';
 import axios from "axios"; 
+import Collapsible from 'react-collapsible';
 
 const INITIAL_VALUES = {
     Symptom1: {
@@ -66,6 +67,8 @@ function Symptons() {
           {props => (
               <Form>
                   <h3>Symptoms</h3>
+                  <Collapsible trigger="[+]">
+                      <br></br>
                   <Grid container spacing={3} width={'70vw'}>
                       <Grid item xs={12}>
                           <DatePicker
@@ -314,6 +317,8 @@ function Symptons() {
                               <Button color='primary' type="submit">Save</Button>
                           </Grid>
                       </Grid>
+                  
+                  </Collapsible>
                   
               </Form>
           )}

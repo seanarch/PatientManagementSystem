@@ -4,7 +4,8 @@ import { Button } from 'reactstrap';
 import { Container, Grid, InputLabel, Select, MenuItem, FormControl, Checkbox } from '@material-ui/core';
 import TextField from '../../components/TextField/TextField';
 import DatePicker from '../../components/Date/DatePicker';
-import axios from "axios"; 
+import axios from "axios";
+import Collapsible from 'react-collapsible'; 
 
 const INITIAL_VALUES = {
     RTinfo: {
@@ -44,6 +45,9 @@ function RTGIinfo() {
             {props => (
                 <Form>
                     <h3>RT & GI Information</h3>
+                    <Collapsible trigger="[+]">
+                      <br></br>
+
                     <Grid container spacing={3} width={'70vw'}>
                         <Grid item xs={12}>
                             <DatePicker
@@ -164,6 +168,8 @@ function RTGIinfo() {
                                 <Button color='primary' type="submit">Save</Button>
                             </Grid>
                         </Grid>
+
+                    </Collapsible>
                     
                 </Form>
             )}

@@ -5,6 +5,7 @@ import { Container, Grid, InputLabel, Select, MenuItem, FormControl, Checkbox } 
 import TextField from '../../components/TextField/TextField';
 import DatePicker from '../../components/Date/DatePicker';
 import axios from "axios"; 
+import Collapsible from 'react-collapsible';
  
 const INITIAL_VALUES = {
     FhxInfo: {
@@ -37,6 +38,9 @@ const Fhxdetail = () => {
                 {props => (
                     <Form>
                         <h3>Fhx Information</h3>
+                        <Collapsible trigger="[+]">
+                      <br></br>
+
                         <Grid container spacing={3} width={'70vw'}>
 
                             <Grid item xs={12}>
@@ -116,6 +120,8 @@ const Fhxdetail = () => {
                                     <Button color='primary' type="submit">Save</Button>
                             </Grid>
                         </Grid>
+
+                      </Collapsible>
                         
                     </Form>
                 )}
