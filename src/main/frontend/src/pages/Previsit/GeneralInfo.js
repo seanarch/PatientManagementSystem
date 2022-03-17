@@ -34,7 +34,7 @@ const GeneralInfo = () => {
                                 <DatePicker
                                         fullWidth
                                         name="GeneralInformation.DateDI"
-                                        label="DateDI"
+                                        label="Date Diagnosed"
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
