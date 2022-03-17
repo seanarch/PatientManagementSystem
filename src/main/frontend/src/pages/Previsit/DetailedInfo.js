@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 import { Button } from 'reactstrap';
-import { Container, Grid, InputLabel, Select, MenuItem, FormControl } from '@material-ui/core';
+import { Container, Grid, InputLabel, Select, MenuItem, FormControl, Slider } from '@material-ui/core';
 import TextField from '../../components/TextField/TextField';
 import DatePicker from '../../components/Date/DatePicker';
 import axios from "axios"; 
@@ -16,7 +16,7 @@ const INITIAL_VALUES = {
         PTINR: "10.1",
         Ascites: 10.10,
         HepaticEnch: "String",
-        CPScore: 10,
+        CPScore: 3,
         ChildPugh: "S",
     },
 }
@@ -74,12 +74,27 @@ const DetailedInfo = () => {
                                         label="HepaticEnch"
                                     />
                                 </Grid>
-                            <Grid item xs={12}>
+                            {/* <Grid item xs={12}>
                                     <TextField
                                         name="DetailedInformation.CPScore"
                                         label="Cognitive Performance Scale"
                                     />
+                                </Grid> */}
+
+                            <Grid item xs={12}>
+                                <h5>Cognitive Performance Scale</h5>
+                                <Slider
+                                    aria-label="Temperature"
+                                    defaultValue={INITIAL_VALUES.DetailedInformation.CPScore}
+                                    valueLabelDisplay="auto"
+                                    step={1}
+                                    marks
+                                    min={0}
+                                    max={10}
+                                    />
+                                                                    
                                 </Grid>
+
                             <Grid item xs={12}>
                                     <TextField
                                         name="DetailedInformation.ChildPugh"
