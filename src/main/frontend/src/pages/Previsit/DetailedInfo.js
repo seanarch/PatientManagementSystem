@@ -5,6 +5,7 @@ import { Container, Grid, InputLabel, Select, MenuItem, FormControl } from '@mat
 import TextField from '../../components/TextField/TextField';
 import DatePicker from '../../components/Date/DatePicker';
 import axios from "axios"; 
+import Collapsible from 'react-collapsible';
 
 
 const INITIAL_VALUES = {
@@ -34,6 +35,8 @@ const DetailedInfo = () => {
                 {props => (
                     <Form>
                         <h3>Detailed Information</h3>
+                        <Collapsible trigger="[+]">
+                        <br></br>
                         <Grid container spacing={3} width={'70vw'}>
                             <Grid item xs={12}>
                                 <DatePicker
@@ -89,7 +92,7 @@ const DetailedInfo = () => {
                                     <Button color='primary' type="submit">Save</Button>
                                 </Grid>
                             </Grid>
-                        
+                        </Collapsible>
                     </Form>
                 )}
             </Formik>

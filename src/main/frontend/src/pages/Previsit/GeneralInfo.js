@@ -6,6 +6,7 @@ import TextField from '../../components/TextField/TextField';
 import DatePicker from '../../components/Date/DatePicker';
 import { TextareaAutosize } from '@mui/base';
 import axios from "axios"; 
+import Collapsible from 'react-collapsible';
 
 const INITIAL_VALUES = {
     GeneralInformation: {
@@ -29,6 +30,8 @@ const GeneralInfo = () => {
                 {props => (
                     <Form>
                         <h3>General Information</h3>
+                        <Collapsible trigger="[+]">
+                        <br></br>
                         <Grid container spacing={3} width={'70vw'}>
                             <Grid item xs={12}>
                                 <DatePicker
@@ -58,7 +61,7 @@ const GeneralInfo = () => {
                                     <Button color='primary' type="submit">Save</Button>
                                 </Grid>
                             </Grid>
-                        
+                        </Collapsible>
                     </Form>
                 )}
             </Formik>
