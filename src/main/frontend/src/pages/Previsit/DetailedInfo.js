@@ -10,9 +10,9 @@ import axios from "axios";
 const INITIAL_VALUES = {
     DetailedInformation: {
         Date1: "2021-03-17",
-        Bili: "2021-04-17",
-        Alb: "2021-05-17",
-        PTINR: "2021-06-17",
+        Bili: "10.1",
+        Alb: "10.1",
+        PTINR: "10.1",
         Ascites: 10.10,
         HepaticEnch: "String",
         CPScore: 10,
@@ -42,27 +42,29 @@ const DetailedInfo = () => {
                                         label="Date"
                                     />
                                 </Grid>
-                            <Grid item xs={12}>
-                                <DatePicker
-                                        fullWidth
+
+                                <Grid item xs={12}>
+                                    <TextField
                                         name="DetailedInformation.Bili"
                                         label="Bilirubin"
                                     />
                                 </Grid>
-                            <Grid item xs={12}>
-                                <DatePicker
-                                        fullWidth
+
+                                <Grid item xs={12}>
+                                    <TextField
                                         name="DetailedInformation.Alb"
                                         label="Alb"
                                     />
                                 </Grid>
-                            <Grid item xs={12}>
-                                <DatePicker
-                                        fullWidth
+
+                                <Grid item xs={12}>
+                                    <TextField
                                         name="DetailedInformation.PTINR"
                                         label="PTINR"
                                     />
                                 </Grid>
+
+
                             <Grid item xs={12}>
                                     <TextField
                                         name="DetailedInformation.HepaticEnch"
