@@ -1,6 +1,6 @@
 package com.PatManSystem.main.Controllers;
 
-import com.PatManSystem.main.DTO.ExamDTO;
+import com.PatManSystem.main.DTO.ExamDto;
 import com.PatManSystem.main.Services.ExamService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class ExamController {
     }
 
     @GetMapping(path ="/all")
-    public List<ExamDTO> getExams(){
+    public List<ExamDto> getExams(){
         return examService.getExams();
     }
 }

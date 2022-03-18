@@ -9,8 +9,8 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PatientinformationDTO implements Serializable {
-    private Integer id;
+public class PatientinformationDto implements Serializable {
+    private Long id;
     private String lastname;
     private String firstname;
     private Character sex;

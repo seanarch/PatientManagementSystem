@@ -1,6 +1,6 @@
 package com.PatManSystem.main.Repository;
 
-import com.PatManSystem.main.DTO.ExamDTO;
+import com.PatManSystem.main.DTO.ExamDto;
 import com.PatManSystem.main.Mapper.ExamMapperImpl;
 import com.PatManSystem.main.Models.*;
 import org.junit.jupiter.api.Test;
@@ -43,7 +43,7 @@ public class ExamMapperImplTest {
         exam.setOral(oral);
         exam.setCns(centralnervoussystem);
 
-        ExamDTO examDto = mapper.examToExamDto(exam);
+        ExamDto examDto = mapper.examToExamDto(exam);
 
         assertEquals(examDto.getId(), exam.getId());
         assertEquals(examDto.getDate(), exam.getDate());
@@ -57,7 +57,7 @@ public class ExamMapperImplTest {
 
     @Test
     void examDtoToExamTest(){
-        ExamDTO examDto = new ExamDTO();
+        ExamDto examDto = new ExamDto();
         examDto.setId(123);
         examDto.setAbdoDescription("normal");
         examDto.setCnsId(111);
@@ -71,7 +71,7 @@ public class ExamMapperImplTest {
 
     @Test
     void updateExamFromExamDtoTest(){
-        ExamDTO examDto = new ExamDTO();
+        ExamDto examDto = new ExamDto();
         examDto.setId(123);
         examDto.setAbdoDescription("normal");
         examDto.setCnsId(111);

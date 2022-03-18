@@ -1,8 +1,7 @@
 package com.PatManSystem.main.Repository;
 
-import com.PatManSystem.main.DTO.PatientinformationDTO;
-
-import com.PatManSystem.main.Mapper.PtIdMapperImpl;
+import com.PatManSystem.main.DTO.PatientinformationDto;
+import com.PatManSystem.main.Mapper.PatientinformationMapperImpl;
 import com.PatManSystem.main.Models.Patientinformation;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +13,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class PtIDMapperImplTest {
 
     @Autowired
-    private final PtIdMapperImpl  mapper = new PtIdMapperImpl();
+    private final PatientinformationMapperImpl mapper = new PatientinformationMapperImpl();
 
     @Test
     void ptIdDtoToPtIdTest(){
 
-        PatientinformationDTO patientinformationDTO = new PatientinformationDTO();
+        PatientinformationDto patientinformationDTO = new PatientinformationDto();
         //set up ptIdDto
 
-        patientinformationDTO.setId(235878);
+        patientinformationDTO.setId(235878L);
         patientinformationDTO.setFirstname("Jack");
         patientinformationDTO.setLastname("Bauer");
         patientinformationDTO.setSex('M');
@@ -31,7 +30,7 @@ public class PtIDMapperImplTest {
         patientinformationDTO.setTg("TG");
         patientinformationDTO.setPrint(1);
 
-        Patientinformation patientinformationModel = mapper.ptIdDtoToPtId(patientinformationDTO);
+        Patientinformation patientinformationModel = mapper.patientinformationDtoToPatientinformation(patientinformationDTO);
 
         assertEquals(patientinformationDTO.getId(), patientinformationModel.getId());
         assertEquals(patientinformationDTO.getFirstname(), patientinformationModel.getFirstname());
