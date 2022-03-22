@@ -36,7 +36,7 @@ const FVCFEVInfo = () => {
                         <Collapsible trigger="[+]">
                          <br></br>
                         <Grid container spacing={3} width={'70vw'}>
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                 <DatePicker
                                         fullWidth
                                         name="FVCFEVInformation.Date2"
@@ -44,41 +44,41 @@ const FVCFEVInfo = () => {
                                     />
                                 </Grid>
                         
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                     <TextField
                                         name="FVCFEVInformation.FVC"
                                         label="FVC"
                                     />
                                 </Grid>
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                     <TextField
                                         name="FVCFEVInformation.FVCperc"
                                         label="FVC%"
                                     />
                                 </Grid>
                                 <hr></hr>
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                     <TextField
                                         name="FVCFEVInformation.FEV1"
                                         label="FEV1"
                                     />
                                 </Grid>
                                 <hr></hr>
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                     <TextField
                                         name="FVCFEVInformation.FEV1perc"
                                         label="FEV%"
                                     />
                                 </Grid>
                                 <hr></hr>
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                     <TextField
                                         name="FVCFEVInformation.Ratio"
                                         label="Ratio"
                                     />
                                 </Grid>
                                 <hr></hr>
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                     <TextField
                                         name="FVCFEVInformation.DLCO"
                                         label="DLCO"

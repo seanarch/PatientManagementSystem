@@ -38,7 +38,7 @@ const DetailedInfo = () => {
                         <Collapsible trigger="[+]">
                         <br></br>
                         <Grid container spacing={3} width={'70vw'}>
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                 <DatePicker
                                         fullWidth
                                         name="DetailedInformation.Date1"
@@ -46,21 +46,21 @@ const DetailedInfo = () => {
                                     />
                                 </Grid>
 
-                                <Grid item xs={12}>
+                                <Grid item xs={6}>
                                     <TextField
                                         name="DetailedInformation.Bili"
                                         label="Bilirubin"
                                     />
                                 </Grid>
 
-                                <Grid item xs={12}>
+                                <Grid item xs={6}>
                                     <TextField
                                         name="DetailedInformation.Alb"
                                         label="Alb"
                                     />
                                 </Grid>
 
-                                <Grid item xs={12}>
+                                <Grid item xs={6}>
                                     <TextField
                                         name="DetailedInformation.PTINR"
                                         label="PTINR"
@@ -68,7 +68,7 @@ const DetailedInfo = () => {
                                 </Grid>
 
 
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                     <TextField
                                         name="DetailedInformation.HepaticEnch"
                                         label="HepaticEnch"
@@ -80,6 +80,13 @@ const DetailedInfo = () => {
                                         label="Cognitive Performance Scale"
                                     />
                                 </Grid> */}
+
+                            <Grid item xs={6}>
+                                    <TextField
+                                        name="DetailedInformation.ChildPugh"
+                                        label="ChildPugh"
+                                    />
+                                </Grid>
 
                             <Grid item xs={12}>
                                 <h5>Cognitive Performance Scale</h5>
@@ -93,13 +100,6 @@ const DetailedInfo = () => {
                                     max={10}
                                     />
                                                                     
-                                </Grid>
-
-                            <Grid item xs={12}>
-                                    <TextField
-                                        name="DetailedInformation.ChildPugh"
-                                        label="ChildPugh"
-                                    />
                                 </Grid>
                                 <hr></hr>
 
