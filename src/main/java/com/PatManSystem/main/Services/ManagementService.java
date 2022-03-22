@@ -19,7 +19,7 @@ public class ManagementService {
         return managementRepository.findAll()
                 .stream()
                 .map(management -> {
-                    return new ManagementMapperImpl().managementToManagementDto(management);
+                    return new ManagementMapperImpl().managementToManagementDTO(management);
                 })
                 .collect(Collectors.toList());
     }

@@ -9,19 +9,13 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RadiationtherapyDto implements Serializable {
+public class FollowupDTO implements Serializable {
     private Long uliId;
-    private LocalDate dateRTStart;
-    private LocalDate dateRTEnd;
-    private Integer typeRTId;
-    private String typeRTDescription;
-    private Integer locationId;
-    private Double rTDose;
-    private Integer fraction;
-    private Integer planningId;
-    private String planningDescription;
-    private String anatDetail;
-    private String general;
+    private LocalDate date;
+    private Integer typeFUId;
+    private String typeFUDescription;
+    private Integer clinicalResponseId;
+    private String clinicalResponseDescription;
     private Integer pneumonitisId;
     private String pneumonitisDescription;
     private Integer upperGIId;
@@ -37,7 +31,5 @@ public class RadiationtherapyDto implements Serializable {
     private Integer hepaticId;
     private String hepaticDescription;
     private String otherToxicity;
-    private String otherToxicityDetail;
-    private String details;
-    private Integer ng;
+    private String otherToxDetail;
 }

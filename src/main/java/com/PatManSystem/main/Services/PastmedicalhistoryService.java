@@ -19,7 +19,7 @@ public class PastmedicalhistoryService {
         return pastmedicalhistoryRepository.findAll()
                 .stream()
                 .map(pastmedicalhistory -> {
-                    return new PastmedicalhistoryMapperImpl().pastmedicalhistoryToPastmedicalhistoryDto(pastmedicalhistory);
+                    return new PastmedicalhistoryMapperImpl().pastmedicalhistoryToPastmedicalhistoryDTO(pastmedicalhistory);
                 })
                 .collect(Collectors.toList());
     }

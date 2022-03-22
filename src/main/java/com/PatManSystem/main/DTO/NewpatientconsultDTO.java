@@ -3,14 +3,14 @@ package com.PatManSystem.main.DTO;
 import lombok.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 @Getter
 @Setter
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class HistoryofpresentillnessDto implements Serializable {
+public class NewpatientconsultDTO implements Serializable {
     private Integer id;
     private Long uliId;
-    private Integer descriptorId;
-    private String descriptorDescription;
+    private LocalDate date;
 }

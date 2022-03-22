@@ -19,7 +19,7 @@ public class HistoryofpresentillnessService {
         return historyofpresentillnessRepository.findAll()
                 .stream()
                 .map(historyofpresentillness -> {
-                    return new HistoryofpresentillnessMapperImpl().historyofpresentillnessToHistoryofpresentillnessDto(historyofpresentillness);
+                    return new HistoryofpresentillnessMapperImpl().historyofpresentillnessToHistoryofpresentillnessDTO(historyofpresentillness);
                 })
                 .collect(Collectors.toList());
     }

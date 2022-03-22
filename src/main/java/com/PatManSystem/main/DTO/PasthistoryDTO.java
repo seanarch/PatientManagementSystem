@@ -8,7 +8,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PasthistoryDto implements Serializable {
+public class PasthistoryDTO implements Serializable {
     private Integer id;
     private Long uliId;
     private String fhxDetail;

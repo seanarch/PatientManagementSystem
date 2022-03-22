@@ -1,6 +1,6 @@
 package com.PatManSystem.main.Services;
 
-import com.PatManSystem.main.DTO.ExamDto;
+import com.PatManSystem.main.DTO.ExamDTO;
 import com.PatManSystem.main.Mapper.ExamMapperImpl;
 import com.PatManSystem.main.Repository.ExamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +15,11 @@ public class ExamService {
     @Autowired
     private ExamRepository examRepository;
 
-    public List<ExamDto> getExams(){
+    public List<ExamDTO> getExams(){
        return examRepository.findAll()
                .stream()
                .map(exam -> {
-                   return new ExamMapperImpl().examToExamDto(exam);
+                   return new ExamMapperImpl().examToExamDTO(exam);
                })
                .collect(Collectors.toList());
     }

@@ -19,7 +19,7 @@ public class NewpatientconsultService {
         return newpatientconsultRepository.findAll()
                 .stream()
                 .map(newpatientconsult -> {
-                    return new NewpatientconsultMapperImpl().newpatientconsultToNewpatientconsultDto(newpatientconsult);
+                    return new NewpatientconsultMapperImpl().newpatientconsultToNewpatientconsultDTO(newpatientconsult);
                 })
                 .collect(Collectors.toList());
     }

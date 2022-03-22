@@ -8,6 +8,6 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ChildpughDto implements Serializable {
+public class ChildpughDTO implements Serializable {
     private Integer id;
 }

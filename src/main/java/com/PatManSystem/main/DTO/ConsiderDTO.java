@@ -8,7 +8,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ConsiderDto implements Serializable {
+public class ConsiderDTO implements Serializable {
     private Integer id;
     private Long uliId;
     private Integer considerId;

@@ -1,6 +1,6 @@
 package com.PatManSystem.main.Mapper;
 
-import com.PatManSystem.main.DTO.PasthistoryDto;
+import com.PatManSystem.main.DTO.PasthistoryDTO;
 import com.PatManSystem.main.Models.Pasthistory;
 import org.mapstruct.*;
 
@@ -8,12 +8,12 @@ import org.mapstruct.*;
 public interface PasthistoryMapper {
     @Mapping(source = "uliId", target = "uli.id")
     @Mapping(source = "GOCDesignationId", target = "GOCDesignation.id")
-    Pasthistory pasthistoryDtoToPasthistory(PasthistoryDto pasthistoryDto);
+    Pasthistory pasthistoryDTOToPasthistory(PasthistoryDTO pasthistoryDTO);
 
-    @InheritInverseConfiguration(name = "pasthistoryDtoToPasthistory")
-    PasthistoryDto pasthistoryToPasthistoryDto(Pasthistory pasthistory);
+    @InheritInverseConfiguration(name = "pasthistoryDTOToPasthistory")
+    PasthistoryDTO pasthistoryToPasthistoryDTO(Pasthistory pasthistory);
 
-    @InheritConfiguration(name = "pasthistoryDtoToPasthistory")
+    @InheritConfiguration(name = "pasthistoryDTOToPasthistory")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updatePasthistoryFromPasthistoryDto(PasthistoryDto pasthistoryDto, @MappingTarget Pasthistory pasthistory);
+    void updatePasthistoryFromPasthistoryDTO(PasthistoryDTO pasthistoryDTO, @MappingTarget Pasthistory pasthistory);
 }

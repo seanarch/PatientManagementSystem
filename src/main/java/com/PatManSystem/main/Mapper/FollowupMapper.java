@@ -1,9 +1,10 @@
 package com.PatManSystem.main.Mapper;
 
-import com.PatManSystem.main.DTO.FollowupDto;
+import com.PatManSystem.main.DTO.FollowupDTO;
 import com.PatManSystem.main.Models.Followup;
 import org.mapstruct.*;
 
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface FollowupMapper {
     @Mapping(source = "uliId", target = "uli.id")
     @Mapping(source = "typeFUId", target = "typeFU.id")
@@ -24,12 +25,12 @@ public interface FollowupMapper {
     @Mapping(source = "hemeDescription", target = "heme.description")
     @Mapping(source = "hepaticId", target = "hepatic.id")
     @Mapping(source = "hepaticDescription", target = "hepatic.description")
-    Followup followupDtoToFollowup(FollowupDto followupDto);
+    Followup followupDTOToFollowup(FollowupDTO followupDTO);
 
-    @InheritInverseConfiguration(name = "followupDtoToFollowup")
-    FollowupDto followupToFollowupDto(Followup followup);
+    @InheritInverseConfiguration(name = "followupDTOToFollowup")
+    FollowupDTO followupToFollowupDTO(Followup followup);
 
-    @InheritConfiguration(name = "followupDtoToFollowup")
+    @InheritConfiguration(name = "followupDTOToFollowup")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateFollowupFromFollowupDto(FollowupDto followupDto, @MappingTarget Followup followup);
+    void updateFollowupFromFollowupDTO(FollowupDTO followupDTO, @MappingTarget Followup followup);
 }

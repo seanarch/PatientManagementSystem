@@ -1,6 +1,6 @@
 package com.PatManSystem.main.Repository;
 
-import com.PatManSystem.main.DTO.ExamDto;
+import com.PatManSystem.main.DTO.ExamDTO;
 import com.PatManSystem.main.Mapper.ExamMapperImpl;
 import com.PatManSystem.main.Models.*;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ public class ExamMapperImplTest {
     private final ExamMapperImpl mapper = new ExamMapperImpl();
 
     @Test
-    void examToExamDtoTest(){
+    void examToExamDTOTest(){
 
         Exam exam = new Exam();
         exam.setId(100);
@@ -43,45 +43,45 @@ public class ExamMapperImplTest {
         exam.setOral(oral);
         exam.setCns(centralnervoussystem);
 
-        ExamDto examDto = mapper.examToExamDto(exam);
+        ExamDTO examDTO = mapper.examToExamDTO(exam);
 
-        assertEquals(examDto.getId(), exam.getId());
-        assertEquals(examDto.getDate(), exam.getDate());
-        assertEquals(examDto.getAbdoDescription(), exam.getAbdo().getDescription());
-        assertEquals(examDto.getHnId(), exam.getHn().getId());
-        assertEquals(examDto.getLungId(), exam.getLung().getId());
-        assertEquals(examDto.getOralId(), exam.getOral().getId());
-        assertEquals(examDto.getCnsId(), exam.getCns().getId());
+        assertEquals(examDTO.getId(), exam.getId());
+        assertEquals(examDTO.getDate(), exam.getDate());
+        assertEquals(examDTO.getAbdoDescription(), exam.getAbdo().getDescription());
+        assertEquals(examDTO.getHnId(), exam.getHn().getId());
+        assertEquals(examDTO.getLungId(), exam.getLung().getId());
+        assertEquals(examDTO.getOralId(), exam.getOral().getId());
+        assertEquals(examDTO.getCnsId(), exam.getCns().getId());
 
     }
 
     @Test
-    void examDtoToExamTest(){
-        ExamDto examDto = new ExamDto();
-        examDto.setId(123);
-        examDto.setAbdoDescription("normal");
-        examDto.setCnsId(111);
+    void examDTOToExamTest(){
+        ExamDTO examDTO = new ExamDTO();
+        examDTO.setId(123);
+        examDTO.setAbdoDescription("normal");
+        examDTO.setCnsId(111);
 
-        Exam exam = mapper.examDtoToExam(examDto);
+        Exam exam = mapper.examDTOToExam(examDTO);
 
-        assertEquals(examDto.getId(), exam.getId());
-        assertEquals(examDto.getAbdoDescription(), exam.getAbdo().getDescription());
-        assertEquals(examDto.getCnsId(),exam.getCns().getId());
+        assertEquals(examDTO.getId(), exam.getId());
+        assertEquals(examDTO.getAbdoDescription(), exam.getAbdo().getDescription());
+        assertEquals(examDTO.getCnsId(),exam.getCns().getId());
     }
 
     @Test
-    void updateExamFromExamDtoTest(){
-        ExamDto examDto = new ExamDto();
-        examDto.setId(123);
-        examDto.setAbdoDescription("normal");
-        examDto.setCnsId(111);
+    void updateExamFromExamDTOTest(){
+        ExamDTO examDTO = new ExamDTO();
+        examDTO.setId(123);
+        examDTO.setAbdoDescription("normal");
+        examDTO.setCnsId(111);
 
         Exam exam = new Exam();
 
-        mapper.updateExamFromExamDto(examDto, exam);
-        assertEquals(examDto.getId(), exam.getId());
-        assertEquals(examDto.getAbdoDescription(), exam.getAbdo().getDescription());
-        assertEquals(examDto.getCnsId(),exam.getCns().getId());
+        mapper.updateExamFromExamDTO(examDTO, exam);
+        assertEquals(examDTO.getId(), exam.getId());
+        assertEquals(examDTO.getAbdoDescription(), exam.getAbdo().getDescription());
+        assertEquals(examDTO.getCnsId(),exam.getCns().getId());
     }
 
 }

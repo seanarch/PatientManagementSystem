@@ -19,7 +19,7 @@ public class DiagnosisService {
         return diagnosisRepository.findAll()
                 .stream()
                 .map(diagnosis -> {
-                    return new DiagnosisMapperImpl().diagnosisToDiagnosisDto(diagnosis);
+                    return new DiagnosisMapperImpl().diagnosisToDiagnosisDTO(diagnosis);
                 })
                 .collect(Collectors.toList());
     }

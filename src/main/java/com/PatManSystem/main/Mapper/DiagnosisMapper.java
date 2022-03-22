@@ -1,6 +1,6 @@
 package com.PatManSystem.main.Mapper;
 
-import com.PatManSystem.main.DTO.DiagnosisDto;
+import com.PatManSystem.main.DTO.DiagnosisDTO;
 import com.PatManSystem.main.Models.Diagnosis;
 import org.mapstruct.Mapping;
 import org.mapstruct.*;
@@ -15,10 +15,10 @@ public interface DiagnosisMapper {
     @Mapping(source = "pathologyDescription", target = "pathology.description")
     @Mapping(source = "recurId", target = "recur.id")
     @Mapping(source = "recurDescription", target = "recur.description")
-    Diagnosis diagnosisDtoToDiagnosis(DiagnosisDto diagnosisDto);
+    Diagnosis diagnosisDTOToDiagnosis(DiagnosisDTO diagnosisDTO);
 
-    DiagnosisDto diagnosisToDiagnosisDto(Diagnosis diagnosis);
+    DiagnosisDTO diagnosisToDiagnosisDTO(Diagnosis diagnosis);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateDiagnosisFromDiagnosisDto(DiagnosisDto diagnosisDto, @MappingTarget Diagnosis diagnosis);
+    void updateDiagnosisFromDiagnosisDTO(DiagnosisDTO diagnosisDTO, @MappingTarget Diagnosis diagnosis);
 }

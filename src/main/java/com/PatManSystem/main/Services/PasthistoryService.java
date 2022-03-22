@@ -19,7 +19,7 @@ public class PasthistoryService {
         return pasthistoryRepository.findAll()
                 .stream()
                 .map(pasthistory -> {
-                    return new PasthistoryMapperImpl().pasthistoryToPasthistoryDto(pasthistory);
+                    return new PasthistoryMapperImpl().pasthistoryToPasthistoryDTO(pasthistory);
                 })
                 .collect(Collectors.toList());
     }

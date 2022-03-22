@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DiagnosticimagingDto implements Serializable {
+public class DiagnosticimagingDTO implements Serializable {
     private Integer id;
     private Long uliId;
     private LocalDate dateDI;

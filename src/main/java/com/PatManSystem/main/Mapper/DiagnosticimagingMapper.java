@@ -1,6 +1,6 @@
 package com.PatManSystem.main.Mapper;
 
-import com.PatManSystem.main.DTO.DiagnosticimagingDto;
+import com.PatManSystem.main.DTO.DiagnosticimagingDTO;
 import com.PatManSystem.main.Models.Diagnosticimaging;
 import org.mapstruct.*;
 
@@ -9,12 +9,12 @@ public interface DiagnosticimagingMapper {
     @Mapping(source = "uliId", target = "uli.id")
     @Mapping(source = "typeDIId", target = "typeDI.id")
     @Mapping(source = "typeDIDescription", target = "typeDI.description")
-    Diagnosticimaging diagnosticimagingDtoToDiagnosticimaging(DiagnosticimagingDto diagnosticimagingDto);
+    Diagnosticimaging diagnosticimagingDTOToDiagnosticimaging(DiagnosticimagingDTO diagnosticimagingDTO);
 
-    @InheritInverseConfiguration(name = "diagnosticimagingDtoToDiagnosticimaging")
-    DiagnosticimagingDto diagnosticimagingToDiagnosticimagingDto(Diagnosticimaging diagnosticimaging);
+    @InheritInverseConfiguration(name = "diagnosticimagingDTOToDiagnosticimaging")
+    DiagnosticimagingDTO diagnosticimagingToDiagnosticimagingDTO(Diagnosticimaging diagnosticimaging);
 
-    @InheritConfiguration(name = "diagnosticimagingDtoToDiagnosticimaging")
+    @InheritConfiguration(name = "diagnosticimagingDTOToDiagnosticimaging")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateDiagnosticimagingFromDiagnosticimagingDto(DiagnosticimagingDto diagnosticimagingDto, @MappingTarget Diagnosticimaging diagnosticimaging);
+    void updateDiagnosticimagingFromDiagnosticimagingDTO(DiagnosticimagingDTO diagnosticimagingDTO, @MappingTarget Diagnosticimaging diagnosticimaging);
 }
