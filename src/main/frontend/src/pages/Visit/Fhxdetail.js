@@ -43,14 +43,14 @@ const Fhxdetail = () => {
 
                         <Grid container spacing={3} width={'70vw'}>
 
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                     <TextField
                                         name="FhxInfo.FhxDetail"
                                         label="FhxDetail"
                                     />
                                 </Grid>
 
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                     <TextField 
                                     name="FhxInfo.Smoking" 
                                     label="Smoking"
@@ -64,42 +64,42 @@ const Fhxdetail = () => {
                                     />
                             </Grid>
 
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                             <h5>Un-attended</h5>
                                 <label>
                                     <Field type="checkbox" name="FhxInfo.Unattended" />
                                 </label>
                             </Grid>
 
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                             <h5>Lacks social support</h5>
                                 <label>
                                     <Field type="checkbox" name="FhxInfo.SocialSup" />
                                 </label>
                             </Grid>
 
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                             <h5>Language Barrier</h5>
                                 <label>
                                     <Field type="checkbox" name="FhxInfo.Language" />
                                 </label>
                             </Grid>
                             
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                             <h5>Financial Challenge</h5>
                                 <label>
                                     <Field type="checkbox" name="FhxInfo.$Stress" />
                                 </label>
                             </Grid>
 
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                             <h5>Psychosocial Challenge</h5>
                                 <label>
                                     <Field type="checkbox" name="FhxInfo.PsychStress" />
                                 </label>
                             </Grid>
 
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                             <h5>ETOH week</h5>
                                 <label>
                                     <Field type="checkbox" name="FhxInfo.ETOHweek" />

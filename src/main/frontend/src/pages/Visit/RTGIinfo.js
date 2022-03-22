@@ -49,45 +49,45 @@ function RTGIinfo() {
                       <br></br>
 
                     <Grid container spacing={3} width={'70vw'}>
-                        <Grid item xs={12}>
+                        <Grid item xs={6}>
                             <DatePicker
                                     fullWidth
                                     name="RTinfo.DateRTStart"
                                     label="DateRTStart"
                                 />
                             </Grid>
-                        <Grid item xs={12}>
+                        <Grid item xs={6}>
                             <DatePicker
                                     fullWidth
                                     name="RTinfo.DateRTEnd"
                                     label="DateRTEnd"
                                 />
                             </Grid>
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                 <TextField
                                     name="RTinfo.TypeRT"
                                     label="TypeRT"
                                 />
                             </Grid>
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                 <TextField
                                     name="RTinfo.Location"
                                     label="Location"
                                 />
                             </Grid>
-                        <Grid item xs={12}>
+                        <Grid item xs={6}>
                                 <TextField
                                     name="RTinfo.RTDose"
                                     label="RT Dose"
                                 />
                             </Grid>
-                        <Grid item xs={12}>
+                        <Grid item xs={6}>
                                 <TextField
                                     name="RTinfo.Fraction"
                                     label="Fraction"
                                 />
                             </Grid>
-                        <Grid item xs={12}>
+                        <Grid item xs={6}>
                                 <TextField
                                     name="RTinfo.Planning"
                                     label="Planning"
@@ -115,49 +115,49 @@ function RTGIinfo() {
                                     />
                                     </Grid>
 
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                 <TextField
                                     name="GIinfo.Pneumoitis"
                                     label="Pneumoitis"
                                 />
                             </Grid>
 
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                 <TextField
                                     name="GIinfo.UpperGI"
                                     label="UpperGI"
                                 />
                             </Grid>
 
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                 <TextField
                                     name="GIinfo.SkinReaction"
                                     label="SkinReaction"
                                 />
                             </Grid>
 
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                 <TextField
                                     name="GIinfo.LowerGI"
                                     label="LowerGI"
                                 />
                             </Grid>
 
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                 <TextField
                                     name="GIinfo.GU"
                                     label="GU"
                                 />
                             </Grid>
 
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                 <TextField
                                     name="GIinfo.Hepatic"
                                     label="Hepatic"
                                 />
                             </Grid>
 
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                 <TextField
                                     name="GIinfo.Heme"
                                     label="Heme"

@@ -49,7 +49,7 @@ const ORinfo = () => {
                         <Collapsible trigger="[+]">
                       <br></br>
                         <Grid container spacing={3} width={'70vw'}>
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                 <DatePicker
                                         fullWidth
                                         name="ORInformation.ORdate"
@@ -57,28 +57,28 @@ const ORinfo = () => {
                                     />
                                 </Grid>
 
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                     <TextField
                                         name="ORInformation.Location"
                                         label="Location"
                                     />
                                 </Grid>
 
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                             <h5>LVSI</h5>
                                 <label>
                                     <Field type="checkbox" name="ORInformation.LVSI" />
                                 </label>
                             </Grid>
 
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                             <h5>PeriNeur</h5>
                                 <label>
                                     <Field type="checkbox" name="ORInformation.Peri" />
                                 </label>
                             </Grid>
  
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                 <label>
                                     <TextField 
                                         name="ORInformation.T"
@@ -87,7 +87,7 @@ const ORinfo = () => {
                                 </label>
                             </Grid>
 
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                 <label>
                                     <TextField 
                                         name="ORInformation.N"
@@ -96,7 +96,7 @@ const ORinfo = () => {
                                 </label>
                             </Grid>
 
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                 <label>
                                     <TextField 
                                         name="ORInformation.Nve"
@@ -105,7 +105,7 @@ const ORinfo = () => {
                                 </label>
                             </Grid>
 
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                 <label>
                                     <TextField 
                                         name="ORInformation.Ntaken"
@@ -114,7 +114,7 @@ const ORinfo = () => {
                                 </label>
                             </Grid>
 
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                 <label>
                                     <TextField 
                                         name="ORInformation.M"
@@ -123,7 +123,7 @@ const ORinfo = () => {
                                 </label>
                             </Grid>
 
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                 <label>
                                     <TextField 
                                         name="ORInformation.Stage"
@@ -132,7 +132,7 @@ const ORinfo = () => {
                                 </label>
                             </Grid>
  
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                 <label>
                                     <TextField 
                                         name="ORInformation.Pathology"
