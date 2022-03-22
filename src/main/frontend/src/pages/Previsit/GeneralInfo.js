@@ -33,17 +33,17 @@ const GeneralInfo = () => {
                         <Collapsible trigger="[+]">
                         <br></br>
                         <Grid container spacing={3} width={'70vw'}>
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                 <DatePicker
                                         fullWidth
                                         name="GeneralInformation.DateDI"
                                         label="Date Diagnosed"
                                     />
                                 </Grid>
-                                <Grid item xs={12}>
+                                <Grid item xs={6}>
                                     <TextField
                                         name="GeneralInformation.CTchest"
-                                        label="CTchest"
+                                        label="CT chest"
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
