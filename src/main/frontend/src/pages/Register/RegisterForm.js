@@ -45,21 +45,21 @@ const RegisterForm = () => {
                         <Form>
                             <h3>Create New Patient</h3>
                             <Grid container spacing={3} width={'70vw'}>
-                                <Grid item xs={12}>
+                                <Grid item xs={6}>
                                     <TextField
                                         label="Lastname"
                                         name="PatientInformation.Lastname"
                                         fullWidth
                                     />
                                     </Grid>
-                                    <Grid item xs={12}>
+                                    <Grid item xs={6}>
                                         <TextField
                                             label="Firstname"
                                             name="PatientInformation.Firstname"
                                         />
                                     </Grid>
 
-                                    <Grid item xs={12} >
+                                    <Grid item xs={6} >
                                     <FormControl fullWidth>
                                         <InputLabel id="demo-simple-select">Sex</InputLabel>
                                         <Select
@@ -78,7 +78,7 @@ const RegisterForm = () => {
                                         </FormControl>
                                     </Grid>
 
-                                    <Grid item xs={12}>
+                                    <Grid item xs={6}>
                                         <DatePicker
                                             fullWidth
                                             name="PatientInformation.Birthday"
@@ -86,7 +86,7 @@ const RegisterForm = () => {
                                         />
                                     </Grid>
 
-                                    <Grid item xs={12}>
+                                    <Grid item xs={6}>
                                         <TextField
                                             label="ULI"
                                             name="PatientInformation.ULI"
@@ -95,21 +95,21 @@ const RegisterForm = () => {
                                     </Grid>
 
 
-                                    <Grid item xs={12}>
+                                    <Grid item xs={6}>
                                         <TextField
                                             label="TG"
                                             name="PatientInformation.TG"
                                         />
                                     </Grid>
 
-                                    <Grid item xs={12}>
+                                    <Grid item xs={6}>
                                         <TextField
                                             label="Location"
                                             name="PatientInformation.Location"
                                         />
                                     </Grid>
 
-                                    <Grid item xs={12}>
+                                    <Grid item xs={6}>
                                         <DatePicker
                                             fullWidth
                                             name="NewPatientConsult.Date"
