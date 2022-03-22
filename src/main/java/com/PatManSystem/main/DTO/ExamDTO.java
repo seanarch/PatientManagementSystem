@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ExamDto implements Serializable {
+public class ExamDTO implements Serializable {
     private Integer id;
     private Integer abdoId;
     private String abdoDescription;

@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReviewofsymptomsDto implements Serializable {
+public class ReviewofsymptomsDTO implements Serializable {
     private Integer id;
     private Long uliId;
     private LocalDate date;

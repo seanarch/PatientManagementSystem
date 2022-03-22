@@ -19,7 +19,7 @@ public class RadiationtherapyService {
         return radiationtherapyRepository.findAll()
                 .stream()
                 .map(radiationtherapy -> {
-                    return new RadiationtherapyMapperImpl().radiationtherapyToRadiationtherapyDto(radiationtherapy);
+                    return new RadiationtherapyMapperImpl().radiationtherapyToRadiationtherapyDTO(radiationtherapy);
                 })
                 .collect(Collectors.toList());
     }

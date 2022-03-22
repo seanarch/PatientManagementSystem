@@ -1,6 +1,6 @@
 package com.PatManSystem.main.Repository;
 
-import com.PatManSystem.main.DTO.PatientinformationDto;
+import com.PatManSystem.main.DTO.PatientinformationDTO;
 import com.PatManSystem.main.Mapper.PatientinformationMapperImpl;
 import com.PatManSystem.main.Models.Patientinformation;
 import org.junit.jupiter.api.Test;
@@ -16,10 +16,10 @@ public class PtIDMapperImplTest {
     private final PatientinformationMapperImpl mapper = new PatientinformationMapperImpl();
 
     @Test
-    void ptIdDtoToPtIdTest(){
+    void ptIdDTOToPtIdTest(){
 
-        PatientinformationDto patientinformationDTO = new PatientinformationDto();
-        //set up ptIdDto
+        PatientinformationDTO patientinformationDTO = new PatientinformationDTO();
+        //set up ptIdDTO
 
         patientinformationDTO.setId(235878L);
         patientinformationDTO.setFirstname("Jack");
@@ -30,7 +30,7 @@ public class PtIDMapperImplTest {
         patientinformationDTO.setTg("TG");
         patientinformationDTO.setPrint(1);
 
-        Patientinformation patientinformationModel = mapper.patientinformationDtoToPatientinformation(patientinformationDTO);
+        Patientinformation patientinformationModel = mapper.patientinformationDTOToPatientinformation(patientinformationDTO);
 
         assertEquals(patientinformationDTO.getId(), patientinformationModel.getId());
         assertEquals(patientinformationDTO.getFirstname(), patientinformationModel.getFirstname());

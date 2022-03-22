@@ -19,7 +19,7 @@ public class ConsiderService {
         return considerRepository.findAll()
                 .stream()
                 .map(consider -> {
-                    return new ConsiderMapperImpl().considerToConsiderDto(consider);
+                    return new ConsiderMapperImpl().considerToConsiderDTO(consider);
                 })
                 .collect(Collectors.toList());
     }

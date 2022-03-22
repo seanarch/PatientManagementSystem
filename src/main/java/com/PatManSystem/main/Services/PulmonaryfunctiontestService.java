@@ -19,7 +19,7 @@ public class PulmonaryfunctiontestService {
         return pulmonaryfunctiontestRepository.findAll()
                 .stream()
                 .map(pulmonaryfunctiontest -> {
-                    return new PulmonaryfunctiontestMapperImpl().pulmonaryfunctiontestToPulmonaryfunctiontestDto(pulmonaryfunctiontest);
+                    return new PulmonaryfunctiontestMapperImpl().pulmonaryfunctiontestToPulmonaryfunctiontestDTO(pulmonaryfunctiontest);
                 })
                 .collect(Collectors.toList());
     }

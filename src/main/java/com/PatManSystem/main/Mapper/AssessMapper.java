@@ -1,6 +1,6 @@
 package com.PatManSystem.main.Mapper;
 
-import com.PatManSystem.main.DTO.AssessDto;
+import com.PatManSystem.main.DTO.AssessDTO;
 import com.PatManSystem.main.Models.Assess;
 import org.mapstruct.*;
 
@@ -13,12 +13,12 @@ public interface AssessMapper {
     @Mapping(source = "swallowingDescription", target = "swallowing.description")
     @Mapping(source = "breathingId", target = "breathing.id")
     @Mapping(source = "breathingDescription", target = "breathing.description")
-    Assess assessDtoToAssess(AssessDto assessDto);
+    Assess assessDTOToAssess(AssessDTO assessDTO);
 
-    @InheritInverseConfiguration(name = "assessDtoToAssess")
-    AssessDto assessToAssessDto(Assess assess);
+    @InheritInverseConfiguration(name = "assessDTOToAssess")
+    AssessDTO assessToAssessDTO(Assess assess);
 
-    @InheritConfiguration(name = "assessDtoToAssess")
+    @InheritConfiguration(name = "assessDTOToAssess")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateAssessFromAssessDto(AssessDto assessDto, @MappingTarget Assess assess);
+    void updateAssessFromAssessDTO(AssessDTO assessDTO, @MappingTarget Assess assess);
 }

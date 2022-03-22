@@ -19,7 +19,7 @@ public class DeathService {
         return deathRepository.findAll()
                 .stream()
                 .map(death -> {
-                    return new DeathMapperImpl().deathToDeathDto(death);
+                    return new DeathMapperImpl().deathToDeathDTO(death);
                 })
                 .collect(Collectors.toList());
     }

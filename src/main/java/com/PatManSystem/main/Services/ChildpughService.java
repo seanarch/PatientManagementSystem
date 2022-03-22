@@ -19,7 +19,7 @@ public class ChildpughService {
         return childpughRepository.findAll()
                 .stream()
                 .map(childpugh -> {
-                    return new ChildpughMapperImpl().childpughToChildpughDto(childpugh);
+                    return new ChildpughMapperImpl().childpughToChildpughDTO(childpugh);
                 })
                 .collect(Collectors.toList());
     }

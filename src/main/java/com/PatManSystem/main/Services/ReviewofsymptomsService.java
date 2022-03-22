@@ -19,7 +19,7 @@ public class ReviewofsymptomsService {
         return reviewofsymptomsRepository.findAll()
                 .stream()
                 .map(reviewofsymptoms -> {
-                    return new ReviewofsymptomsMapperImpl().reviewofsymptomsToReviewofsymptomsDto(reviewofsymptoms);
+                    return new ReviewofsymptomsMapperImpl().reviewofsymptomsToReviewofsymptomsDTO(reviewofsymptoms);
                 })
                 .collect(Collectors.toList());
     }

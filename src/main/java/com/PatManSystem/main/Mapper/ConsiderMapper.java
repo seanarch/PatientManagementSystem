@@ -1,6 +1,6 @@
 package com.PatManSystem.main.Mapper;
 
-import com.PatManSystem.main.DTO.ConsiderDto;
+import com.PatManSystem.main.DTO.ConsiderDTO;
 import com.PatManSystem.main.Models.Consider;
 import org.mapstruct.*;
 
@@ -9,12 +9,12 @@ public interface ConsiderMapper {
     @Mapping(source = "uliId", target = "uli.id")
     @Mapping(source = "considerId", target = "consider.id")
     @Mapping(source = "considerDescription", target = "consider.description")
-    Consider considerDtoToConsider(ConsiderDto considerDto);
+    Consider considerDTOToConsider(ConsiderDTO considerDTO);
 
-    @InheritInverseConfiguration(name = "considerDtoToConsider")
-    ConsiderDto considerToConsiderDto(Consider consider);
+    @InheritInverseConfiguration(name = "considerDTOToConsider")
+    ConsiderDTO considerToConsiderDTO(Consider consider);
 
-    @InheritConfiguration(name = "considerDtoToConsider")
+    @InheritConfiguration(name = "considerDTOToConsider")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateConsiderFromConsiderDto(ConsiderDto considerDto, @MappingTarget Consider consider);
+    void updateConsiderFromConsiderDTO(ConsiderDTO considerDTO, @MappingTarget Consider consider);
 }

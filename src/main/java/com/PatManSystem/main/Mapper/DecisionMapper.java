@@ -1,6 +1,6 @@
 package com.PatManSystem.main.Mapper;
 
-import com.PatManSystem.main.DTO.DecisionDto;
+import com.PatManSystem.main.DTO.DecisionDTO;
 import com.PatManSystem.main.Models.Decision;
 import org.mapstruct.*;
 
@@ -9,12 +9,12 @@ public interface DecisionMapper {
     @Mapping(source = "uliId", target = "uli.id")
     @Mapping(source = "decisionId", target = "decision.id")
     @Mapping(source = "decisionDescription", target = "decision.description")
-    Decision decisionDtoToDecision(DecisionDto decisionDto);
+    Decision decisionDTOToDecision(DecisionDTO decisionDTO);
 
-    @InheritInverseConfiguration(name = "decisionDtoToDecision")
-    DecisionDto decisionToDecisionDto(Decision decision);
+    @InheritInverseConfiguration(name = "decisionDTOToDecision")
+    DecisionDTO decisionToDecisionDTO(Decision decision);
 
-    @InheritConfiguration(name = "decisionDtoToDecision")
+    @InheritConfiguration(name = "decisionDTOToDecision")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateDecisionFromDecisionDto(DecisionDto decisionDto, @MappingTarget Decision decision);
+    void updateDecisionFromDecisionDTO(DecisionDTO decisionDTO, @MappingTarget Decision decision);
 }

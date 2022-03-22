@@ -19,7 +19,7 @@ private AssessRepository assessRepository;
         return assessRepository.findAll()
         .stream()
         .map(assess -> {
-            return new AssessMapperImpl().assessToAssessDto(assess);
+            return new AssessMapperImpl().assessToAssessDTO(assess);
         })
         .collect(Collectors.toList());
     }

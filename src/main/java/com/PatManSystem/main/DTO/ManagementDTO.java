@@ -9,9 +9,11 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DeathDto implements Serializable {
+public class ManagementDTO implements Serializable {
     private Integer id;
     private Long uliId;
     private LocalDate date;
+    private Integer interventionId;
+    private String interventionDescription;
     private String detail;
 }

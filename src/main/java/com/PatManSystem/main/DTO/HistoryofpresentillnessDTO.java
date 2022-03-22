@@ -8,9 +8,9 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PastmedicalhistoryDto implements Serializable {
+public class HistoryofpresentillnessDTO implements Serializable {
     private Integer id;
     private Long uliId;
-    private String dx;
-    private String genDx;
+    private Integer descriptorId;
+    private String descriptorDescription;
 }

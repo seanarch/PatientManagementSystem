@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PatientinformationDto implements Serializable {
+public class PatientinformationDTO implements Serializable {
     private Long id;
     private String lastname;
     private String firstname;

@@ -1,9 +1,10 @@
 package com.PatManSystem.main.Mapper;
 
-import com.PatManSystem.main.DTO.RadiationtherapyDto;
+import com.PatManSystem.main.DTO.RadiationtherapyDTO;
 import com.PatManSystem.main.Models.Radiationtherapy;
 import org.mapstruct.*;
 
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface RadiationtherapyMapper {
     @Mapping(source = "uliId", target = "uli.id")
     @Mapping(source = "typeRTId", target = "typeRT.id")
@@ -25,12 +26,12 @@ public interface RadiationtherapyMapper {
     @Mapping(source = "hemeDescription", target = "heme.description")
     @Mapping(source = "hepaticId", target = "hepatic.id")
     @Mapping(source = "hepaticDescription", target = "hepatic.description")
-    Radiationtherapy radiationtherapyDtoToRadiationtherapy(RadiationtherapyDto radiationtherapyDto);
+    Radiationtherapy radiationtherapyDTOToRadiationtherapy(RadiationtherapyDTO radiationtherapyDTO);
 
-    @InheritInverseConfiguration(name = "radiationtherapyDtoToRadiationtherapy")
-    RadiationtherapyDto radiationtherapyToRadiationtherapyDto(Radiationtherapy radiationtherapy);
+    @InheritInverseConfiguration(name = "radiationtherapyDTOToRadiationtherapy")
+    RadiationtherapyDTO radiationtherapyToRadiationtherapyDTO(Radiationtherapy radiationtherapy);
 
-    @InheritConfiguration(name = "radiationtherapyToRadiationtherapy")
+    @InheritConfiguration(name = "radiationtherapyDTOToRadiationtherapy")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateRadiationtherapyFromRadiationtherapyDto(RadiationtherapyDto radiationtherapyDto, @MappingTarget Radiationtherapy radiationtherapy);
+    void updateRadiationtherapyFromRadiationtherapyDTO(RadiationtherapyDTO radiationtherapyDTO, @MappingTarget Radiationtherapy radiationtherapy);
 }

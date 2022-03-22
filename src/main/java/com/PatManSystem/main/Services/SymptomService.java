@@ -19,7 +19,7 @@ public class SymptomService {
         return symptomRepository.findAll()
                 .stream()
                 .map(symptom -> {
-                    return new SymptomMapperImpl().symptomToSymptomDto(symptom);
+                    return new SymptomMapperImpl().symptomToSymptomDTO(symptom);
                 })
                 .collect(Collectors.toList());
     }

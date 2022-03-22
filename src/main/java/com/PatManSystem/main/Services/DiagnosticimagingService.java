@@ -19,7 +19,7 @@ public class DiagnosticimagingService {
         return diagnosticimagingRepository.findAll()
                 .stream()
                 .map(diagnosticimaging -> {
-                    return new DiagnosticimagingMapperImpl().diagnosticimagingToDiagnosticimagingDto(diagnosticimaging);
+                    return new DiagnosticimagingMapperImpl().diagnosticimagingToDiagnosticimagingDTO(diagnosticimaging);
                 })
                 .collect(Collectors.toList());
     }

@@ -19,7 +19,7 @@ public class FollowupService {
         return followupRepository.findAll()
                 .stream()
                 .map(followup -> {
-                    return new FollowupMapperImpl().followupToFollowupDto(followup);
+                    return new FollowupMapperImpl().followupToFollowupDTO(followup);
                 })
                 .collect(Collectors.toList());
     }

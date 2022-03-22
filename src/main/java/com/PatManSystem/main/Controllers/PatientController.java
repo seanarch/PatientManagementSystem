@@ -29,4 +29,6 @@ public class PatientController {
     public List<Patientinformation> getPatients(){
         return patientService.getPatients();
     }
+
+
 }

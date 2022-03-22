@@ -9,6 +9,8 @@ import java.time.LocalDate;
 @Setter
 @Entity
 @Table(name = "radiationtherapy")
+
+
 public class Radiationtherapy {
     @Id
     @Column(name = "RT", nullable = false)

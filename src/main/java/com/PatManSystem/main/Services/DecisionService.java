@@ -19,7 +19,7 @@ public class DecisionService {
         return decisionRepository.findAll()
                 .stream()
                 .map(decision -> {
-                    return new DecisionMapperImpl().decisionToDecisionDto(decision);
+                    return new DecisionMapperImpl().decisionToDecisionDTO(decision);
                 })
                 .collect(Collectors.toList());
     }
