@@ -78,67 +78,53 @@ const ORinfo = () => {
                                 </label>
                             </Grid>
  
-                            <Grid item xs={6}>
-                                <label>
+                            <Grid item xs={6}>                                 
                                     <TextField 
                                         name="ORInformation.T"
                                         label="T"
                                          />
-                                </label>
                             </Grid>
 
                             <Grid item xs={6}>
-                                <label>
                                     <TextField 
                                         name="ORInformation.N"
                                         label="N"
                                          />
-                                </label>
                             </Grid>
 
                             <Grid item xs={6}>
-                                <label>
                                     <TextField 
                                         name="ORInformation.Nve"
                                         label="N+ve"
                                          />
-                                </label>
                             </Grid>
 
                             <Grid item xs={6}>
-                                <label>
                                     <TextField 
                                         name="ORInformation.Ntaken"
                                         label="N Taken"
                                          />
-                                </label>
                             </Grid>
 
                             <Grid item xs={6}>
-                                <label>
                                     <TextField 
                                         name="ORInformation.M"
                                         label="M"
                                          />
-                                </label>
                             </Grid>
 
                             <Grid item xs={6}>
-                                <label>
                                     <TextField 
                                         name="ORInformation.Stage"
                                         label="Stage"
                                          />
-                                </label>
                             </Grid>
  
                             <Grid item xs={6}>
-                                <label>
                                     <TextField 
                                         name="ORInformation.Pathology"
                                         label="Pathology"
                                          />
-                                </label>
                             </Grid>
                                 <hr></hr>
                                 
