@@ -88,16 +88,17 @@ const DetailedInfo = () => {
                                     />
                                 </Grid>
 
-                            <Grid item xs={12}>
+                            <Grid item xs={11}>
                                 <h5>Cognitive Performance Scale</h5>
                                 <Slider
-                                    aria-label="Temperature"
-                                    defaultValue={INITIAL_VALUES.DetailedInformation.CPScore}
-                                    valueLabelDisplay="auto"
+                                    
+                                    valueLabelDisplay="on"
                                     step={1}
                                     marks
                                     min={0}
                                     max={10}
+                                    name="DetailedInformation.CPScore"
+                                    label="CPScore"
                                     />
                                                                     
                                 </Grid>
