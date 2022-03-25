@@ -4,6 +4,8 @@ import { Button } from 'reactstrap';
 import { Container, Grid } from '@material-ui/core';
 import DatePicker from '../../components/Date/DatePicker';
 import TextField from '../../components/TextField/TextField';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -15,7 +17,15 @@ const INITIAL_VALUES = {
   }
 };
 
-const DeathForm = () => {
+function DeathForm () {
+  
+  const notify = () => {
+     
+    toast.success('Successfully saved!', {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 2000
+    })
+}
 
   return (
       <Container maxWidth="md">
@@ -52,7 +62,8 @@ const DeathForm = () => {
                 </Grid>
 
                 <Grid item xs={12}>
-                  <Button color='primary' type="submit">Save</Button>
+                  <Button color='primary' type="submit" onClick={notify}>Save</Button>
+                  <ToastContainer />
                 </Grid>
 
               </Grid>

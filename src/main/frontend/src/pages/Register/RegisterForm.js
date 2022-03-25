@@ -4,6 +4,8 @@ import { Button } from 'reactstrap';
 import { Container, Grid, InputLabel, Select, MenuItem, FormControl } from '@material-ui/core';
 import TextField from '../../components/TextField/TextField';
 import DatePicker from '../../components/Date/DatePicker';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const today = new Date(); 
 const date = today.setDate(today.getDate()); 
@@ -29,7 +31,16 @@ const INITIAL_VALUES = {
 console.log(ymddate)
 console.log(firstname)
 
-const RegisterForm = () => {
+function RegisterForm () {
+
+    const notify = () => {
+     
+        toast.success('Successfully created!', {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 2000
+        })
+    }
+
     return (
 
         <Container maxWidth="md">
@@ -118,7 +129,8 @@ const RegisterForm = () => {
                                     </Grid>
 
                                     <Grid item xs={12}>
-                                        <Button color='primary' type="submit">Create</Button>
+                                        <Button color='primary' type="submit" onClick={notify}>Create</Button>
+                                        <ToastContainer />
                                     </Grid>
                                 </Grid>
                             
