@@ -6,6 +6,8 @@ import TextField from '../../components/TextField/TextField';
 import DatePicker from '../../components/Date/DatePicker';
 import axios from "axios";
 import Collapsible from 'react-collapsible'; 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const INITIAL_VALUES = {
     RTinfo: {
@@ -32,6 +34,15 @@ const INITIAL_VALUES = {
  
 
 function RTGIinfo() {
+
+    const notify = () => {
+     
+        toast.success('Successfully saved!', {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 2000
+        })
+    }
+
   return (
     <Container maxWidth="md">
     <div className='container' style={{
@@ -165,7 +176,8 @@ function RTGIinfo() {
                             </Grid>
 
                             <Grid item xs={12}>
-                                <Button color='primary' type="submit">Save</Button>
+                                <Button onClick={notify} color='primary' type="submit">Save</Button>
+                                <ToastContainer />
                             </Grid>
                         </Grid>
 
