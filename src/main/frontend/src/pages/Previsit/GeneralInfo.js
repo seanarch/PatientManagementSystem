@@ -7,6 +7,8 @@ import DatePicker from '../../components/Date/DatePicker';
 import { TextareaAutosize } from '@mui/base';
 import axios from "axios"; 
 import Collapsible from 'react-collapsible';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const INITIAL_VALUES = {
     GeneralInformation: {
@@ -16,7 +18,17 @@ const INITIAL_VALUES = {
     },
 }
 
-const GeneralInfo = () => {
+function GeneralInfo() {
+
+    const notify = () => {
+     
+        toast.success('Successfully saved!', {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 2000
+        })
+    }
+
+
     return (
         <Container maxWidth="md">
         <div className='container' style={{
@@ -58,7 +70,8 @@ const GeneralInfo = () => {
                                  
 
                                 <Grid item xs={12}>
-                                    <Button color='primary' type="submit">Save</Button>
+                                    <Button color='primary' type="submit" onClick={notify}>Save</Button>
+                                    <ToastContainer />
                                 </Grid>
                             </Grid>
                         </Collapsible>
