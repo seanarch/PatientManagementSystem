@@ -3,9 +3,20 @@ import { useFormik } from 'formik';
 import { FormControl, InputLabel, Select, MenuItem, Box } from '@material-ui/core';
 import TextField from '@mui/material/TextField';
 import { Button } from 'reactstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 /* npm install @mui/material @emotion/react @emotion/styled */
 const Other = () => {
+    
+    const notify = () => {
+     
+        toast.success('Successfully saved!', {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 2000
+        })
+    }
+
     const otherForm = useFormik({
         initialValues: {
             CNS: { ECOG: "" },
@@ -240,7 +251,8 @@ const Other = () => {
                         value={otherForm.values.ABNORMAL.Description}
                     />
                 </Box>
-                <Button color="primary" type="submit" >Save</Button> 
+                <Button onClick={notify} color="primary" type="submit" >Save</Button> 
+                <ToastContainer />
             </Box>
         </div>
  
