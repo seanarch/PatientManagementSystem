@@ -21,7 +21,7 @@ public class PtIDMapperImplTest {
         PatientinformationDTO patientinformationDTO = new PatientinformationDTO();
         //set up ptIdDTO
 
-        patientinformationDTO.setId(235878L);
+        //patientinformationDTO.setId(235878L);
         patientinformationDTO.setFirstname("Jack");
         patientinformationDTO.setLastname("Bauer");
         patientinformationDTO.setSex('M');
