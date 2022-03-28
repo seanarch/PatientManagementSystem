@@ -23,28 +23,28 @@ public class ExamController {
     }
 
     @GetMapping(path ="/id={id}")
-    public ExamDTO getExam(@PathVariable("id") Long id){
+    public ExamDTO getExam(@PathVariable("id") Integer id){
         return examService.getExam(id);
     }
 
-    @GetMapping(path ="/ULI={ULI}")
+    @GetMapping(path ="/uli={ULI}")
     public List<ExamDTO> getExams(@PathVariable("ULI") Long ULI){
         return examService.getExamByULI(ULI);
     }
 
-    /*@PostMapping(path = "/new")
+    @PostMapping(path = "/new")
     public String registerNewExam(@RequestBody ExamDTO examDTO){
         examService.newExam(examDTO);
         return "NEW: Exam identified by ID "+examDTO.getId()+" successfully added.";
-    }*/
+    }
 
-    /*@DeleteMapping(path = "/delete/id={id}")
-    public String deleteExam(@PathVariable("id") Long id){
+    @DeleteMapping(path = "/delete/id={id}")
+    public String deleteExam(@PathVariable("id") int id){
         examService.deleteExam(id);
         return "DELETE: Exam identified by ID "+id+" successfully deleted.";
     }
 
-    @PostMapping(path = "/update")//UPDATE using post, take in DTO, null fields are NO CHANGE, and not-null is CHANGE, not including id
+    /*@PostMapping(path = "/update")//UPDATE using post, take in DTO, null fields are NO CHANGE, and not-null is CHANGE, not including id
     public String updateExam(@RequestBody ExamDTO examDTO){
         examService.updateExam(examDTO);
 
