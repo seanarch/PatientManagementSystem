@@ -19,7 +19,7 @@ public class ExamMapperImplTest {
     void examToExamDTOTest(){
 
         Exam exam = new Exam();
-        exam.setId(100);
+        exam.setId(100l);
         exam.setDate(LocalDate.ofEpochDay(2020-12-12));
 
         Abdomen abdomen = new Abdomen();
@@ -58,7 +58,7 @@ public class ExamMapperImplTest {
     @Test
     void examDTOToExamTest(){
         ExamDTO examDTO = new ExamDTO();
-        examDTO.setId(123);
+        examDTO.setId(123l);
         examDTO.setAbdoDescription("normal");
         examDTO.setCnsId(111);
 
@@ -72,7 +72,7 @@ public class ExamMapperImplTest {
     @Test
     void updateExamFromExamDTOTest(){
         ExamDTO examDTO = new ExamDTO();
-        examDTO.setId(123);
+        examDTO.setId(123l);
         examDTO.setAbdoDescription("normal");
         examDTO.setCnsId(111);
 

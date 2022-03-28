@@ -68,7 +68,7 @@ public class PatientInformationService {
         */
 
         Patientinformation entity = patientRepository.findPatientinformationById(DTO.getId()); //retrieve a copy of the Patientinfo
-
+        if(entity != null)
         for (Method getter : DTO.getClass().getMethods()) {
             Object get = "";
             if (getter.getName().startsWith("get") && getter.getParameterTypes().length == 0) {
@@ -90,5 +90,7 @@ public class PatientInformationService {
                     }
              }
         }
+        else
+            throw new IllegalStateException("Patient identified by ULI "+DTO.getId()+ " does not exist.");
     }
 }

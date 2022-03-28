@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ExamDTO implements Serializable {
-    private Integer id;
+    private Long id;
     private Integer abdoId;
     private String abdoDescription;
     private Long uliId;

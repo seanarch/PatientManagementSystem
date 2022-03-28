@@ -15,10 +15,10 @@ import java.util.Optional;
 public interface ExamRepository extends JpaRepository<Exam, Long> {
 
     //@Query("select e from Exam e where e.id = ?1")
-    Exam findExamById(Integer Id);
+    Exam findExamById(Long Id);
     List<Exam> findExamByUli(Patientinformation uli);
 
-    @Transactional
-    void deleteExamById(Integer id);
+    /*@Transactional
+    void deleteExamById(Integer id);*/
 
 }
