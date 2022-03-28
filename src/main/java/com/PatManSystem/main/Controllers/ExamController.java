@@ -36,9 +36,9 @@ public class ExamController {
     public String registerNewExam(@RequestBody ExamDTO examDTO){
         examService.newExam(examDTO);
         return "NEW: Exam identified by ID "+examDTO.getId()+" successfully added.";
-    }
+    }*/
 
-    @DeleteMapping(path = "/delete/id={id}")
+    /*@DeleteMapping(path = "/delete/id={id}")
     public String deleteExam(@PathVariable("id") Long id){
         examService.deleteExam(id);
         return "DELETE: Exam identified by ID "+id+" successfully deleted.";

@@ -14,6 +14,7 @@ import java.util.Optional;
 public interface ExamRepository extends JpaRepository<Exam, Long> {
     Exam findExamById(Long Id);
 
-    //@Query("SELECT e FROM exam e WHERE e.ULI = ?1")
-    List<Exam> findExamByULI(Long uli);
+    List<Exam> findExamByUli(Patientinformation uli);
+
+
 }
