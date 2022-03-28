@@ -4,19 +4,20 @@ import { Button } from 'reactstrap';
 import { Container, Grid, InputLabel, Select, MenuItem, FormControl } from '@material-ui/core';
 import TextField from '../../components/TextField/TextField';
 import DatePicker from '../../components/Date/DatePicker';
+import Collapsible from 'react-collapsible';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const today = new Date(); 
-const date = today.setDate(today.getDate()); 
+const today = new Date();
+const date = today.setDate(today.getDate());
 const ymddate = new Date(date).toISOString().split('T')[0] // yyyy-mm-dd
- 
+
 const firstname = "John";
 
 const INITIAL_VALUES = {
     PatientInformation: {
         Lastname: "",
-        Firstname: {firstname}.firstname,
+        Firstname: { firstname }.firstname,
         Sex: "",
         Birthday: "",
         ULI: "",
@@ -24,20 +25,20 @@ const INITIAL_VALUES = {
         Location: ""
     },
     NewPatientConsult: {
-        Date: {ymddate}.ymddate
+        Date: { ymddate }.ymddate
     },
 }
 
 console.log(ymddate)
 console.log(firstname)
 
-function RegisterForm () {
+function RegisterForm() {
 
     const notify = () => {
-     
+
         toast.success('Successfully created!', {
-          position: toast.POSITION.TOP_RIGHT,
-          autoClose: 2000
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: 2000
         })
     }
 
@@ -51,17 +52,19 @@ function RegisterForm () {
                 <Formik initialValues={{ ...INITIAL_VALUES }} onSubmit={values => {
                     console.log(values)//once submit, provide value for back end
                 }}
->
+                >
                     {props => (
                         <Form>
                             <h3>Create New Patient</h3>
-                            <Grid container spacing={3} width={'70vw'}>
-                                <Grid item xs={6}>
-                                    <TextField
-                                        label="Lastname"
-                                        name="PatientInformation.Lastname"
-                                        fullWidth
-                                    />
+                            <Collapsible trigger="[+]">
+                                <br></br>
+                                <Grid container spacing={3} width={'70vw'}>
+                                    <Grid item xs={6}>
+                                        <TextField
+                                            label="Lastname"
+                                            name="PatientInformation.Lastname"
+                                            fullWidth
+                                        />
                                     </Grid>
                                     <Grid item xs={6}>
                                         <TextField
@@ -71,21 +74,21 @@ function RegisterForm () {
                                     </Grid>
 
                                     <Grid item xs={6} >
-                                    <FormControl fullWidth>
-                                        <InputLabel id="demo-simple-select">Sex</InputLabel>
-                                        <Select
-                                            label="Sex"
-                                            name="PatientInformation.Sex"
-                                            id="demo-simple-select"
-                                            value={props.values.PatientInformation.Sex}
-                                            onChange={props.handleChange}
-                                            labelId="demo-simple-select-label"
-      
-                                        >
-                                            <MenuItem value={"M"}>Male</MenuItem>
-                                            <MenuItem value={"F"}>Female</MenuItem>
+                                        <FormControl fullWidth>
+                                            <InputLabel id="demo-simple-select">Sex</InputLabel>
+                                            <Select
+                                                label="Sex"
+                                                name="PatientInformation.Sex"
+                                                id="demo-simple-select"
+                                                value={props.values.PatientInformation.Sex}
+                                                onChange={props.handleChange}
+                                                labelId="demo-simple-select-label"
 
-                                        </Select>
+                                            >
+                                                <MenuItem value={"M"}>Male</MenuItem>
+                                                <MenuItem value={"F"}>Female</MenuItem>
+
+                                            </Select>
                                         </FormControl>
                                     </Grid>
 
@@ -133,7 +136,8 @@ function RegisterForm () {
                                         <ToastContainer />
                                     </Grid>
                                 </Grid>
-                            
+                            </Collapsible>
+
                         </Form>
                     )}
                 </Formik>

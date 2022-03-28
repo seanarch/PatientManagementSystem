@@ -12,13 +12,12 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 const INITIAL_VALUES = {
-  Death: {
-    Date: "",
-    Detail: "Details",
+  Search: {
+    PatientName: "",
   }
 };
 
-function DeathForm() {
+function SearchForm() {
 
   const notify = () => {
 
@@ -36,35 +35,25 @@ function DeathForm() {
       }}>
         <Formik initialValues={{ ...INITIAL_VALUES }} onSubmit={values => {
           console.log(values)
+          
           //once submit, provide value for back end
         }}
         >
           <Form>
-            <h3>Death information</h3>
+            <h3>Search Existing Patient</h3>
             <Collapsible trigger="[+]">
               <br></br>
               <Grid container spacing={3} width={'70vw'}>
-
-                <Grid item xs={12}>
-                  <DatePicker
-                    fullWidth
-                    name="Death.Date"
-                    label="Death Date"
-                  />
-                </Grid>
-
                 <Grid item xs={12}>
                   <TextField
                     fullWidth
-                    label="Death Detail"
-                    name="Death.Detail"
-                    multiline
-                    rows={3}
+                    label="Search By Patient First Name, Last Name or ULI"
+                    name="Search.PatientName"
                   />
                 </Grid>
 
                 <Grid item xs={12}>
-                  <Button color='primary' type="submit" onClick={notify}>Save</Button>
+                  <Button color='primary' type="submit" onClick={notify}>Search</Button>
                   <ToastContainer />
                 </Grid>
 
@@ -79,4 +68,4 @@ function DeathForm() {
 
 }
 
-export default DeathForm;
+export default SearchForm;
