@@ -13,7 +13,7 @@ import java.time.LocalDate;
 public class Exam {
     @Id
     @Column(name = "Exam", nullable = false)
-    private Integer id;
+    private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Abdo")
     private Abdomen abdo;
