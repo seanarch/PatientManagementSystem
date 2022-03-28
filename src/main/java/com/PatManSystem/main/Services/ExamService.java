@@ -41,7 +41,8 @@ public class ExamService {
 
     }
     public List<ExamDTO> getExamByULI(Long ULI){
-        List<Exam> getExams = examRepository.findExamByULI(ULI);
+
+        List<Exam> getExams = examRepository.findExamByUli(new Patientinformation(ULI,null,null,null,null,null,null,null));
         if(getExams == null) //check if the requested patient exists, if not; throw not found exception
             throw new IllegalStateException("Exam identified by ULI "+ULI+" was not found.");
 
@@ -50,4 +51,14 @@ public class ExamService {
                 .collect(Collectors.toList());
 
     }
+    /*public void newExam(ExamDTO examDTO){
+
+        if(examRepository.findExamById(examDTO.getId()) != null){  //check if the requested patient exists, if not; throw not found exception
+            throw new IllegalStateException("Patient identified by ULI "+examDTO.getId() + " already exists. Use Post:Update at /api/patient/update instead.");
+        }else{
+            examRepository.save(new PatientinformationMapperImpl().patientinformationDTOToPatientinformation(examDTO)); // convert incoming DTO to DB entity and save to the DB
+        }
+
+    }*/
+
 }
