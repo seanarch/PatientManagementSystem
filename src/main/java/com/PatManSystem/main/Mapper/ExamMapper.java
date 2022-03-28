@@ -2,10 +2,14 @@ package com.PatManSystem.main.Mapper;
 
 import com.PatManSystem.main.DTO.ExamDTO;
 import com.PatManSystem.main.Models.Exam;
+import lombok.Builder;
+import lombok.Builder.Default;
 import org.mapstruct.*;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface ExamMapper {
+
+
     @Mapping(source = "abdoId", target = "abdo.id")
     @Mapping(source = "abdoDescription", target = "abdo.description")
     @Mapping(source = "uliId", target = "uli.id")
@@ -35,4 +39,6 @@ public interface ExamMapper {
     @InheritConfiguration(name = "examDTOToExam")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateExamFromExamDTO(ExamDTO examDTO, @MappingTarget Exam exam);
+
+
 }

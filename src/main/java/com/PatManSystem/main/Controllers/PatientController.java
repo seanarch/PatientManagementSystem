@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "/api/patient")
 @CrossOrigin("*")
 public class PatientController {
+
+
     private final PatientInformationService patientService;
     
     @Autowired

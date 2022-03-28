@@ -59,32 +59,30 @@ public class PatientInformationService {
 
     }
     @Transactional // set all methods to be transactional, when a .set is called, it will create a DB transaction of the same type
-    public void updatePatient(PatientinformationDTO patientinformationDTO){
-        Patientinformation PI = patientRepository.findPatientinformationById(patientinformationDTO.getId()); //retrieve a copy of the Patientinfo
+    public void updatePatient(PatientinformationDTO DTO){
         /*
             The following code is really hard to explain. Basically it dynamically maps the getters from the DTO
             to the setters of the DB entity. Using this technique this code is model agnostic and doesnt need to
             be modified for new models. To use this in other Service classes you need only change the repository
-            name and type, and the DTO name and type.
+            type, and the DTO type. Specifically the Class type of entity and DTO
         */
-        for (Method getter : patientinformationDTO.getClass().getMethods()) {
+
+        Patientinformation entity = patientRepository.findPatientinformationById(DTO.getId()); //retrieve a copy of the Patientinfo
+
+        for (Method getter : DTO.getClass().getMethods()) {
             Object get = "";
             if (getter.getName().startsWith("get") && getter.getParameterTypes().length == 0) {
                 try {
-                    get = getter.invoke(patientinformationDTO);
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
+                    get = getter.invoke(DTO);
+                } catch (IllegalAccessException | InvocationTargetException e) {
                     e.printStackTrace();
                 }
                 if (get != null)
-                    for (Method setter : PI.getClass().getMethods()) {
+                    for (Method setter : entity.getClass().getMethods()) {
                         if (setter.getName().startsWith("set") && setter.getName().endsWith(getter.getName().substring(3)) && setter.getParameterTypes().length == 1) {
                             try {
-                                setter.invoke(PI, get);
-                            } catch (IllegalAccessException e) {
-                                e.printStackTrace();
-                            } catch (InvocationTargetException e) {
+                                setter.invoke(entity, get);
+                            } catch (IllegalAccessException | InvocationTargetException e) {
                                 e.printStackTrace();
                             }
                             continue;
