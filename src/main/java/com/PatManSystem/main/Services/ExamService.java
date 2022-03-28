@@ -32,7 +32,7 @@ public class ExamService {
                .collect(Collectors.toList());
     }
 
-    public ExamDTO getExam(Long id){
+    public ExamDTO getExam(Integer id){
         Exam getExam = examRepository.findExamById(id);
         if(getExam == null) //check if the requested patient exists, if not; throw not found exception
             throw new IllegalStateException("Exam identified by ID "+id+" was not found.");
@@ -51,14 +51,23 @@ public class ExamService {
                 .collect(Collectors.toList());
 
     }
-    /*public void newExam(ExamDTO examDTO){
+    public void newExam(ExamDTO examDTO){
 
         if(examRepository.findExamById(examDTO.getId()) != null){  //check if the requested patient exists, if not; throw not found exception
-            throw new IllegalStateException("Patient identified by ULI "+examDTO.getId() + " already exists. Use Post:Update at /api/patient/update instead.");
+            throw new IllegalStateException("Exam identified by ID "+examDTO.getId() + " already exists. Use Post:Update at /api/patient/update instead.");
         }else{
-            examRepository.save(new PatientinformationMapperImpl().patientinformationDTOToPatientinformation(examDTO)); // convert incoming DTO to DB entity and save to the DB
+            examRepository.save(new ExamMapperImpl().examDTOToExam(examDTO)); // convert incoming DTO to DB entity and save to the DB
         }
 
-    }*/
+    }
+    public void deleteExam(Integer id){
+
+        if(examRepository.findExamById(id) == null){ //check if the requested patient exists, if not; throw not found exception
+            throw new IllegalStateException("Exam identified by ID "+id+ " does not exist.");
+        }else{
+            examRepository.deleteExamById(id);
+        }
+
+    }
 
 }
