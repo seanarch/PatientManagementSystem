@@ -12,6 +12,5 @@ public class DecisionDTO implements Serializable {
     private Integer id;
     private Long uliId;
     private Integer decisionId;
-    private String decisionDescription;
     private String detail;
 }

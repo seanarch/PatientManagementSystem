@@ -14,6 +14,5 @@ public class ManagementDTO implements Serializable {
     private Long uliId;
     private LocalDate date;
     private Integer interventionId;
-    private String interventionDescription;
     private String detail;
 }

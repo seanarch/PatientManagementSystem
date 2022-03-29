@@ -15,9 +15,6 @@ public class AssessDTO implements Serializable {
     private Long uliId;
     private LocalDate date;
     private Integer ecogId;
-    private String ecogDescription;
     private Integer swallowingId;
-    private String swallowingDescription;
     private Integer breathingId;
-    private String breathingDescription;
 }

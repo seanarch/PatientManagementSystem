@@ -8,11 +8,8 @@ import org.mapstruct.*;
 public interface AssessMapper {
     @Mapping(source = "uliId", target = "uli.id")
     @Mapping(source = "ecogId", target = "ecog.id")
-    @Mapping(source = "ecogDescription", target = "ecog.description")
     @Mapping(source = "swallowingId", target = "swallowing.id")
-    @Mapping(source = "swallowingDescription", target = "swallowing.description")
     @Mapping(source = "breathingId", target = "breathing.id")
-    @Mapping(source = "breathingDescription", target = "breathing.description")
     Assess assessDTOToAssess(AssessDTO assessDTO);
 
     @InheritInverseConfiguration(name = "assessDTOToAssess")

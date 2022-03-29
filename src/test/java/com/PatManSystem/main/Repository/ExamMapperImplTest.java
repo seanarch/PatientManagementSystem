@@ -47,7 +47,6 @@ public class ExamMapperImplTest {
 
         assertEquals(examDTO.getId(), exam.getId());
         assertEquals(examDTO.getDate(), exam.getDate());
-        assertEquals(examDTO.getAbdoDescription(), exam.getAbdo().getDescription());
         assertEquals(examDTO.getHnId(), exam.getHn().getId());
         assertEquals(examDTO.getLungId(), exam.getLung().getId());
         assertEquals(examDTO.getOralId(), exam.getOral().getId());
@@ -59,13 +58,11 @@ public class ExamMapperImplTest {
     void examDTOToExamTest(){
         ExamDTO examDTO = new ExamDTO();
         examDTO.setId(123l);
-        examDTO.setAbdoDescription("normal");
         examDTO.setCnsId(111);
 
         Exam exam = mapper.examDTOToExam(examDTO);
 
         assertEquals(examDTO.getId(), exam.getId());
-        assertEquals(examDTO.getAbdoDescription(), exam.getAbdo().getDescription());
         assertEquals(examDTO.getCnsId(),exam.getCns().getId());
     }
 
@@ -73,14 +70,12 @@ public class ExamMapperImplTest {
     void updateExamFromExamDTOTest(){
         ExamDTO examDTO = new ExamDTO();
         examDTO.setId(123l);
-        examDTO.setAbdoDescription("normal");
         examDTO.setCnsId(111);
 
         Exam exam = new Exam();
 
         mapper.updateExamFromExamDTO(examDTO, exam);
         assertEquals(examDTO.getId(), exam.getId());
-        assertEquals(examDTO.getAbdoDescription(), exam.getAbdo().getDescription());
         assertEquals(examDTO.getCnsId(),exam.getCns().getId());
     }
 
