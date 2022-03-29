@@ -12,6 +12,5 @@ public class ConsiderDTO implements Serializable {
     private Integer id;
     private Long uliId;
     private Integer considerId;
-    private String considerDescription;
     private String detail;
 }

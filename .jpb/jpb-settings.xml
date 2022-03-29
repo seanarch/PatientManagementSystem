@@ -8,4 +8,5 @@
       </database-info>
     </database-infos>
   </component>
+  <component name="JpaPluginProjectSettings" dtoClassNamePostfix="DTO" />
 </project>

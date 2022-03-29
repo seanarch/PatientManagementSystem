@@ -10,11 +10,8 @@ public interface DiagnosisMapper {
     @Mapping(source = "uliId", target = "uli.id")
     @Mapping(source = "locationId", target = "location.id")
     @Mapping(source = "orId", target = "or.id")
-    @Mapping(source = "orDescription", target = "or.description")
     @Mapping(source = "pathologyId", target = "pathology.id")
-    @Mapping(source = "pathologyDescription", target = "pathology.description")
     @Mapping(source = "recurId", target = "recur.id")
-    @Mapping(source = "recurDescription", target = "recur.description")
     Diagnosis diagnosisDTOToDiagnosis(DiagnosisDTO diagnosisDTO);
 
     DiagnosisDTO diagnosisToDiagnosisDTO(Diagnosis diagnosis);

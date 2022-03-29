@@ -8,7 +8,6 @@ import org.mapstruct.*;
 public interface DecisionMapper {
     @Mapping(source = "uliId", target = "uli.id")
     @Mapping(source = "decisionId", target = "decision.id")
-    @Mapping(source = "decisionDescription", target = "decision.description")
     Decision decisionDTOToDecision(DecisionDTO decisionDTO);
 
     @InheritInverseConfiguration(name = "decisionDTOToDecision")

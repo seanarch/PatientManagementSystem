@@ -17,10 +17,8 @@ public class DiagnosisDTO implements Serializable {
     private LocalDate oRDate;
     private Integer locationId;
     private Integer orId;
-    private String orDescription;
     private Integer sizePrimaryMm;
     private Integer pathologyId;
-    private String pathologyDescription;
     private String grade;
     private String margin;
     private Integer lvsi;
@@ -32,7 +30,6 @@ public class DiagnosisDTO implements Serializable {
     private String stainingVeIHC;
     private String stage;
     private Integer recurId;
-    private String recurDescription;
     private String siteOfFirstMet;
     private LocalDate today;
 }
