@@ -72,8 +72,7 @@ public class ExamService {
         }
 
     }
-    @Transactional
-    // set all methods to be transactional, when a .set is called, it will create a DB transaction of the same type
+    @Transactional // set all methods to be transactional, when a .set is called, it will create a DB transaction of the same type
     public void updateExam(ExamDTO DTO){
         /*
             The following code is really hard to explain. Basically it dynamically maps the getters from the DTO
