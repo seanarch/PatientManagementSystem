@@ -6,9 +6,13 @@ import { TextareaAutosize } from '@mui/base';
 import TextField from '../../components/TextField/TextField';
 import DatePicker from '../../components/Date/DatePicker';
 import axios from "axios"; 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const INITIAL_VALUES = {
+
+    
     Endvisit: {
         Consideration: `Long text here Long text here Long text here Long text here Long text here 
         Long text here Long text here Long text here Long text here Long text here 
@@ -24,6 +28,13 @@ const INITIAL_VALUES = {
 }
 
 const Endvisitpage = () => {
+    const notify = () => {
+     
+        toast.success('Successfully saved!', {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 2000
+        })
+    }
     return (
         <Container maxWidth="md">
         <div className='container' style={{
@@ -36,7 +47,7 @@ const Endvisitpage = () => {
 >
                 {props => (
                     <Form>
-                        
+                        <h3>Consideration and decision</h3>
                         <Grid container spacing={3} width={'70vw'}>
                         
                         <Grid item xs={12}>
@@ -61,7 +72,8 @@ const Endvisitpage = () => {
                                  
 
                                 <Grid item xs={12}>
-                                    <Button color='primary' type="submit">Save</Button>
+                                    <Button onClick={notify} color='primary' type="submit">Save</Button>
+                                    <ToastContainer />
                                 </Grid>
                             </Grid>
                         

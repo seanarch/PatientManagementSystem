@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Setter
 @Entity
 @Table(name = "childpugh")
-public class Childpugh {
+public class ChildPugh {
     @Id
     @Column(name = "CPID", nullable = false)
     private Integer id;

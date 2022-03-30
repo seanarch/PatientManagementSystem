@@ -3,9 +3,20 @@ import { useFormik } from 'formik';
 import { FormControl, InputLabel, Select, MenuItem, Box } from '@material-ui/core';
 import TextField from '@mui/material/TextField';
 import { Button } from 'reactstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 /* npm install @mui/material @emotion/react @emotion/styled */
 const Other = () => {
+    
+    const notify = () => {
+     
+        toast.success('Successfully saved!', {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 2000
+        })
+    }
+
     const otherForm = useFormik({
         initialValues: {
             CNS: { ECOG: "" },
@@ -149,7 +160,7 @@ const Other = () => {
                 {/* Peripheral is displayed according to doctor's existing UI, however it's only the foreign key, instead of table name, which should be Skin */}
                 <Box mb={3}>
                     <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">Peripheral / Skin </InputLabel>
+                        <InputLabel id="demo-simple-select-label">Peripheral/Skin </InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
@@ -240,7 +251,8 @@ const Other = () => {
                         value={otherForm.values.ABNORMAL.Description}
                     />
                 </Box>
-                <Button color="primary" type="submit" >Save</Button> 
+                <Button onClick={notify} color="primary" type="submit" >Save</Button> 
+                <ToastContainer />
             </Box>
         </div>
  
