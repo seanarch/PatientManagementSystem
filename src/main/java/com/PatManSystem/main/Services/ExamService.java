@@ -1,30 +1,56 @@
 package com.PatManSystem.main.Services;
 
 import com.PatManSystem.main.DTO.ExamDTO;
-import com.PatManSystem.main.DTO.PatientinformationDTO;
 import com.PatManSystem.main.Mapper.ExamMapperImpl;
-import com.PatManSystem.main.Mapper.PatientinformationMapperImpl;
+import com.PatManSystem.main.Models.Breath;
 import com.PatManSystem.main.Models.Exam;
 import com.PatManSystem.main.Models.Patientinformation;
-import com.PatManSystem.main.Repository.ExamRepository;
+import com.PatManSystem.main.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class ExamService {
 
     private final ExamRepository examRepository;
+    private final AbdomenRepository abdomenRepository;
+    private final CentralnervoussystemRepository centralnervoussystemRepository;
+    private final LungRepository lungRepository;
+    private final HeadandneckRepository headandneckRepository;
+    private final OralRepository oralRepository;
+    private final CardiacRepository cardiacRepository;
+    private final MusculoskeletalRepository musculoskeletalRepository;
+    private final SkinRepository skinRepository;
+    private final SupineRepository supineRepository;
+    private final BreathRepository breathRepository;
 
     @Autowired
-    public ExamService(ExamRepository examRepository){
+    public ExamService(ExamRepository examRepository,
+                       AbdomenRepository abdomenRepository,
+                       CentralnervoussystemRepository centralnervoussystemRepository,
+                       LungRepository lungRepository,
+                       HeadandneckRepository headandneckRepository,
+                       OralRepository oralRepository,
+                       CardiacRepository cardiacRepository,
+                       MusculoskeletalRepository musculoskeletalRepository,
+                       SkinRepository skinRepository,
+                       SupineRepository supineRepository,
+                       BreathRepository breathRepository){
+
         this.examRepository = examRepository;
+        this.abdomenRepository = abdomenRepository;
+        this.centralnervoussystemRepository = centralnervoussystemRepository;
+        this.lungRepository = lungRepository;
+        this.headandneckRepository = headandneckRepository;
+        this.oralRepository = oralRepository;
+        this.cardiacRepository = cardiacRepository;
+        this.musculoskeletalRepository = musculoskeletalRepository;
+        this.skinRepository = skinRepository;
+        this.supineRepository = supineRepository;
+        this.breathRepository = breathRepository;
+
     }
 
 
@@ -34,7 +60,6 @@ public class ExamService {
                .map(exam -> new ExamMapperImpl().examToExamDTO(exam))
                .collect(Collectors.toList());
     }
-
     public ExamDTO getExam(Long id){
         Exam getExam = examRepository.findExamById(id);
         if(getExam == null) //check if the requested patient exists, if not; throw not found exception
@@ -72,40 +97,58 @@ public class ExamService {
         }
 
     }
-    @Transactional // set all methods to be transactional, when a .set is called, it will create a DB transaction of the same type
     public void updateExam(ExamDTO DTO){
+        Exam setEntity = examRepository.findExamById(DTO.getId()); //retrieve a copy of the entity
         /*
-            The following code is really hard to explain. Basically it dynamically maps the getters from the DTO
-            to the setters of the DB entity. Using this technique this code is model agnostic and doesnt need to
-            be modified for new models. To use this in other Service classes you need only change the repository
-            type, and the DTO type. Specifically the Class type of entity and DTO
+            IF the repository can find the object specified by the id
+            THEN set respective object in setEntity to the object returned by the repository
+            FINALLY save the setEntity object, JPA opens a transaction and performs the update.
+            ELSE throw an exception
         */
+        if(setEntity != null){
+            if (DTO.getAbdoId() != null)
+                abdomenRepository.findById(DTO.getAbdoId()).ifPresent(setEntity::setAbdo);
 
-        Exam entity = examRepository.findExamById(DTO.getId()); //retrieve a copy of the Patientinfo
-        if(entity != null)
-        for (Method getter : DTO.getClass().getMethods()) {
-            Object get = "";
-            if (getter.getName().startsWith("get") && getter.getParameterTypes().length == 0) {
-                try {
-                    get = getter.invoke(DTO);
-                } catch (IllegalAccessException | InvocationTargetException e) {
-                    e.printStackTrace();
-                }
-                if (get != null)
-                    for (Method setter : entity.getClass().getMethods()) {
-                        if (setter.getName().startsWith("set") && setter.getName().endsWith(getter.getName().substring(3)) && setter.getParameterTypes().length == 1) {
-                            try {
-                                setter.invoke(entity, get);
-                            } catch (IllegalAccessException | InvocationTargetException e) {
-                                e.printStackTrace();
-                            }
-                            continue;
-                        }
-                    }
-            }
-        }
-        else
+            if (DTO.getDate() != null)
+               setEntity.setDate(DTO.getDate());
+
+            if (DTO.getCnsId() != null)
+                centralnervoussystemRepository.findById(DTO.getCnsId()).ifPresent(setEntity::setCns);
+
+            if (DTO.getCnsId() != null)
+                centralnervoussystemRepository.findById(DTO.getCnsId()).ifPresent(setEntity::setCns);
+
+            if (DTO.getLungId() != null)
+                lungRepository.findById(DTO.getLungId()).ifPresent(setEntity::setLung);
+
+            if (DTO.getHnId() != null)
+                headandneckRepository.findById(DTO.getHnId()).ifPresent(setEntity::setHn);
+
+            if (DTO.getOralId() != null)
+                oralRepository.findById(DTO.getOralId()).ifPresent(setEntity::setOral);
+
+            if (DTO.getCardiacId() != null)
+                cardiacRepository.findById(DTO.getCardiacId()).ifPresent(setEntity::setCardiac);
+
+            if (DTO.getMskId() != null)
+                musculoskeletalRepository.findById(DTO.getMskId()).ifPresent(setEntity::setMsk);
+
+            if (DTO.getPeripheralId() != null)
+                skinRepository.findById(DTO.getPeripheralId()).ifPresent(setEntity::setPeripheral);
+
+            if (DTO.getSupineId() != null)
+                supineRepository.findById(DTO.getSupineId()).ifPresent(setEntity::setSupine);
+
+            if (DTO.getAbnormal() != null)
+                setEntity.setAbnormal(DTO.getAbnormal());
+
+            if (DTO.getBreathId() != null)
+                breathRepository.findById(DTO.getBreathId()).ifPresent(setEntity::setBreath);
+
+            examRepository.save(setEntity);
+
+        }else {
             throw new IllegalStateException("Exam identified by ID "+DTO.getId()+ " does not exist.");
+        }
     }
-
 }

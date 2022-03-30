@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Builder.Default;
 import org.mapstruct.*;
 
+import javax.transaction.Transactional;
+
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface ExamMapper {
 

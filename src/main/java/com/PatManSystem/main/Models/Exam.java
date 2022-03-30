@@ -1,11 +1,13 @@
 package com.PatManSystem.main.Models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+
 @Getter
 @Setter
 @Entity
@@ -14,7 +16,9 @@ public class Exam {
     @Id
     @Column(name = "Exam", nullable = false)
     private Long id;
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @JoinColumn(name = "Abdo")
     private Abdomen abdo;
 
