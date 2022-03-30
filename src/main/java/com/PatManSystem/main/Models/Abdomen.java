@@ -1,7 +1,8 @@
 package com.PatManSystem.main.Models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -12,6 +13,8 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "abdomen")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Abdomen {
     @Id
     @Column(name = "TypeID", nullable = false)
@@ -19,7 +22,6 @@ public class Abdomen {
 
     @Column(name = "Description", nullable = false, length = 200)
     private String description;
-
 
     @OneToMany(mappedBy = "abdo")
     private Set<Exam> exams = new LinkedHashSet<>();
