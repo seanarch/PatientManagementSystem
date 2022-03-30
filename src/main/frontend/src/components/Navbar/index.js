@@ -18,7 +18,7 @@ const Navbar = () => {
                 <Bars />
                 <NavMenu>
                     <NavLink to='/register' activestyle="true">
-                        Register
+                        New Patient
                     </NavLink>
                     <NavLink to='/previsit' activestyle="true">
                         Previsit

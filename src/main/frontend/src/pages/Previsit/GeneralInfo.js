@@ -6,6 +6,9 @@ import TextField from '../../components/TextField/TextField';
 import DatePicker from '../../components/Date/DatePicker';
 import { TextareaAutosize } from '@mui/base';
 import axios from "axios"; 
+import Collapsible from 'react-collapsible';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const INITIAL_VALUES = {
     GeneralInformation: {
@@ -15,7 +18,17 @@ const INITIAL_VALUES = {
     },
 }
 
-const GeneralInfo = () => {
+function GeneralInfo() {
+
+    const notify = () => {
+     
+        toast.success('Successfully saved!', {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 2000
+        })
+    }
+
+
     return (
         <Container maxWidth="md">
         <div className='container' style={{
@@ -29,18 +42,20 @@ const GeneralInfo = () => {
                 {props => (
                     <Form>
                         <h3>General Information</h3>
+                        <Collapsible trigger="[+]">
+                        <br></br>
                         <Grid container spacing={3} width={'70vw'}>
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                 <DatePicker
                                         fullWidth
                                         name="GeneralInformation.DateDI"
-                                        label="DateDI"
+                                        label="Date Diagnosed"
                                     />
                                 </Grid>
-                                <Grid item xs={12}>
+                                <Grid item xs={6}>
                                     <TextField
                                         name="GeneralInformation.CTchest"
-                                        label="CTchest"
+                                        label="CT chest"
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
@@ -55,10 +70,11 @@ const GeneralInfo = () => {
                                  
 
                                 <Grid item xs={12}>
-                                    <Button color='primary' type="submit">Save</Button>
+                                    <Button color='primary' type="submit" onClick={notify}>Save</Button>
+                                    <ToastContainer />
                                 </Grid>
                             </Grid>
-                        
+                        </Collapsible>
                     </Form>
                 )}
             </Formik>

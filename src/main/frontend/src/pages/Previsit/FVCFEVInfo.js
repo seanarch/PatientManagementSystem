@@ -5,6 +5,9 @@ import { Container, Grid, InputLabel, Select, MenuItem, FormControl } from '@mat
 import TextField from '../../components/TextField/TextField';
 import DatePicker from '../../components/Date/DatePicker';
 import axios from "axios"; 
+import Collapsible from 'react-collapsible';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const INITIAL_VALUES = {
     FVCFEVInformation: {
@@ -18,7 +21,16 @@ const INITIAL_VALUES = {
     },
 }
 
-const FVCFEVInfo = () => {
+function FVCFEVInfo() {
+
+    const notify = () => {
+     
+        toast.success('Successfully saved!', {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 2000
+        })
+    }
+
     return (
         <Container maxWidth="md">
         <div className='container' style={{
@@ -32,8 +44,10 @@ const FVCFEVInfo = () => {
                 {props => (
                     <Form>
                         <h3>FVC FEV Information</h3>
+                        <Collapsible trigger="[+]">
+                         <br></br>
                         <Grid container spacing={3} width={'70vw'}>
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                 <DatePicker
                                         fullWidth
                                         name="FVCFEVInformation.Date2"
@@ -41,41 +55,41 @@ const FVCFEVInfo = () => {
                                     />
                                 </Grid>
                         
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                     <TextField
                                         name="FVCFEVInformation.FVC"
                                         label="FVC"
                                     />
                                 </Grid>
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                     <TextField
                                         name="FVCFEVInformation.FVCperc"
                                         label="FVC%"
                                     />
                                 </Grid>
                                 <hr></hr>
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                     <TextField
                                         name="FVCFEVInformation.FEV1"
                                         label="FEV1"
                                     />
                                 </Grid>
                                 <hr></hr>
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                     <TextField
                                         name="FVCFEVInformation.FEV1perc"
                                         label="FEV%"
                                     />
                                 </Grid>
                                 <hr></hr>
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                     <TextField
                                         name="FVCFEVInformation.Ratio"
                                         label="Ratio"
                                     />
                                 </Grid>
                                 <hr></hr>
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                     <TextField
                                         name="FVCFEVInformation.DLCO"
                                         label="DLCO"
@@ -83,10 +97,11 @@ const FVCFEVInfo = () => {
                                 </Grid>
                                 <hr></hr>
                                 <Grid item xs={12}>
-                                    <Button color='primary' type="submit">Save</Button>
+                                    <Button color='primary' type="submit" onClick={notify}>Save</Button>
+                                    <ToastContainer />
                                 </Grid>
                             </Grid>
-                        
+                        </Collapsible>
                     </Form>
                 )}
             </Formik>

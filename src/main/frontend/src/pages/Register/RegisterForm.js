@@ -4,12 +4,19 @@ import { Button } from 'reactstrap';
 import { Container, Grid, InputLabel, Select, MenuItem, FormControl } from '@material-ui/core';
 import TextField from '../../components/TextField/TextField';
 import DatePicker from '../../components/Date/DatePicker';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+const today = new Date(); 
+const date = today.setDate(today.getDate()); 
+const ymddate = new Date(date).toISOString().split('T')[0] // yyyy-mm-dd
+ 
+const firstname = "John";
 
 const INITIAL_VALUES = {
     PatientInformation: {
         Lastname: "",
-        Firstname: "",
+        Firstname: {firstname}.firstname,
         Sex: "",
         Birthday: "",
         ULI: "",
@@ -17,11 +24,23 @@ const INITIAL_VALUES = {
         Location: ""
     },
     NewPatientConsult: {
-        Date: ""
-    }
+        Date: {ymddate}.ymddate
+    },
 }
 
-const RegisterForm = () => {
+console.log(ymddate)
+console.log(firstname)
+
+function RegisterForm () {
+
+    const notify = () => {
+     
+        toast.success('Successfully created!', {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 2000
+        })
+    }
+
     return (
 
         <Container maxWidth="md">
@@ -37,21 +56,21 @@ const RegisterForm = () => {
                         <Form>
                             <h3>Create New Patient</h3>
                             <Grid container spacing={3} width={'70vw'}>
-                                <Grid item xs={12}>
+                                <Grid item xs={6}>
                                     <TextField
                                         label="Lastname"
                                         name="PatientInformation.Lastname"
                                         fullWidth
                                     />
                                     </Grid>
-                                    <Grid item xs={12}>
+                                    <Grid item xs={6}>
                                         <TextField
                                             label="Firstname"
                                             name="PatientInformation.Firstname"
                                         />
                                     </Grid>
 
-                                    <Grid item xs={12} >
+                                    <Grid item xs={6} >
                                     <FormControl fullWidth>
                                         <InputLabel id="demo-simple-select">Sex</InputLabel>
                                         <Select
@@ -70,7 +89,7 @@ const RegisterForm = () => {
                                         </FormControl>
                                     </Grid>
 
-                                    <Grid item xs={12}>
+                                    <Grid item xs={6}>
                                         <DatePicker
                                             fullWidth
                                             name="PatientInformation.Birthday"
@@ -78,7 +97,7 @@ const RegisterForm = () => {
                                         />
                                     </Grid>
 
-                                    <Grid item xs={12}>
+                                    <Grid item xs={6}>
                                         <TextField
                                             label="ULI"
                                             name="PatientInformation.ULI"
@@ -87,21 +106,21 @@ const RegisterForm = () => {
                                     </Grid>
 
 
-                                    <Grid item xs={12}>
+                                    <Grid item xs={6}>
                                         <TextField
                                             label="TG"
                                             name="PatientInformation.TG"
                                         />
                                     </Grid>
 
-                                    <Grid item xs={12}>
+                                    <Grid item xs={6}>
                                         <TextField
                                             label="Location"
                                             name="PatientInformation.Location"
                                         />
                                     </Grid>
 
-                                    <Grid item xs={12}>
+                                    <Grid item xs={6}>
                                         <DatePicker
                                             fullWidth
                                             name="NewPatientConsult.Date"
@@ -110,7 +129,8 @@ const RegisterForm = () => {
                                     </Grid>
 
                                     <Grid item xs={12}>
-                                        <Button color='primary' type="submit">Create</Button>
+                                        <Button color='primary' type="submit" onClick={notify}>Create</Button>
+                                        <ToastContainer />
                                     </Grid>
                                 </Grid>
                             
