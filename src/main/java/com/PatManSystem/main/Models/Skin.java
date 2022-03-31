@@ -15,7 +15,7 @@ public class Skin {
     @Column(name = "TypeID", nullable = false)
     private Integer id;
 
-    @Column(name = "Description", nullable = false, length = 200)
+    @Column(name = "Description", length = 200)
     private String description;
 
     @OneToMany(mappedBy = "peripheral")
