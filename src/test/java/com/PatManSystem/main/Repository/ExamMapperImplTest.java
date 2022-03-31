@@ -79,4 +79,6 @@ public class ExamMapperImplTest {
         assertEquals(examDTO.getCnsId(),exam.getCns().getId());
     }
 
+
+
 }

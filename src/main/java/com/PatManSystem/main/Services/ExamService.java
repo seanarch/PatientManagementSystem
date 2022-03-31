@@ -2,12 +2,13 @@ package com.PatManSystem.main.Services;
 
 import com.PatManSystem.main.DTO.ExamDTO;
 import com.PatManSystem.main.Mapper.ExamMapperImpl;
-import com.PatManSystem.main.Models.Breath;
 import com.PatManSystem.main.Models.Exam;
 import com.PatManSystem.main.Models.Patientinformation;
 import com.PatManSystem.main.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -97,6 +98,7 @@ public class ExamService {
         }
 
     }
+
     public void updateExam(ExamDTO DTO){
         Exam setEntity = examRepository.findExamById(DTO.getId()); //retrieve a copy of the entity
         /*
@@ -105,15 +107,13 @@ public class ExamService {
             FINALLY save the setEntity object, JPA opens a transaction and performs the update.
             ELSE throw an exception
         */
+
         if(setEntity != null){
             if (DTO.getAbdoId() != null)
                 abdomenRepository.findById(DTO.getAbdoId()).ifPresent(setEntity::setAbdo);
 
             if (DTO.getDate() != null)
                setEntity.setDate(DTO.getDate());
-
-            if (DTO.getCnsId() != null)
-                centralnervoussystemRepository.findById(DTO.getCnsId()).ifPresent(setEntity::setCns);
 
             if (DTO.getCnsId() != null)
                 centralnervoussystemRepository.findById(DTO.getCnsId()).ifPresent(setEntity::setCns);
@@ -150,5 +150,7 @@ public class ExamService {
         }else {
             throw new IllegalStateException("Exam identified by ID "+DTO.getId()+ " does not exist.");
         }
+
+
     }
 }
