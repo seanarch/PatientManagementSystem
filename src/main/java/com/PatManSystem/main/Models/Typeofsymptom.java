@@ -15,7 +15,7 @@ public class Typeofsymptom {
     @Column(name = "TypeID", nullable = false)
     private Integer id;
 
-    @Column(name = "Decription", nullable = false, length = 100)
+    @Column(name = "Decription", length = 100)
     private String decription;
 
     @OneToMany(mappedBy = "symptom")

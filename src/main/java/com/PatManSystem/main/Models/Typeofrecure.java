@@ -15,7 +15,7 @@ public class Typeofrecure {
     @Column(name = "TypeID", nullable = false)
     private Integer id;
 
-    @Column(name = "Description", nullable = false, length = 1000)
+    @Column(name = "Description", length = 1000)
     private String description;
 
     @OneToMany(mappedBy = "recur")
