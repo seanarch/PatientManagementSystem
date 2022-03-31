@@ -10,4 +10,5 @@ class PatientManagementSystemApplicationTests {
 	void contextLoads() {
 	}
 
+
 }

@@ -1,8 +1,12 @@
 package com.PatManSystem.main.Models;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.time.LocalDate;
-
+@Getter
+@Setter
 @Entity
 @Table(name = "diagnosticimaging")
 public class Diagnosticimaging {
@@ -12,7 +16,7 @@ public class Diagnosticimaging {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ULI", nullable = false)
-    private PtId uli;
+    private Patientinformation uli;
 
     @Column(name = "DateDI")
     private LocalDate dateDI;
@@ -24,43 +28,4 @@ public class Diagnosticimaging {
     @Column(name = "Finding", length = 5000)
     private String finding;
 
-    public String getFinding() {
-        return finding;
-    }
-
-    public void setFinding(String finding) {
-        this.finding = finding;
-    }
-
-    public Typeofdiagnosticimaging getTypeDI() {
-        return typeDI;
-    }
-
-    public void setTypeDI(Typeofdiagnosticimaging typeDI) {
-        this.typeDI = typeDI;
-    }
-
-    public LocalDate getDateDI() {
-        return dateDI;
-    }
-
-    public void setDateDI(LocalDate dateDI) {
-        this.dateDI = dateDI;
-    }
-
-    public PtId getUli() {
-        return uli;
-    }
-
-    public void setUli(PtId uli) {
-        this.uli = uli;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 }

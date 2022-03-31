@@ -1,10 +1,13 @@
 package com.PatManSystem.main.Models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.persistence.*;
+import java.util.LinkedHashSet;
+import java.util.Set;
+@Getter
+@Setter
 @Entity
 @Table(name = "zrtplan")
 public class Zrtplan {
@@ -12,13 +15,18 @@ public class Zrtplan {
     @Column(name = "TypeID", nullable = false)
     private Integer id;
 
-    public Integer getId() {
-        return id;
+    @Column(name = "Description", length = 100)
+    private String description;
+
+    @OneToMany(mappedBy = "planning")
+    private Set<Radiationtherapy> radiationtherapies = new LinkedHashSet<>();
+
+    public Set<Radiationtherapy> getRadiationtherapies() {
+        return radiationtherapies;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setRadiationtherapies(Set<Radiationtherapy> radiationtherapies) {
+        this.radiationtherapies = radiationtherapies;
     }
 
-    //TODO Reverse Engineering! Migrate other columns to the entity
 }
