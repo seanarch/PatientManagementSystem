@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import { FormControl, InputLabel, Select, MenuItem, Box } from '@material-ui/core';
+import { FormControl, InputLabel, Select, MenuItem, Box, Container } from '@material-ui/core';
 import TextField from '@mui/material/TextField';
 import { Button } from 'reactstrap';
 import { ToastContainer, toast } from 'react-toastify';
@@ -39,8 +39,8 @@ const Other = () => {
         }
     })
     return (
- 
-        <div style={{
+        <Container maxWidth="md">
+        <div className='container' style={{
             display: 'flex', justifyContent:
                 'center', alignItems: 'center', marginTop: '50px', lineHeight: '10px'
         }}>
@@ -255,7 +255,7 @@ const Other = () => {
                 <ToastContainer />
             </Box>
         </div>
- 
+        </Container>
     )
 }
 
