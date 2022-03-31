@@ -1,8 +1,7 @@
 package com.PatManSystem.main.Controllers;
 
-import com.PatManSystem.main.DTO.ExamDTO;
+
 import com.PatManSystem.main.DTO.ManagementDTO;
-import com.PatManSystem.main.Models.Management;
 import com.PatManSystem.main.Services.ManagementService;
 
 import java.time.LocalDate;
