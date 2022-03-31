@@ -32,7 +32,7 @@ function SearchForm() {
   }
 
   const SearchFilter = async () => {
-    const patientResponse = await fetch(`http://localhost:8080/api/patient/`);
+    const patientResponse = await fetch(`http://localhost:8080/api/patient/all`);
     const patientResponseData = await patientResponse.json();
     setPatient(patientResponseData);
     console.log(patientResponseData);
