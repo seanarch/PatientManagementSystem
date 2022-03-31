@@ -15,7 +15,7 @@ public class Mellowscore {
     @Column(name = "TypeID", nullable = false)
     private Integer id;
 
-    @Column(name = "Description", nullable = false, length = 60)
+    @Column(name = "Description", length = 60)
     private String description;
 
     @OneToMany(mappedBy = "swallowing")

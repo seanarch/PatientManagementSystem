@@ -15,7 +15,7 @@ public class Zrtugi {
     @Column(name = "TypeID", nullable = false)
     private Integer id;
 
-    @Column(name = "Description", nullable = false, length = 100)
+    @Column(name = "Description", length = 100)
     private String description;
 
     @OneToMany(mappedBy = "upperGI")

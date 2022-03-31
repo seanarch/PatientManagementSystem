@@ -15,7 +15,7 @@ public class Typeofbiopsy {
     @Column(name = "TypeID", nullable = false)
     private Integer id;
 
-    @Column(name = "Description", nullable = false, length = 500)
+    @Column(name = "Description", length = 500)
     private String description;
 
     @OneToMany(mappedBy = "or")
