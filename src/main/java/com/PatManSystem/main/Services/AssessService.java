@@ -6,7 +6,7 @@ import com.PatManSystem.main.Mapper.AssessMapperImpl;
 import com.PatManSystem.main.Mapper.AssessMapperImpl;
 import com.PatManSystem.main.Models.Assess;
 import com.PatManSystem.main.Models.Patientinformation;
-import com.PatManSystem.main.Repository.AssessRepository;
+import com.PatManSystem.main.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +20,26 @@ import java.util.stream.Collectors;
 @Service
 public class AssessService {
 
-@Autowired
-private AssessRepository assessRepository;
+    private final AssessRepository assessRepository;
+    private final PatientRepository patientRepository;
+    private final EcogperformancestatusscaleRepository ecogperformancestatusscaleRepository;
+    private final MellowscoreRepository mellowscoreRepository;
+    private final MrcdyspnoeascaleRepository mrcdyspnoeascaleRepository;
+
+    @Autowired
+    public AssessService(AssessRepository assessRepository,
+                         PatientRepository patientRepository,
+                         EcogperformancestatusscaleRepository ecogperformancestatusscaleRepository,
+                         MellowscoreRepository mellowscoreRepository,
+                         MrcdyspnoeascaleRepository mrcdyspnoeascaleRepository
+                         ){
+        this.assessRepository = assessRepository;
+        this.patientRepository = patientRepository;
+        this.ecogperformancestatusscaleRepository = ecogperformancestatusscaleRepository;
+        this.mellowscoreRepository = mellowscoreRepository;
+        this.mrcdyspnoeascaleRepository = mrcdyspnoeascaleRepository;
+    }
+
 
     public List<AssessDTO> getAssesss(){
         return assessRepository.findAll()
@@ -31,7 +49,7 @@ private AssessRepository assessRepository;
     }
     public AssessDTO getAssess(Integer id){
         Optional<Assess> getAssess = assessRepository.findById(id);
-        if(getAssess.isPresent()) //check if the requested patient exists, if not; throw not found exception
+        if(getAssess.isEmpty()) //check if the requested patient exists, if not; throw not found exception
             throw new IllegalStateException("Assess identified by ID "+id+" was not found.");
 
         return new AssessMapperImpl().assessToAssessDTO(getAssess.get());
@@ -66,45 +84,25 @@ private AssessRepository assessRepository;
         }
 
     }
-    @Transactional    // set all methods to be transactional, when a .set is called, it will create a DB transaction of the same type
     public void updateAssess(AssessDTO DTO){
-        /*
-            The following code is really hard to explain. Basically it dynamically maps the getters from the DTO
-            to the setters of the DB entity. Using this technique this code is model agnostic and doesnt need to
-            be modified for new models. To use this in other Service classes you need only change the repository
-            type, and the DTO type. Specifically the Class type of entity and DTO
-        */
-        Assess entity = assessRepository.findById(DTO.getId()).get(); //retrieve a copy of the entity type
+        Assess setEntity = assessRepository.findById(DTO.getId()).get(); //retrieve a copy of the entity type
 
-        if(entity != null)
-            for (Method getter : DTO.getClass().getMethods()) {
-                Object get = "";
-                if (getter.getName().startsWith("get") && getter.getParameterTypes().length == 0) {
-                    System.out.println("Getter: "+getter);
+        if(setEntity != null){
 
-                    try {
-                        get = getter.invoke(DTO);
-                        System.out.println("Get: "+get);
-                    } catch (IllegalAccessException | InvocationTargetException e) {
-                        e.printStackTrace();
-                    }
-                    if (get != null)
-                        for (Method setter : entity.getClass().getMethods()) {
-                            if (setter.getName().startsWith("set") && setter.getName().endsWith(getter.getName().substring(3)) && setter.getParameterTypes().length == 1) {
-                                try {
-                                    setter.invoke(entity, get);
-                                    System.out.println("Setter: "+setter);
+            if (DTO.getDate() != null)
+                setEntity.setDate(DTO.getDate());
 
-                                } catch (IllegalAccessException | InvocationTargetException e) {
-                                    e.printStackTrace();
-                                }
-                                continue;
-                            }
-                        }
-                }
-                System.out.println("----------");
-            }
-        else
+            if (DTO.getEcogId() != null)
+                ecogperformancestatusscaleRepository.findById(DTO.getEcogId()).ifPresent(setEntity::setEcog);
+
+            if (DTO.getSwallowingId() != null)
+                mellowscoreRepository.findById(DTO.getSwallowingId()).ifPresent(setEntity::setSwallowing);
+
+            if (DTO.getBreathingId() != null)
+                mrcdyspnoeascaleRepository.findById(DTO.getBreathingId()).ifPresent(setEntity::setBreathing);
+
+            assessRepository.save(setEntity);
+        }else
             throw new IllegalStateException("Assess identified by ID "+DTO.getId()+ " does not exist.");
     }
 }

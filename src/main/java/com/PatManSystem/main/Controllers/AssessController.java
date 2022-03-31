@@ -31,6 +31,7 @@ public class AssessController {
     public AssessDTO getAssess(@PathVariable("id") Integer id){
         return assessService.getAssess(id);
     }
+
     @GetMapping(path ="/uli={ULI}")
     public List<AssessDTO> getAssesss(@PathVariable("ULI") Long ULI){
         return assessService.getAssessByULI(ULI);
