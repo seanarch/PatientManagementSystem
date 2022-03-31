@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ManagementDTO implements Serializable {
-    private Integer id;
+    private Long id;
     private Long uliId;
     private LocalDate date;
     private Integer interventionId;

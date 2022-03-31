@@ -52,7 +52,7 @@ public class ExamController {
     public String updateExam(@RequestBody ExamDTO examDTO){
 
         examService.updateExam(examDTO);
-        return "UPDATE: Exam identified by ULI "+examDTO.getId()+" successfully updated.";
+        return "UPDATE: Exam identified by ULI "+examDTO.getUliId()+" successfully updated.";
 
     }
 

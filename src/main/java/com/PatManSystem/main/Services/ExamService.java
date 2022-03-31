@@ -77,8 +77,8 @@ public class ExamService {
         return getExams.stream()
                 .map(exam -> new ExamMapperImpl().examToExamDTO(exam))
                 .collect(Collectors.toList());
-
     }
+
     public void newExam(ExamDTO examDTO){
 
         if(examRepository.findExamById(examDTO.getId()) != null){  //check if the requested patient exists, if not; throw not found exception

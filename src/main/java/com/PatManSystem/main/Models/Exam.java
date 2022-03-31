@@ -18,7 +18,6 @@ public class Exam {
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @JoinColumn(name = "Abdo")
     private Abdomen abdo;
 
@@ -37,9 +36,11 @@ public class Exam {
     @JoinColumn(name = "Lung")
     private Lung lung;
 
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "HN")
     private Headandneck hn;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Oral")
@@ -49,20 +50,25 @@ public class Exam {
     @JoinColumn(name = "Cardiac")
     private Cardiac cardiac;
 
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MSK")
     private Musculoskeletal msk;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Peripheral")
     private Skin peripheral;
 
+
     @Column(name = "ABNORMAL", length = 2000)
     private String abnormal;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Supine")
     private Supine supine;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Breath")
