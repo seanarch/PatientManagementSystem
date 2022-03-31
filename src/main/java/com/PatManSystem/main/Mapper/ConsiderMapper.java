@@ -8,6 +8,7 @@ import org.mapstruct.*;
 public interface ConsiderMapper {
     @Mapping(source = "uliId", target = "uli.id")
     @Mapping(source = "considerId", target = "consider.id")
+    @Mapping(source = "considerDescription", target = "consider.description")
     Consider considerDTOToConsider(ConsiderDTO considerDTO);
 
     @InheritInverseConfiguration(name = "considerDTOToConsider")

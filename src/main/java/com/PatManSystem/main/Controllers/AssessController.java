@@ -62,11 +62,14 @@ public class AssessController {
         @RequestParam(required = false) Long uliId,
         @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date, // date parsed from JSON is STRING, addition formatting required to convert to LocalDate Obj
         @RequestParam(required = false) Integer ecogId,
+        @RequestParam(required = false) String ecogDescription,
         @RequestParam(required = false) Integer swallowingId,
-        @RequestParam(required = false) Integer breathingId
+        @RequestParam(required = false) String swallowingDescription,
+        @RequestParam(required = false) Integer breathingId,
+        @RequestParam(required = false) String breathingDescription
 
     ){
-        assessService.updateAssess(new AssessDTO(id,uliId,date,ecogId,swallowingId,breathingId));
+        assessService.updateAssess(new AssessDTO(id,uliId,date,ecogId,ecogDescription,swallowingId,swallowingDescription,breathingId,breathingDescription));
 
         return "UPDATE: Assess identified by ID "+id+" successfully updated.";
     }
