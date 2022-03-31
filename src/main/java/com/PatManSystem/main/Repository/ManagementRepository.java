@@ -11,5 +11,5 @@ import java.util.List;
 @Repository
 public interface ManagementRepository extends JpaRepository<Management, Long> {
     Management findManagementById(Long Id);
-    List<Management> findManagementByUli(Long uli);
+    List<Management> findManagementByUli(Patientinformation patientinformation);
 }

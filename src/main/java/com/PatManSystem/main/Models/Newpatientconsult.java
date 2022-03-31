@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class Newpatientconsult {
     @Id
     @Column(name = "`Bx ID`", nullable = false)
-    private Integer id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ULI", nullable = false)

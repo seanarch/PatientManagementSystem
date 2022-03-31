@@ -3,8 +3,8 @@ package com.PatManSystem.main.Services;
 import com.PatManSystem.main.DTO.ManagementDTO;
 import com.PatManSystem.main.Mapper.ManagementMapperImpl;
 import com.PatManSystem.main.Models.Management;
+
 import com.PatManSystem.main.Models.Patientinformation;
-import com.PatManSystem.main.Models.Typeofmanagement;
 import com.PatManSystem.main.Repository.ManagementRepository;
 import com.PatManSystem.main.Repository.TypeofmanagementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +48,7 @@ public class ManagementService {
 
     //find Mangement entity by ULI and return ManagementDTO list
     public List<ManagementDTO> getManagementByULI(Long ULI){
-        List<Management> getManagements = managementRepository.findManagementByUli(ULI);
+        List<Management> getManagements = managementRepository.findManagementByUli(new Patientinformation(ULI,null,null,null,null,null,null,null));
         if (getManagements == null)
             throw new IllegalStateException("Management identified by ULI "+ULI+" was not found.");
 
@@ -60,7 +60,7 @@ public class ManagementService {
     //create new Management entity by passing managementDTO
     public void newManagement(ManagementDTO managementDTO){
         if(managementRepository.findManagementById(managementDTO.getId()) != null){
-            throw new IllegalStateException("Management identified by ID "+managementDTO.getId() + " already exists. Use Post:Update at /api/patient/update instead.");
+            throw new IllegalStateException("Management identified by ID "+managementDTO.getId() + " already exists. Use Post:Update at /api/management/update instead.");
         }
           managementRepository.save(new ManagementMapperImpl().managementDTOToManagement(managementDTO));
     }
@@ -85,10 +85,12 @@ public class ManagementService {
             if ( managementDTO.getInterventionId() != null ) {
                 typeofmanagementRepository.findById(managementDTO.getInterventionId()).ifPresent(existingManagement::setIntervention);
             }
-
+            // management table's id may not need to be updated once it has been created
+            /*
             if ( managementDTO.getId() != null ) {
                 existingManagement.setId( managementDTO.getId() );
             }
+             */
             if ( managementDTO.getDate() != null ) {
                 existingManagement.setDate( managementDTO.getDate() );
             }
