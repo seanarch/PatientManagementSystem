@@ -61,10 +61,11 @@ public class ManagementController {
             @RequestParam(required = false) Long uliId,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date, // date parsed from JSON is STRING, addition formatting required to convert to LocalDate Obj
             @RequestParam(required = false) Integer interventionId,
+            @RequestParam(required = false) String interventionDescription,
             @RequestParam(required = false) String detail
 
     ){
-        managementService.updateManagement(new ManagementDTO(id,uliId,date,interventionId,detail));
+        managementService.updateManagement(new ManagementDTO(id,uliId,date,interventionId,interventionDescription,detail));
 
         return "UPDATE: Management identified by ID "+id+" successfully updated.";
     }

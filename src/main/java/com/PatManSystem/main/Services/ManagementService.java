@@ -94,6 +94,7 @@ public class ManagementService {
             if ( managementDTO.getDate() != null ) {
                 existingManagement.setDate( managementDTO.getDate() );
             }
+
             if ( managementDTO.getDetail() != null ) {
                 existingManagement.setDetail( managementDTO.getDetail() );
             }

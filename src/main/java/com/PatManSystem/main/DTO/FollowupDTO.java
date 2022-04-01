@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class FollowupDTO implements Serializable {
     private Integer id;
+    private Long uliId;
     private LocalDate date;
     private Integer typeFUId;
     private String typeFUDescription;
