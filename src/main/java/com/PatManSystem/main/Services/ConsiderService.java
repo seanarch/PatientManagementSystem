@@ -47,7 +47,7 @@ public class ConsiderService {
             throw new ConsiderNotFound(ULI);
 
         return getConsiders.stream()
-                .map(consider -> new ConsiderMapperImpl().considerToConsiderDTO(consider))
+                .map(new ConsiderMapperImpl()::considerToConsiderDTO)
                 .collect(Collectors.toList());
 
     }
@@ -71,7 +71,6 @@ public class ConsiderService {
     public void updateConsider(ConsiderDTO DTO){
 
         Consider setEntity = considerRepository.findById(DTO.getId()).orElseThrow(() -> new ConsiderNotFound(DTO.getId()));
-
 
         if (DTO.getConsiderId() != null)
             typeofconsiderationRepository.findById(DTO.getConsiderId()).ifPresent(setEntity::setConsider);
