@@ -1,12 +1,12 @@
 package com.PatManSystem.main.DTO;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.io.Serializable;
 import java.time.LocalDate;
-
+@Getter
+@Setter
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,4 +21,8 @@ public class ChildpughDTO implements Serializable {
     private String hepaticEnch;
     private Integer childPughScore;
     private String childPugh;
+
+    public ChildpughDTO(Integer id){
+        this.id = id;
+    }
 }

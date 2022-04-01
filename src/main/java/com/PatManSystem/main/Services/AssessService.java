@@ -96,7 +96,10 @@ public class AssessService {
         assessRepository.save(setEntity);
 
     }
-
+    /* Custom exceptions for this class
+     * NotFound
+     * DuplicateFound
+     */
     static class AssessNotFound extends Exception{
         public AssessNotFound(String errorMessage){
             super(errorMessage);
