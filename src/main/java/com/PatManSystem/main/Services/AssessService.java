@@ -7,6 +7,7 @@ import com.PatManSystem.main.Mapper.AssessMapperImpl;
 import com.PatManSystem.main.Models.Assess;
 import com.PatManSystem.main.Models.Patientinformation;
 import com.PatManSystem.main.Repository.*;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,20 +22,17 @@ import java.util.stream.Collectors;
 public class AssessService {
 
     private final AssessRepository assessRepository;
-    private final PatientRepository patientRepository;
     private final EcogperformancestatusscaleRepository ecogperformancestatusscaleRepository;
     private final MellowscoreRepository mellowscoreRepository;
     private final MrcdyspnoeascaleRepository mrcdyspnoeascaleRepository;
 
     @Autowired
     public AssessService(AssessRepository assessRepository,
-                         PatientRepository patientRepository,
                          EcogperformancestatusscaleRepository ecogperformancestatusscaleRepository,
                          MellowscoreRepository mellowscoreRepository,
                          MrcdyspnoeascaleRepository mrcdyspnoeascaleRepository
                          ){
         this.assessRepository = assessRepository;
-        this.patientRepository = patientRepository;
         this.ecogperformancestatusscaleRepository = ecogperformancestatusscaleRepository;
         this.mellowscoreRepository = mellowscoreRepository;
         this.mrcdyspnoeascaleRepository = mrcdyspnoeascaleRepository;
@@ -47,62 +45,81 @@ public class AssessService {
         .map(assess -> new AssessMapperImpl().assessToAssessDTO(assess))
         .collect(Collectors.toList());
     }
+    @SneakyThrows
     public AssessDTO getAssess(Integer id){
-        Optional<Assess> getAssess = assessRepository.findById(id);
-        if(getAssess.isEmpty()) //check if the requested patient exists, if not; throw not found exception
-            throw new IllegalStateException("Assess identified by ID "+id+" was not found.");
-
-        return new AssessMapperImpl().assessToAssessDTO(getAssess.get());
-
+        return new AssessMapperImpl().assessToAssessDTO(assessRepository.findById(id).orElseThrow(() -> new AssessNotFound(id)));
     }
+    @SneakyThrows
     public List<AssessDTO> getAssessByULI(Long ULI){
 
-        List<Assess> getAssesss = assessRepository.findAssessByUli(new Patientinformation(ULI,null,null,null,null,null,null,null));
-        if(getAssesss == null) //check if the requested patient exists, if not; throw not found exception
-            throw new IllegalStateException("Assess identified by ULI "+ULI+" was not found.");
+        List<Assess> getAssesss = assessRepository.findAssessByUli(new Patientinformation(ULI));
+
+        if(getAssesss.isEmpty()) //check if the requested patient exists, if not; throw not found exception
+            throw new AssessNotFound(ULI);
 
         return getAssesss.stream()
                 .map(assess -> new AssessMapperImpl().assessToAssessDTO(assess))
                 .collect(Collectors.toList());
 
     }
+    @SneakyThrows
     public void newAssess(AssessDTO assessDTO){
 
-        if(assessRepository.findById(assessDTO.getId()).isPresent()){  //check if the requested patient exists, if not; throw not found exception
-            throw new IllegalStateException("Assess identified by ID "+assessDTO.getId() + " already exists. Use Post:Update at /api/patient/update instead.");
-        }else{
-            assessRepository.save(new AssessMapperImpl().assessDTOToAssess(assessDTO)); // convert incoming DTO to DB entity and save to the DB
-        }
+        assessRepository.findById(assessDTO.getId()).orElseThrow(() -> new AssessDuplicateFound(assessDTO.getId()));
+        assessRepository.save(new AssessMapperImpl().assessDTOToAssess(assessDTO)); // convert incoming DTO to DB entity and save to the DB
 
     }
+    @SneakyThrows
     public void deleteAssess(Integer id){
 
-        if(assessRepository.findById(id).isEmpty()){ //check if the requested patient exists, if not; throw not found exception
-            throw new IllegalStateException("Assess identified by ID "+id+ " does not exist.");
-        }else{
-            assessRepository.deleteById(id);
-        }
+        assessRepository.findById(id).orElseThrow(() -> new AssessNotFound(id));
+        assessRepository.deleteById(id);
 
     }
+    @SneakyThrows
     public void updateAssess(AssessDTO DTO){
-        Assess setEntity = assessRepository.findById(DTO.getId()).get(); //retrieve a copy of the entity type
 
-        if(setEntity != null){
+        Assess setEntity = assessRepository.findById(DTO.getId()).orElseThrow(() -> new AssessNotFound(DTO.getId()));
 
-            if (DTO.getDate() != null)
-                setEntity.setDate(DTO.getDate());
+        if (DTO.getDate() != null)
+            setEntity.setDate(DTO.getDate());
 
-            if (DTO.getEcogId() != null)
-                ecogperformancestatusscaleRepository.findById(DTO.getEcogId()).ifPresent(setEntity::setEcog);
+        if (DTO.getEcogId() != null)
+            ecogperformancestatusscaleRepository.findById(DTO.getEcogId()).ifPresent(setEntity::setEcog);
 
-            if (DTO.getSwallowingId() != null)
-                mellowscoreRepository.findById(DTO.getSwallowingId()).ifPresent(setEntity::setSwallowing);
+        if (DTO.getSwallowingId() != null)
+            mellowscoreRepository.findById(DTO.getSwallowingId()).ifPresent(setEntity::setSwallowing);
 
-            if (DTO.getBreathingId() != null)
-                mrcdyspnoeascaleRepository.findById(DTO.getBreathingId()).ifPresent(setEntity::setBreathing);
+        if (DTO.getBreathingId() != null)
+            mrcdyspnoeascaleRepository.findById(DTO.getBreathingId()).ifPresent(setEntity::setBreathing);
 
-            assessRepository.save(setEntity);
-        }else
-            throw new IllegalStateException("Assess identified by ID "+DTO.getId()+ " does not exist.");
+        assessRepository.save(setEntity);
+
+    }
+
+    static class AssessNotFound extends Exception{
+        public AssessNotFound(String errorMessage){
+            super(errorMessage);
+        }
+        public AssessNotFound(){
+            super("Assess not found");
+        }
+        public AssessNotFound(Integer id){
+            super("Assess of ID:"+id+" not found");
+        }
+        public AssessNotFound(Long ULI){
+            super("Assess of ULI:"+ULI+" not found");
+        }
+    }
+    static class AssessDuplicateFound extends Exception{
+        public AssessDuplicateFound(String errorMessage){
+            super(errorMessage);
+        }
+        public AssessDuplicateFound(){
+            super("Assess already exists");
+        }
+        public AssessDuplicateFound(Integer id){
+            super("Assess of ID:"+id+" already exists");
+        }
     }
 }

@@ -10,4 +10,5 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class ChildpughDTO implements Serializable {
     private Integer id;
+    private Long uliId;
 }
