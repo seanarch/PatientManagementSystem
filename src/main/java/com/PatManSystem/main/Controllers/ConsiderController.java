@@ -4,8 +4,8 @@ import com.PatManSystem.main.DTO.ConsiderDTO;
 import com.PatManSystem.main.Services.ConsiderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
 @RestController
 @RequestMapping(path = "/api/consider")
 @CrossOrigin("*")

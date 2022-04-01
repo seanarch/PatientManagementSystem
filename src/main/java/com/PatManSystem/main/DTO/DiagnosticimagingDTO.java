@@ -17,4 +17,11 @@ public class DiagnosticimagingDTO implements Serializable {
     private Integer typeDIId;
     private String typeDIDescription;
     private String finding;
+
+    public DiagnosticimagingDTO(Integer id, LocalDate dateDI, Integer typeDIId, String finding) {
+        this.id = id;
+        this.dateDI = dateDI;
+        this.typeDIId = typeDIId;
+        this.finding = finding;
+    }
 }
