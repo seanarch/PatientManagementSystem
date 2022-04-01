@@ -21,7 +21,6 @@ public class ConsiderService {
 
     @Autowired
     public ConsiderService(ConsiderRepository considerRepository,
-                           PatientRepository patientRepository,
                            TypeofconsiderationRepository typeofconsiderationRepository){
         this.considerRepository = considerRepository;
         this.typeofconsiderationRepository = typeofconsiderationRepository;
@@ -34,10 +33,12 @@ public class ConsiderService {
                 .map(new ConsiderMapperImpl()::considerToConsiderDTO)
                 .collect(Collectors.toList());
     }
+
     @SneakyThrows
     public ConsiderDTO getConsider(Integer id){
         return new ConsiderMapperImpl().considerToConsiderDTO(considerRepository.findById(id).orElseThrow(() -> new ConsiderNotFound(id)));
     }
+
     @SneakyThrows
     public List<ConsiderDTO> getByULI(Long ULI){
 
@@ -51,6 +52,7 @@ public class ConsiderService {
                 .collect(Collectors.toList());
 
     }
+
     @SneakyThrows
     public void newConsider(ConsiderDTO DTO){
 
@@ -60,6 +62,7 @@ public class ConsiderService {
         considerRepository.save(new ConsiderMapperImpl().considerDTOToConsider(DTO)); // convert incoming DTO to DB entity and save to the DB
 
     }
+
     @SneakyThrows
     public void deleteConsider(Integer id){
 
@@ -67,6 +70,7 @@ public class ConsiderService {
         considerRepository.deleteById(id);
 
     }
+
     @SneakyThrows
     public void updateConsider(ConsiderDTO DTO){
 
