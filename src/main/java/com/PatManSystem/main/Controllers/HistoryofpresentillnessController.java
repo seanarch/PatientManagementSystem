@@ -59,7 +59,6 @@ public class HistoryofpresentillnessController {
             @RequestParam(required = false) Integer decriptorId
     ){
         historyofpresentillnessService.updateHistoryofpresentillness(new HistoryofpresentillnessDTO(id,decriptorId));
-
         return "UPDATE: Historyofpresentillness identified by ID "+id+" successfully updated.";
     }
 

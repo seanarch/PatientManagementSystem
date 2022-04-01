@@ -14,4 +14,10 @@ public class SymptomDTO implements Serializable {
     private Integer symptomId;
     private String symptomDecription;
     private String detail;
+
+    public SymptomDTO(Integer id, Integer symptomId, String detail) {
+        this.id = id;
+        this.symptomId = symptomId;
+        this.detail = detail;
+    }
 }
