@@ -9,10 +9,10 @@ public interface ChildpughMapper {
     @Mapping(source = "uliId", target = "uli.id")
     Childpugh childpughDTOToChildpugh(ChildpughDTO childpughDTO);
 
-    @InheritInverseConfiguration(name = "childDTOToChildpugh")
+    @Mapping(source = "uli.id", target = "uliId")
     ChildpughDTO childpughToChildpughDTO(Childpugh childpugh);
 
-    @InheritConfiguration(name = "childpughDTOToChildpugh")
+    @Mapping(source = "uliId", target = "uli.id")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateChildpughFromChildpughDTO(ChildpughDTO childpughDTO, @MappingTarget Childpugh childpugh);
 }
