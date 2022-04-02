@@ -45,7 +45,7 @@ public class PulmonaryfunctiontestController {
     }
 
     @DeleteMapping(path = "/delete/id={id}")
-    public String deletePulmonaryfunctiontest(@PathVariable("id")Integer id) throws NotFoundException, IllegalArgumentException {
+    public String deletePulmonaryfunctiontest(@PathVariable("id")Integer id) throws NotFoundException {
             pulmonaryfunctiontestService.deletePulmonaryfunctiontest(id);
         return "DELETE: Pulmonaryfunctiontest identified by ID " + id + " successfully deleted.";
     }

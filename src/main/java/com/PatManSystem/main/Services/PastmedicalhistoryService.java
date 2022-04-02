@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Service
 public class PastmedicalhistoryService {
 
-    private PastmedicalhistoryRepository pastmedicalhistoryRepository;
+    private final PastmedicalhistoryRepository pastmedicalhistoryRepository;
 
     @Autowired
     public PastmedicalhistoryService(PastmedicalhistoryRepository pastmedicalhistoryRepository){
@@ -26,9 +26,7 @@ public class PastmedicalhistoryService {
     public List<PastmedicalhistoryDTO> getPastmedicalhistorys(){
         return pastmedicalhistoryRepository.findAll()
                 .stream()
-                .map(pastmedicalhistory -> {
-                    return new PastmedicalhistoryMapperImpl().pastmedicalhistoryToPastmedicalhistoryDTO(pastmedicalhistory);
-                })
+                .map(new PastmedicalhistoryMapperImpl()::pastmedicalhistoryToPastmedicalhistoryDTO)
                 .collect(Collectors.toList());
     }
 
@@ -74,6 +72,7 @@ public class PastmedicalhistoryService {
 
        if (pastmedicalhistoryDTO.getDx() != null)
            pastmedicalhistory.setDx(pastmedicalhistoryDTO.getDx());
+
        if(pastmedicalhistoryDTO.getGenDx() != null)
            pastmedicalhistory.setGenDx(pastmedicalhistory.getGenDx());
 

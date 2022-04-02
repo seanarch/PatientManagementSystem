@@ -20,21 +20,21 @@ public class Radiationtherapy {
     @JoinColumn(name = "ULI", nullable = false)
     private Patientinformation uli;
 
-    @Column(name = "DateRTStart")
+    @Column(name = "Datertstart")
     private LocalDate dateRTStart;
 
     @Column(name = "DateRTEnd")
     private LocalDate dateRTEnd;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "TypeRT")
+    @JoinColumn(name = "Typert")
     private Typeofradiationtherapy typeRT;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Location")
     private Bodylocation location;
 
-    @Column(name = "RTDose")
+    @Column(name = "Rtdose")
     private Double rTDose;
 
     @Column(name = "Fraction")
@@ -44,7 +44,7 @@ public class Radiationtherapy {
     @JoinColumn(name = "Planning")
     private Zrtplan planning;
 
-    @Column(name = "AnatDetail", length = 1000)
+    @Column(name = "Anatdetail", length = 1000)
     private String anatDetail;
 
     @Column(name = "General", length = 1000)
@@ -55,19 +55,19 @@ public class Radiationtherapy {
     private Zrtlung pneumonitis;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "UpperGI")
+    @JoinColumn(name = "Uppergi")
     private Zrtugi upperGI;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "SkinReaction")
+    @JoinColumn(name = "Skinreaction")
     private Zrtskin skinReaction;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "LowerGI")
+    @JoinColumn(name = "Lowergi")
     private Zrtlgi lowerGI;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "GU")
+    @JoinColumn(name = "Gu")
     private Zrtgu gu;
 
     @ManyToOne(fetch = FetchType.LAZY)
