@@ -1,18 +1,18 @@
 package com.PatManSystem.main.Mapper;
 
-import com.PatManSystem.main.Models.Reviewofsymptoms;
 import com.PatManSystem.main.DTO.ReviewofsymptomsDTO;
-
+import com.PatManSystem.main.Models.Reviewofsymptoms;
 import org.mapstruct.*;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface ReviewofsymptomsMapper {
-
     @Mapping(source = "uliId", target = "uli.id")
     Reviewofsymptoms reviewofsymptomsDTOToReviewofsymptoms(ReviewofsymptomsDTO reviewofsymptomsDTO);
 
-    ReviewofsymptomsDTO reviewofsymptomsToReviewofsymptomsDTO(Reviewofsymptoms reviewofsymptom);
+    @Mapping(source = "uli.id", target = "uliId")
+    ReviewofsymptomsDTO reviewofsymptomsToReviewofsymptomsDTO(Reviewofsymptoms reviewofsymptoms);
 
+    @Mapping(source = "uliId", target = "uli.id")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateDiagnosisFromDiagnosisDTO(ReviewofsymptomsDTO reviewofsymptomsDTO, @MappingTarget Reviewofsymptoms reviewofsymptom);
+    void updateReviewofsymptomsFromReviewofsymptomsDTO(ReviewofsymptomsDTO reviewofsymptomsDTO, @MappingTarget Reviewofsymptoms reviewofsymptoms);
 }

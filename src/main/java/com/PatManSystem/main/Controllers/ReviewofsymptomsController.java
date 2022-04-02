@@ -58,6 +58,7 @@ public class ReviewofsymptomsController {
     @PutMapping(path = "update/id={id}") //UPDATE using PUT, take in params from address, absent params are NO CHANGE, and present params are CHANGE, not including id
     public String updateReviewofsymptoms(
             @PathVariable("id") Integer id,
+            @RequestParam(required = false) Long uliId,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,           
             @RequestParam(required = false) Integer feversChills,
             @RequestParam(required = false) Integer bADLs,
@@ -91,6 +92,7 @@ public class ReviewofsymptomsController {
         reviewofsymptomsService.updateReviewofsymptoms(
                 new ReviewofsymptomsDTO(
                         id,
+                        uliId,
                         date,
                         feversChills,
                         bADLs,

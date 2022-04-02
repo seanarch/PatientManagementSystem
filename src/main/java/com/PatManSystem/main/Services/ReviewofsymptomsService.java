@@ -1,8 +1,6 @@
 package com.PatManSystem.main.Services;
 
 import com.PatManSystem.main.DTO.ReviewofsymptomsDTO;
-import com.PatManSystem.main.DTO.ReviewofsymptomsDTO;
-import com.PatManSystem.main.Mapper.ReviewofsymptomsMapperImpl;
 import com.PatManSystem.main.Mapper.ReviewofsymptomsMapperImpl;
 import com.PatManSystem.main.Models.Reviewofsymptoms;
 import com.PatManSystem.main.Models.Patientinformation;

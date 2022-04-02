@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
-@Table(name = "reviewofsystems")
+@Table(name = "reviewofsymptoms")
 public class Reviewofsymptoms {
     @Id
     @Column(name = "ROS", nullable = false)
