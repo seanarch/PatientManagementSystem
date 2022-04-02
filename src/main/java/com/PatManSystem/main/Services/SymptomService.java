@@ -53,7 +53,6 @@ public class SymptomService {
         return getSymptoms.stream()
                 .map(new SymptomMapperImpl()::symptomToSymptomDTO)
                 .collect(Collectors.toList());
-
     }
 
     @SneakyThrows

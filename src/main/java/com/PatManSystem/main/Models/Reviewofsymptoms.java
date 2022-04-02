@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
-@Table(name = "reviewofsystems")
+@Table(name = "reviewofsymptoms")
 public class Reviewofsymptoms {
     @Id
     @Column(name = "ROS", nullable = false)
@@ -39,7 +39,7 @@ public class Reviewofsymptoms {
     @Column(name = "`Abdominal Pain`")
     private Integer abdominalPain;
 
-    @Column(name = "NauseaVomiting")
+    @Column(name = "Nauseavomiting")
     private Integer nauseaVomiting;
 
     @Column(name = "Heartburn")
@@ -54,7 +54,7 @@ public class Reviewofsymptoms {
     @Column(name = "Melena")
     private Integer melena;
 
-    @Column(name = "RectalBleed")
+    @Column(name = "Rectalbleed")
     private Integer rectalBleed;
 
     @Column(name = "Nocturea")
@@ -69,7 +69,7 @@ public class Reviewofsymptoms {
     @Column(name = "Pneumaturea")
     private Integer pneumaturea;
 
-    @Column(name = "`Back BoneJointPain`")
+    @Column(name = "`Back Bonejointpain`")
     private Integer backBoneJointPain;
 
     @Column(name = "SOB")
@@ -84,22 +84,22 @@ public class Reviewofsymptoms {
     @Column(name = "Wheeze")
     private Integer wheeze;
 
-    @Column(name = "ChestPain")
+    @Column(name = "Chestpain")
     private Integer chestPain;
 
     @Column(name = "Headaches")
     private Integer headaches;
 
-    @Column(name = "VisionChanges")
+    @Column(name = "Visionchanges")
     private Integer visionChanges;
 
     @Column(name = "Hearing")
     private Integer hearing;
 
-    @Column(name = "SpeechChanges")
+    @Column(name = "Speechchanges")
     private Integer speechChanges;
 
-    @Column(name = "FocalWeakness")
+    @Column(name = "Focalweakness")
     private Integer focalWeakness;
 
     @Column(name = "ED")

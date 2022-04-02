@@ -50,7 +50,6 @@ public class ConsiderService {
         return getConsiders.stream()
                 .map(new ConsiderMapperImpl()::considerToConsiderDTO)
                 .collect(Collectors.toList());
-
     }
 
     @SneakyThrows
