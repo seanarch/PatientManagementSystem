@@ -43,9 +43,8 @@ public class RadiationtherapyDTO implements Serializable {
     private String details;
     private Integer ng;
 
-    public RadiationtherapyDTO(Integer id, Long uliId, LocalDate dateRTStart, LocalDate dateRTEnd, Integer typeRTId, Integer locationId, Double rTDose, Integer fraction, Integer planningId, String anatDetail, String general, Integer pneumonitisId, Integer upperGIId, Integer skinReactionId, Integer lowerGIId, Integer guId, Integer hemeId, Integer hepaticId, String otherToxicity, String details, Integer ng) {
+    public RadiationtherapyDTO(Integer id, LocalDate dateRTStart, LocalDate dateRTEnd, Integer typeRTId, Integer locationId, Double rTDose, Integer fraction, Integer planningId, String anatDetail, String general, Integer pneumonitisId, Integer upperGIId, Integer skinReactionId, Integer lowerGIId, Integer guId, Integer hemeId, Integer hepaticId, String otherToxicity, String details, Integer ng) {
         this.id = id;
-        this.uliId = uliId;
         this.dateRTStart = dateRTStart;
         this.dateRTEnd = dateRTEnd;
         this.typeRTId = typeRTId;

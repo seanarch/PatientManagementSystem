@@ -57,8 +57,7 @@ public class RadiationtherapyController {
     }
     @PutMapping(path = "update/id={id}") //UPDATE using PUT, take in params from address, absent params are NO CHANGE, and present params are CHANGE, not including id
     public String updateRadiationtherapy(
-            @PathVariable("id") Integer id,           
-            @RequestParam(required = false) Long uliId,
+            @PathVariable("id") Integer id,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateRTStart,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateRTEnd,
             @RequestParam(required = false) Integer typeRTId,
@@ -82,7 +81,6 @@ public class RadiationtherapyController {
         radiationtherapyService.updateRadiationtherapy(
                 new RadiationtherapyDTO(
                     id,
-                    uliId,
                     dateRTStart,
                     dateRTEnd,
                     typeRTId,
