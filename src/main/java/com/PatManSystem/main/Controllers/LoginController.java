@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "/api/user")
+@RequestMapping(path = "/api/login")
 @CrossOrigin("*")
 public class LoginController {
 
@@ -17,7 +17,7 @@ public class LoginController {
     public LoginController(LoginService loginService) {
         this.loginService = loginService;
     }
-    @PostMapping(path = "/login")//UPDATE using post, take in DTO, null fields are NO CHANGE, and not-null is CHANGE, not including id
+    @PostMapping //perform a login in attempt, return TRUE if the username and password are correct, FALSE otherwise
     public boolean loginUser(@RequestBody UserDTO userDTO){
         return loginService.loginUser(userDTO);
     }
