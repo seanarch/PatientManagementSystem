@@ -3,6 +3,7 @@ package com.PatManSystem.main.Controllers;
 import com.PatManSystem.main.DTO.RadiationtherapyDTO;
 import com.PatManSystem.main.Services.RadiationtherapyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -58,8 +59,8 @@ public class RadiationtherapyController {
     public String updateRadiationtherapy(
             @PathVariable("id") Integer id,           
             @RequestParam(required = false) Long uliId,
-            @RequestParam(required = false) LocalDate dateRTStart,
-            @RequestParam(required = false) LocalDate dateRTEnd,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateRTStart,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateRTEnd,
             @RequestParam(required = false) Integer typeRTId,
             @RequestParam(required = false) Integer locationId,
             @RequestParam(required = false) Double rTDose,
