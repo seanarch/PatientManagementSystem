@@ -19,7 +19,9 @@ public class PasthistoryDTO implements Serializable {
     private Integer languageBarrier;
     private Integer financialChallenge;
     private Integer psychosocialChallenge;
-    private Integer gOCDesignationId;
-    private String eTOHWeek;
+    private Integer goalofcareId;
+    private String goalofcareDescription;
     private String detail;
+    private String eTOHWeek;
+
 }

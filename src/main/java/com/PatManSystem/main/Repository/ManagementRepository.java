@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ManagementRepository extends JpaRepository<Management, Long> {
-    Management findManagementById(Long Id);
+public interface ManagementRepository extends JpaRepository<Management, Integer> {
+    Management findManagementById(Integer Id);
     List<Management> findManagementByUli(Patientinformation patientinformation);
 }

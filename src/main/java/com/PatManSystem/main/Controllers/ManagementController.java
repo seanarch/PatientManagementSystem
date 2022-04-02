@@ -2,6 +2,8 @@ package com.PatManSystem.main.Controllers;
 
 
 import com.PatManSystem.main.DTO.ManagementDTO;
+import com.PatManSystem.main.Exception.DuplicateFoundException;
+import com.PatManSystem.main.Exception.NotFoundException;
 import com.PatManSystem.main.Services.ManagementService;
 
 import java.time.LocalDate;
@@ -27,29 +29,29 @@ public class ManagementController {
     }
 
     @GetMapping(path ="/id={id}")
-    public ManagementDTO getManagement(@PathVariable("id") Long id){
+    public ManagementDTO getManagement(@PathVariable("id") Integer id) throws NotFoundException {
         return managementService.getManagement(id);
     }
 
     @GetMapping(path ="/uli={ULI}")
-    public List<ManagementDTO> getManagements(@PathVariable("ULI") Long ULI){
+    public List<ManagementDTO> getManagements(@PathVariable("ULI") Long ULI) throws NotFoundException {
         return managementService.getManagementByULI(ULI);
     }
 
     @PostMapping(path = "/new")
-    public String registerNewManagement(@RequestBody ManagementDTO managementDTO){
+    public String registerNewManagement(@RequestBody ManagementDTO managementDTO) throws DuplicateFoundException {
         managementService.newManagement(managementDTO);
         return "NEW: Management identified by ID "+managementDTO.getId()+" successfully added.";
     }
 
     @DeleteMapping(path = "/delete/id={id}")
-    public String deleteManagement(@PathVariable("id") Long id){
+    public String deleteManagement(@PathVariable("id") Integer id) throws NotFoundException {
         managementService.deleteManagement(id);
         return "DELETE: Management identified by ID "+id+" successfully deleted.";
     }
 
     @PostMapping(path = "/update")//UPDATE using post, take in DTO, null fields are NO CHANGE, and not-null is CHANGE, not including id
-    public String updateManagement(@RequestBody ManagementDTO managementDTO){
+    public String updateManagement(@RequestBody ManagementDTO managementDTO) throws NotFoundException {
 
         managementService.updateManagement(managementDTO);
         return "UPDATE: Management identified by ULI "+ managementDTO.getUliId() +" successfully updated.";
@@ -57,14 +59,14 @@ public class ManagementController {
 
     @PutMapping(path = "update/id={id}") //UPDATE using PUT, take in params from address, absent params are NO CHANGE, and present params are CHANGE, not including id
     public String updateManagement(
-            @PathVariable("id") Long id,
+            @PathVariable("id") Integer id,
             @RequestParam(required = false) Long uliId,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date, // date parsed from JSON is STRING, addition formatting required to convert to LocalDate Obj
             @RequestParam(required = false) Integer interventionId,
             @RequestParam(required = false) String interventionDescription,
             @RequestParam(required = false) String detail
 
-    ){
+    ) throws NotFoundException {
         managementService.updateManagement(new ManagementDTO(id,uliId,date,interventionId,interventionDescription,detail));
 
         return "UPDATE: Management identified by ID "+id+" successfully updated.";
