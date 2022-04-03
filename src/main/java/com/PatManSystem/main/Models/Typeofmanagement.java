@@ -18,11 +18,4 @@ public class Typeofmanagement {
     @Column(name = "Description", length = 1000)
     private String description;
 
-    @OneToMany(mappedBy = "intervention")
-    private Set<Management> managements = new LinkedHashSet<>();
-
-    public Set<Management> getManagements() {
-        return managements;
-    }
-
 }
