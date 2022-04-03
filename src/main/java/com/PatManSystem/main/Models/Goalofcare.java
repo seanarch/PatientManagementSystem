@@ -1,9 +1,13 @@
 package com.PatManSystem.main.Models;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
-
+@Getter
+@Setter
 @Entity
 @Table(name = "goalofcare")
 public class Goalofcare {
@@ -14,30 +18,4 @@ public class Goalofcare {
     @Column(name = "Description", nullable = false, length = 45)
     private String description;
 
-    @OneToMany(mappedBy = "goalofcare")
-    private Set<Pasthistory> pasthistories = new LinkedHashSet<>();
-
-    public Set<Pasthistory> getPasthistories() {
-        return pasthistories;
-    }
-
-    public void setPasthistories(Set<Pasthistory> pasthistories) {
-        this.pasthistories = pasthistories;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 }
