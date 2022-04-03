@@ -18,11 +18,4 @@ public class Zfu {
     @Column(name = "Description", length = 1000)
     private String description;
 
-    @OneToMany(mappedBy = "typeFU")
-    private Set<Followup> followups = new LinkedHashSet<>();
-
-    public Set<Followup> getFollowups() {
-        return followups;
-    }
-
 }
