@@ -18,11 +18,4 @@ public class Typeofdecision {
     @Column(name = "Description", length = 1000)
     private String description;
 
-    @OneToMany(mappedBy = "decision")
-    private Set<Decision> decisions = new LinkedHashSet<>();
-
-    public Set<Decision> getDecisions() {
-        return decisions;
-    }
-
 }
