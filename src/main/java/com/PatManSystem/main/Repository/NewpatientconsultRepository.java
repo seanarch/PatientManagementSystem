@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface NewpatientconsultRepository extends JpaRepository<Newpatientconsult, Long> {
-    Newpatientconsult findNewpatientconsultById(Long Id);
+public interface NewpatientconsultRepository extends JpaRepository<Newpatientconsult, Integer> {
+    Newpatientconsult findNewpatientconsultById(Integer Id);
     List<Newpatientconsult> findNewpatientconsultByUli(Patientinformation patientinformation);
 }

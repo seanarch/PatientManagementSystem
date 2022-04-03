@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 public class ExamService {
 
     private final ExamRepository examRepository;
+    private final PatientRepository patientRepository;
     private final AbdomenRepository abdomenRepository;
     private final CentralnervoussystemRepository centralnervoussystemRepository;
     private final LungRepository lungRepository;
@@ -29,6 +30,7 @@ public class ExamService {
 
     @Autowired
     public ExamService(ExamRepository examRepository,
+                       PatientRepository patientRepository,
                        AbdomenRepository abdomenRepository,
                        CentralnervoussystemRepository centralnervoussystemRepository,
                        LungRepository lungRepository,
@@ -41,6 +43,7 @@ public class ExamService {
                        BreathRepository breathRepository){
 
         this.examRepository = examRepository;
+        this.patientRepository = patientRepository;
         this.abdomenRepository = abdomenRepository;
         this.centralnervoussystemRepository = centralnervoussystemRepository;
         this.lungRepository = lungRepository;
@@ -53,7 +56,6 @@ public class ExamService {
         this.breathRepository = breathRepository;
 
     }
-
 
     public List<ExamDTO> getExams(){
        return examRepository.findAll()
@@ -82,11 +84,12 @@ public class ExamService {
 
     public void newExam(ExamDTO examDTO){
 
-        if(examRepository.findExamById(examDTO.getId()) != null){  //check if the requested patient exists, if not; throw not found exception
+        if(examRepository.findExamById(examDTO.getId()) != null)  //check if the requested patient exists, if not; throw not found exception
             throw new IllegalStateException("Exam identified by ID "+examDTO.getId() + " already exists. Use Post:Update at /api/patient/update instead.");
-        }else{
+        else {
             examRepository.save(new ExamMapperImpl().examDTOToExam(examDTO)); // convert incoming DTO to DB entity and save to the DB
         }
+
 
     }
     public void deleteExam(Long id){
@@ -144,6 +147,7 @@ public class ExamService {
 
             if (DTO.getBreathId() != null)
                 breathRepository.findById(DTO.getBreathId()).ifPresent(setEntity::setBreath);
+
 
             examRepository.save(setEntity);
 

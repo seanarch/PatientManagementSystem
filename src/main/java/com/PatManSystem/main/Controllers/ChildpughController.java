@@ -57,7 +57,6 @@ public class ChildpughController {
 
     ){
         childpughService.updateChildpugh(new ChildpughDTO(id));
-
         return "UPDATE: Childpugh identified by ID "+id+" successfully updated.";
     }
 

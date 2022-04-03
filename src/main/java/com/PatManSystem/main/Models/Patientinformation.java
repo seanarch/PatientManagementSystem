@@ -42,5 +42,7 @@ public class Patientinformation {
     @Column(name = "Location", length = 45)
     private String location;
 
-
+    public Patientinformation(Long id){
+        this.id = id;
+    }
 }
