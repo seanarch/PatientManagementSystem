@@ -18,11 +18,4 @@ public class Typeofdiagnosticimaging {
     @Column(name = "Description", length = 500)
     private String description;
 
-    @OneToMany(mappedBy = "typeDI")
-    private Set<Diagnosticimaging> diagnosticimagings = new LinkedHashSet<>();
-
-    public Set<Diagnosticimaging> getDiagnosticimagings() {
-        return diagnosticimagings;
-    }
-
 }
