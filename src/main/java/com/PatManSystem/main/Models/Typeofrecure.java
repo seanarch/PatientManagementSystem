@@ -18,11 +18,4 @@ public class Typeofrecure {
     @Column(name = "Description", length = 1000)
     private String description;
 
-    @OneToMany(mappedBy = "recur")
-    private Set<Diagnosis> diagnoses = new LinkedHashSet<>();
-
-    public Set<Diagnosis> getDiagnoses() {
-        return diagnoses;
-    }
-
 }
