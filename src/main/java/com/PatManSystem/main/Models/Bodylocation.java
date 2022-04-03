@@ -17,5 +17,6 @@ public class Bodylocation {
     @Column(name = "TypeID", nullable = false)
     private Integer id;
 
-
+    @Column(name = "Description", length = 45)
+    private String description;
 }
