@@ -18,12 +18,4 @@ public class Mrcdyspnoeascale {
     @Column(name = "Description", length = 60)
     private String description;
 
-    @OneToMany(mappedBy = "breathing")
-    private Set<Assess> assesses = new LinkedHashSet<>();
-
-    public Set<Assess> getAssesses() {
-        return assesses;
-    }
-
-
 }
