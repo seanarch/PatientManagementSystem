@@ -17,12 +17,4 @@ public class Ecogperformancestatusscale {
 
     @Column(name = "Description", length = 100)
     private String description;
-
-    @OneToMany(mappedBy = "ecog")
-    private Set<Assess> assesses = new LinkedHashSet<>();
-
-    public Set<Assess> getAssesses() {
-        return assesses;
-    }
-
 }
