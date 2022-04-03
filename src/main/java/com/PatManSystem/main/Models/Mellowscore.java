@@ -18,11 +18,4 @@ public class Mellowscore {
     @Column(name = "Description", length = 60)
     private String description;
 
-    @OneToMany(mappedBy = "swallowing")
-    private Set<Assess> assesses = new LinkedHashSet<>();
-
-    public Set<Assess> getAssesses() {
-        return assesses;
-    }
-
 }
