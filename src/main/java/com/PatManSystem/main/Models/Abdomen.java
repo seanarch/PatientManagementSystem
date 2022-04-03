@@ -23,11 +23,4 @@ public class Abdomen {
     @Column(name = "Description", length = 200)
     private String description;
 
-    @OneToMany(mappedBy = "abdo")
-    private Set<Exam> exams = new LinkedHashSet<>();
-
-    public Set<Exam> getExams() {
-        return exams;
-    }
-
 }

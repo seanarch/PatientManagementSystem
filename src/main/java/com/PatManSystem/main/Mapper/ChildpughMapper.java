@@ -6,6 +6,7 @@ import org.mapstruct.*;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface ChildpughMapper {
+
     @Mapping(source = "uliId", target = "uli.id")
     Childpugh childpughDTOToChildpugh(ChildpughDTO childpughDTO);
 

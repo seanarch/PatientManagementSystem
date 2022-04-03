@@ -9,16 +9,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-/**
- *
- * @author Connor
- */
-
 @RestController  
 @RequestMapping(path = "/api/patient")
 @CrossOrigin("*")
 public class PatientController {
-
 
     private final PatientInformationService patientService;
     
