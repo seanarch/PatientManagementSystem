@@ -49,13 +49,13 @@ const Other = () => {
                 
                 <Box mb={3}>
                     <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">CNS</InputLabel>
+                        <InputLabel id="demo-simple-select-label">Central Nervous System (CNS)</InputLabel>
 
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             name="CNS.ECOG"
-                            label="CNS"
+                            label="Central Nervous System (CNS)"
                             onChange={otherForm.handleChange}
                             value={otherForm.values.CNS.ECOG}
 
@@ -87,12 +87,12 @@ const Other = () => {
 
                 <Box mb={3}>
                     <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">HN</InputLabel>
+                        <InputLabel id="demo-simple-select-label">Hemagglutinin-Neuraminidase (HN)</InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             name='HN.ECOG'
-                            label="HN"
+                            label="Hemagglutinin-Neuraminidase (HN)"
                             onChange={otherForm.handleChange}
                             value={otherForm.values.HN.ECOG}
                         >
@@ -141,12 +141,12 @@ const Other = () => {
 
                 <Box mb={3}>
                     <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">MSK</InputLabel>
+                        <InputLabel id="demo-simple-select-label">Musculoskeletal (MSK)</InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             name='MSK.Description'
-                            label="MSK"
+                            label="Musculoskeletal (MSK)"
                             onChange={otherForm.handleChange}
                             value={otherForm.values.MSK.Description}
                         >
@@ -178,12 +178,12 @@ const Other = () => {
 
                 <Box mb={3}>
                     <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">Adbo</InputLabel>
+                        <InputLabel id="demo-simple-select-label">Abdominal (Adbo)</InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             name='Adbo.ECOG'
-                            label="Adbo"
+                            label="Abdominal (Adbo)"
                             onChange={otherForm.handleChange}
                             value={otherForm.values.Adbo.ECOG}
                         >

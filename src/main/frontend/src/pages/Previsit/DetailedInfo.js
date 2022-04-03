@@ -60,21 +60,21 @@ function DetailedInfo() {
                                 <Grid item xs={6}>
                                     <TextField
                                         name="DetailedInformation.Bili"
-                                        label="Bilirubin"
+                                        label="Bilirubin (BR)"
                                     />
                                 </Grid>
 
                                 <Grid item xs={6}>
                                     <TextField
                                         name="DetailedInformation.Alb"
-                                        label="Alb"
+                                        label="Albumin (Alb)"
                                     />
                                 </Grid>
 
                                 <Grid item xs={6}>
                                     <TextField
                                         name="DetailedInformation.PTINR"
-                                        label="PTINR"
+                                        label="Prothrombin time (PTINR)"
                                     />
                                 </Grid>
 
@@ -82,7 +82,7 @@ function DetailedInfo() {
                             <Grid item xs={6}>
                                     <TextField
                                         name="DetailedInformation.HepaticEnch"
-                                        label="HepaticEnch"
+                                        label="Hepatic Encephalopathy (HepaticEnch)"
                                     />
                                 </Grid>
                             {/* <Grid item xs={12}>
@@ -101,6 +101,7 @@ function DetailedInfo() {
 
                             <Grid item xs={11}>
                                 <h5>Cognitive Performance Scale</h5>
+                                <br/><br/>
                                 <Slider
                                     
                                     valueLabelDisplay="on"

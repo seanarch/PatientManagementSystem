@@ -40,8 +40,11 @@ function DeathForm() {
         }}
         >
           <Form>
-            <h3>Death information</h3>
-            <Collapsible trigger="[+]">
+
+          <h3>Death information</h3>
+            <Collapsible trigger="[+]"> 
+             
+           
               <br></br>
               <Grid container spacing={3} width={'70vw'}>
 
