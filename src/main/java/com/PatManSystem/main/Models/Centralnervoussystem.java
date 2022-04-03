@@ -18,11 +18,4 @@ public class Centralnervoussystem {
     @Column(name = "Description", length = 200)
     private String description;
 
-    @OneToMany(mappedBy = "cns")
-    private Set<Exam> exams = new LinkedHashSet<>();
-
-    public Set<Exam> getExams() {
-        return exams;
-    }
-
 }
