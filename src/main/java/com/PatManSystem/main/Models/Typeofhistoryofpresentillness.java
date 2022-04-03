@@ -18,12 +18,4 @@ public class Typeofhistoryofpresentillness {
     @Column(name = "Description", length = 1000)
     private String description;
 
-    @OneToMany(mappedBy = "descriptor")
-    private Set<Historyofpresentillness> historyofpresentillnesses = new LinkedHashSet<>();
-
-    public Set<Historyofpresentillness> getHistoryofpresentillnesses() {
-        return historyofpresentillnesses;
-    }
-
-
 }
