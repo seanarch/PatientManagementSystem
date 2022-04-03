@@ -18,12 +18,4 @@ public class Typeofradiationtherapy {
     @Column(name = "Description", length = 500)
     private String description;
 
-    @OneToMany(mappedBy = "typeRT")
-    private Set<Radiationtherapy> radiationtherapies = new LinkedHashSet<>();
-
-    public Set<Radiationtherapy> getRadiationtherapies() {
-        return radiationtherapies;
-    }
-
-
 }
