@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  mysqldb:
+    image: mysql
+    networks:
+      - pms_network
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=pmsdb
+    command: docker network create pms_network
+
+  pms:
+    image: pms
+    ports:
+      - "8080:8080"
+    networks:
+      - pms_network
+    depends_on:
+      - mysqldb
+
+  react-app:
+    image: react-image
+    ports:
+      - "3000:3000"
+    networks:
+      - pms_network
+    depends_on:
+      - pms
+    command: npm start
+
+networks:
+  pms_network:
