@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController  
 @RequestMapping(path = "/api/patient")
-@CrossOrigin("*")
+@CrossOrigin("http://localhost:3000")
 public class PatientController {
 
     private final PatientInformationService patientService;
@@ -25,6 +25,7 @@ public class PatientController {
     public List<Patientinformation> getPatients(){
         return patientService.getPatients();
     }
+
     @GetMapping(path ="/id={id}")
     public PatientinformationDTO getPatient(@PathVariable("id") Long id){
         return patientService.getPatient(id);

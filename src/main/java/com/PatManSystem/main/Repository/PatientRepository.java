@@ -8,6 +8,4 @@ import java.util.Optional;
 
 @Repository
 public interface PatientRepository extends JpaRepository<Patientinformation, Long> {
-
-    Patientinformation findPatientinformationById(Long Id);
 }

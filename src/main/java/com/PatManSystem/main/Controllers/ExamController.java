@@ -60,32 +60,21 @@ public class ExamController {
     public String updateExam(
         @PathVariable("id") Long id,
         @RequestParam(required = false) Integer abdoId,
-        @RequestParam(required = false) String abdoDescription,
-        @RequestParam(required = false) Long uliId,
         @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date, // date parsed from JSON is STRING, addition formatting required to convert to LocalDate Obj
         @RequestParam(required = false) Integer cnsId,
-        @RequestParam(required = false) String cnsDescription,
         @RequestParam(required = false) Integer lungId,
-        @RequestParam(required = false) String lungDescription,
         @RequestParam(required = false) Integer hnId,
-        @RequestParam(required = false) String hnDescription,
         @RequestParam(required = false) Integer oralId,
-        @RequestParam(required = false) String oralDescription,
         @RequestParam(required = false) Integer cardiacId,
-        @RequestParam(required = false) String cardiacDescription,
         @RequestParam(required = false) Integer mskId,
-        @RequestParam(required = false) String mskDescription,
         @RequestParam(required = false) Integer peripheralId,
-        @RequestParam(required = false) String peripheralDescription,
         @RequestParam(required = false) String abnormal,
         @RequestParam(required = false) Integer supineId,
-        @RequestParam(required = false) String supineDescription,
-        @RequestParam(required = false) Integer breathId,
-        @RequestParam(required = false) String breathDescription
+        @RequestParam(required = false) Integer breathId
     ){
-        examService.updateExam(new ExamDTO(id,abdoId,abdoDescription, uliId,date,cnsId, cnsDescription,
-                lungId,lungDescription,hnId,hnDescription,oralId,oralDescription,cardiacId,cardiacDescription,
-                mskId,mskDescription,peripheralId,peripheralDescription,abnormal,supineId,supineDescription,breathId,breathDescription));
+        examService.updateExam(new ExamDTO(id,abdoId,date,cnsId,
+                lungId,hnId,oralId,cardiacId,
+                mskId,peripheralId,abnormal,supineId,breathId));
 
         return "UPDATE: Exam identified by ID "+id+" successfully updated.";
     }

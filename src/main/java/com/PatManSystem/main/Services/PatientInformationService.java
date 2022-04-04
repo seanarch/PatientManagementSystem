@@ -8,10 +8,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.PatManSystem.main.DTO.PatientinformationDTO;
+import com.PatManSystem.main.Exception.NotFoundException;
 import com.PatManSystem.main.Mapper.PatientinformationMapper;
 import com.PatManSystem.main.Mapper.PatientinformationMapperImpl;
 import com.PatManSystem.main.Models.Patientinformation;
 import com.PatManSystem.main.Repository.PatientRepository;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,18 +32,18 @@ public class PatientInformationService {
         return patientRepository.findAll(); // return a list of all patients
 
     }
-    public PatientinformationDTO getPatient(Long id){
+    public PatientinformationDTO getPatient(Long ULI){
 
-        Patientinformation newPatient = patientRepository.findPatientinformationById(id);
-        if(newPatient == null) //check if the requested patient exists, if not; throw not found exception
-            throw new IllegalStateException("Patient identified by ULI "+id+" was not found.");
+        Optional<Patientinformation> newPatient = patientRepository.findById(ULI);
+        if(newPatient.isEmpty()) //check if the requested patient exists, if not; throw not found exception
+            throw new IllegalStateException("Patient identified by ULI "+ULI+" was not found.");
 
-        return new PatientinformationMapperImpl().patientinformationToPatientinformationDTO(newPatient);
+        return new PatientinformationMapperImpl().patientinformationToPatientinformationDTO(newPatient.get());
 
     }
     public void newPatient(PatientinformationDTO patientinformationDTO){
 
-        if(patientRepository.findPatientinformationById(patientinformationDTO.getId()) != null){  //check if the requested patient exists, if not; throw not found exception
+        if(patientRepository.findById(patientinformationDTO.getId()).isPresent()){  //check if the requested patient exists, if not; throw not found exception
             throw new IllegalStateException("Patient identified by ULI "+patientinformationDTO.getId() + " already exists. Use Post:Update at /api/patient/update instead.");
         }else{
             patientRepository.save(new PatientinformationMapperImpl().patientinformationDTOToPatientinformation(patientinformationDTO)); // convert incoming DTO to DB entity and save to the DB
@@ -49,48 +51,27 @@ public class PatientInformationService {
 
     }
 
-    public void deletePatient(Long id){
+    public void deletePatient(Long ULI){
 
-        if(patientRepository.findPatientinformationById(id) == null){ //check if the requested patient exists, if not; throw not found exception
-            throw new IllegalStateException("Patient identified by ULI "+id+ " does not exist.");
+        if(patientRepository.findById(ULI).isEmpty()){ //check if the requested patient exists, if not; throw not found exception
+            throw new IllegalStateException("Patient identified by ULI "+ULI+ " does not exist.");
         }else{
-            patientRepository.deleteById(id);
+            patientRepository.deleteById(ULI);
         }
 
     }
-    @Transactional // set all methods to be transactional, when a .set is called, it will create a DB transaction of the same type
+    @SneakyThrows
     public void updatePatient(PatientinformationDTO DTO){
-        /*
-            The following code is really hard to explain. Basically it dynamically maps the getters from the DTO
-            to the setters of the DB entity. Using this technique this code is model agnostic and doesnt need to
-            be modified for new models. To use this in other Service classes you need only change the repository
-            type, and the DTO type. Specifically the Class type of entity and DTO
-        */
+        Patientinformation setEntity = patientRepository.findById(DTO.getId()).orElseThrow(() -> new NotFoundException("Patient identified by id:{"+DTO.getId()+"} was not found."));
 
-        Patientinformation entity = patientRepository.findPatientinformationById(DTO.getId()); //retrieve a copy of the Patientinfo
-        if(entity != null)
-        for (Method getter : DTO.getClass().getMethods()) {
-            Object get = "";
-            if (getter.getName().startsWith("get") && getter.getParameterTypes().length == 0) {
-                try {
-                    get = getter.invoke(DTO);
-                } catch (IllegalAccessException | InvocationTargetException e) {
-                    e.printStackTrace();
-                }
-                if (get != null)
-                    for (Method setter : entity.getClass().getMethods()) {
-                        if (setter.getName().startsWith("set") && setter.getName().endsWith(getter.getName().substring(3)) && setter.getParameterTypes().length == 1) {
-                            try {
-                                setter.invoke(entity, get);
-                            } catch (IllegalAccessException | InvocationTargetException e) {
-                                e.printStackTrace();
-                            }
-                            continue;
-                        }
-                    }
-             }
-        }
-        else
-            throw new IllegalStateException("Patient identified by ULI "+DTO.getId()+ " does not exist.");
+        System.out.println(setEntity.getId());
+        System.out.println(DTO.getLastname());
+        System.out.println(setEntity.getLastname());
+        if (DTO.getLastname() != null)
+            setEntity.setLastname(DTO.getLastname());
+
+        System.out.println(setEntity.getLastname());
+
+        //patientRepository.save(setEntity);
     }
 }

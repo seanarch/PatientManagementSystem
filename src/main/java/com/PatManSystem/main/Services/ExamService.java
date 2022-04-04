@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -64,16 +65,16 @@ public class ExamService {
                .collect(Collectors.toList());
     }
     public ExamDTO getExam(Long id){
-        Exam getExam = examRepository.findExamById(id);
-        if(getExam == null) //check if the requested patient exists, if not; throw not found exception
+        Optional<Exam> getExam = examRepository.findById(id);
+        if(getExam.isEmpty()) //check if the requested patient exists, if not; throw not found exception
             throw new IllegalStateException("Exam identified by ID "+id+" was not found.");
 
-        return new ExamMapperImpl().examToExamDTO(getExam);
+        return new ExamMapperImpl().examToExamDTO(getExam.get());
 
     }
     public List<ExamDTO> getExamByULI(Long ULI){
 
-        List<Exam> getExams = examRepository.findExamByUli(new Patientinformation(ULI,null,null,null,null,null,null,null));
+        List<Exam> getExams = examRepository.findByUli(new Patientinformation(ULI));
         if(getExams == null) //check if the requested patient exists, if not; throw not found exception
             throw new IllegalStateException("Exam identified by ULI "+ULI+" was not found.");
 
@@ -84,7 +85,7 @@ public class ExamService {
 
     public void newExam(ExamDTO examDTO){
 
-        if(examRepository.findExamById(examDTO.getId()) != null)  //check if the requested patient exists, if not; throw not found exception
+        if(examRepository.findById(examDTO.getId()).isPresent())  //check if the requested patient exists, if not; throw not found exception
             throw new IllegalStateException("Exam identified by ID "+examDTO.getId() + " already exists. Use Post:Update at /api/patient/update instead.");
         else {
             examRepository.save(new ExamMapperImpl().examDTOToExam(examDTO)); // convert incoming DTO to DB entity and save to the DB
@@ -94,7 +95,7 @@ public class ExamService {
     }
     public void deleteExam(Long id){
 
-        if(examRepository.findExamById(id) == null){ //check if the requested patient exists, if not; throw not found exception
+        if(examRepository.findById(id).isEmpty()){ //check if the requested patient exists, if not; throw not found exception
             throw new IllegalStateException("Exam identified by ID "+id+ " does not exist.");
         }else{
             examRepository.deleteById(id);
@@ -103,7 +104,8 @@ public class ExamService {
     }
 
     public void updateExam(ExamDTO DTO){
-        Exam setEntity = examRepository.findExamById(DTO.getId()); //retrieve a copy of the entity
+        Optional<Exam> getEntity = examRepository.findById(DTO.getId()); //retrieve a copy of the entity
+
         /*
             IF the repository can find the object specified by the id
             THEN set respective object in setEntity to the object returned by the repository
@@ -111,7 +113,9 @@ public class ExamService {
             ELSE throw an exception
         */
 
-        if(setEntity != null){
+        if(getEntity.isPresent()){
+            Exam setEntity = getEntity.get();
+
             if (DTO.getAbdoId() != null)
                 abdomenRepository.findById(DTO.getAbdoId()).ifPresent(setEntity::setAbdo);
 
