@@ -72,6 +72,6 @@ public class PatientInformationService {
 
         System.out.println(setEntity.getLastname());
 
-        //patientRepository.save(setEntity);
+        patientRepository.save(setEntity);
     }
 }

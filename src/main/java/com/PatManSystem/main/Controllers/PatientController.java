@@ -10,8 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController  
-@RequestMapping(path = "/api/patient")
-@CrossOrigin("http://localhost:3000")
+@RequestMapping(path = "/api/patient",
+        method = {RequestMethod.GET,
+                RequestMethod.PUT,
+                RequestMethod.DELETE,
+                RequestMethod.POST})
+@CrossOrigin("*")
 public class PatientController {
 
     private final PatientInformationService patientService;
@@ -42,9 +46,13 @@ public class PatientController {
         patientService.deletePatient(id);
         return "DELETE: Patient identified by ULI "+id+" successfully deleted.";
     }
-
+    //@CrossOrigin("http://localhost:3000/register/")
     @PostMapping(path = "/update")//UPDATE using post, take in DTO, null fields are NO CHANGE, and not-null is CHANGE, not including id
     public String updatePatient(@RequestBody PatientinformationDTO patientinformationDTO){
+
+
+        System.out.println(patientinformationDTO.getLastname());
+
         patientService.updatePatient(patientinformationDTO);
 
         return "UPDATE: Patient identified by ULI "+patientinformationDTO.getId()+" successfully updated.";

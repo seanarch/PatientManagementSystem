@@ -29,14 +29,17 @@ function PatientInfo() {
             console.log(values);
             try {
             let result = await fetch(
-                `http://localhost:8080/api/patient/update/id=${userid}`,
+                `http://localhost:8080/api/patient/update/`,
                 {
-                  method: "put",
+                  method: "post",
                   mode: "cors",
                   headers: {
                     "Content-Type": "application/json"
                   },
-                  body: `${values.lastname}&${values.firstname}&${values.sex}&${values.birthday}&${values.print}&${values.tg}&${values.location}`
+                  body: `{
+                           "id": 172867100,
+                           "lastname": "${values.lastname}"
+                         }`
                 }
               );
               console.log("Submited: " + result);
