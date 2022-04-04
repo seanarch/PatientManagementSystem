@@ -10,6 +10,8 @@ const Register = () => (
     <div>
          
         <PatientInfo />
+        <RegisterForm />
+        <DeathForm />
  
     </div>
 );
