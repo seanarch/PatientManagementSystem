@@ -85,4 +85,15 @@ form{
   background-color: white;
   color: black;
 }
- 
+
+.search__bar--container {
+  height: 80px;
+  padding: 0.5rem calc((100vw - 1000px) / 2);
+  z-index: 10;
+}
+
+input.search__bar--search-box {
+  height: 40px;
+  width: 100%;
+  padding-left: 10px;
+}
