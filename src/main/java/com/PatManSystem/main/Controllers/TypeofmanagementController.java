@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/typeofmanagement")
-@CrossOrigin("*")
+@RequestMapping(path = "/api/typeofmanagement" ,
+        method = {RequestMethod.GET,
+                RequestMethod.DELETE,
+                RequestMethod.POST})
+@CrossOrigin("http://localhost:3000")
 public class TypeofmanagementController {
 
     private final TypeofmanagementService typeofmanagementService;

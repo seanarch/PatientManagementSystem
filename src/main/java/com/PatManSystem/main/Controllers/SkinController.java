@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/skin")
-@CrossOrigin("*")
+@RequestMapping(path = "/api/skin" ,
+        method = {RequestMethod.GET,
+                RequestMethod.DELETE,
+                RequestMethod.POST})
+@CrossOrigin("http://localhost:3000")
 public class SkinController {
 
     private final SkinService skinService;

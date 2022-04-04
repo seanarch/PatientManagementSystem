@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/zrtskin")
-@CrossOrigin("*")
+@RequestMapping(path = "/api/zrtskin" ,
+        method = {RequestMethod.GET,
+                RequestMethod.DELETE,
+                RequestMethod.POST})
+@CrossOrigin("http://localhost:3000")
 public class ZrtskinController {
 
     private final ZrtskinService zrtskinService;

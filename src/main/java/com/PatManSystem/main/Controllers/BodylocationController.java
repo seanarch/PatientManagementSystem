@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/bodylocation")
-@CrossOrigin("*")
+@RequestMapping(path = "/api/bodylocation" ,
+        method = {RequestMethod.GET,
+                RequestMethod.DELETE,
+                RequestMethod.POST})
+@CrossOrigin("http://localhost:3000")
 public class BodylocationController {
 
     private final BodylocationService bodylocationService;

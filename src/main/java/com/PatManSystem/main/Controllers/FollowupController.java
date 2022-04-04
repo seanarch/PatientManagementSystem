@@ -10,8 +10,12 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/followup")
-@CrossOrigin("*")
+@RequestMapping(path = "/api/followup" ,
+        method = {RequestMethod.GET,
+                RequestMethod.PUT,
+                RequestMethod.DELETE,
+                RequestMethod.POST})
+@CrossOrigin("http://localhost:3000")
 public class FollowupController {
 
     private final FollowupService followupService;

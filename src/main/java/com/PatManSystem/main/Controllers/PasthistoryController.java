@@ -10,8 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "/api/pasthistory")
-@CrossOrigin("*")
+@RequestMapping(path = "/api/pasthistory" ,
+        method = {RequestMethod.GET,
+                RequestMethod.PUT,
+                RequestMethod.DELETE,
+                RequestMethod.POST})
+@CrossOrigin("http://localhost:3000")
 public class PasthistoryController {
     private final PasthistoryService pasthistoryService;
 
@@ -57,7 +61,6 @@ public class PasthistoryController {
     @PutMapping(path = "update/id={id}") //UPDATE using PUT, take in params from address, absent params are NO CHANGE, and present params are CHANGE, not including id
     public String updatePasthistory(
             @PathVariable("id") Integer id,
-            @RequestParam(required = false) Long uliId,
             @RequestParam(required = false) String fhxDetail,
             @RequestParam(required = false) Integer smokingPackYears,
             @RequestParam(required = false) String smokingQuit,
@@ -67,12 +70,11 @@ public class PasthistoryController {
             @RequestParam(required = false) Integer financialChallenge,
             @RequestParam(required = false) Integer psychosocialChallenge,
             @RequestParam(required = false) Integer goalofcareId,
-            @RequestParam(required = false) String goalofcareDescription,
             @RequestParam(required = false) String detail,
             @RequestParam(required = false) String eTOHWeek
     ) throws NotFoundException {
-        pasthistoryService.updatePasthistory(new PasthistoryDTO(id,uliId,fhxDetail,smokingPackYears,smokingQuit,attendedFamily,lacksSocialSupport,languageBarrier
-        ,financialChallenge,psychosocialChallenge,goalofcareId,goalofcareDescription,detail,eTOHWeek));
+        pasthistoryService.updatePasthistory(new PasthistoryDTO(id,fhxDetail,smokingPackYears,smokingQuit,attendedFamily,lacksSocialSupport,languageBarrier
+        ,financialChallenge,psychosocialChallenge,goalofcareId,detail,eTOHWeek));
 
         return "UPDATE: Management identified by ID "+id+" successfully updated.";
     }

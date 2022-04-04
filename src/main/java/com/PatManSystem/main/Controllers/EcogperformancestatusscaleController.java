@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/ecogperformancestatusscale")
-@CrossOrigin("*")
+@RequestMapping(path = "/api/ecogperformancestatusscale" ,
+        method = {RequestMethod.GET,
+                RequestMethod.DELETE,
+                RequestMethod.POST})
+@CrossOrigin("http://localhost:3000")
 public class EcogperformancestatusscaleController {
 
     private final EcogperformancestatusscaleService ecogperformancestatusscaleService;

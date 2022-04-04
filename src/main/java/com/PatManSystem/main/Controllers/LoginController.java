@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "/api/login")
-@CrossOrigin("*")
+@RequestMapping(path = "/api/login" ,
+        method = {RequestMethod.POST})
+@CrossOrigin("http://localhost:3000")
 public class LoginController {
 
     private final LoginService loginService;

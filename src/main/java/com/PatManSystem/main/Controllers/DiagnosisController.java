@@ -9,8 +9,12 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/diagnosis")
-@CrossOrigin("*")
+@RequestMapping(path = "/api/diagnosis" ,
+        method = {RequestMethod.GET,
+                RequestMethod.PUT,
+                RequestMethod.DELETE,
+                RequestMethod.POST})
+@CrossOrigin("http://localhost:3000")
 public class DiagnosisController {
 
     private final DiagnosisService diagnosisService;

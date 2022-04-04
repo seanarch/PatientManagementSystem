@@ -12,11 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
-
 @RestController
-@RequestMapping(path = "/api/management")
-@CrossOrigin("*")
+@RequestMapping(path = "/api/management" ,
+        method = {RequestMethod.GET,
+                RequestMethod.PUT,
+                RequestMethod.DELETE,
+                RequestMethod.POST})
+@CrossOrigin("http://localhost:3000")
 public class ManagementController {
     private final ManagementService managementService;
 
@@ -60,14 +62,12 @@ public class ManagementController {
     @PutMapping(path = "update/id={id}") //UPDATE using PUT, take in params from address, absent params are NO CHANGE, and present params are CHANGE, not including id
     public String updateManagement(
             @PathVariable("id") Integer id,
-            @RequestParam(required = false) Long uliId,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date, // date parsed from JSON is STRING, addition formatting required to convert to LocalDate Obj
             @RequestParam(required = false) Integer interventionId,
-            @RequestParam(required = false) String interventionDescription,
             @RequestParam(required = false) String detail
 
     ) throws NotFoundException {
-        managementService.updateManagement(new ManagementDTO(id,uliId,date,interventionId,interventionDescription,detail));
+        managementService.updateManagement(new ManagementDTO(id,date,interventionId,detail));
 
         return "UPDATE: Management identified by ID "+id+" successfully updated.";
     }

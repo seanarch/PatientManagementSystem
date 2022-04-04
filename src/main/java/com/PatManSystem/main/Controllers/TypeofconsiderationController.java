@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/typeofconsideration")
-@CrossOrigin("*")
+@RequestMapping(path = "/api/typeofconsideration" ,
+        method = {RequestMethod.GET,
+                RequestMethod.DELETE,
+                RequestMethod.POST})
+@CrossOrigin("http://localhost:3000")
 public class TypeofconsiderationController {
 
     private final TypeofconsiderationService typeofconsiderationService;

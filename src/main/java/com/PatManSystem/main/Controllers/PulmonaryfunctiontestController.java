@@ -13,8 +13,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "/api/pulmonaryfunctiontest")
-@CrossOrigin("*")
+@RequestMapping(path = "/api/pulmonaryfunctiontest" ,
+        method = {RequestMethod.GET,
+                RequestMethod.PUT,
+                RequestMethod.DELETE,
+                RequestMethod.POST})
+@CrossOrigin("http://localhost:3000")
 public class PulmonaryfunctiontestController {
     private final PulmonaryfunctiontestService pulmonaryfunctiontestService;
 

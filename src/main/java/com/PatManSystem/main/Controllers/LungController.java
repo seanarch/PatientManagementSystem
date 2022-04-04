@@ -7,8 +7,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/lung")
-@CrossOrigin("*")
+@RequestMapping(path = "/api/lung" ,
+        method = {RequestMethod.GET,
+                RequestMethod.DELETE,
+                RequestMethod.POST})
+@CrossOrigin("http://localhost:3000")
 public class LungController {
 
     private final LungService lungService;

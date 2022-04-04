@@ -12,8 +12,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.criteria.CriteriaBuilder;
 
 @RestController
-@RequestMapping(path = "/api/pastmedicalhistory")
-@CrossOrigin("*")
+@RequestMapping(path = "/api/pastmedicalhistory" ,
+        method = {RequestMethod.GET,
+                RequestMethod.PUT,
+                RequestMethod.DELETE,
+                RequestMethod.POST})
+@CrossOrigin("http://localhost:3000")
 public class PastmedicalhistoryController {
 
     private final PastmedicalhistoryService pastmedicalhistoryService;

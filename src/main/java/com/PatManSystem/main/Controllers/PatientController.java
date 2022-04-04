@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
                 RequestMethod.PUT,
                 RequestMethod.DELETE,
                 RequestMethod.POST})
-@CrossOrigin("*")
+@CrossOrigin("http://localhost:3000")
 public class PatientController {
 
     private final PatientInformationService patientService;
@@ -46,7 +46,6 @@ public class PatientController {
         patientService.deletePatient(id);
         return "DELETE: Patient identified by ULI "+id+" successfully deleted.";
     }
-    //@CrossOrigin("http://localhost:3000/register/")
     @PostMapping(path = "/update")//UPDATE using post, take in DTO, null fields are NO CHANGE, and not-null is CHANGE, not including id
     public String updatePatient(@RequestBody PatientinformationDTO patientinformationDTO){
 

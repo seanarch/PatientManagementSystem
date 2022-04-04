@@ -12,8 +12,12 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/assess")
-@CrossOrigin("*")
+@RequestMapping(path = "/api/assess",
+        method = {RequestMethod.GET,
+                RequestMethod.PUT,
+                RequestMethod.DELETE,
+                RequestMethod.POST})
+@CrossOrigin("http://localhost:3000")
 public class AssessController {
 
     private final AssessService assessService;

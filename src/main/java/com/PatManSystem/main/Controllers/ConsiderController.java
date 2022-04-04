@@ -7,8 +7,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/consider")
-@CrossOrigin("*")
+@RequestMapping(path = "/api/consider" , method = {RequestMethod.GET,
+                RequestMethod.PUT,
+                RequestMethod.DELETE,
+                RequestMethod.POST})
+@CrossOrigin("http://localhost:3000")
 public class ConsiderController {
 
     private final ConsiderService considerService;
@@ -56,10 +59,9 @@ public class ConsiderController {
     public String updateConsider(
             @PathVariable("id") Integer id,
             @RequestParam(required = false) Integer considerId,
-            @RequestParam(required = false) String considerDescription,
             @RequestParam(required = false) String detail
     ){
-        considerService.updateConsider(new ConsiderDTO(id,considerId,considerDescription,detail));
+        considerService.updateConsider(new ConsiderDTO(id,considerId,detail));
 
         return "UPDATE: Consider identified by ID "+id+" successfully updated.";
     }

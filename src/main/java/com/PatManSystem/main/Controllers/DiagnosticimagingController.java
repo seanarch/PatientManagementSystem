@@ -10,8 +10,12 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/diagnosticimaging")
-@CrossOrigin("*")
+@RequestMapping(path = "/api/diagnosticimaging" ,
+        method = {RequestMethod.GET,
+                RequestMethod.PUT,
+                RequestMethod.DELETE,
+                RequestMethod.POST})
+@CrossOrigin("http://localhost:3000")
 public class DiagnosticimagingController {
     private final DiagnosticimagingService diagnosticimagingService;
 

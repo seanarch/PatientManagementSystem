@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 @RestController
-@RequestMapping(path = "/api/death")
-@CrossOrigin("*")
+@RequestMapping(path = "/api/death" ,
+        method = {RequestMethod.GET,
+                RequestMethod.PUT,
+                RequestMethod.DELETE,
+                RequestMethod.POST})
+@CrossOrigin("http://localhost:3000")
 public class DeathController {
     private final DeathService deathService;
 

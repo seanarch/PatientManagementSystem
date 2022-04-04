@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/centralnervoussystem")
-@CrossOrigin("*")
+@RequestMapping(path = "/api/centralnervoussystem" ,
+        method = {RequestMethod.GET,
+                RequestMethod.DELETE,
+                RequestMethod.POST})
+@CrossOrigin("http://localhost:3000")
 public class CentralnervoussystemController {
 
     private final CentralnervoussystemService centralnervoussystemService;

@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/typeofrecure")
-@CrossOrigin("*")
+@RequestMapping(path = "/api/typeofrecure" ,
+        method = {RequestMethod.GET,
+                RequestMethod.DELETE,
+                RequestMethod.POST})
+@CrossOrigin("http://localhost:3000")
 public class TypeofrecureController {
 
     private final TypeofrecureService typeofrecureService;

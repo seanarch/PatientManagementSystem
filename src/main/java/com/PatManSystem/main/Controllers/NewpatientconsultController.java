@@ -15,8 +15,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.criteria.CriteriaBuilder;
 
 @RestController
-@RequestMapping(path = "/api/newpatientconsult")
-@CrossOrigin("*")
+@RequestMapping(path = "/api/newpatientconsult",
+        method = {RequestMethod.GET,
+                RequestMethod.PUT,
+                RequestMethod.DELETE,
+                RequestMethod.POST})
+@CrossOrigin("http://localhost:3000")
 
 public class NewpatientconsultController {
 

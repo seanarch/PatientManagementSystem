@@ -16,4 +16,11 @@ public class ManagementDTO implements Serializable {
     private Integer interventionId;
     private String interventionDescription;
     private String detail;
+
+	public ManagementDTO(Integer id, LocalDate date, Integer interventionId, String detail) {
+		this.id = id;
+		this.date = date;
+		this.interventionId = interventionId;
+		this.detail = detail;
+	}
 }

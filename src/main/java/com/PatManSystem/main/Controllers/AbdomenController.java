@@ -8,8 +8,10 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(path = "/api/abdomen")
-@CrossOrigin("*")
+@RequestMapping(path = "/api/abdomen", method = {RequestMethod.GET,
+                RequestMethod.DELETE,
+                RequestMethod.POST})
+@CrossOrigin("http://localhost:3000")
 public class AbdomenController {
 
     private final AbdomenService abdomenService;

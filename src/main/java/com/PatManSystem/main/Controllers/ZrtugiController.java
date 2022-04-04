@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/zrtugi")
-@CrossOrigin("*")
+@RequestMapping(path = "/api/zrtugi" ,
+        method = {RequestMethod.GET,
+                RequestMethod.DELETE,
+                RequestMethod.POST})
+@CrossOrigin("http://localhost:3000")
 public class ZrtugiController {
 
     private final ZrtugiService zrtugiService;

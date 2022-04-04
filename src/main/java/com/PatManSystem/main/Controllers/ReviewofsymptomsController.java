@@ -10,8 +10,12 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/reviewofsymptoms")
-@CrossOrigin("*")
+@RequestMapping(path = "/api/reviewofsymptoms" ,
+        method = {RequestMethod.GET,
+                RequestMethod.PUT,
+                RequestMethod.DELETE,
+                RequestMethod.POST})
+@CrossOrigin("http://localhost:3000")
 public class ReviewofsymptomsController {
 
     private final ReviewofsymptomsService reviewofsymptomsService;
