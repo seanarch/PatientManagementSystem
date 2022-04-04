@@ -64,13 +64,26 @@ public class PatientInformationService {
     public void updatePatient(PatientinformationDTO DTO){
         Patientinformation setEntity = patientRepository.findById(DTO.getId()).orElseThrow(() -> new NotFoundException("Patient identified by id:{"+DTO.getId()+"} was not found."));
 
-        System.out.println(setEntity.getId());
-        System.out.println(DTO.getLastname());
-        System.out.println(setEntity.getLastname());
         if (DTO.getLastname() != null)
             setEntity.setLastname(DTO.getLastname());
 
-        System.out.println(setEntity.getLastname());
+        if (DTO.getFirstname() != null)
+            setEntity.setFirstname(DTO.getFirstname());
+
+        if (DTO.getSex() != null)
+            setEntity.setSex(DTO.getSex());
+
+        if (DTO.getBirthday() != null)
+            setEntity.setBirthday(DTO.getBirthday());
+
+        if (DTO.getPrint() != null)
+            setEntity.setPrint(DTO.getPrint());
+
+        if (DTO.getTg() != null)
+            setEntity.setTg(DTO.getTg());
+
+        if (DTO.getLocation() != null)
+            setEntity.setLocation(DTO.getLocation());
 
         patientRepository.save(setEntity);
     }

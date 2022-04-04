@@ -8,7 +8,8 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(path = "/api/abdomen", method = {RequestMethod.GET,
+@RequestMapping(path = "/api/abdomen",
+        method = {RequestMethod.GET,
                 RequestMethod.DELETE,
                 RequestMethod.POST})
 @CrossOrigin("http://localhost:3000")
