@@ -58,7 +58,7 @@ function FVCFEVInfo() {
                             <Grid item xs={6}>
                                     <TextField
                                         name="FVCFEVInformation.FVC"
-                                        label="FVC"
+                                        label="Forced Vital Capacity (FVC)"
                                     />
                                 </Grid>
                             <Grid item xs={6}>
@@ -71,7 +71,7 @@ function FVCFEVInfo() {
                             <Grid item xs={6}>
                                     <TextField
                                         name="FVCFEVInformation.FEV1"
-                                        label="FEV1"
+                                        label="Forced Expiratory Volume (FEV1)"
                                     />
                                 </Grid>
                                 <hr></hr>

@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class NewpatientconsultDTO implements Serializable {
-    private Long id;
+    private Integer id;
     private Long uliId;
     private LocalDate date;
 }

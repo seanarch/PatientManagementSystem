@@ -18,11 +18,4 @@ public class Typeofpathology {
     @Column(name = "Description", length = 500)
     private String description;
 
-    @OneToMany(mappedBy = "pathology")
-    private Set<Diagnosis> diagnoses = new LinkedHashSet<>();
-
-    public Set<Diagnosis> getDiagnoses() {
-        return diagnoses;
-    }
-
 }

@@ -17,12 +17,4 @@ public class Lung {
 
     @Column(name = "Description", length = 200)
     private String description;
-
-    @OneToMany(mappedBy = "lung")
-    private Set<Exam> exams = new LinkedHashSet<>();
-
-    public Set<Exam> getExams() {
-        return exams;
-    }
-
 }

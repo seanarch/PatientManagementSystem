@@ -18,10 +18,4 @@ public class Cardiac {
     @Column(name = "Description", length = 200)
     private String description;
 
-    @OneToMany(mappedBy = "cardiac")
-    private Set<Exam> exams = new LinkedHashSet<>();
-
-    public Set<Exam> getExams() {
-        return exams;
-    }
 }

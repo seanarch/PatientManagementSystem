@@ -18,15 +18,4 @@ public class Zrtresponse {
     @Column(name = "Description", length = 500)
     private String description;
 
-    @OneToMany(mappedBy = "clinicalResponse")
-    private Set<Followup> followups = new LinkedHashSet<>();
-
-    public Set<Followup> getFollowups() {
-        return followups;
-    }
-
-    public void setFollowups(Set<Followup> followups) {
-        this.followups = followups;
-    }
-
 }

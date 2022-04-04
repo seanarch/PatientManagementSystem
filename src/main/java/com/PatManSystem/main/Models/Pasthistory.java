@@ -17,33 +17,33 @@ public class Pasthistory {
     @JoinColumn(name = "ULI", nullable = false)
     private Patientinformation uli;
 
-    @Column(name = "FhxDetail", length = 500)
+    @Column(name = "Fhxdetail", length = 500)
     private String fhxDetail;
 
-    @Column(name = "SmokingPackYears")
+    @Column(name = "Smokingpackyears")
     private Integer smokingPackYears;
 
-    @Column(name = "SmokeQuit", length = 45)
+    @Column(name = "Smokequit", length = 45)
     private String smokeQuit;
 
-    @Column(name = "AttendedFamily")
+    @Column(name = "Attendedfamily")
     private Integer attendedFamily;
 
-    @Column(name = "LacksSocialSupport")
+    @Column(name = "Lackssocialsupport")
     private Integer lacksSocialSupport;
 
-    @Column(name = "LanguageBarrier")
+    @Column(name = "Languagebarrier")
     private Integer languageBarrier;
 
-    @Column(name = "FinancialChallenge")
+    @Column(name = "Financialchallenge")
     private Integer financialChallenge;
 
-    @Column(name = "PsychosocialChallenge")
+    @Column(name = "Psychosocialchallenge")
     private Integer psychosocialChallenge;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`GOC designation`")
-    private Goalofcare gOCDesignation;
+    private Goalofcare goalofcare;
 
     @Column(name = "`ETOH/week`", length = 45)
     private String eTOHWeek;

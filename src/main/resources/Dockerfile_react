@@ -1,0 +1,12 @@
+FROM node:16
+WORKDIR /frontend
+env PATH /frontend/node_modules/.bin:$PATH
+COPY package.json .
+RUN npm install --silent
+RUN npm install @material-ui/core@next
+RUN npm install --save react-toastify
+RUN npm install react-collapsible --save
+RUN npm install react-scripts -g --silent
+COPY /src/main/frontend .
+EXPOSE 3000
+CMD ["npm", "start"]

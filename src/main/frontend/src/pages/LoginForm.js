@@ -14,6 +14,7 @@ const LoginForm = () => {
                 <div className='d-flex justify-content-center align-items-center'>
                     <img src={UserImage} className="user__image" alt="User" />
                 </div>
+                
                 <Form onSubmit={handleLoginFormSubmit}>
                     <FormGroup row>
                         <Label
@@ -57,6 +58,7 @@ const LoginForm = () => {
                         Submit
                     </Button>
                 </Form>
+               
             </div>
         </main>
 

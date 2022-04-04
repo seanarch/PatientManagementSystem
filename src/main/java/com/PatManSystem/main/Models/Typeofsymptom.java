@@ -18,11 +18,4 @@ public class Typeofsymptom {
     @Column(name = "Decription", length = 100)
     private String decription;
 
-    @OneToMany(mappedBy = "symptom")
-    private Set<Symptom> symptoms = new LinkedHashSet<>();
-
-    public Set<Symptom> getSymptoms() {
-        return symptoms;
-    }
-
 }

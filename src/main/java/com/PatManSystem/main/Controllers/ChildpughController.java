@@ -12,8 +12,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/childpugh")
-@CrossOrigin("*")
+@RequestMapping(path = "/api/childpugh" , method = {RequestMethod.GET,
+                RequestMethod.PUT,
+                RequestMethod.DELETE,
+                RequestMethod.POST})
+@CrossOrigin("http://localhost:3000")
 public class ChildpughController {
 
     private final ChildpughService childpughService;
@@ -57,7 +60,6 @@ public class ChildpughController {
 
     ){
         childpughService.updateChildpugh(new ChildpughDTO(id));
-
         return "UPDATE: Childpugh identified by ID "+id+" successfully updated.";
     }
 

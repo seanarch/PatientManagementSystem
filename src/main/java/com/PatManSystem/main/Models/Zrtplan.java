@@ -18,15 +18,4 @@ public class Zrtplan {
     @Column(name = "Description", length = 100)
     private String description;
 
-    @OneToMany(mappedBy = "planning")
-    private Set<Radiationtherapy> radiationtherapies = new LinkedHashSet<>();
-
-    public Set<Radiationtherapy> getRadiationtherapies() {
-        return radiationtherapies;
-    }
-
-    public void setRadiationtherapies(Set<Radiationtherapy> radiationtherapies) {
-        this.radiationtherapies = radiationtherapies;
-    }
-
 }

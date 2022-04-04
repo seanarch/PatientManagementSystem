@@ -10,6 +10,5 @@ import java.util.List;
 
 @Repository
 public interface ExamRepository extends JpaRepository<Exam, Long> {
-    Exam findExamById(Long Id);
-    List<Exam> findExamByUli(Patientinformation uli);
+    List<Exam> findByUli(Patientinformation uli);
 }

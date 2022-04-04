@@ -8,6 +8,7 @@ import org.mapstruct.*;
 public interface HistoryofpresentillnessMapper {
     @Mapping(source = "uliId", target = "uli.id")
     @Mapping(source = "descriptorId", target = "descriptor.id")
+    @Mapping(source = "descriptorDescription", target = "descriptor.description")
     Historyofpresentillness historyofpresentillnessDTOToHistoryofpresentillness(HistoryofpresentillnessDTO historyofpresentillnessDTO);
 
     @InheritInverseConfiguration(name = "historyofpresentillnessDTOToHistoryofpresentillness")

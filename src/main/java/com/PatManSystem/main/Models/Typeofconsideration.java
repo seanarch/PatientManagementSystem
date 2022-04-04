@@ -18,11 +18,4 @@ public class Typeofconsideration {
     @Column(name = "Description", length = 1000)
     private String description;
 
-    @OneToMany(mappedBy = "consider")
-    private Set<Consider> considers = new LinkedHashSet<>();
-
-    public Set<Consider> getConsiders() {
-        return considers;
-    }
-
 }

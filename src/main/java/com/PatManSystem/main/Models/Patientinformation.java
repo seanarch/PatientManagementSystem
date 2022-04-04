@@ -24,13 +24,13 @@ public class Patientinformation {
     @Column(name = "Lastname", length = 45)
     private String lastname;
 
-    @Column(name = "Firstname", nullable = false, length = 45)
+    @Column(name = "Firstname", length = 45)
     private String firstname;
 
-    @Column(name = "Sex", nullable = false)
+    @Column(name = "Sex")
     private Character sex;
 
-    @Column(name = "Birthday", nullable = false)
+    @Column(name = "Birthday")
     private LocalDate birthday;
 
     @Column(name = "Print")
@@ -42,5 +42,7 @@ public class Patientinformation {
     @Column(name = "Location", length = 45)
     private String location;
 
-
+    public Patientinformation(Long id){
+        this.id = id;
+    }
 }

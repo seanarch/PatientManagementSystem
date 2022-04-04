@@ -8,6 +8,7 @@ import org.mapstruct.*;
 public interface ManagementMapper {
     @Mapping(source = "uliId", target = "uli.id")
     @Mapping(source = "interventionId", target = "intervention.id")
+    @Mapping(source = "interventionDescription", target = "intervention.description")
     Management managementDTOToManagement(ManagementDTO managementDTO);
 
     @InheritInverseConfiguration(name = "managementDTOToManagement")

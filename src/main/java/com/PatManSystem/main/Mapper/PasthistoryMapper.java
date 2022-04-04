@@ -7,7 +7,8 @@ import org.mapstruct.*;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface PasthistoryMapper {
     @Mapping(source = "uliId", target = "uli.id")
-    @Mapping(source = "GOCDesignationId", target = "GOCDesignation.id")
+    @Mapping(source = "goalofcareId", target = "goalofcare.id")
+    @Mapping(source = "goalofcareDescription", target = "goalofcare.description")
     Pasthistory pasthistoryDTOToPasthistory(PasthistoryDTO pasthistoryDTO);
 
     @InheritInverseConfiguration(name = "pasthistoryDTOToPasthistory")

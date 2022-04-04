@@ -18,27 +18,4 @@ public class Zrtheme {
     @Column(name = "Description", length = 100)
     private String description;
 
-    @OneToMany(mappedBy = "heme")
-    private Set<Radiationtherapy> radiationtherapies = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "heme")
-    private Set<Followup> followups = new LinkedHashSet<>();
-
-    public Set<Followup> getFollowups() {
-        return followups;
-    }
-
-    public void setFollowups(Set<Followup> followups) {
-        this.followups = followups;
-    }
-
-    public Set<Radiationtherapy> getRadiationtherapies() {
-        return radiationtherapies;
-    }
-
-    public void setRadiationtherapies(Set<Radiationtherapy> radiationtherapies) {
-        this.radiationtherapies = radiationtherapies;
-    }
-
-
 }

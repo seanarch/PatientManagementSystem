@@ -2,19 +2,22 @@ package com.PatManSystem.main.Services;
 
 import com.PatManSystem.main.DTO.ExamDTO;
 import com.PatManSystem.main.Mapper.ExamMapperImpl;
-import com.PatManSystem.main.Models.Breath;
 import com.PatManSystem.main.Models.Exam;
 import com.PatManSystem.main.Models.Patientinformation;
 import com.PatManSystem.main.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class ExamService {
 
     private final ExamRepository examRepository;
+    private final PatientRepository patientRepository;
     private final AbdomenRepository abdomenRepository;
     private final CentralnervoussystemRepository centralnervoussystemRepository;
     private final LungRepository lungRepository;
@@ -28,6 +31,7 @@ public class ExamService {
 
     @Autowired
     public ExamService(ExamRepository examRepository,
+                       PatientRepository patientRepository,
                        AbdomenRepository abdomenRepository,
                        CentralnervoussystemRepository centralnervoussystemRepository,
                        LungRepository lungRepository,
@@ -40,6 +44,7 @@ public class ExamService {
                        BreathRepository breathRepository){
 
         this.examRepository = examRepository;
+        this.patientRepository = patientRepository;
         this.abdomenRepository = abdomenRepository;
         this.centralnervoussystemRepository = centralnervoussystemRepository;
         this.lungRepository = lungRepository;
@@ -53,7 +58,6 @@ public class ExamService {
 
     }
 
-
     public List<ExamDTO> getExams(){
        return examRepository.findAll()
                .stream()
@@ -61,16 +65,16 @@ public class ExamService {
                .collect(Collectors.toList());
     }
     public ExamDTO getExam(Long id){
-        Exam getExam = examRepository.findExamById(id);
-        if(getExam == null) //check if the requested patient exists, if not; throw not found exception
+        Optional<Exam> getExam = examRepository.findById(id);
+        if(getExam.isEmpty()) //check if the requested patient exists, if not; throw not found exception
             throw new IllegalStateException("Exam identified by ID "+id+" was not found.");
 
-        return new ExamMapperImpl().examToExamDTO(getExam);
+        return new ExamMapperImpl().examToExamDTO(getExam.get());
 
     }
     public List<ExamDTO> getExamByULI(Long ULI){
 
-        List<Exam> getExams = examRepository.findExamByUli(new Patientinformation(ULI,null,null,null,null,null,null,null));
+        List<Exam> getExams = examRepository.findByUli(new Patientinformation(ULI));
         if(getExams == null) //check if the requested patient exists, if not; throw not found exception
             throw new IllegalStateException("Exam identified by ULI "+ULI+" was not found.");
 
@@ -81,39 +85,42 @@ public class ExamService {
 
     public void newExam(ExamDTO examDTO){
 
-        if(examRepository.findExamById(examDTO.getId()) != null){  //check if the requested patient exists, if not; throw not found exception
+        if(examRepository.findById(examDTO.getId()).isPresent())  //check if the requested patient exists, if not; throw not found exception
             throw new IllegalStateException("Exam identified by ID "+examDTO.getId() + " already exists. Use Post:Update at /api/patient/update instead.");
-        }else{
+        else {
             examRepository.save(new ExamMapperImpl().examDTOToExam(examDTO)); // convert incoming DTO to DB entity and save to the DB
         }
+
 
     }
     public void deleteExam(Long id){
 
-        if(examRepository.findExamById(id) == null){ //check if the requested patient exists, if not; throw not found exception
+        if(examRepository.findById(id).isEmpty()){ //check if the requested patient exists, if not; throw not found exception
             throw new IllegalStateException("Exam identified by ID "+id+ " does not exist.");
         }else{
             examRepository.deleteById(id);
         }
 
     }
+
     public void updateExam(ExamDTO DTO){
-        Exam setEntity = examRepository.findExamById(DTO.getId()); //retrieve a copy of the entity
+        Optional<Exam> getEntity = examRepository.findById(DTO.getId()); //retrieve a copy of the entity
+
         /*
             IF the repository can find the object specified by the id
             THEN set respective object in setEntity to the object returned by the repository
             FINALLY save the setEntity object, JPA opens a transaction and performs the update.
             ELSE throw an exception
         */
-        if(setEntity != null){
+
+        if(getEntity.isPresent()){
+            Exam setEntity = getEntity.get();
+
             if (DTO.getAbdoId() != null)
                 abdomenRepository.findById(DTO.getAbdoId()).ifPresent(setEntity::setAbdo);
 
             if (DTO.getDate() != null)
                setEntity.setDate(DTO.getDate());
-
-            if (DTO.getCnsId() != null)
-                centralnervoussystemRepository.findById(DTO.getCnsId()).ifPresent(setEntity::setCns);
 
             if (DTO.getCnsId() != null)
                 centralnervoussystemRepository.findById(DTO.getCnsId()).ifPresent(setEntity::setCns);
@@ -145,10 +152,13 @@ public class ExamService {
             if (DTO.getBreathId() != null)
                 breathRepository.findById(DTO.getBreathId()).ifPresent(setEntity::setBreath);
 
+
             examRepository.save(setEntity);
 
         }else {
             throw new IllegalStateException("Exam identified by ID "+DTO.getId()+ " does not exist.");
         }
+
+
     }
 }

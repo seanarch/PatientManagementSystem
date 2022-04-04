@@ -40,6 +40,7 @@ const Other = () => {
         }
     })
     return (
+<<<<<<< HEAD
         <div>
             <SearchBar />
             <Container maxWidth="md">
@@ -53,6 +54,27 @@ const Other = () => {
                         <Box mb={3}>
                             <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">CNS</InputLabel>
+=======
+        <Container maxWidth="md">
+        <div className='container' style={{
+            display: 'flex', justifyContent:
+                'center', alignItems: 'center', marginTop: '50px', lineHeight: '10px'
+        }}>
+            <Box component="form" style={{ width: '70vw' }} onSubmit={otherForm.handleSubmit}>
+                <h3>Patient Exam</h3>
+                
+                <Box mb={3}>
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Central Nervous System (CNS)</InputLabel>
+
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            name="CNS.ECOG"
+                            label="Central Nervous System (CNS)"
+                            onChange={otherForm.handleChange}
+                            value={otherForm.values.CNS.ECOG}
+>>>>>>> c30098c7b87a65d5216ee4949cccf13733fba37d
 
                                 <Select
                                     labelId="demo-simple-select-label"
@@ -70,6 +92,7 @@ const Other = () => {
                             </FormControl>
                         </Box>
 
+<<<<<<< HEAD
                         <Box mb={3}>
                             <FormControl fullWidth >
                                 <InputLabel id="demo-simple-select-label">Lung</InputLabel>
@@ -87,6 +110,25 @@ const Other = () => {
                                 </Select>
                             </FormControl>
                         </Box>
+=======
+                <Box mb={3}>
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Hemagglutinin-Neuraminidase (HN)</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            name='HN.ECOG'
+                            label="Hemagglutinin-Neuraminidase (HN)"
+                            onChange={otherForm.handleChange}
+                            value={otherForm.values.HN.ECOG}
+                        >
+                            <MenuItem value={7}>ABNORMALITY NOTED SEE DETAIL</MenuItem>
+                            <MenuItem value={8}>No cervical or supra-clavicular lymphadenopathy, no scleral icterus or jaundice</MenuItem>
+                            <MenuItem value={9}>Not performed</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Box>
+>>>>>>> c30098c7b87a65d5216ee4949cccf13733fba37d
 
                         <Box mb={3}>
                             <FormControl fullWidth>
@@ -124,6 +166,7 @@ const Other = () => {
                             </FormControl>
                         </Box>
 
+<<<<<<< HEAD
                         <Box mb={3}>
                             <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">Cardiac</InputLabel>
@@ -141,6 +184,25 @@ const Other = () => {
                                 </Select>
                             </FormControl>
                         </Box>
+=======
+                <Box mb={3}>
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Musculoskeletal (MSK)</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            name='MSK.Description'
+                            label="Musculoskeletal (MSK)"
+                            onChange={otherForm.handleChange}
+                            value={otherForm.values.MSK.Description}
+                        >
+                            <MenuItem value={7}>ABNORMALITY NOTED SEE DETAIL</MenuItem>
+                            <MenuItem value={8}>Gait, strength and reflexes - Normal. No bony tenderness in spine</MenuItem>
+                            <MenuItem value={9}>Not performed</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Box>
+>>>>>>> c30098c7b87a65d5216ee4949cccf13733fba37d
 
                         <Box mb={3}>
                             <FormControl fullWidth>
@@ -160,6 +222,7 @@ const Other = () => {
                             </FormControl>
                         </Box>
 
+<<<<<<< HEAD
                         {/* Peripheral is displayed according to doctor's existing UI, however it's only the foreign key, instead of table name, which should be Skin */}
                         <Box mb={3}>
                             <FormControl fullWidth>
@@ -178,6 +241,44 @@ const Other = () => {
                                 </Select>
                             </FormControl>
                         </Box>
+=======
+                <Box mb={3}>
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Abdominal (Adbo)</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            name='Adbo.ECOG'
+                            label="Abdominal (Adbo)"
+                            onChange={otherForm.handleChange}
+                            value={otherForm.values.Adbo.ECOG}
+                        >
+                            <MenuItem value={7}>ABNORMALITY NOTED SEE DETAIL</MenuItem>
+                            <MenuItem value={8}>No visual changes, Abd soft, liver not enlarged. No mass ascites or inguinal LN,</MenuItem>
+                            <MenuItem value={9}>Not performed</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Box>
+                <Box mb={3}>
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Supine</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            name='Supine.Setup'
+                            label="Supine"
+                            onChange={otherForm.handleChange}
+                            value={otherForm.values.Supine.Setup}
+                        >
+                            <MenuItem value={1}>Able to lay flat Supine or Prone
+                            </MenuItem>
+                            <MenuItem value={2}>Cannot Lay Prone</MenuItem>
+                            <MenuItem value={3}>Cannot Lay Supine</MenuItem>
+                            <MenuItem value={4}>Not performed</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Box>
+>>>>>>> c30098c7b87a65d5216ee4949cccf13733fba37d
 
                         <Box mb={3}>
                             <FormControl fullWidth>

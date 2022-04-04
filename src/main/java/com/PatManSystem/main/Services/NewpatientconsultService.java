@@ -2,6 +2,8 @@ package com.PatManSystem.main.Services;
 
 
 import com.PatManSystem.main.DTO.NewpatientconsultDTO;
+import com.PatManSystem.main.Exception.DuplicateFoundException;
+import com.PatManSystem.main.Exception.NotFoundException;
 import com.PatManSystem.main.Mapper.NewpatientconsultMapperImpl;
 import com.PatManSystem.main.Models.Newpatientconsult;
 import com.PatManSystem.main.Models.Patientinformation;
@@ -33,19 +35,19 @@ public class NewpatientconsultService {
     }
 
     //find Newpatientconsult entity by id and return NewpatientconsultDTO
-    public NewpatientconsultDTO getNewpatientconsult(Long id) {
+    public NewpatientconsultDTO getNewpatientconsult(Integer id) throws NotFoundException {
         Newpatientconsult getNewpatientconsult = newpatientconsultRepository.findNewpatientconsultById(id);
         if (getNewpatientconsult == null)
-            throw new IllegalStateException("Newpatientconsult identified by ID " + id + " was not found.");
+            throw new NotFoundException(id);
 
         return new NewpatientconsultMapperImpl().newpatientconsultToNewpatientconsultDTO(getNewpatientconsult);
     }
 
     //find Newpatientconsult entity by ULI and return NewpatientconsultDTO list
-    public List<NewpatientconsultDTO> getNewpatientconsultByULI(Long ULI){
+    public List<NewpatientconsultDTO> getNewpatientconsultByULI(Long ULI) throws NotFoundException {
         List<Newpatientconsult> getNewpatientconsults = newpatientconsultRepository.findNewpatientconsultByUli(new Patientinformation(ULI,null,null,null,null,null,null,null));
-        if (getNewpatientconsults == null)
-            throw new IllegalStateException("Newpatientconsult identified by ULI "+ULI+" was not found.");
+        if (getNewpatientconsults.isEmpty())
+            throw new NotFoundException(ULI);
 
         return getNewpatientconsults.stream()
                 .map(newpatientconsult -> new NewpatientconsultMapperImpl().newpatientconsultToNewpatientconsultDTO(newpatientconsult))
@@ -53,28 +55,28 @@ public class NewpatientconsultService {
     }
 
     //create new Newpatientconsult entity by passing NewpatientconsultDTO
-    public void newNewpatientconsult(NewpatientconsultDTO newpatientconsultDTO) {
+    public void newNewpatientconsult(NewpatientconsultDTO newpatientconsultDTO) throws DuplicateFoundException {
         if (newpatientconsultRepository.findNewpatientconsultById(newpatientconsultDTO.getId()) != null) {
-            throw new IllegalStateException("Newpatientconsult identified by ID " + newpatientconsultDTO.getId() + " already exists. Use Post:Update at /api/newpatientconsult/update instead.");
+            throw new DuplicateFoundException(newpatientconsultDTO.getId());
         }
         newpatientconsultRepository.save(new NewpatientconsultMapperImpl().newpatientconsultDTOToNewpatientconsult(newpatientconsultDTO));
     }
 
     //delete Newpatientconsult entity by id
-    public void deleteNewpatientconsult(Long id) {
+    public void deleteNewpatientconsult(Integer id) throws NotFoundException {
         if (newpatientconsultRepository.findNewpatientconsultById(id) == null) {
-            throw new IllegalStateException("Newpatientconsult identified by ID " + id + " does not exist.");
+            throw new NotFoundException(id);
         } else {
             newpatientconsultRepository.deleteById(id);
         }
     }
 
     //update Newpatientconsult entity
-    public void updateNewpatientconsult(NewpatientconsultDTO newpatientconsultDTO) {
+    public void updateNewpatientconsult(NewpatientconsultDTO newpatientconsultDTO) throws NotFoundException {
         Newpatientconsult existingNewpatientconsult = newpatientconsultRepository.findNewpatientconsultById(newpatientconsultDTO.getId());
 
         if (existingNewpatientconsult == null)
-            throw new IllegalStateException("Newpatientconsult identified by ID " + newpatientconsultDTO.getId() + " was not found.");
+            throw new NotFoundException(newpatientconsultDTO.getId());
         else {
             // newpatientconsult table's id may not need to be updated once it has been created
            /*

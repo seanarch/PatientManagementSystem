@@ -55,7 +55,7 @@ function GeneralInfo() {
                                 <Grid item xs={6}>
                                     <TextField
                                         name="GeneralInformation.CTchest"
-                                        label="CT chest"
+                                        label="Computed Tomography (CT) Chest"
                                     />
                                 </Grid>
                                 <Grid item xs={12}>

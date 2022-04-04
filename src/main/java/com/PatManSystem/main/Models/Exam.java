@@ -14,6 +14,7 @@ import java.time.LocalDate;
 @Table(name = "exam")
 public class Exam {
     @Id
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "Exam", nullable = false)
     private Long id;
 
@@ -38,6 +39,7 @@ public class Exam {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @JoinColumn(name = "HN")
     private Headandneck hn;
 
@@ -46,7 +48,7 @@ public class Exam {
     @JoinColumn(name = "Oral")
     private Oral oral;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "Cardiac")
     private Cardiac cardiac;
 

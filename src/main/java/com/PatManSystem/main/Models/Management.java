@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class Management {
     @Id
     @Column(name = "MNG", nullable = false)
-    private Long id;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ULI", nullable = false)
