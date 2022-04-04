@@ -45,8 +45,9 @@ function SearchForm() {
   const handleFilter = (event) => {
     const searchWord = event.target.value;
     setWordEntered(searchWord);
-    const newFilter = patientDetails.filter((value) => {
-      return value.title.toLowerCase().includes(searchWord.toLowerCase());
+    const newFilter = patientDetails.filter(value => {
+      console.log(value);
+      return value.id.toString().startsWith(searchWord);
     });
 
     if (searchWord === "") {
@@ -108,7 +109,7 @@ function SearchForm() {
             {filteredData.slice(0, 15).map((value, key) => {
               return (
                 <a className="dataItem" href={value.link} target="_blank">
-                  <p>{value.title} </p>
+                  <p>{value.firstname} </p>
                 </a>
               );
             })}
