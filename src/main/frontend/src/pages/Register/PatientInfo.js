@@ -31,10 +31,10 @@ function PatientInfo() {
             let result = await fetch(
                 `http://localhost:8080/api/patient/update/id=${userid}`,
                 {
-                  method: "update",
-                  mode: "no-cors",
+                  method: "put",
+                  mode: "cors",
                   headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
+                    "Content-Type": "application/json"
                   },
                   body: `${values.lastname}&${values.firstname}&${values.sex}&${values.birthday}&${values.print}&${values.tg}&${values.location}`
                 }
