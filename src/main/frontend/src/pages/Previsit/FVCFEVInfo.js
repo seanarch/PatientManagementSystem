@@ -90,14 +90,10 @@ function FVCFEVInfo() {
         }}>
 
              <form onSubmit={formik.handleSubmit}>
-                        <h3>FVC FEV Information</h3>
-                        <Collapsible trigger="[+]">
-            <Formik initialValues={{ ...INITIAL_VALUES }} onSubmit={values => {
-                console.log(values)
-            }}
->
-                {props => (
-                    <Form>
+                     
+                     
+ 
+                
                         <Collapsible trigger="FVC FEV Information" triggerTagName='h3'  overflowWhenOpen="inherit">
                          <br></br>
                         <Grid container spacing={3} width={'70vw'}>
