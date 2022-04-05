@@ -8,7 +8,6 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=pmsdb
-    command: docker network create pms_network
 
   pms:
     image: pms

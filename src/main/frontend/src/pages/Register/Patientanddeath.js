@@ -4,18 +4,18 @@ import RegisterForm from './RegisterForm';
 import DeathForm from './DeathForm';
 import SearchForm from './SearchForm';
 import PatientInfo from './PatientInfo';
-import Patientanddeath from './Patientanddeath';
-/* npm install reactstrap
- */
-const Register = () => (
+import Collapsible from 'react-collapsible';
+ 
+const Patientanddeath = () => (
     <div>
-         
-       <Patientanddeath />
 
-       <RegisterForm />
         
+        <PatientInfo />
+        <DeathForm />
+        
+       
  
     </div>
 );
 
-export default Register;
+export default Patientanddeath;

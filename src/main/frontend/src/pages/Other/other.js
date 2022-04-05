@@ -41,7 +41,7 @@ const Other = () => {
     })
     return (
         <div>
-            <SearchBar />
+       
             <Container maxWidth="md">
                 <div className='container' style={{
                     display: 'flex', justifyContent:

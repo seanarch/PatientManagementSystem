@@ -10,7 +10,7 @@ import SearchBar from '../../components/SearchBar';
  */
 const Previsit = () => (
     <div>
-        <SearchBar />
+         
         <GeneralInfo />
         <DetailedInfo />
         <FVCFEVInfo />
