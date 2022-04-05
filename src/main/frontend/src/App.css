@@ -33,31 +33,34 @@ main.login__form {
   margin-bottom: 30px;
 }
 
+.background{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  z-index: -1;
 
-form{
+}
+
+/*.background img{
+  display: block;
+  width: 100%;
+  opacity: 0.6;
+}
+*/
+div.container{
   position: relative;
-  width: fit-content;
-  block-size: fit-content;
   border-style: groove;
   border-width: 3px;
   border-color:#474747;
-  padding-right: 30px;
-  padding-bottom: 30px;
-  padding-left: 30px;
-
+  background-color: white;
+  width: 1300px;
+  left: -130px;
+  padding-top: 0px;
+  padding-bottom: 15px;
 }
-
-div.sign_in{
-
-  padding-top: 20px;
-  padding-bottom: 25px;
-  text-align: center;
-  display: inline-block;
-  border-style: dotted;
-}
-
 h3{
- 
   padding-top: auto;
   text-align: center;
   color: white;
@@ -67,3 +70,30 @@ h3{
   text-transform: uppercase;
 }
 
+
+form{
+  position: relative;
+  width: fit-content;
+  block-size: fit-content;
+}
+
+.dark-mode {
+  background-color: black;
+  color: white;
+}
+.light-mode {
+  background-color: white;
+  color: black;
+}
+
+.search__bar--container {
+  height: 80px;
+  padding: 0.5rem calc((100vw - 1000px) / 2);
+  z-index: 10;
+}
+
+input.search__bar--search-box {
+  height: 40px;
+  width: 100%;
+  padding-left: 10px;
+}
