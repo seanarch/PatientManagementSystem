@@ -4,3 +4,4 @@
 /src/main/resources/Dockerfile_react
 /src/main/resources/Dockerfile_pms
 /src/main/resources/docker-compose.yml
+create_docker_images.ps1

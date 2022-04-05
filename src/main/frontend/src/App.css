@@ -34,7 +34,19 @@ main.login__form {
 }
 
 
+<<<<<<< HEAD
+}
+
+/*.background img{
+  display: block;
+  width: 100%;
+  opacity: 0.6;
+}
+*/
+div.container{
+=======
 form{
+>>>>>>> c30098c7b87a65d5216ee4949cccf13733fba37d
   position: relative;
   width: fit-content;
   block-size: fit-content;
@@ -67,3 +79,33 @@ h3{
   text-transform: uppercase;
 }
 
+<<<<<<< HEAD
+
+form{
+  position: relative;
+  width: fit-content;
+  block-size: fit-content;
+}
+
+.dark-mode {
+  background-color: black;
+  color: white;
+}
+.light-mode {
+  background-color: white;
+  color: black;
+}
+
+.search__bar--container {
+  height: 80px;
+  padding: 0.5rem calc((100vw - 1000px) / 2);
+  z-index: 10;
+}
+
+input.search__bar--search-box {
+  height: 40px;
+  width: 100%;
+  padding-left: 10px;
+}
+=======
+>>>>>>> c30098c7b87a65d5216ee4949cccf13733fba37d
