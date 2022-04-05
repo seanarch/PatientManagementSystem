@@ -94,7 +94,7 @@ function DeathForm() {
               <Grid item xs={6}>
                 <TextField
                   label="Death date"
-                  name="Deathdate"
+                  name="date"
                   value={formik.values.date}
                   onChange={formik.handleChange}
                   fullWidth
@@ -105,7 +105,7 @@ function DeathForm() {
                   <TextField
                     fullWidth
                     label="Death Detail"
-                    name="Death Detail"
+                    name="detail"
                     value={formik.values.detail}
                     onChange={formik.handleChange}
                     multiline
