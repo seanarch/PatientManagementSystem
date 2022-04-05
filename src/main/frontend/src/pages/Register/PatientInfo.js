@@ -22,7 +22,8 @@ function PatientInfo() {
             birthday: "",
             print: "",
             tg: "",
-            location: ""
+            location: "",
+ 
         }, 
 
         onSubmit: async (values) => {
@@ -90,7 +91,7 @@ function PatientInfo() {
                      
                         <form onSubmit={formik.handleSubmit}>
                             <h3>Patient Information</h3>
-                            <Collapsible trigger="[+]">
+                             
                                 <br></br>
                                 <Grid container spacing={3} width={'70vw'}>
                                     <Grid item xs={6}>
@@ -152,6 +153,17 @@ function PatientInfo() {
                                             fullWidth
                                         />
                                     </Grid>
+
+                                    <Grid item xs={6}>
+                                        <TextField
+                                            label="Print"
+                                            name="print"
+                                            value={formik.values.print}
+                                            onChange={formik.handleChange}
+                                            fullWidth
+                                        />
+                                    </Grid>
+ 
  
                                 
                                     <Grid item xs={12}>
@@ -159,7 +171,7 @@ function PatientInfo() {
                                         <ToastContainer />
                                     </Grid>
                                 </Grid>
-                            </Collapsible>
+                            
 
                         </form>
                

@@ -1,9 +1,9 @@
-import React from 'react';
-import { Formik, Form } from 'formik';
+import React, {useEffect} from 'react';
+import { useFormik, Formik, Form } from 'formik';
 import { Button } from 'reactstrap';
 import { Container, Grid } from '@material-ui/core';
 import DatePicker from '../../components/Date/DatePicker';
-import TextField from '../../components/TextField/TextField';
+import { TextField } from "@material-ui/core/"; 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Collapsible from 'react-collapsible';
@@ -20,6 +20,57 @@ const INITIAL_VALUES = {
 
 function DeathForm() {
 
+  const userid = -2088258034;
+
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues: {
+        date: "",
+        detail: "",
+
+    }, 
+
+    onSubmit: async (values) => {
+      console.log(values);
+      try {
+      let result = await fetch(
+          `http://localhost:8080/api/death/update/`,
+          {
+            method: "post",
+            mode: "cors",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: `{
+                     "id": -2088258034,
+                     "date": "${values.date}",
+                     "detail": "${values.detail}" 
+                   }`
+          }
+        );
+        console.log("Submited: " + result);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  });
+
+  useEffect(() => {
+    (async () => {
+      try {
+        let response = await fetch(
+          `http://localhost:8080/api/death/id=${userid}`
+        );
+        let content = await response.json();
+        formik.setValues(content);
+        // formik.setFieldValue("email", content[0].email);
+      } catch (e) {
+        console.log(e);
+      }
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const notify = () => {
 
     toast.success('Successfully saved!', {
@@ -34,33 +85,29 @@ function DeathForm() {
         display: 'flex', justifyContent:
           'center', alignItems: 'center', marginTop: '50px'
       }}>
-        <Formik initialValues={{ ...INITIAL_VALUES }} onSubmit={values => {
-          console.log(values)
-          //once submit, provide value for back end
-        }}
-        >
-          <Form>
-
-          <h3>Death information</h3>
-            <Collapsible trigger="[+]"> 
-             
+        <form onSubmit={formik.handleSubmit}>
+ 
            
               <br></br>
               <Grid container spacing={3} width={'70vw'}>
 
-                <Grid item xs={12}>
-                  <DatePicker
-                    fullWidth
-                    name="Death.Date"
-                    label="Death Date"
+              <Grid item xs={6}>
+                <TextField
+                  label="Death date"
+                  name="Deathdate"
+                  value={formik.values.date}
+                  onChange={formik.handleChange}
+                  fullWidth
                   />
-                </Grid>
+              </Grid>
 
                 <Grid item xs={12}>
                   <TextField
                     fullWidth
                     label="Death Detail"
-                    name="Death.Detail"
+                    name="Death Detail"
+                    value={formik.values.detail}
+                    onChange={formik.handleChange}
                     multiline
                     rows={3}
                   />
@@ -72,9 +119,9 @@ function DeathForm() {
                 </Grid>
 
               </Grid>
-            </Collapsible>
-          </Form>
-        </Formik>
+            
+          </form>
+         
       </div>
     </Container>
 
