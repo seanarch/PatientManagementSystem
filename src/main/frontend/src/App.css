@@ -43,22 +43,37 @@ main.login__form {
 
 }
 
-/*.background img{
+*.background img{
   display: block;
   width: 100%;
   opacity: 0.6;
 }
-*/
+
 div.container{
-  position: relative;
-  border-style: groove;
-  border-width: 3px;
-  border-color:#474747;
-  background-color: white;
-  width: 1300px;
-  left: -130px;
-  padding-top: 0px;
-  padding-bottom: 15px;
+  form{
+    position: relative;
+    width: fit-content;
+    block-size: fit-content;
+    border-style: groove;
+    border-width: 3px;
+    border-color:#474747;
+    background-color: white;
+    width: 1300px;
+    left: -130px;
+    padding-top: 0px;
+    padding-bottom: 15px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+    padding-left: 30px;
+  }  
+}
+div.sign_in{
+
+  padding-top: 20px;
+  padding-bottom: 25px;
+  text-align: center;
+  display: inline-block;
+  border-style: dotted;
 }
 h3{
   padding-top: auto;
