@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import { FormControl, InputLabel, Select, MenuItem, Box, Container } from '@material-ui/core';
+import { FormControl, InputLabel, Grid, Select, MenuItem, Box, Container } from '@material-ui/core';
 import TextField from '@mui/material/TextField';
 import { Button } from 'reactstrap';
 import { ToastContainer, toast } from 'react-toastify';
@@ -40,17 +40,15 @@ const Other = () => {
         }
     })
     return (
-        <div>
-       
-            <Container maxWidth="md">
-                <div className='container' style={{
-                    display: 'flex', justifyContent:
-                        'center', alignItems: 'center', marginTop: '50px', lineHeight: '10px'
-                }}>
-                    <Box component="form" style={{ width: '70vw' }} onSubmit={otherForm.handleSubmit}>
-                        <h3>Patient Exam</h3>
-
-                        <Box mb={3}>
+        <Container maxWidth="md" >
+            <div className='container' style={{
+                display: 'flex', justifyContent:
+                    'center', alignItems: 'center', marginTop: '70px', marginBottom: '25px'
+            }}>
+                <form onSubmit={otherForm.handleSubmit}>
+                <h3>Patient Exam</h3>
+                    <Grid container spacing={3} width={'70vw'}>
+                        <Grid item xs={12}>
                             <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">CNS</InputLabel>
 
@@ -68,9 +66,9 @@ const Other = () => {
                                     <MenuItem value={9}>Not performed</MenuItem>
                                 </Select>
                             </FormControl>
-                        </Box>
+                        </Grid>
 
-                        <Box mb={3}>
+                        <Grid item xs={12}>
                             <FormControl fullWidth >
                                 <InputLabel id="demo-simple-select-label">Lung</InputLabel>
                                 <Select
@@ -86,9 +84,9 @@ const Other = () => {
                                     <MenuItem value={9}>Not performed</MenuItem>
                                 </Select>
                             </FormControl>
-                        </Box>
+                        </Grid>
 
-                        <Box mb={3}>
+                        <Grid item xs={12}>
                             <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">HN</InputLabel>
                                 <Select
@@ -104,9 +102,9 @@ const Other = () => {
                                     <MenuItem value={9}>Not performed</MenuItem>
                                 </Select>
                             </FormControl>
-                        </Box>
+                        </Grid>
 
-                        <Box mb={3}>
+                        <Grid item xs={12}>
                             <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">Oral</InputLabel>
                                 <Select
@@ -122,9 +120,9 @@ const Other = () => {
                                     <MenuItem value={9}>Not performed</MenuItem>
                                 </Select>
                             </FormControl>
-                        </Box>
+                        </Grid>
 
-                        <Box mb={3}>
+                        <Grid item xs={12}>
                             <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">Cardiac</InputLabel>
                                 <Select
@@ -140,9 +138,9 @@ const Other = () => {
                                     <MenuItem value={9}>Not performed</MenuItem>
                                 </Select>
                             </FormControl>
-                        </Box>
+                        </Grid>
 
-                        <Box mb={3}>
+                        <Grid item xs={12}>
                             <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">MSK</InputLabel>
                                 <Select
@@ -158,10 +156,10 @@ const Other = () => {
                                     <MenuItem value={9}>Not performed</MenuItem>
                                 </Select>
                             </FormControl>
-                        </Box>
+                        </Grid>
 
                         {/* Peripheral is displayed according to doctor's existing UI, however it's only the foreign key, instead of table name, which should be Skin */}
-                        <Box mb={3}>
+                        <Grid item xs={12}>
                             <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">Peripheral/Skin </InputLabel>
                                 <Select
@@ -177,9 +175,9 @@ const Other = () => {
                                     <MenuItem value={9}>Not performed</MenuItem>
                                 </Select>
                             </FormControl>
-                        </Box>
+                        </Grid>
 
-                        <Box mb={3}>
+                        <Grid item xs={12}>
                             <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">Adbo</InputLabel>
                                 <Select
@@ -195,8 +193,8 @@ const Other = () => {
                                     <MenuItem value={9}>Not performed</MenuItem>
                                 </Select>
                             </FormControl>
-                        </Box>
-                        <Box mb={3}>
+                        </Grid>
+                        <Grid item xs={12}>
                             <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">Supine</InputLabel>
                                 <Select
@@ -214,9 +212,9 @@ const Other = () => {
                                     <MenuItem value={4}>Not performed</MenuItem>
                                 </Select>
                             </FormControl>
-                        </Box>
+                        </Grid>
 
-                        <Box mb={3}>
+                        <Grid item xs={12}>
                             <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">Breath</InputLabel>
                                 <Select
@@ -241,9 +239,9 @@ const Other = () => {
                                     </MenuItem>
                                 </Select>
                             </FormControl>
-                        </Box>
+                        </Grid>
 
-                        <Box mb={3}>
+                        <Grid item xs={12}>
                             <TextField fullWidth
                                 id="outlined-multiline-static"
                                 name="ABNORMAL.Description"
@@ -253,13 +251,17 @@ const Other = () => {
                                 onChange={otherForm.handleChange}
                                 value={otherForm.values.ABNORMAL.Description}
                             />
-                        </Box>
+                        </Grid>
+                        <Grid item xs={12}>
                         <Button onClick={notify} color="primary" type="submit" >Save</Button>
                         <ToastContainer />
-                    </Box>
-                </div>
-            </Container>
-        </div>
+                        </Grid>
+                    </Grid>
+                </form>
+            </div>
+
+        </Container>
+
     )
 }
 

@@ -8,6 +8,7 @@ import axios from "axios";
 import Collapsible from 'react-collapsible';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { textAlign } from '@material-ui/system';
 
 const INITIAL_VALUES = {
     Symptom1: {
@@ -69,7 +70,7 @@ function Symptons() {
   return (   <Container maxWidth="md">
   <div className='container' style={{
       display: 'flex', justifyContent:
-          'center', alignItems: 'center', marginTop: '50px'
+          'center', alignItems: 'center', marginTop: '50px', marginBottom: '25px'
   }}>
       <Formik initialValues={{ ...INITIAL_VALUES }} onSubmit={values => {
           console.log(values) 
@@ -77,8 +78,7 @@ function Symptons() {
 >
           {props => (
               <Form>
-                  <h3>Symptoms</h3>
-                  <Collapsible trigger="[+]">
+                  <Collapsible trigger="Symptoms" triggerTagName='h3' overflowWhenOpen="inherit">
                       <br></br>
                   <Grid container spacing={3} width={'70vw'}>
                       <Grid item xs={6}>

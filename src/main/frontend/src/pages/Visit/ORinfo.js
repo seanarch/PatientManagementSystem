@@ -53,9 +53,7 @@ function ORinfo() {
 >
                 {props => (
                     <Form>
-                        <h3>OR Information</h3>
-
-                        <Collapsible trigger="[+]">
+                        <Collapsible trigger="OR Information" triggerTagName='h3'  overflowWhenOpen="inherit">
                       <br></br>
                         <Grid container spacing={3} width={'70vw'}>
                             <Grid item xs={6}>

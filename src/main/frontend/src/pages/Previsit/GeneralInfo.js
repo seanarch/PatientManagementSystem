@@ -41,10 +41,9 @@ function GeneralInfo() {
 >
                 {props => (
                     <Form>
-                        <h3>General Information</h3>
-                        <Collapsible trigger="[+]">
+                        <Collapsible  trigger="General Information" triggerTagName='h3'  overflowWhenOpen="inherit" >
                         <br></br>
-                        <Grid container spacing={3} width={'70vw'}>
+                        <Grid container spacing={3} width={'70vw'} >
                             <Grid item xs={6}>
                                 <DatePicker
                                         fullWidth

@@ -46,8 +46,7 @@ function Fhxdetail() {
 >
                 {props => (
                     <Form>
-                        <h3>Fhx Information</h3>
-                        <Collapsible trigger="[+]">
+                        <Collapsible trigger="Fhx Information" triggerTagName='h3'  overflowWhenOpen="inherit">
                       <br></br>
 
                         <Grid container spacing={3} width={'70vw'}>

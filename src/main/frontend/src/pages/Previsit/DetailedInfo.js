@@ -45,10 +45,9 @@ function DetailedInfo() {
 >
                 {props => (
                     <Form>
-                        <h3>Detailed Information</h3>
-                        <Collapsible trigger="[+]">
+                        <Collapsible trigger="Detailed Information" triggerTagName='h3'  overflowWhenOpen="inherit">
                         <br></br>
-                        <Grid container spacing={3} width={'70vw'}>
+                        <Grid container spacing={3} width={'70vw'} >
                             <Grid item xs={6}>
                                 <DatePicker
                                         fullWidth
@@ -99,7 +98,7 @@ function DetailedInfo() {
                                     />
                                 </Grid>
 
-                            <Grid item xs={11}>
+                            <Grid item xs={12} >
                                 <h5>Cognitive Performance Scale</h5>
                                 <br/><br/>
                                 <Slider
@@ -111,13 +110,14 @@ function DetailedInfo() {
                                     max={10}
                                     name="DetailedInformation.CPScore"
                                     label="CPScore"
+                                    
                                     />
                                                                     
                                 </Grid>
                                 <hr></hr>
 
                                 <Grid item xs={12}>
-                                    <Button color='primary' type="submit" onClick={notify}>Save</Button>
+                                    <Button color='primary' type="submit"  onClick={notify}>Save</Button>
                                     <ToastContainer />
                                 </Grid>
                             </Grid>

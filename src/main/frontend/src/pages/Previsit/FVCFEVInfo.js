@@ -35,7 +35,7 @@ function FVCFEVInfo() {
         <Container maxWidth="md">
         <div className='container' style={{
             display: 'flex', justifyContent:
-                'center', alignItems: 'center', marginTop: '50px'
+                'center', alignItems: 'center', marginTop: '50px',marginBottom: '25px'
         }}>
             <Formik initialValues={{ ...INITIAL_VALUES }} onSubmit={values => {
                 console.log(values) 
@@ -43,8 +43,7 @@ function FVCFEVInfo() {
 >
                 {props => (
                     <Form>
-                        <h3>FVC FEV Information</h3>
-                        <Collapsible trigger="[+]">
+                        <Collapsible trigger="FVC FEV Information" triggerTagName='h3'  overflowWhenOpen="inherit">
                          <br></br>
                         <Grid container spacing={3} width={'70vw'}>
                             <Grid item xs={6}>

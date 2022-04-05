@@ -47,7 +47,7 @@ function RegisterForm() {
         <Container maxWidth="md">
             <div className='container' style={{
                 display: 'flex', justifyContent:
-                    'center', alignItems: 'center', marginTop: '50px'
+                    'center', alignItems: 'center', marginTop: '50px', marginBottom: '25px'
             }}>
                 <Formik initialValues={{ ...INITIAL_VALUES }} onSubmit={values => {
                     console.log(values)//once submit, provide value for back end
@@ -55,8 +55,7 @@ function RegisterForm() {
                 >
                     {props => (
                         <Form>
-                            <h3>Create New Patient</h3>
-                            <Collapsible trigger="[+]">
+                            <Collapsible  trigger="Create New Patient" triggerTagName='h3'   overflowWhenOpen="inherit">
                                 <br></br>
                                 <Grid container spacing={3} width={'70vw'}>
                                     <Grid item xs={6}>
