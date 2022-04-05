@@ -38,7 +38,13 @@ function PatientInfo() {
                   },
                   body: `{
                            "id": 172867100,
-                           "lastname": "${values.lastname}"
+                           "lastname": "${values.lastname}",
+                           "firstname": "${values.firstname}",
+                           "sex": "${values.sex}",
+                           "birthday": "${values.birthday}",
+                           "print": "${values.print}",
+                           "tg": "${values.tg}",
+                           "location": "${values.location}"
                          }`
                 }
               );
