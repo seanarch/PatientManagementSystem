@@ -31,7 +31,7 @@ export default function SearchPatient() {
                         <input type='text' list='searchFirstName' className='search__bar--search-box' placeholder='Search FirstName' />
                         <datalist id='searchFirstName'>
                             {patientDetails.slice(0, 15).map((value, key) => {
-                                console.log(value);
+                              //  console.log(value);
                                 return (
                                     <option>{value.firstname}</option>
                                 );
