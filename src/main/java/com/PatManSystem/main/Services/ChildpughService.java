@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Service
 public class ChildpughService {
 
-    private ChildpughRepository childpughRepository;
+    private final ChildpughRepository childpughRepository;
 
     @Autowired
     public ChildpughService(ChildpughRepository childpughRepository){
@@ -31,9 +31,7 @@ public class ChildpughService {
     public List<ChildpughDTO> getChildpughs(){
         return childpughRepository.findAll()
                 .stream()
-                .map(childpugh -> {
-                    return new ChildpughMapperImpl().childpughToChildpughDTO(childpugh);
-                })
+                .map(new ChildpughMapperImpl()::childpughToChildpughDTO)
                 .collect(Collectors.toList());
     }
     @SneakyThrows
@@ -54,7 +52,6 @@ public class ChildpughService {
 
         childpughRepository.findById(id).orElseThrow(() -> new ChildPughNotFound(id)); //find the entity by its id, if it cannot be found throw a NotFound exception, otherwise continue
         childpughRepository.deleteById(id);
-
 
     }
     public void updateChildpugh(ChildpughDTO DTO){
