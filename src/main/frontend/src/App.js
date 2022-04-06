@@ -11,6 +11,7 @@ import Other from './pages/Other/other';
 import Endvisit from './pages/endvisit';
 import NotFound from './pages/NotFound';
 import LoginForm from './pages/LoginForm';
+import Endvisitform from './pages/Endvisit/Endvisitform';
 
 
 
@@ -27,7 +28,7 @@ function App() {
           <Route path="/previsit" element={<Previsit />} />
           <Route path="/visit" element={<Visit />} />
           <Route path="/other" element={<Other />} />
-          <Route path="/endvisit" element={<Endvisit />} />
+          <Route path="/endvisit" element={<Endvisitform />} />
           <Route path="/signin" element={<LoginForm />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
