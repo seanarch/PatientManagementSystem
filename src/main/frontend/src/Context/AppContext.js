@@ -9,6 +9,9 @@ export const AppState = ({ children }) => {
         e.preventDefault();
         //Log form values to console
         console.log(loginDetails);
+
+        //save login detail for user session
+        setLoginDetails(loginDetails);
     }
 
     useEffect(() => {

@@ -1,66 +1,60 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../Context/AppContext';
-import UserImage from '../images/User-profile-image.webp';
-import { Form, FormGroup, Label, Col, Input, Button } from 'reactstrap';
+import { Button } from 'reactstrap';
+import { Container, Grid, TextField, Box } from '@material-ui/core';
 
 const LoginForm = () => {
 
     const { loginDetails, setLoginDetails, handleLoginFormSubmit } = useContext(AppContext);
 
     return (
-        <main className="login__form">
-            <div className="register__form">
-                <h3 className='text-center mb-5'>Welcome</h3>
-                <div className='d-flex justify-content-center align-items-center'>
-                    <img src={UserImage} className="user__image" alt="User" />
-                </div>
-                
-                <Form onSubmit={handleLoginFormSubmit}>
-                    <FormGroup row>
-                        <Label
-                            for="username"
-                            sm={3}
-                        >
-                            Username
-                        </Label>
-                        <Col sm={9}>
-                            <Input
-                                id="username"
-                                name="username"
-                                placeholder="First Name"
+        <Container maxWidth="md">
+            <div className='container' style={{
+                display: 'flex', justifyContent:
+                    'center', alignItems: 'center', marginTop: '50px'
+            }}>
+
+
+                <form width={'30vw'} onSubmit={handleLoginFormSubmit} >
+                    <h3>Welcome to PMS</h3>
+                    <Box mb={5} mt={5}><h4>Sign In</h4></Box>
+
+                    <Grid container spacing={3}>
+                        <Grid item xs={12}>
+                            <TextField
+                                id="userName"
+                                label="Username"
+                                name="userName"
+                                required
                                 value={loginDetails.userName}
-                                type="text"
-                                aria-required="true"
                                 onChange={(e) => setLoginDetails({ ...loginDetails, userName: e.target.value })}
+                                fullWidth
                             />
-                        </Col>
-                    </FormGroup>
-                    <FormGroup row>
-                        <Label
-                            for="password"
-                            sm={3}
-                        >
-                            Password
-                        </Label>
-                        <Col sm={9}>
-                            <Input
+                        </Grid>
+
+                        <Grid item xs={12}>
+                            <TextField
                                 id="password"
+                                label="Password"
                                 name="password"
-                                value={loginDetails.password}
-                                placeholder="********"
+                                required
                                 type="password"
-                                aria-required="true"
+                                value={loginDetails.password}
                                 onChange={(e) => setLoginDetails({ ...loginDetails, password: e.target.value })}
+                                fullWidth
                             />
-                        </Col>
-                    </FormGroup>
-                    <Button>
-                        Submit
-                    </Button>
-                </Form>
-               
+                        </Grid>
+
+                        <Grid item xs={12} >
+                            <Button color="primary" type="submit" >Save</Button>
+                        </Grid>
+                    </Grid>
+
+
+                </form>
+
             </div>
-        </main>
+        </Container>
 
     )
 }

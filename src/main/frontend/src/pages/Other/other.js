@@ -161,12 +161,12 @@ const Other = () => {
                         {/* Peripheral is displayed according to doctor's existing UI, however it's only the foreign key, instead of table name, which should be Skin */}
                         <Grid item xs={12}>
                             <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Peripheral/Skin </InputLabel>
+                                <InputLabel id="demo-simple-select-label">Peripheral / Skin </InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
                                     name="Skin.ECOG"
-                                    label="Skin"
+                                    label="Peripheral / Skin"
                                     onChange={otherForm.handleChange}
                                     value={otherForm.values.Skin.ECOG}
                                 >
