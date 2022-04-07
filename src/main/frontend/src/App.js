@@ -11,8 +11,7 @@ import Other from './pages/Other/other';
 import Endvisit from './pages/endvisit';
 import NotFound from './pages/NotFound';
 import LoginForm from './pages/LoginForm';
-
-
+import PatientDetails from './components/SeePatientDetails';
 
 
 function App() {
@@ -29,6 +28,7 @@ function App() {
           <Route path="/other" element={<Other />} />
           <Route path="/endvisit" element={<Endvisit />} />
           <Route path="/signin" element={<LoginForm />} />
+          <Route path="/details" element={<PatientDetails />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </AppState>
