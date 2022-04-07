@@ -7,7 +7,7 @@ import {
     ModalHeader, ModalBody
 } from "reactstrap"
 
-export default function SearchPatient() {
+export default function SeePatientDetails() {
 
     const { patientDetails, filteredData, handleFilter, wordEntered, setPatientDetails, toggle, modal, selectedPatient, handleSearch, setSearchId, searchId } = useContext(AppContext);
 
@@ -38,7 +38,7 @@ export default function SearchPatient() {
                         </datalist>
                     </div>*/}
                     <div className='col-6'>
-                        <form className='search__bar--form' onSubmit={handleSearch}>
+                        <form onSubmit={handleSearch}>
                             <input type='text' value={searchId} onChange={e => setSearchId(e.target.value)} list='searchULI' className='search__bar--search-box' placeholder='Search ULI and press ENTER' />
                             <datalist id='searchULI'>
                                 {patientDetails.slice(0, 15).map((value, key) => {
@@ -65,26 +65,17 @@ export default function SearchPatient() {
                             <th>Details</th>
                         </thead>
                         <tbody>
-                            {filteredData.length !== 0 && (
-
-                                filteredData.slice(0, 15).map((value, index) => {
-                                    return (
-                                        <tr>
-                                            <td>{index + 1}</td>
-                                            <td>{value.firstname}</td>
-                                            <td>{value.lastname}</td>
-                                            <td>{value.sex}</td>
-                                            <td>{value.birthday}</td>
-                                            <td>
-                                                <form onSubmit={setPatientDetails}>
-                                                    <input type='hidden' value={value.id} />
-                                                    <button type="submit" onClick={toggle} className='see__details--button'>See Details</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    );
-                                })
-
+                            {selectedPatient !== null && (
+                                <tr>
+                                    <td>1</td>
+                                    <td>{selectedPatient.firstname}</td>
+                                    <td>{selectedPatient.lastname}</td>
+                                    <td>{selectedPatient.sex}</td>
+                                    <td>{selectedPatient.birthday}</td>
+                                    <td>
+                                        <button type="submit" onClick={toggle} className='see__details--button'>See Details</button>
+                                    </td>
+                                </tr>
                             )}
                         </tbody>
                     </Table>
