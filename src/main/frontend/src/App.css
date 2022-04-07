@@ -54,6 +54,26 @@ main.login__form {
 }
 
 
+div.container {
+  form {
+    position: relative;
+    width: fit-content;
+    block-size: fit-content;
+    border-style: groove;
+    border-width: 3px;
+    border-color: #474747;
+    background-color: white;
+    width: 1300px;
+    left: -130px;
+    padding-top: 0px;
+    padding-bottom: 15px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+    padding-left: 30px;
+  }
+}
+
+
 div.sign_in {
 
   padding-top: 20px;
