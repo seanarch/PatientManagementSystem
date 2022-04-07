@@ -73,7 +73,6 @@ div.container {
   }
 }
 
-
 div.sign_in {
 
   padding-top: 20px;
@@ -140,4 +139,8 @@ input.search__bar--search-box {
   height: 40px;
   width: 100%;
   padding-left: 10px;
+}
+
+.btn1, .btn2{ 
+  margin: 0 2px; 
 }
