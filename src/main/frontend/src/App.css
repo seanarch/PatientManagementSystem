@@ -9,22 +9,26 @@
 
 main.login__form {
   margin-top: 54px;
-    margin-bottom: 54px;
-    display: flex !important;
-    justify-content: center;
+  margin-bottom: 54px;
+  display: flex !important;
+  justify-content: center;
 }
+
 .register__form {
   width: 580px;
   margin-bottom: 40px;
   border: 1px solid #e5e5e5;
   border-radius: 30px;
   padding: 20px 40px;
-  box-shadow: 0 2px 18px rgba(0,0,0,0.25), 0 2px 2px rgba(0,0,0,0.22);
+  box-shadow: 0 2px 18px rgba(0, 0, 0, 0.25), 0 2px 2px rgba(0, 0, 0, 0.22);
 }
-.register__form input, .register__form select {
+
+.register__form input,
+.register__form select {
   border: 2px solid #bababa;
   border-radius: 8px;
 }
+
 .user__image {
   width: 150px;
   height: 150px;
@@ -33,7 +37,7 @@ main.login__form {
   margin-bottom: 30px;
 }
 
-.background{
+.background {
   position: fixed;
   top: 0;
   left: 0;
@@ -43,13 +47,13 @@ main.login__form {
 
 }
 
-*.background img{
+*.background img {
   display: block;
   width: 100%;
   opacity: 0.6;
 }
 
-div.sign_in{
+div.sign_in {
 
   padding-top: 20px;
   padding-bottom: 25px;
@@ -57,7 +61,8 @@ div.sign_in{
   display: inline-block;
   border-style: dotted;
 }
-h3{
+
+h3 {
   padding-top: auto;
   text-align: center;
   color: white;
@@ -68,7 +73,7 @@ h3{
 }
 
 
-form{
+form {
   position: relative;
   width: fit-content;
   block-size: fit-content;
@@ -78,6 +83,7 @@ form{
   background-color: black;
   color: white;
 }
+
 .light-mode {
   background-color: white;
   color: black;
@@ -87,6 +93,26 @@ form{
   height: 80px;
   padding: 0.5rem calc((100vw - 1000px) / 2);
   z-index: 10;
+}
+
+.search__bar--table-container {
+  height: auto;
+  padding: 0.5rem calc((100vw - 1000px) / 2);
+  z-index: 10;
+}
+
+.see__details--button {
+  border-radius: 4px;
+  background: #0074BC;
+  padding: 10px 22px;
+  color: #fff;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 input.search__bar--search-box {
