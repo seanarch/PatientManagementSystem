@@ -1,8 +1,8 @@
-import React from 'react';
-import { Formik, Form, Field } from 'formik';
+import React, {useEffect} from 'react';
+import { useFormik, Formik, Form, Field } from 'formik';
 import { Button } from 'reactstrap';
 import { Container, Grid, InputLabel, Select, MenuItem, FormControl, Checkbox } from '@material-ui/core';
-import TextField from '../../components/TextField/TextField';
+import { TextField } from '@material-ui/core'; 
 import DatePicker from '../../components/Date/DatePicker';
 import axios from "axios"; 
 import Collapsible from 'react-collapsible';
@@ -10,54 +10,114 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { textAlign } from '@material-ui/system';
 
-const INITIAL_VALUES = {
-    Symptom1: {
-        Date1: "2021-03-17",
-        Date2: "2021-03-17",
-        Symptom: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", 
-    },
-    SymptomCheckbox1: {
-        Fevers: false,
-        SOB: false,
-        Nocturea: false,
-        BADL: false,
-        Cough: false,
-        Hesitancy: false,
-        IADLs: false,
-        Hemoptisis: false,
-        Hematurea: false,
-        WTLoss: false,
-        Wheeze: false,
-        Pneumature: false,
-        BackBone: false,
-        ChestPain: false,
-    },
-    SymptomCheckbox2: {
-        Headache: true,
-        AppetiteLost: true,
-        NauseaVo: true,
-        VisionCha: true,
-        ChewSwallow: true,
-        Heartburn: true,
-        Hearing:  true,
-        Abdominal: true,
-        BowelHab: true,
-        SpeechCha: true,
-        Hemeteme: true,
-        RectalBlee: true,
-        FocalWea: true,
-        Melena: true,
-    },
-    Symptom2: {
-        Date: "2021-04-22",
-        ECOG: "String",
-        Swallowing: "String",
-        Breathing: "String",
-    }
-}
+ 
  
 
 function Symptons() {
+
+    const userid = -2147216991;
+
+    const formik = useFormik({
+        enableReinitialize: true,
+        initialValues: {
+            date: "",
+            feversChills: 0,
+            appetiteLoss: 0,
+            difficultyChewing: 0,
+            abdominalPain: 0,
+            nauseaVomiting: 0,
+            heartburn: 0,
+            constipation: 0,
+            hemetemesis: 0,
+            melena: 0,
+            rectalBleed: 0,
+            nocturea: 0,
+            hesitancy: 0,
+            hematurea: 0,
+            pneumaturea: 0,
+            backBoneJointPain: 0,
+            sob: 0,
+            cough: 0,
+            hemoptisis: 0,
+            wheeze: 0,
+            chestPain: 0,
+            headaches: 0,
+            visionChanges: 0,
+            hearing: 0,
+            speechChanges: 0,
+            focalWeakness: 0,
+            ed: 0,
+            badls: 0,
+            iadls: 0 
+        },
+
+        onSubmit: async (values) => {
+            console.log(values);
+            try {
+            let result = await fetch(
+                `http://localhost:8080/api/reviewofsymptoms/update/`,
+                {
+                  method: "post",
+                  mode: "cors",
+                  headers: {
+                    "Content-Type": "application/json"
+                  },
+                  body: `{
+                           "id": "${userid}",
+                           "date": "${values.date}",
+                           "feversChills": "${values.feversChills}",
+                           "appetiteLoss": "${values.appetiteLoss}" ,
+                           "difficultyChewing": "${values.difficultyChewing}" ,
+                           "abdominalPain": "${values.abdominalPain}" ,
+                           "nauseaVomiting": "${values.nauseaVomiting}" ,
+                           "heartburn": "${values.heartburn}" ,
+                           "constipation": "${values.constipation}" ,
+                           "hemetemesis": "${values.hemetemesis}" ,
+                           "melena": "${values.melena}" ,
+                           "rectalBleed": "${values.rectalBleed}" ,
+                           "nocturea": "${values.nocturea}" ,
+                           "hesitancy": "${values.hesitancy}" ,
+                           "hematurea": "${values.hematurea}" ,
+                           "pneumaturea": "${values.pneumaturea}" ,
+                           "backBoneJointPain": "${values.backBoneJointPain}" ,
+                           "sob": "${values.sob}" ,
+                           "cough": "${values.cough}" ,
+                           "hemoptisis": "${values.hemoptisis}" ,
+                           "wheeze": "${values.wheeze}" ,
+                           "chestPain": "${values.chestPain}" ,
+                           "headaches": "${values.headaches}" ,
+                           "visionChanges": "${values.visionChanges}",
+                           "hearing": "${values.hearing}" ,
+                           "speechChanges": "${values.speechChanges}" ,
+                           "focalWeakness": "${values.focalWeakness}" ,
+                           "ed": "${values.ed}" ,
+                           "badls": "${values.badls}" ,
+                           "iadls": "${values.iadls}"    
+                         }`
+                }
+              );
+              console.log("Submited: " + result);
+            } catch (e) {
+              console.log(e);
+            }
+          }
+        });
+      
+        useEffect(() => {
+          (async () => {
+            try {
+              let response = await fetch(
+                `http://localhost:8080/api/reviewofsymptoms/id=${userid}`
+              );
+              let content = await response.json();
+              formik.setValues(content);
+              // formik.setFieldValue("email", content[0].email);
+            } catch (e) {
+              console.log(e);
+            }
+          })();
+          // eslint-disable-next-line react-hooks/exhaustive-deps
+        }, []);
 
     const notify = () => {
      
@@ -72,257 +132,303 @@ function Symptons() {
       display: 'flex', justifyContent:
           'center', alignItems: 'center', marginTop: '50px', marginBottom: '25px'
   }}>
-      <Formik initialValues={{ ...INITIAL_VALUES }} onSubmit={values => {
-          console.log(values) 
-      }}
->
-          {props => (
-              <Form>
+    
+              <form onSubmit={formik.handleSubmit}>
                   <Collapsible trigger="Symptoms" triggerTagName='h3' overflowWhenOpen="inherit">
                       <br></br>
                   <Grid container spacing={3} width={'70vw'}>
-                      <Grid item xs={6}>
-                          <DatePicker
-                                  fullWidth
-                                  name="Symptom1.Date1"
-                                  label="Date1"
-                              />
-                          </Grid>
-                      <Grid item xs={6}>
-                          <DatePicker
-                                  fullWidth
-                                  name="Symptom1.Date2"
-                                  label="Date2"
-                              />
-                          </Grid>
-
-                          <Grid item xs={12}>
-                                    <TextField
+                
+                  <Grid item xs={12}>
+                                <TextField
                                         fullWidth
-                                        label="Symptom"
-                                        name="Symptom1.Symptom"
-                                        multiline
-                                        rows={4}
+                                        label="Date"
+                                        name="date"
+                                        value={formik.values.date}
+                                        onChange={formik.handleChange}
+                                         
                                     />
+                                </Grid>
+
+                                <Grid item xs={3}>
+
+                                    <h5>FeversChills</h5>
+                                    <input type="checkbox" 
+                                    name="feversChills"
+                                    checked={formik.values.feversChills} 
+                                    onChange={formik.handleChange}/>
+
                                     </Grid>
 
-                            <Grid item xs={3}>
-                            <h5>Fevers</h5>
-                                <label>
-                                    <Field type="checkbox" name="SymptomCheckbox1.Fevers" />
-                                </label>
-                            </Grid>
+                                <Grid item xs={3}>
 
-                            <Grid item xs={3}>
-                            <h5>SOB</h5>
-                                <label>
-                                    <Field type="checkbox" name="SymptomCheckbox1.SOB" />
-                                </label>
-                            </Grid>
+                                    <h5>AppetiteLoss</h5>
+                                    <input type="checkbox" 
+                                    name="appetiteLoss"
+                                    checked={formik.values.appetiteLoss} 
+                                    onChange={formik.handleChange}/>
 
-                            <Grid item xs={3}>
-                            <h5>Nocturea</h5>
-                                <label>
-                                    <Field type="checkbox" name="SymptomCheckbox1.Nocturea" />
-                                </label>
-                            </Grid>
+                                    </Grid>
 
-                            <Grid item xs={3}>
-                            <h5>BADL</h5>
-                                <label>
-                                    <Field type="checkbox" name="SymptomCheckbox1.BADL" />
-                                </label>
-                            </Grid>
+                                <Grid item xs={3}>
 
-                            <Grid item xs={3}>
-                            <h5>Cough</h5>
-                                <label>
-                                    <Field type="checkbox" name="SymptomCheckbox1.Cough" />
-                                </label>
-                            </Grid>
+                                    <h5>Chewing</h5>
+                                    <input type="checkbox" 
+                                    name="difficultyChewing"
+                                    checked={formik.values.difficultyChewing} 
+                                    onChange={formik.handleChange}/>
 
-                            <Grid item xs={3}>
-                            <h5>Hesitancy</h5>
-                                <label>
-                                    <Field type="checkbox" name="SymptomCheckbox1.Hesitancy" />
-                                </label>
-                            </Grid>
+                                    </Grid>
 
-                            <Grid item xs={3}>
-                            <h5>IADLs</h5>
-                                <label>
-                                    <Field type="checkbox" name="SymptomCheckbox1.IADLs" />
-                                </label>
-                            </Grid>
+                                <Grid item xs={3}>
 
-                            <Grid item xs={3}>
-                            <h5>Hemoptisis</h5>
-                                <label>
-                                    <Field type="checkbox" name="SymptomCheckbox1.Hemoptisis" />
-                                </label>
-                            </Grid>
+                                    <h5>AbdominalPain</h5>
+                                    <input type="checkbox" 
+                                    name="abdominalPain"
+                                    checked={formik.values.abdominalPain} 
+                                    onChange={formik.handleChange}/>
 
-                            <Grid item xs={3}>
-                            <h5>WTLoss</h5>
-                                <label>
-                                    <Field type="checkbox" name="SymptomCheckbox1.WTLoss" />
-                                </label>
-                            </Grid>
+                                    </Grid>
 
-                            <Grid item xs={3}>
-                            <h5>Wheeze</h5>
-                                <label>
-                                    <Field type="checkbox" name="SymptomCheckbox1.Wheeze" />
-                                </label>
-                            </Grid>
+                                <Grid item xs={3}>
 
-                            <Grid item xs={3}>
-                            <h5>Pneumature</h5>
-                                <label>
-                                    <Field type="checkbox" name="SymptomCheckbox1.Pneumature" />
-                                </label>
-                            </Grid>
+                                    <h5>Vomiting</h5>
+                                    <input type="checkbox" 
+                                    name="nauseaVomiting"
+                                    checked={formik.values.nauseaVomiting} 
+                                    onChange={formik.handleChange}/>
 
-                            <Grid item xs={3}>
-                            <h5>BackBone</h5>
-                                <label>
-                                    <Field type="checkbox" name="SymptomCheckbox1.BackBone" />
-                                </label>
-                            </Grid>
+                                    </Grid>
 
-                            <Grid item xs={3}>
-                            <h5>ChestPain</h5>
-                                <label>
-                                    <Field type="checkbox" name="SymptomCheckbox1.ChestPain" />
-                                </label>
-                            </Grid>
+                                <Grid item xs={3}>
 
-                            <Grid item xs={3}>
-                            <h5>Headache</h5>
-                                <label>
-                                    <Field type="checkbox" name="SymptomCheckbox2.Headache" />
-                                </label>
-                            </Grid>
+                                    <h5>Heartburn</h5>
+                                    <input type="checkbox" 
+                                    name="heartburn"
+                                    checked={formik.values.heartburn} 
+                                    onChange={formik.handleChange}/>
 
-                            <Grid item xs={3}>
-                            <h5>AppetiteLost</h5>
-                                <label>
-                                    <Field type="checkbox" name="SymptomCheckbox2.AppetiteLost" />
-                                </label>
-                            </Grid>
+                                    </Grid>
 
-                            <Grid item xs={3}>
-                            <h5>NauseaVo</h5>
-                                <label>
-                                    <Field type="checkbox" name="SymptomCheckbox2.NauseaVo" />
-                                </label>
-                            </Grid>
+                                <Grid item xs={3}>
 
-                            <Grid item xs={3}>
-                            <h5>VisionCha</h5>
-                                <label>
-                                    <Field type="checkbox" name="SymptomCheckbox2.VisionCha" />
-                                </label>
-                            </Grid>
+                                    <h5>Constipation</h5>
+                                    <input type="checkbox" 
+                                    name="constipation"
+                                    checked={formik.values.constipation} 
+                                    onChange={formik.handleChange}/>
 
-                            <Grid item xs={3}>
-                            <h5>ChewSwallow</h5>
-                                <label>
-                                    <Field type="checkbox" name="SymptomCheckbox2.ChewSwallow" />
-                                </label>
-                            </Grid>
+                                    </Grid>
 
-                            <Grid item xs={3}>
-                            <h5>Heartburn</h5>
-                                <label>
-                                    <Field type="checkbox" name="SymptomCheckbox2.Heartburn" />
-                                </label>
-                            </Grid>
+                                <Grid item xs={3}>
 
-                            <Grid item xs={3}>
-                            <h5>Hearing</h5>
-                                <label>
-                                    <Field type="checkbox" name="SymptomCheckbox2.Hearing" />
-                                </label>
-                            </Grid>
+                                    <h5>Hemetemesis</h5>
+                                    <input type="checkbox" 
+                                    name="hemetemesis"
+                                    checked={formik.values.hemetemesis} 
+                                    onChange={formik.handleChange}/>
 
-                            <Grid item xs={3}>
-                            <h5>Abdominal</h5>
-                                <label>
-                                    <Field type="checkbox" name="SymptomCheckbox2.Abdominal" />
-                                </label>
-                            </Grid>
+                                    </Grid>
 
-                            <Grid item xs={3}>
-                            <h5>BowelHab</h5>
-                                <label>
-                                    <Field type="checkbox" name="SymptomCheckbox2.BowelHab" />
-                                </label>
-                            </Grid>
+                                <Grid item xs={3}>
 
-                            <Grid item xs={3}>
-                            <h5>SpeechCha</h5>
-                                <label>
-                                    <Field type="checkbox" name="SymptomCheckbox2.SpeechCha" />
-                                </label>
-                            </Grid>
+                                    <h5>Melena</h5>
+                                    <input type="checkbox" 
+                                    name="melena"
+                                    checked={formik.values.melena} 
+                                    onChange={formik.handleChange}/>
 
-                            <Grid item xs={3}>
-                            <h5>Hemeteme</h5>
-                                <label>
-                                    <Field type="checkbox" name="SymptomCheckbox2.Hemeteme" />
-                                </label>
-                            </Grid>
+                                    </Grid>
 
-                            <Grid item xs={3}>
-                            <h5>RectalBlee</h5>
-                                <label>
-                                    <Field type="checkbox" name="SymptomCheckbox2.RectalBlee" />
-                                </label>
-                            </Grid>
+                                <Grid item xs={3}>
 
-                            <Grid item xs={3}>
-                            <h5>FocalWea</h5>
-                                <label>
-                                    <Field type="checkbox" name="SymptomCheckbox2.FocalWea" />
-                                </label>
-                            </Grid>
+                                    <h5>RectalBleed</h5>
+                                    <input type="checkbox" 
+                                    name="rectalBleed"
+                                    checked={formik.values.rectalBleed} 
+                                    onChange={formik.handleChange}/>
 
-                            <Grid item xs={3}>
-                            <h5>Melena</h5>
-                                <label>
-                                    <Field type="checkbox" name="SymptomCheckbox2.Melena" />
-                                </label>
-                            </Grid>
- 
-                          <Grid item xs={6}>
-                          <DatePicker
-                                  fullWidth
-                                  name="Symptom2.Date"
-                                  label="Date"
-                              />
-                          </Grid>
+                                    </Grid>
 
-                          <Grid item xs={6}>
-                                    <TextField
-                                        name="Symptom2.ECOG"
-                                        label="ECOG"
-                                    />
-                                </Grid>                       
-                                
-                                <Grid item xs={6}>
-                                    <TextField
-                                        name="Symptom2.Swallowing"
-                                        label="Swallowing"
-                                    />
-                                </Grid>
+                                <Grid item xs={3}>
 
-                                <Grid item xs={6}>
-                                    <TextField
-                                        name="Symptom2.Breathing"
-                                        label="Breathing"
-                                    />
-                                </Grid>
+                                    <h5>Nocturea</h5>
+                                    <input type="checkbox" 
+                                    name="nocturea"
+                                    checked={formik.values.nocturea} 
+                                    onChange={formik.handleChange}/>
+
+                                    </Grid>
+
+                                <Grid item xs={3}>
+
+                                    <h5>Hesitancy</h5>
+                                    <input type="checkbox" 
+                                    name="nocturea"
+                                    checked={formik.values.hesitancy} 
+                                    onChange={formik.handleChange}/>
+
+                                    </Grid>
+
+                                <Grid item xs={3}>
+
+                                    <h5>Hematurea</h5>
+                                    <input type="checkbox" 
+                                    name="hematurea"
+                                    checked={formik.values.hematurea} 
+                                    onChange={formik.handleChange}/>
+
+                                    </Grid>
+
+                                <Grid item xs={3}>
+
+                                    <h5>Pneumaturea</h5>
+                                    <input type="checkbox" 
+                                    name="pneumaturea"
+                                    checked={formik.values.pneumaturea} 
+                                    onChange={formik.handleChange}/>
+
+                                    </Grid>
+
+                                <Grid item xs={3}>
+
+                                    <h5>BackBonePain</h5>
+                                    <input type="checkbox" 
+                                    name="backBoneJointPain"
+                                    checked={formik.values.backBoneJointPain} 
+                                    onChange={formik.handleChange}/>
+
+                                    </Grid>
+
+                                <Grid item xs={3}>
+
+                                    <h5>Sob</h5>
+                                    <input type="checkbox" 
+                                    name="sob"
+                                    checked={formik.values.sob} 
+                                    onChange={formik.handleChange}/>
+
+                                    </Grid>
+
+                                <Grid item xs={3}>
+
+                                    <h5>Cough</h5>
+                                    <input type="checkbox" 
+                                    name="cough"
+                                    checked={formik.values.cough} 
+                                    onChange={formik.handleChange}/>
+
+                                    </Grid>
+
+                                <Grid item xs={3}>
+
+                                    <h5>Hemoptisis</h5>
+                                    <input type="checkbox" 
+                                    name="hemoptisis"
+                                    checked={formik.values.hemoptisis} 
+                                    onChange={formik.handleChange}/>
+
+                                    </Grid>
+
+                                <Grid item xs={3}>
+
+                                    <h5>Wheeze</h5>
+                                    <input type="checkbox" 
+                                    name="wheeze"
+                                    checked={formik.values.wheeze} 
+                                    onChange={formik.handleChange}/>
+
+                                    </Grid>
+
+                                <Grid item xs={3}>
+
+                                    <h5>ChestPain</h5>
+                                    <input type="checkbox" 
+                                    name="chestPain"
+                                    checked={formik.values.chestPain} 
+                                    onChange={formik.handleChange}/>
+
+                                    </Grid>
+
+                                <Grid item xs={3}>
+
+                                    <h5>Headaches</h5>
+                                    <input type="checkbox" 
+                                    name="headaches"
+                                    checked={formik.values.headaches} 
+                                    onChange={formik.handleChange}/>
+
+                                    </Grid>
+
+                                <Grid item xs={3}>
+
+                                    <h5>VisionChanges</h5>
+                                    <input type="checkbox" 
+                                    name="visionChanges"
+                                    checked={formik.values.visionChanges} 
+                                    onChange={formik.handleChange}/>
+
+                                    </Grid>
+
+                                <Grid item xs={3}>
+
+                                    <h5>Hearing</h5>
+                                    <input type="checkbox" 
+                                    name="hearing"
+                                    checked={formik.values.hearing} 
+                                    onChange={formik.handleChange}/>
+
+                                    </Grid>
+
+                                <Grid item xs={3}>
+
+                                    <h5>SpeechChanges</h5>
+                                    <input type="checkbox" 
+                                    name="speechChanges"
+                                    checked={formik.values.speechChanges} 
+                                    onChange={formik.handleChange}/>
+
+                                    </Grid>
+
+                                <Grid item xs={3}>
+
+                                    <h5>FocalWeakness</h5>
+                                    <input type="checkbox" 
+                                    name="focalWeakness"
+                                    checked={formik.values.focalWeakness} 
+                                    onChange={formik.handleChange}/>
+
+                                    </Grid>
+
+                                <Grid item xs={3}>
+
+                                    <h5>Ed</h5>
+                                    <input type="checkbox" 
+                                    name="ed"
+                                    checked={formik.values.ed} 
+                                    onChange={formik.handleChange}/>
+
+                                    </Grid>
+
+                                <Grid item xs={3}>
+
+                                    <h5>Badls</h5>
+                                    <input type="checkbox" 
+                                    name="badls"
+                                    checked={formik.values.badls} 
+                                    onChange={formik.handleChange}/>
+
+                                    </Grid>
+
+                                <Grid item xs={3}>
+
+                                    <h5>Iadls</h5>
+                                    <input type="checkbox" 
+                                    name="iadls"
+                                    checked={formik.values.iadls} 
+                                    onChange={formik.handleChange}/>
+
+                                    </Grid>
+                
 
                           <Grid item xs={6}>
                               <Button onClick={notify} color='primary' type="submit">Save</Button>
@@ -332,9 +438,8 @@ function Symptons() {
                   
                   </Collapsible>
                   
-              </Form>
-          )}
-      </Formik>
+              </form>
+ 
   </div>
 </Container>
 )
