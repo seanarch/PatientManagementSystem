@@ -17,8 +17,10 @@ public interface DiagnosisMapper {
     @Mapping(source = "recurDescription", target = "recur.description")
     Diagnosis diagnosisDTOToDiagnosis(DiagnosisDTO diagnosisDTO);
 
+    @InheritInverseConfiguration(name = "diagnosisDTOToDiagnosis")
     DiagnosisDTO diagnosisToDiagnosisDTO(Diagnosis diagnosis);
 
+    @InheritConfiguration(name = "diagnosisDTOToDiagnosis")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateDiagnosisFromDiagnosisDTO(DiagnosisDTO diagnosisDTO, @MappingTarget Diagnosis diagnosis);
 }
