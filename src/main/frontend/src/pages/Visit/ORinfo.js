@@ -19,7 +19,7 @@ function ORinfo() {
         enableReinitialize: true,
         initialValues: {
             ordate: "",
-            locationId: "",
+            locationId: 0,
             orId: 0,
             sizePrimaryMm: 0,
             pathologyId: 0,
@@ -31,7 +31,7 @@ function ORinfo() {
             nodesTaken: "",
             m: "",
             stage: "",
-            lvsi: "",
+            lvsi: 0,
             periNeural: "",
             pathologyDescription: "",
         },
@@ -142,6 +142,25 @@ function ORinfo() {
                                 </label>
                             </Grid> */}
 
+                            <Grid item xs={6}>
+
+                            <h5>LVSI</h5>
+                            <input type="checkbox" 
+                            name="lvsi"
+                            checked={formik.values.lvsi} 
+                            onChange={formik.handleChange}/>
+
+                            </Grid>
+
+                            <Grid item xs={6}>
+
+                            <h5>periNeural</h5>
+                            <input type="checkbox" 
+                            name="periNeural"
+                            checked={formik.values.periNeural} 
+                            onChange={formik.handleChange}/>
+
+                            </Grid>
                             {/* <Grid item xs={6}>
                             <h5>LVSI</h5>
                                 <label>
