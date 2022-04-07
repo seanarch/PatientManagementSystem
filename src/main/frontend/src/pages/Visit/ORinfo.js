@@ -1,37 +1,95 @@
-import React from 'react';
-import { Formik, Form, Field } from 'formik';
+import React, { useEffect } from 'react';
+import { useFormik, Formik, Form, Field } from 'formik';
 import { Button } from 'reactstrap';
 import { Container, Grid, InputLabel, Select, MenuItem, FormControl, Checkbox } from '@material-ui/core';
-import TextField from '../../components/TextField/TextField';
+import { TextField } from "@material-ui/core/";
 import DatePicker from '../../components/Date/DatePicker';
 import axios from "axios"; 
 import Collapsible from 'react-collapsible'; 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
  
-
-const INITIAL_VALUES = {
-    ORInformation: {
-	ORdate: "2020-10-10",
-	Location: "location",
-	OR: 10,
-	Size: 10,
-	Pathology: 10,
-	Grade: "Grade",
-	Margin: "Margin",
-	T: "T string",
-	N: "N string",
-	Nve: "Nodes+ve string",
-	Ntaken: "Nodes taken",
-	M: "M string",
-	Stage: "Stage string",
-	LVSI: true,
-	Peri: false,
-	Pathology: 10,
-    },
-}
+ 
 
 function ORinfo() {
+
+    const userid = -2145721333;
+
+    const formik = useFormik({
+        enableReinitialize: true,
+        initialValues: {
+            ordate: "",
+            locationId: "",
+            orId: 0,
+            sizePrimaryMm: 0,
+            pathologyId: 0,
+            grade: "",
+            margin: "",
+            t: "",
+            n: "",
+            nodesVe: "",
+            nodesTaken: "",
+            m: "",
+            stage: "",
+            lvsi: "",
+            periNeural: "",
+            pathologyDescription: "",
+        },
+
+        onSubmit: async (values) => {
+            console.log(values);
+            try {
+            let result = await fetch(
+                `http://localhost:8080/api/diagnosis/update/`,
+                {
+                  method: "post",
+                  mode: "cors",
+                  headers: {
+                    "Content-Type": "application/json"
+                  },
+                  body: `{
+                           "id": "${userid}",
+                           "ordate": "${values.ordate}",
+                           "locationId": "${values.locationId}",
+                           "orId": "${values.orId}",
+                           "sizePrimaryMm": "${values.sizePrimaryMm}",
+                           "pathologyId": "${values.pathologyId}",
+                           "grade": "${values.grade}",
+                           "margin": "${values.margin}",
+                           "t": "${values.t}",
+                           "n": "${values.n}",
+                           "nodesVe": "${values.nodesVe}",
+                           "nodesTaken": "${values.nodesTaken}",
+                           "m": "${values.m}",
+                           "stage": "${values.stage}",
+                           "lvsi": "${values.lvsi}",
+                           "periNeural": "${values.periNeural}",
+                           "pathologyDescription": "${values.pathologyDescription}"
+                         }`
+                }
+              );
+              console.log("Submited: " + result);
+            } catch (e) {
+              console.log(e);
+            }
+          }
+        });
+
+        useEffect(() => {
+            (async () => {
+              try {
+                let response = await fetch(
+                  `http://localhost:8080/api/diagnosis/id=${userid}`
+                );
+                let content = await response.json();
+                formik.setValues(content);
+                // formik.setFieldValue("email", content[0].email);
+              } catch (e) {
+                console.log(e);
+              }
+            })();
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+          }, []);
     
     const notify = () => {
      
@@ -47,93 +105,165 @@ function ORinfo() {
             display: 'flex', justifyContent:
                 'center', alignItems: 'center', marginTop: '50px'
         }}>
-            <Formik initialValues={{ ...INITIAL_VALUES }} onSubmit={values => {
-                console.log(values) 
-            }}
->
-                {props => (
-                    <Form>
+             
+                    <form onSubmit={formik.handleSubmit}>
                         <Collapsible trigger="OR Information" triggerTagName='h3'  overflowWhenOpen="inherit">
                       <br></br>
                         <Grid container spacing={3} width={'70vw'}>
                             <Grid item xs={6}>
-                                <DatePicker
+                                <TextField
                                         fullWidth
-                                        name="ORInformation.ORdate"
-                                        label="OR Date"
+                                        label="OR date"
+                                        name="ordate"
+                                        value={formik.values.ordate}
+                                        onChange={formik.handleChange}
+                                         
                                     />
                                 </Grid>
 
                             <Grid item xs={6}>
                                     <TextField
-                                        name="ORInformation.Location"
-                                        label="Location"
+                                        fullWidth
+                                        label="Location ID"
+                                        name="locationId"
+                                        value={formik.values.locationId}
+                                        onChange={formik.handleChange}
                                     />
                                 </Grid>
 
-                            <Grid item xs={6}>
+                            {/* <Grid item xs={6}>
                             <h5>LVSI</h5>
                                 <label>
-                                    <Field type="checkbox" name="ORInformation.LVSI" />
+                                    <Field 
+                                    type="checkbox" 
+                                    name="lvsi" 
+                                    value={formik.values.lvsi}
+                                    onChange={formik.handleChange} />
                                 </label>
-                            </Grid>
+                            </Grid> */}
 
-                            <Grid item xs={6}>
-                            <h5>PeriNeur</h5>
+                            {/* <Grid item xs={6}>
+                            <h5>LVSI</h5>
                                 <label>
-                                    <Field type="checkbox" name="ORInformation.Peri" />
+                                    <Field 
+                                    type="checkbox" 
+                                    name="lvsi" 
+                                    value={formik.values.lvsi}
+                                    onChange={formik.handleChange} />
                                 </label>
-                            </Grid>
- 
-                            <Grid item xs={6}>                                 
-                                    <TextField 
-                                        name="ORInformation.T"
+                            </Grid> */}
+
+                            <Grid item xs={6}>
+                                    <TextField
+                                        fullWidth
+                                        label="OR ID"
+                                        name="orId"
+                                        value={formik.values.orId}
+                                        onChange={formik.handleChange}
+                                    />
+                                </Grid>
+
+                                <Grid item xs={6}>
+                                    <TextField
+                                        fullWidth
+                                        label="Size Primary MM"
+                                        name="sizePrimaryMm"
+                                        value={formik.values.sizePrimaryMm}
+                                        onChange={formik.handleChange}
+                                    />
+                                </Grid>
+   
+                                <Grid item xs={6}>
+                                    <TextField
+                                        fullWidth
+                                        label="Pathology ID"
+                                        name="pathologyId"
+                                        value={formik.values.pathologyId}
+                                        onChange={formik.handleChange}
+                                    />
+                                </Grid>
+
+                                <Grid item xs={6}>
+                                    <TextField
+                                        fullWidth
+                                        label="Grade"
+                                        name="grade"
+                                        value={formik.values.grade}
+                                        onChange={formik.handleChange}
+                                    />
+                                </Grid>
+
+                                <Grid item xs={6}>
+                                    <TextField
+                                        fullWidth
+                                        label="Margin"
+                                        name="margin"
+                                        value={formik.values.margin}
+                                        onChange={formik.handleChange}
+                                    />
+                                </Grid>
+
+                                <Grid item xs={6}>
+                                    <TextField
+                                        fullWidth
                                         label="T"
-                                         />
-                            </Grid>
+                                        name="t"
+                                        value={formik.values.t}
+                                        onChange={formik.handleChange}
+                                    />
+                                </Grid>
 
-                            <Grid item xs={6}>
-                                    <TextField 
-                                        name="ORInformation.N"
+                                <Grid item xs={6}>
+                                    <TextField
+                                        fullWidth
                                         label="N"
-                                         />
-                            </Grid>
+                                        name="n"
+                                        value={formik.values.n}
+                                        onChange={formik.handleChange}
+                                    />
+                                </Grid>
 
-                            <Grid item xs={6}>
-                                    <TextField 
-                                        name="ORInformation.Nve"
-                                        label="N+ve"
-                                         />
-                            </Grid>
+                                <Grid item xs={6}>
+                                    <TextField
+                                        fullWidth
+                                        label="nodesVe"
+                                        name="nodesVe"
+                                        value={formik.values.nodesVe}
+                                        onChange={formik.handleChange}
+                                    />
+                                </Grid>
 
-                            <Grid item xs={6}>
-                                    <TextField 
-                                        name="ORInformation.Ntaken"
-                                        label="N Taken"
-                                         />
-                            </Grid>
+                                <Grid item xs={6}>
+                                    <TextField
+                                        fullWidth
+                                        label="nodesTaken"
+                                        name="nodesTaken"
+                                        value={formik.values.nodesTaken}
+                                        onChange={formik.handleChange}
+                                    />
+                                </Grid>
 
-                            <Grid item xs={6}>
-                                    <TextField 
-                                        name="ORInformation.M"
+                                <Grid item xs={6}>
+                                    <TextField
+                                        fullWidth
                                         label="M"
-                                         />
-                            </Grid>
+                                        name="m"
+                                        value={formik.values.m}
+                                        onChange={formik.handleChange}
+                                    />
+                                </Grid>
 
-                            <Grid item xs={6}>
-                                    <TextField 
-                                        name="ORInformation.Stage"
+                                <Grid item xs={6}>
+                                    <TextField
+                                        fullWidth
                                         label="Stage"
-                                         />
-                            </Grid>
- 
-                            <Grid item xs={6}>
-                                    <TextField 
-                                        name="ORInformation.Pathology"
-                                        label="Pathology"
-                                         />
-                            </Grid>
-                                <hr></hr>
+                                        name="stage"
+                                        value={formik.values.stage}
+                                        onChange={formik.handleChange}
+                                    />
+                                </Grid>
+
+   
                                 
                             <Grid item xs={12}>
                                     <Button onClick={notify} color='primary' type="submit">Save</Button>
@@ -143,9 +273,8 @@ function ORinfo() {
 
                       </Collapsible>
                         
-                    </Form>
-                )}
-            </Formik>
+                    </form>
+ 
         </div>
     </Container>
     )
