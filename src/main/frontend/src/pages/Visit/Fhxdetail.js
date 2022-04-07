@@ -1,30 +1,85 @@
-import React from 'react';
-import { Formik, Form, Field } from 'formik';
+import React, { useEffect } from 'react';
+import { useFormik, Formik, Form, Field } from 'formik';
 import { Button } from 'reactstrap';
 import { Container, Grid, InputLabel, Select, MenuItem, FormControl, Checkbox } from '@material-ui/core';
-import TextField from '../../components/TextField/TextField';
+import { TextField } from "@material-ui/core/";
 import DatePicker from '../../components/Date/DatePicker';
 import axios from "axios"; 
 import Collapsible from 'react-collapsible';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
  
-const INITIAL_VALUES = {
-    FhxInfo: {
-        FhxDetail: "String",
-        Smoking: 100,
-        SmokingQuit: "3 years",
-        Unattended: false,
-        SocialSup: false,
-        Language: false,
-        $Stress: true,
-        PsychStress: true,
-        ETOHweek: true,
-        Details: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        },
-}
+ 
 
 function Fhxdetail() {
+
+    const userid = -2144486835;
+    
+    const formik = useFormik({
+        enableReinitialize: true,
+        initialValues: {
+            fhxDetail: "",
+            smokingPackYears: 0,
+            smokeQuit: "",
+            attendedFamily: false,
+            lacksSocialSupport: false,
+            languageBarrier: false,
+            financialChallenge: true,
+            psychosocialChallenge: true,
+            etohweek: true,
+            detail: "",
+        },
+
+        onSubmit: async (values) => {
+            console.log(values);
+            try {
+            let result = await fetch(
+                `http://localhost:8080/api/pasthistory/update/`,
+                {
+                  method: "post",
+                  mode: "cors",
+                  headers: {
+                    "Content-Type": "application/json"
+                  },
+                  body: `{
+                           "id": "${userid}",
+                           "fhxDetail": "${values.fhxDetail}",
+                           "smokingPackYears": "${values.smokingPackYears}",
+                           "smokeQuit": "${values.smokeQuit}",
+                           "attendedFamily": "${values.attendedFamily}",
+                           "lacksSocialSupport": "${values.lacksSocialSupport}",
+                           "languageBarrier": "${values.languageBarrier}",
+                           "financialChallenge": "${values.financialChallenge}",
+                           "psychosocialChallenge": "${values.psychosocialChallenge}",
+                           "etohweek": "${values.etohweek}",
+                           "detail": "${values.detail}"
+                         }`
+                }
+              );
+              console.log("Submited: " + result);
+            } catch (e) {
+              console.log(e);
+            }
+          }
+        });
+
+        useEffect(() => {
+            (async () => {
+              try {
+                let response = await fetch(
+                  `http://localhost:8080/api/pasthistory/id=${userid}`
+                );
+                let content = await response.json();
+                formik.setValues(content);
+                // formik.setFieldValue("email", content[0].email);
+              } catch (e) {
+                console.log(e);
+              }
+            })();
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+          }, []);
+
+ 
     
     const notify = () => {
      
@@ -40,89 +95,116 @@ function Fhxdetail() {
             display: 'flex', justifyContent:
                 'center', alignItems: 'center', marginTop: '50px'
         }}>
-            <Formik initialValues={{ ...INITIAL_VALUES }} onSubmit={values => {
-                console.log(values) 
-            }}
->
-                {props => (
-                    <Form>
+             
+                 
+                    <form onSubmit={formik.handleSubmit}>
                         <Collapsible trigger="Fhx Information" triggerTagName='h3'  overflowWhenOpen="inherit">
                       <br></br>
 
                         <Grid container spacing={3} width={'70vw'}>
 
-                            <Grid item xs={6}>
-                                    <TextField
-                                        name="FhxInfo.FhxDetail"
-                                        label="FhxDetail"
-                                    />
-                                </Grid>
-
-                            <Grid item xs={6}>
-                                    <TextField 
-                                    name="FhxInfo.Smoking" 
-                                    label="Smoking"
-                                    />
-                            </Grid>
-
-                            <Grid item xs={12}>
-                                    <TextField 
-                                    name="FhxInfo.SmokingQuit" 
-                                    label="Smoking Quit"
-                                    />
-                            </Grid>
-
-                            <Grid item xs={6}>
-                            <h5>Un-attended</h5>
-                                <label>
-                                    <Field type="checkbox" name="FhxInfo.Unattended" />
-                                </label>
-                            </Grid>
-
-                            <Grid item xs={6}>
-                            <h5>Lacks social support</h5>
-                                <label>
-                                    <Field type="checkbox" name="FhxInfo.SocialSup" />
-                                </label>
-                            </Grid>
-
-                            <Grid item xs={6}>
-                            <h5>Language Barrier</h5>
-                                <label>
-                                    <Field type="checkbox" name="FhxInfo.Language" />
-                                </label>
-                            </Grid>
-                            
-                            <Grid item xs={6}>
-                            <h5>Financial Challenge</h5>
-                                <label>
-                                    <Field type="checkbox" name="FhxInfo.$Stress" />
-                                </label>
-                            </Grid>
-
-                            <Grid item xs={6}>
-                            <h5>Psychosocial Challenge</h5>
-                                <label>
-                                    <Field type="checkbox" name="FhxInfo.PsychStress" />
-                                </label>
-                            </Grid>
-
-                            <Grid item xs={6}>
-                            <h5>ETOH week</h5>
-                                <label>
-                                    <Field type="checkbox" name="FhxInfo.ETOHweek" />
-                                </label>
-                            </Grid>
-
-                            <Grid item xs={12}>
-                                    <TextField
-                                        fullWidth
-                                        label="Details"
-                                        name="FhxInfo.Details"
-                                        multiline
-                                        rows={4}
-                                    />
+                                <Grid item xs={6}>
+                                        <TextField
+                                            label="FHX detail"
+                                            name="fhxDetail"
+                                            value={formik.values.fhxDetail}
+                                            onChange={formik.handleChange}
+                                            fullWidth
+                                        />
                                     </Grid>
+
+                                <Grid item xs={6}>
+                                        <TextField
+                                            label="Smoking Pack Years"
+                                            name="smokingPackYears"
+                                            value={formik.values.smokingPackYears}
+                                            onChange={formik.handleChange}
+                                            fullWidth
+                                        />
+                                    </Grid>
+
+                                <Grid item xs={12}>
+                                        <TextField
+                                            label="Smoke quit"
+                                            name="smokeQuit"
+                                            value={formik.values.smokeQuit}
+                                            onChange={formik.handleChange}
+                                            fullWidth
+                                        />
+                                    </Grid>
+ 
+                                    <Grid item xs={6}>
+
+                                    <h5>Attended Family</h5>
+                                    <input type="checkbox" 
+                                    name="attendedFamily"
+                                    checked={formik.values.attendedFamily} 
+                                    onChange={formik.handleChange}/>
+
+                                    </Grid>
+ 
+                                    <Grid item xs={6}>
+
+                                    <h5>Social Support</h5>
+                                    <input type="checkbox" 
+                                    name="lacksSocialSupport"
+                                    checked={formik.values.lacksSocialSupport} 
+                                    onChange={formik.handleChange}/>
+
+                                    </Grid>
+ 
+                                    <Grid item xs={6}>
+
+                                    <h5>Language Barrier</h5>
+                                    <input type="checkbox" 
+                                    name="languageBarrier"
+                                    checked={formik.values.languageBarrier} 
+                                    onChange={formik.handleChange}/>
+
+                                    </Grid>
+ 
+                                    <Grid item xs={6}>
+
+                                    <h5>Financial Challenge</h5>
+                                    <input type="checkbox" 
+                                    name="financialChallenge"
+                                    checked={formik.values.financialChallenge} 
+                                    onChange={formik.handleChange}/>
+
+                                    </Grid>
+ 
+                                    <Grid item xs={6}>
+
+                                    <h5>Psychosocial Challenge</h5>
+                                    <input type="checkbox" 
+                                    name="psychosocialChallenge"
+                                    checked={formik.values.psychosocialChallenge} 
+                                    onChange={formik.handleChange}/>
+
+                                    </Grid>
+ 
+                                    <Grid item xs={6}>
+
+                                    <h5>etohweek</h5>
+                                    <input type="checkbox" 
+                                    name="etohweek"
+                                    checked={formik.values.etohweek} 
+                                    onChange={formik.handleChange}/>
+
+                                    </Grid>
+
+                                <Grid item xs={12}>
+                                        <TextField
+                                            label="Detail"
+                                            name="detail"
+                                            value={formik.values.detail}
+                                            onChange={formik.handleChange}
+                                            multiline
+                                            rows={3}
+                                            fullWidth
+                                        />
+                                    </Grid>
+ 
 
                             <Grid item xs={12}>
                                     <Button onClick={notify} color='primary' type="submit">Save</Button>
@@ -132,9 +214,8 @@ function Fhxdetail() {
 
                       </Collapsible>
                         
-                    </Form>
-                )}
-            </Formik>
+                    </form>
+ 
         </div>
     </Container>
     )

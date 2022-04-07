@@ -131,13 +131,15 @@ function ORinfo() {
                                     />
                                 </Grid>
 
+ 
+
                             {/* <Grid item xs={6}>
                             <h5>LVSI</h5>
                                 <label>
                                     <Field 
                                     type="checkbox" 
                                     name="lvsi" 
-                                    value={formik.values.lvsi}
+                                    checked={formik.values.lvsi}
                                     onChange={formik.handleChange} />
                                 </label>
                             </Grid> */}
