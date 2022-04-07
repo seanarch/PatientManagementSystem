@@ -73,32 +73,12 @@ export default function SeePatientDetails() {
                                     <td>{selectedPatient.sex}</td>
                                     <td>{selectedPatient.birthday}</td>
                                     <td>
-                                        <button type="submit" onClick={toggle} className='see__details--button'>See Details</button>
+                                        <button type="submit" className='see__details--button'>See Details</button>
                                     </td>
                                 </tr>
                             )}
                         </tbody>
                     </Table>
-                    <Modal isOpen={modal}
-                        toggle={toggle}
-                        modalTransition={{ timeout: 1000 }}>
-                        <ModalHeader>Patient Details</ModalHeader>
-                        <ModalBody>
-                            {selectedPatient !== null && (
-                                <div>
-                                    <p><strong>First name</strong> : {selectedPatient.firstname}</p>
-                                    <p><strong>Last name</strong> : {selectedPatient.lastname}</p>
-                                    <p><strong>Sex</strong> : {selectedPatient.sex}</p>
-                                    <p><strong>Birthday</strong> : {selectedPatient.birthday}</p>
-                                    <p><strong>Print</strong> : {selectedPatient.print}</p>
-                                    <p><strong>Tg</strong> : {selectedPatient.tg}</p>
-                                    <p><strong>Location</strong> : {selectedPatient.location}</p>
-                                    <p><strong>ULI</strong> : {selectedPatient.id}</p>
-                                </div>
-                            )
-                            }
-                        </ModalBody>
-                    </Modal>
                 </div>
             </div>
         </>
