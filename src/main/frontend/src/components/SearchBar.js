@@ -15,7 +15,7 @@ export default function SearchPatient() {
         <>
             <div className='search__bar--container'>
                 <div className='row'>
-                    <div className='col-6'>
+                    <div className='col-4'>
                         <input type='text' list='searchFirstName' onChange={handleFilter}
                             value={wordEntered} className='search__bar--search-box' placeholder='Search FirstName' />
                         <datalist id='searchFirstName'>
@@ -27,7 +27,7 @@ export default function SearchPatient() {
                             })}
                         </datalist>
                     </div>
-                    {/* <div className='col-4'>
+                     <div className='col-4'>
                         <input type='text' list='searchlastName' className='search__bar--search-box' placeholder='Search LastName' />
                         <datalist id='searchlastName'>
                             {patientDetails.slice(0, 15).map((value, key) => {
@@ -36,8 +36,9 @@ export default function SearchPatient() {
                                 );
                             })}
                         </datalist>
-                    </div>*/}
-                    <div className='col-6'>
+                    </div>
+
+                    <div className='col-4'>
                         <form className='search__bar--form' onSubmit={handleSearch}>
                             <input type='text' value={searchId} onChange={e => setSearchId(e.target.value)} list='searchULI' className='search__bar--search-box' placeholder='Search ULI and press ENTER' />
                             <datalist id='searchULI'>
@@ -78,7 +79,7 @@ export default function SearchPatient() {
                                             <td>
                                                 <form onSubmit={setPatientDetails}>
                                                     <input type='hidden' value={value.id} />
-                                                    <button type="submit" onClick={toggle} className='see__details--button'>See Details</button>
+                                                    <button type="submit" className='see__details--button'>See Details</button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -88,26 +89,6 @@ export default function SearchPatient() {
                             )}
                         </tbody>
                     </Table>
-                    <Modal isOpen={modal}
-                        toggle={toggle}
-                        modalTransition={{ timeout: 1000 }}>
-                        <ModalHeader>Patient Details</ModalHeader>
-                        <ModalBody>
-                            {selectedPatient !== null && (
-                                <div>
-                                    <p><strong>First name</strong> : {selectedPatient.firstname}</p>
-                                    <p><strong>Last name</strong> : {selectedPatient.lastname}</p>
-                                    <p><strong>Sex</strong> : {selectedPatient.sex}</p>
-                                    <p><strong>Birthday</strong> : {selectedPatient.birthday}</p>
-                                    <p><strong>Print</strong> : {selectedPatient.print}</p>
-                                    <p><strong>Tg</strong> : {selectedPatient.tg}</p>
-                                    <p><strong>Location</strong> : {selectedPatient.location}</p>
-                                    <p><strong>ULI</strong> : {selectedPatient.id}</p>
-                                </div>
-                            )
-                            }
-                        </ModalBody>
-                    </Modal>
                 </div>
             </div>
         </>
