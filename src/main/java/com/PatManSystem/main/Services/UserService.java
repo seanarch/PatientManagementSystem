@@ -37,7 +37,7 @@ public class UserService {
     }
 
     @SneakyThrows
-    public UserDTO getUser(Integer id){
+    public UserDTO getUser(String id){
         return new UserMapperImpl()
                 .userToUserDTO(userRepository.findById(id)
                         .orElseThrow(() -> new NotFoundException("User identified by id:{"+id+"} was not found.")));
@@ -54,7 +54,7 @@ public class UserService {
     }
 
     @SneakyThrows
-    public void deleteUser(Integer id){
+    public void deleteUser(String id){
 
         userRepository.findById(id).orElseThrow(() -> new NotFoundException("User identified by ID:{"+id+"} was not found."));
         userRepository.deleteById(id);

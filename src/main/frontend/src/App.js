@@ -12,7 +12,7 @@ import Endvisit from './pages/endvisit';
 import NotFound from './pages/NotFound';
 import LoginForm from './pages/LoginForm';
 import PatientDetails from './components/SeePatientDetails';
-
+import {useContext} from 'react';
 
 function App() {
   return (
