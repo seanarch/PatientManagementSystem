@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 export const AppContext = createContext();
 
 export const AppState = ({ children }) => {
-    const [loginDetails, setLoginDetails] = useState({ userName: '', password: '' });
+    const [loginDetails, setLoginDetails] = useState({ userEmail: '', password: '' });
     // SEARCH PATIENT DATA
     const [patientDetails, setPatient] = useState([]); 
     const [patientId, setPatientId] = useState("");
@@ -70,14 +70,7 @@ export const AppState = ({ children }) => {
         });
     }
 
-    const handleLoginFormSubmit = (e) => {
-        e.preventDefault();
-        //Log form values to console
-        console.log(loginDetails);
 
-        //save login detail for user session
-        setLoginDetails(loginDetails);
-    }
 
 
     useEffect(() => {
@@ -87,7 +80,7 @@ export const AppState = ({ children }) => {
 
 
     return (
-        <AppContext.Provider value={{ loginDetails, setLoginDetails, handleLoginFormSubmit, patientDetails, patientId, filteredData, handleFilter, wordEntered, setPatientDetails, modal, toggle, selectedPatient, handleSearch, setSearchId, searchId }}>
+        <AppContext.Provider value={{ loginDetails, setLoginDetails, patientDetails, patientId, filteredData, handleFilter, wordEntered, setPatientDetails, modal, toggle, selectedPatient, handleSearch, setSearchId, searchId }}>
             {children}
         </AppContext.Provider>
     );

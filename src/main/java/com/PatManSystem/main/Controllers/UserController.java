@@ -27,7 +27,7 @@ public class UserController {
     }
 
     @GetMapping(path ="/id={id}")
-    public UserDTO getUser(@PathVariable("id") Integer id){
+    public UserDTO getUser(@PathVariable("id") String id){
         return userService.getUser(id);
     }
 
@@ -39,7 +39,7 @@ public class UserController {
     }
 
     @DeleteMapping(path = "/delete/id={id}")
-    public String deleteUser(@PathVariable("id") Integer id){
+    public String deleteUser(@PathVariable("id") String id){
         userService.deleteUser(id);
         return "DELETE: User identified by ID "+id+" successfully deleted.";
     }
