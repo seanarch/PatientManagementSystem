@@ -25,14 +25,6 @@ export const AppState = ({ children }) => {
         navigate('/details');
     }
 
-    
-
-    // Modal open state
-    const [modal, setModal] = useState(false);
-
-    // Toggle for Modal
-    const toggle = () => setModal(!modal);
-
     const SearchFilter = async () => {
         const patientResponse = await fetch(`http://localhost:8080/api/patient/all`);
         const patientResponseData = await patientResponse.json();
@@ -47,6 +39,7 @@ export const AppState = ({ children }) => {
 
     const handleFilter = (event) => {
         const searchWord = event.target.value;
+        console.log(patientDetails);
         setWordEntered(searchWord);
         const newFilter = patientDetails.filter((value) => {
             return value.firstname.toLowerCase().includes(searchWord.toLowerCase());
@@ -80,8 +73,9 @@ export const AppState = ({ children }) => {
 
 
     return (
-        <AppContext.Provider value={{ loginDetails, setLoginDetails, patientDetails, patientId, filteredData, handleFilter, wordEntered, setPatientDetails, modal, toggle, selectedPatient, handleSearch, setSearchId, searchId }}>
-            {children}
+
+        <AppContext.Provider value={{ loginDetails, setLoginDetails, handleLoginFormSubmit, patientDetails, patientId, filteredData, handleFilter, wordEntered, setPatientDetails, modal, toggle, selectedPatient, handleSearch, setSearchId, searchId }}>
+      {children}
         </AppContext.Provider>
     );
 };
