@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { AppContext } from '../Context/AppContext';
 import { Button } from 'reactstrap';
 import { Container, Grid, TextField, Box,Alert } from '@material-ui/core';
@@ -8,12 +8,13 @@ const LoginForm = () => {
 
     const { loginDetails, setLoginDetails } = useContext(AppContext);
     const [loginStatus, setloginStatus] = useState("");
-
+    const {isLoggedIn, setIsLoggedIn} = useContext(AppContext);
 
 
     const handleLoginFormSubmit = async (e) => {
         e.preventDefault();
 
+        
         try {
             const result = await fetch(
                 `http://localhost:8080/api/login`,
@@ -31,7 +32,7 @@ const LoginForm = () => {
                 }
               )
               const data = await result.json();
-              console.log(data);
+            //  console.log(data);
 
               //if data.message exist(user not found in the back end), display the message to screen
               if(data.message){
@@ -40,6 +41,8 @@ const LoginForm = () => {
                   setloginStatus("User name password combination is not correct. Please try again");
               }else if(data){
                 setloginStatus("Successfully logged in.");
+
+                setIsLoggedIn(true);
               }
 
             } catch (e) {
@@ -47,6 +50,11 @@ const LoginForm = () => {
             }
           }
 
+          useEffect(()=>{
+            window.localStorage.setItem("login-status", JSON.stringify(isLoggedIn));
+        });
+    
+     
     return (
         <Container maxWidth="md">
             <div className='container' style={{
@@ -86,7 +94,7 @@ const LoginForm = () => {
                         </Grid>
 
                         <Grid item xs={12} >
-                            <Button color="primary" type="submit">Save</Button>
+                            <Button color="primary" type="submit">Submit</Button>
                         </Grid>
                     </Grid>
 

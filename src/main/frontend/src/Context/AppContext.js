@@ -5,27 +5,28 @@ export const AppContext = createContext();
 
 export const AppState = ({ children }) => {
     const [loginDetails, setLoginDetails] = useState({ userEmail: '', password: '' });
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     // SEARCH PATIENT DATA
-    const [patientDetails, setPatient] = useState([]); 
+    const [patientDetails, setPatient] = useState([]);
     const [patientId, setPatientId] = useState("");
     const [selectedPatient, setSelectedPatient] = useState({});
     const [filteredData, setFilteredData] = useState([]);
     const [wordEntered, setWordEntered] = useState("");
     const [searchId, setSearchId] = useState("");
 
-    const navigate = useNavigate();
-
-    const handleSearch = event => {
-        event.preventDefault();
-        patientDetails.forEach(patient => {
-            if (patient.id === parseInt(searchId)) {
-                setSelectedPatient(patient);
-            }
-        });
-        navigate('/details');
-    }
-
+    /*     const navigate = useNavigate();
     
+        const handleSearch = event => {
+            event.preventDefault();
+            patientDetails.forEach(patient => {
+                if (patient.id === parseInt(searchId)) {
+                    setSelectedPatient(patient);
+                }
+            });
+            navigate('/details');
+        }
+    
+         */
 
     // Modal open state
     const [modal, setModal] = useState(false);
@@ -72,15 +73,21 @@ export const AppState = ({ children }) => {
 
 
 
-
-    useEffect(() => {
-        SearchFilter();
-    }, []);
-
+    //since the AppContext is binded to APP component, SearchFilter() will be called everytime the APP component mounts. will bring performance down here. hence comment it out first  
+    /*     useEffect(() => {
+    
+            SearchFilter(); 
+    
+        }, []);
+     */
 
 
     return (
-        <AppContext.Provider value={{ loginDetails, setLoginDetails, patientDetails, patientId, filteredData, handleFilter, wordEntered, setPatientDetails, modal, toggle, selectedPatient, handleSearch, setSearchId, searchId }}>
+        <AppContext.Provider value={{
+            loginDetails, setLoginDetails, isLoggedIn, setIsLoggedIn, patientDetails, patientId, filteredData, handleFilter, wordEntered, setPatientDetails, modal, toggle, selectedPatient,
+            /*handleSearch, */
+            setSearchId, searchId
+        }}>
             {children}
         </AppContext.Provider>
     );
