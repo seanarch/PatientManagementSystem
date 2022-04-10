@@ -1,11 +1,12 @@
 package com.PatManSystem.main.Services;
 
 import com.PatManSystem.main.DTO.ConsiderDTO;
+import com.PatManSystem.main.Exception.DuplicateFoundException;
+import com.PatManSystem.main.Exception.NotFoundException;
 import com.PatManSystem.main.Mapper.ConsiderMapperImpl;
 import com.PatManSystem.main.Models.Consider;
 import com.PatManSystem.main.Models.Patientinformation;
 import com.PatManSystem.main.Repository.ConsiderRepository;
-import com.PatManSystem.main.Repository.PatientRepository;
 import com.PatManSystem.main.Repository.TypeofconsiderationRepository;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class ConsiderService {
 
     @SneakyThrows
     public ConsiderDTO getConsider(Integer id){
-        return new ConsiderMapperImpl().considerToConsiderDTO(considerRepository.findById(id).orElseThrow(() -> new ConsiderNotFound(id)));
+        return new ConsiderMapperImpl().considerToConsiderDTO(considerRepository.findById(id).orElseThrow(() -> new NotFoundException("Consider identified by ID:{"+id+"} was not found.")));
     }
 
     @SneakyThrows
@@ -45,7 +46,7 @@ public class ConsiderService {
         List<Consider> getConsiders = considerRepository.findByUli(new Patientinformation(ULI));
 
         if(getConsiders.isEmpty())
-            throw new ConsiderNotFound(ULI);
+            throw new NotFoundException("Consider identified by ULI:{"+ULI+"} was not found.");
 
         return getConsiders.stream()
                 .map(new ConsiderMapperImpl()::considerToConsiderDTO)
@@ -55,8 +56,8 @@ public class ConsiderService {
     @SneakyThrows
     public void newConsider(ConsiderDTO DTO){
 
-        if(considerRepository.findById(DTO.getId()).isPresent())
-            throw new ConsiderDuplicateFound(DTO.getId());
+        if(DTO.getId() != null && considerRepository.findById(DTO.getId()).isPresent())
+            throw new DuplicateFoundException("Consider identified by ID:{"+DTO.getId()+"} already exists.");
 
         considerRepository.save(new ConsiderMapperImpl().considerDTOToConsider(DTO)); // convert incoming DTO to DB entity and save to the DB
 
@@ -65,7 +66,7 @@ public class ConsiderService {
     @SneakyThrows
     public void deleteConsider(Integer id){
 
-        considerRepository.findById(id).orElseThrow(() -> new ConsiderNotFound(id));
+        considerRepository.findById(id).orElseThrow(() -> new NotFoundException("Consider identified by ID:{"+id+"} was not found."));
         considerRepository.deleteById(id);
 
     }
@@ -73,7 +74,7 @@ public class ConsiderService {
     @SneakyThrows
     public void updateConsider(ConsiderDTO DTO){
 
-        Consider setEntity = considerRepository.findById(DTO.getId()).orElseThrow(() -> new ConsiderNotFound(DTO.getId()));
+        Consider setEntity = considerRepository.findById(DTO.getId()).orElseThrow(() -> new NotFoundException("Consider identified by ID:{"+DTO.getId()+"} was not found."));
 
         if (DTO.getConsiderId() != null)
             typeofconsiderationRepository.findById(DTO.getConsiderId()).ifPresent(setEntity::setConsider);
@@ -83,35 +84,6 @@ public class ConsiderService {
 
         considerRepository.save(setEntity);
 
-    }
-    /* Custom exceptions for this class
-     * NotFound
-     * DuplicateFound
-     */
-    static class ConsiderNotFound extends Exception{
-        public ConsiderNotFound(String errorMessage){
-            super(errorMessage);
-        }
-        public ConsiderNotFound(){
-            super("Consider not found");
-        }
-        public ConsiderNotFound(Integer id){
-            super("Consider of ID:"+id+" not found");
-        }
-        public ConsiderNotFound(Long ULI){
-            super("Consider of ULI:"+ULI+" not found");
-        }
-    }
-    static class ConsiderDuplicateFound extends Exception{
-        public ConsiderDuplicateFound(String errorMessage){
-            super(errorMessage);
-        }
-        public ConsiderDuplicateFound(){
-            super("Consider already exists");
-        }
-        public ConsiderDuplicateFound(Integer id){
-            super("Consider of ID:"+id+" already exists");
-        }
     }
 
 }
