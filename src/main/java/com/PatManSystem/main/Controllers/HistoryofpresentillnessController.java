@@ -13,7 +13,7 @@ import java.util.List;
                 RequestMethod.PUT,
                 RequestMethod.DELETE,
                 RequestMethod.POST})
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("*")
 public class HistoryofpresentillnessController {
 
     private final HistoryofpresentillnessService historyofpresentillnessService;

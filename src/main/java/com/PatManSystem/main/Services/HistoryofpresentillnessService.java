@@ -1,12 +1,11 @@
 package com.PatManSystem.main.Services;
 
 import com.PatManSystem.main.DTO.HistoryofpresentillnessDTO;
-import com.PatManSystem.main.DTO.HistoryofpresentillnessDTO;
-import com.PatManSystem.main.Mapper.HistoryofpresentillnessMapperImpl;
+import com.PatManSystem.main.Exception.DuplicateFoundException;
+import com.PatManSystem.main.Exception.NotFoundException;
 import com.PatManSystem.main.Mapper.HistoryofpresentillnessMapperImpl;
 import com.PatManSystem.main.Models.Historyofpresentillness;
 import com.PatManSystem.main.Models.Patientinformation;
-import com.PatManSystem.main.Models.Typeofhistoryofpresentillness;
 import com.PatManSystem.main.Repository.HistoryofpresentillnessRepository;
 import com.PatManSystem.main.Repository.TypeofhistoryofpresentillnessRepository;
 import lombok.SneakyThrows;
@@ -39,7 +38,7 @@ public class HistoryofpresentillnessService {
 
     @SneakyThrows
     public HistoryofpresentillnessDTO getHistoryofpresentillness(Integer id){
-        return new HistoryofpresentillnessMapperImpl(). historyofpresentillnessToHistoryofpresentillnessDTO( historyofpresentillnessRepository.findById(id).orElseThrow(() -> new HistoryofpresentillnessService.HistoryofpresentillnessNotFound(id)));
+        return new HistoryofpresentillnessMapperImpl(). historyofpresentillnessToHistoryofpresentillnessDTO( historyofpresentillnessRepository.findById(id).orElseThrow(() -> new NotFoundException("Historyofpresentillness identified by ID:{"+id+"} was not found.")));
     }
 
     @SneakyThrows
@@ -48,7 +47,7 @@ public class HistoryofpresentillnessService {
         List<Historyofpresentillness> getHistoryofpresentillnesss =  historyofpresentillnessRepository.findByUli(new Patientinformation(ULI));
 
         if(getHistoryofpresentillnesss.isEmpty())
-            throw new HistoryofpresentillnessService.HistoryofpresentillnessNotFound(ULI);
+            throw new NotFoundException("Historyofpresentillness identified by ID:{"+ULI+"} was not found.");
 
         return getHistoryofpresentillnesss.stream()
                 .map(new HistoryofpresentillnessMapperImpl():: historyofpresentillnessToHistoryofpresentillnessDTO)
@@ -59,8 +58,11 @@ public class HistoryofpresentillnessService {
     @SneakyThrows
     public void newHistoryofpresentillness(HistoryofpresentillnessDTO DTO){
 
-        if( historyofpresentillnessRepository.findById(DTO.getId()).isPresent())
-            throw new HistoryofpresentillnessService.HistoryofpresentillnessDuplicateFound(DTO.getId());
+        if(DTO.getId() != null && historyofpresentillnessRepository.existsById(DTO.getId()))
+            throw new DuplicateFoundException(DTO.getId());
+
+        if(DTO.getDescriptorId() == null)
+            DTO.setDescriptorId(4); //if null set to default ID 4 (otherwise healthy)
 
          historyofpresentillnessRepository.save(new HistoryofpresentillnessMapperImpl(). historyofpresentillnessDTOToHistoryofpresentillness(DTO)); // convert incoming DTO to DB entity and save to the DB
 
@@ -69,7 +71,7 @@ public class HistoryofpresentillnessService {
     @SneakyThrows
     public void deleteHistoryofpresentillness(Integer id){
 
-         historyofpresentillnessRepository.findById(id).orElseThrow(() -> new HistoryofpresentillnessService.HistoryofpresentillnessNotFound(id));
+         historyofpresentillnessRepository.findById(id).orElseThrow(() -> new NotFoundException("Historyofpresentillness identified by ID:{"+id+"} was not found."));
          historyofpresentillnessRepository.deleteById(id);
 
     }
@@ -77,7 +79,7 @@ public class HistoryofpresentillnessService {
     @SneakyThrows
     public void updateHistoryofpresentillness(HistoryofpresentillnessDTO DTO){
 
-        Historyofpresentillness setEntity =  historyofpresentillnessRepository.findById(DTO.getId()).orElseThrow(() -> new HistoryofpresentillnessService.HistoryofpresentillnessNotFound(DTO.getId()));
+        Historyofpresentillness setEntity =  historyofpresentillnessRepository.findById(DTO.getId()).orElseThrow(() -> new NotFoundException("Historyofpresentillness identified by ID:{"+DTO.getId()+"} was not found."));
 
         if (DTO.getDescriptorId() != null)
             typeofhistoryofpresentillnessRepository.findById(DTO.getDescriptorId()).ifPresent(setEntity::setDescriptor);
@@ -85,34 +87,4 @@ public class HistoryofpresentillnessService {
          historyofpresentillnessRepository.save(setEntity);
 
     }
-    /* Custom exceptions for this class
-     * NotFound
-     * DuplicateFound
-     */
-    static class HistoryofpresentillnessNotFound extends Exception{
-        public HistoryofpresentillnessNotFound(String errorMessage){
-            super(errorMessage);
-        }
-        public HistoryofpresentillnessNotFound(){
-            super("Historyofpresentillness not found");
-        }
-        public HistoryofpresentillnessNotFound(Integer id){
-            super("Historyofpresentillness of ID:"+id+" not found");
-        }
-        public HistoryofpresentillnessNotFound(Long ULI){
-            super("Historyofpresentillness of ULI:"+ULI+" not found");
-        }
-    }
-    static class HistoryofpresentillnessDuplicateFound extends Exception{
-        public HistoryofpresentillnessDuplicateFound(String errorMessage){
-            super(errorMessage);
-        }
-        public HistoryofpresentillnessDuplicateFound(){
-            super("Historyofpresentillness already exists");
-        }
-        public HistoryofpresentillnessDuplicateFound(Integer id){
-            super("Historyofpresentillness of ID:"+id+" already exists");
-        }
-    }
-
 }

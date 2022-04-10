@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Table(name = "historyofpresentillness")
 public class Historyofpresentillness {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
     private Integer id;
 

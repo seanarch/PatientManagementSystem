@@ -12,7 +12,6 @@ public class HistoryofpresentillnessDTO implements Serializable {
     private Integer id;
     private Long uliId;
     private Integer descriptorId;
-    private String descriptorDescription;
 
     public HistoryofpresentillnessDTO(Integer id, Integer decriptorId) {
         this.id = id;
