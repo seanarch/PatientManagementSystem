@@ -1,10 +1,8 @@
 package com.PatManSystem.main.Services;
 
 import com.PatManSystem.main.DTO.FollowupDTO;
-import com.PatManSystem.main.DTO.FollowupDTO;
 import com.PatManSystem.main.Exception.DuplicateFoundException;
 import com.PatManSystem.main.Exception.NotFoundException;
-import com.PatManSystem.main.Mapper.FollowupMapperImpl;
 import com.PatManSystem.main.Mapper.FollowupMapperImpl;
 import com.PatManSystem.main.Models.Followup;
 import com.PatManSystem.main.Models.Patientinformation;
@@ -12,7 +10,6 @@ import com.PatManSystem.main.Repository.*;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
