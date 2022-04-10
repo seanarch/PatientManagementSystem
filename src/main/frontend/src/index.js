@@ -1,11 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import App from './App';
+import { AppState } from './Context/AppContext';
 import reportWebVitals from './reportWebVitals';
+import { useContext } from 'react';
+import { Context } from 'react';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+
+      <AppState>
+        <App />
+      </AppState>
+
   </React.StrictMode>,
   document.getElementById('root')
 );

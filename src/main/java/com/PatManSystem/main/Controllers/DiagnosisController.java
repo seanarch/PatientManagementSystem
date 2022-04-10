@@ -14,7 +14,7 @@ import java.util.List;
                 RequestMethod.PUT,
                 RequestMethod.DELETE,
                 RequestMethod.POST})
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("*")
 public class DiagnosisController {
 
     private final DiagnosisService diagnosisService;

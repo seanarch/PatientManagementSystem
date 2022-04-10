@@ -35,7 +35,7 @@ public class AbdomenService {
     @SneakyThrows
     public void newAbdomen(Abdomen entity){
 
-        if(abdomenRepository.findById(entity.getId()).isPresent())
+        if(entity.getId() != null && abdomenRepository.findById(entity.getId()).isPresent())
             throw new DuplicateFoundException("Abdomen identified by ID:{"+entity.getId()+"} already exists.");
 
         abdomenRepository.save(entity);
@@ -54,27 +54,8 @@ public class AbdomenService {
 
         Abdomen setEntity = abdomenRepository.findById(entity.getId()).orElseThrow(() -> new NotFoundException("Abdomen identified by id:{"+entity.getId()+"} was not found."));
 
-        for (Method getter : entity.getClass().getMethods()) {
-            Object get = "";
-            if (getter.getName().startsWith("get") && getter.getParameterTypes().length == 0) {
-                try {
-                    get = getter.invoke(entity);
-                } catch (IllegalAccessException | InvocationTargetException e) {
-                    e.printStackTrace();
-                }
-                if (get != null)
-                    for (Method setter : setEntity.getClass().getMethods()) {
-                        if (setter.getName().startsWith("set") && setter.getName().endsWith(getter.getName().substring(3)) && setter.getParameterTypes().length == 1) {
-                            try {
-                                setter.invoke(setEntity, get);
-                            } catch (IllegalAccessException | InvocationTargetException e) {
-                                e.printStackTrace();
-                            }
-                            continue;
-                        }
-                    }
-            }
-        }
+        if(entity.getDescription() != null)
+            setEntity.setDescription(entity.getDescription());
 
         abdomenRepository.save(setEntity);
 

@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Table(name = "consider")
 public class Consider {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ConID", nullable = false)
     private Integer id;
 

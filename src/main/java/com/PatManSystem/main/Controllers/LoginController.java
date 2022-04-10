@@ -20,6 +20,9 @@ public class LoginController {
     }
     @PostMapping //perform a login in attempt, return TRUE if the username and password are correct, FALSE otherwise
     public boolean loginUser(@RequestBody UserDTO userDTO){
-        return loginService.loginUser(userDTO);
+        boolean validLogin = loginService.loginUser(userDTO);
+        System.out.println(validLogin);
+        return validLogin;
+
     }
 }

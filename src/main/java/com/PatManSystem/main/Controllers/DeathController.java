@@ -14,7 +14,7 @@ import java.util.List;
                 RequestMethod.PUT,
                 RequestMethod.DELETE,
                 RequestMethod.POST})
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("*")
 public class DeathController {
     private final DeathService deathService;
 
@@ -40,7 +40,7 @@ public class DeathController {
     @PostMapping(path = "/new")
     public String registerNewDeath(@RequestBody DeathDTO deathDTO){
         deathService.newDeath(deathDTO);
-        return "NEW: Death identified by ID "+deathDTO.getId()+" successfully added.";
+        return "NEW: Death successfully added.";
     }
 
     @DeleteMapping(path = "/delete/id={id}")

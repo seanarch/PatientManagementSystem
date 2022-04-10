@@ -109,8 +109,8 @@ function FVCFEVInfo() {
                         
                                     <Grid item xs={6}>
                                         <TextField
-                                            label="fvc"
-                                            name="fvc"
+                                            label="Forced vital capacity (FVC)"
+                                            name="Forced vital capacity (FVC)"
                                             value={formik.values.fvc}
                                             onChange={formik.handleChange}
                                             fullWidth
@@ -119,8 +119,8 @@ function FVCFEVInfo() {
 
                                     <Grid item xs={6}>
                                         <TextField
-                                            label="fvc1"
-                                            name="fvc1"
+                                            label="Forced vital capacity (FVC1)"
+                                            name="Forced vital capacity (FVC1)"
                                             value={formik.values.fvc1}
                                             onChange={formik.handleChange}
                                             fullWidth
@@ -129,8 +129,8 @@ function FVCFEVInfo() {
 
                                     <Grid item xs={6}>
                                         <TextField
-                                            label="fev1"
-                                            name="fev1"
+                                            label="Forced Expiratory Volume (FEV1)"
+                                            name="Forced Expiratory Volume (FEV1)"
                                             value={formik.values.fev1}
                                             onChange={formik.handleChange}
                                             fullWidth
@@ -139,8 +139,8 @@ function FVCFEVInfo() {
 
                                     <Grid item xs={6}>
                                         <TextField
-                                            label="fev11"
-                                            name="fev11"
+                                            label="Forced Expiratory Volume (FEV11)"
+                                            name="Forced Expiratory Volume (FEV11)"
                                             value={formik.values.fev11}
                                             onChange={formik.handleChange}
                                             fullWidth

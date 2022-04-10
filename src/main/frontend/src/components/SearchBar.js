@@ -1,45 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Card, Input } from 'semantic-ui-react'
+import React, { useContext } from 'react';
+import { AppContext } from "../Context/AppContext";
+// import { Card, Input } from 'semantic-ui-react'
+import { Table } from 'reactstrap';
+import {
+    Button, Modal, ModalFooter,
+    ModalHeader, ModalBody
+} from "reactstrap"
 
 export default function SearchPatient() {
-    const [patientDetails, setPatient] = useState([]);
-    // const [filteredData, setFilteredData] = useState([]);
-    // const [wordEntered, setWordEntered] = useState("");
 
-    const SearchFilter = async () => {
-        const patientResponse = await fetch(`http://localhost:8080/api/patient/all`);
-        const patientResponseData = await patientResponse.json();
-        patientResponseData.forEach(item => {
-            if (item.firstname !== null) {
-                setPatient(patientDetails => [...patientDetails, item]);
-            }
-        });
-        // setPatient(patientResponseData);
-        // console.log(patientResponseData);
-      }
-    
-      useEffect(() => {
-        SearchFilter();
-      }, [])
+    const { patientDetails, filteredData, handleFilter, wordEntered, setPatientDetails, toggle, modal, selectedPatient, handleSearch, setSearchId, searchId } = useContext(AppContext);
 
     return (
         <>
             <div className='search__bar--container'>
                 <div className='row'>
                     <div className='col-4'>
-                        <input type='text' list='searchFirstName' className='search__bar--search-box' placeholder='Search FirstName' />
+                        <input type='text' list='searchFirstName' onChange={handleFilter}
+                            value={wordEntered} className='search__bar--search-box' placeholder='Firstname' />
                         <datalist id='searchFirstName'>
                             {patientDetails.slice(0, 15).map((value, key) => {
-                              //  console.log(value);
                                 return (
                                     <option>{value.firstname}</option>
                                 );
                             })}
                         </datalist>
                     </div>
-                    <div className='col-4'>
-                        <input type='text' list='searchlastName' className='search__bar--search-box' placeholder='Search LastName' />
+                     <div className='col-4'>
+                        <input type='text' list='searchlastName' className='search__bar--search-box' placeholder='Lastname' />
                         <datalist id='searchlastName'>
                             {patientDetails.slice(0, 15).map((value, key) => {
                                 return (
@@ -48,18 +36,24 @@ export default function SearchPatient() {
                             })}
                         </datalist>
                     </div>
+
                     <div className='col-4'>
-                        <input type='text' list='searchULI' className='search__bar--search-box' placeholder='Search ULI' />
-                        <datalist id='searchULI'>
-                            {patientDetails.slice(0, 15).map((value, key) => {
-                                // return (
-                                //     // <option>{value.ULI}</option>
-                                // );
-                            })}
-                        </datalist>
+                        <form className='search__bar--form' onSubmit={handleSearch}>
+                            <input type='text' value={searchId} onChange={e => setSearchId(e.target.value)} list='searchULI' className='search__bar--search-box' placeholder='ULI' />
+                            <datalist id='searchULI'>
+                                {patientDetails.slice(0, 15).map((value, key) => {
+                                    //  console.log(value);
+                                    return (
+                                        <option>{value.id}</option>
+                                    );
+                                })}
+                            </datalist>
+                        </form>
                     </div>
+
                 </div>
             </div>
+
         </>
     )
 }

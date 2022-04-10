@@ -11,7 +11,7 @@ import java.util.List;
                 RequestMethod.PUT,
                 RequestMethod.DELETE,
                 RequestMethod.POST})
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("*")
 public class ConsiderController {
 
     private final ConsiderService considerService;
@@ -39,7 +39,7 @@ public class ConsiderController {
     public String registerNewConsider(@RequestBody ConsiderDTO considerDTO){
 
         considerService.newConsider(considerDTO);
-        return "NEW: Consider identified by ID "+considerDTO.getId()+" successfully added.";
+        return "NEW: Consider successfully added.";
     }
 
     @DeleteMapping(path = "/delete/id={id}")

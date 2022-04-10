@@ -9,16 +9,16 @@ import Patientchallenges from './Visit/Patientchallenges';
 
 const visit = () => (
     <div>
+ 
         
-       
+        <SearchBar/>
         <ORinfo />
         <Fhxdetail />
         <Patientchallenges />
         <RTGIinfo />  
         <Symptoms />
 
-    
-     
+ 
     </div>
 );
 

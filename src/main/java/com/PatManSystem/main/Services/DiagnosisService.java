@@ -2,6 +2,8 @@ package com.PatManSystem.main.Services;
 
 import com.PatManSystem.main.DTO.DiagnosisDTO;
 import com.PatManSystem.main.DTO.DiagnosisDTO;
+import com.PatManSystem.main.Exception.DuplicateFoundException;
+import com.PatManSystem.main.Exception.NotFoundException;
 import com.PatManSystem.main.Mapper.DiagnosisMapperImpl;
 import com.PatManSystem.main.Mapper.DiagnosisMapperImpl;
 import com.PatManSystem.main.Models.Diagnosis;
@@ -26,7 +28,6 @@ public class DiagnosisService {
     private final TypeofrecureRepository typeofrecureRepository;
 
     @Autowired
-
     public DiagnosisService(DiagnosisRepository diagnosisRepository,
                             BodylocationRepository bodylocationRepository,
                             TypeofbiopsyRepository typeofbiopsyRepository,
@@ -50,7 +51,7 @@ public class DiagnosisService {
 
     @SneakyThrows
     public DiagnosisDTO getDiagnosis(Integer id){
-        return new DiagnosisMapperImpl().diagnosisToDiagnosisDTO(diagnosisRepository.findById(id).orElseThrow(() -> new DiagnosisService.DiagnosisNotFound(id)));
+        return new DiagnosisMapperImpl().diagnosisToDiagnosisDTO(diagnosisRepository.findById(id).orElseThrow(() -> new NotFoundException("Diagnosis identified by ID:{"+id+"} was not found.")));
     }
 
     @SneakyThrows
@@ -59,19 +60,18 @@ public class DiagnosisService {
         List<Diagnosis> getDiagnosiss = diagnosisRepository.findByUli(new Patientinformation(ULI));
 
         if(getDiagnosiss.isEmpty())
-            throw new DiagnosisService.DiagnosisNotFound(ULI);
+            throw new NotFoundException("Diagnosis identified by ID:{"+ULI+"} was not found.");
 
         return getDiagnosiss.stream()
                 .map(new DiagnosisMapperImpl()::diagnosisToDiagnosisDTO)
                 .collect(Collectors.toList());
-
     }
 
     @SneakyThrows
     public void newDiagnosis(DiagnosisDTO DTO){
 
-        if(diagnosisRepository.findById(DTO.getId()).isPresent())
-            throw new DiagnosisService.DiagnosisDuplicateFound(DTO.getId());
+        if(DTO.getId() != null && diagnosisRepository.findById(DTO.getId()).isPresent())
+            throw new DuplicateFoundException("Diagnosis identified by ID:{"+DTO.getId()+"} already exists.");
 
         diagnosisRepository.save(new DiagnosisMapperImpl().diagnosisDTOToDiagnosis(DTO)); // convert incoming DTO to DB entity and save to the DB
 
@@ -80,7 +80,7 @@ public class DiagnosisService {
     @SneakyThrows
     public void deleteDiagnosis(Integer id){
 
-        diagnosisRepository.findById(id).orElseThrow(() -> new DiagnosisService.DiagnosisNotFound(id));
+        diagnosisRepository.findById(id).orElseThrow(() -> new NotFoundException("Diagnosis identified by ID:{"+id+"} was not found."));
         diagnosisRepository.deleteById(id);
 
     }
@@ -88,7 +88,7 @@ public class DiagnosisService {
     @SneakyThrows
     public void updateDiagnosis(DiagnosisDTO DTO){
 
-        Diagnosis setEntity = diagnosisRepository.findById(DTO.getId()).orElseThrow(() -> new DiagnosisService.DiagnosisNotFound(DTO.getId()));
+        Diagnosis setEntity = diagnosisRepository.findById(DTO.getId()).orElseThrow(() -> new NotFoundException("Diagnosis identified by ID:{"+DTO.getId()+"} was not found."));
 
         if (DTO.getNodesVe() != null)
             setEntity.setNodesVe(DTO.getNodesVe());
@@ -149,34 +149,5 @@ public class DiagnosisService {
 
         diagnosisRepository.save(setEntity);
 
-    }
-    /* Custom exceptions for this class
-     * NotFound
-     * DuplicateFound
-     */
-    static class DiagnosisNotFound extends Exception{
-        public DiagnosisNotFound(String errorMessage){
-            super(errorMessage);
-        }
-        public DiagnosisNotFound(){
-            super("Diagnosis not found");
-        }
-        public DiagnosisNotFound(Integer id){
-            super("Diagnosis of ID:"+id+" not found");
-        }
-        public DiagnosisNotFound(Long ULI){
-            super("Diagnosis of ULI:"+ULI+" not found");
-        }
-    }
-    static class DiagnosisDuplicateFound extends Exception{
-        public DiagnosisDuplicateFound(String errorMessage){
-            super(errorMessage);
-        }
-        public DiagnosisDuplicateFound(){
-            super("Diagnosis already exists");
-        }
-        public DiagnosisDuplicateFound(Integer id){
-            super("Diagnosis of ID:"+id+" already exists");
-        }
     }
 }
