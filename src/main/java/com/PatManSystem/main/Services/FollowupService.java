@@ -2,6 +2,8 @@ package com.PatManSystem.main.Services;
 
 import com.PatManSystem.main.DTO.FollowupDTO;
 import com.PatManSystem.main.DTO.FollowupDTO;
+import com.PatManSystem.main.Exception.DuplicateFoundException;
+import com.PatManSystem.main.Exception.NotFoundException;
 import com.PatManSystem.main.Mapper.FollowupMapperImpl;
 import com.PatManSystem.main.Mapper.FollowupMapperImpl;
 import com.PatManSystem.main.Models.Followup;
@@ -63,7 +65,7 @@ public class FollowupService {
 
     @SneakyThrows
     public FollowupDTO getFollowup(Integer id){
-        return new FollowupMapperImpl().followupToFollowupDTO(followupRepository.findById(id).orElseThrow(() -> new FollowupService.FollowupNotFound(id)));
+        return new FollowupMapperImpl().followupToFollowupDTO(followupRepository.findById(id).orElseThrow(() ->  new NotFoundException("Followup identified by ID:{"+id+"} was not found.")));
     }
 
     @SneakyThrows
@@ -72,7 +74,7 @@ public class FollowupService {
         List<Followup> getFollowups = followupRepository.findByUli(new Patientinformation(ULI));
 
         if(getFollowups.isEmpty())
-            throw new FollowupService.FollowupNotFound(ULI);
+            throw new NotFoundException("Followup identified by ID:{"+ULI+"} was not found.");
 
         return getFollowups.stream()
                 .map(new FollowupMapperImpl()::followupToFollowupDTO)
@@ -83,8 +85,37 @@ public class FollowupService {
     @SneakyThrows
     public void newFollowup(FollowupDTO DTO){
 
-        if(followupRepository.findById(DTO.getId()).isPresent())
-            throw new FollowupService.FollowupDuplicateFound(DTO.getId());
+        if(DTO.getId() != null && followupRepository.findById(DTO.getId()).isPresent())
+            throw new DuplicateFoundException("Followup identified by ID:{"+DTO.getId()+"} already exists.");
+
+        if(DTO.getClinicalResponseId() == null)
+            DTO.setClinicalResponseId(4); //if null set to ID 4 (NA)
+
+        if(DTO.getGuId() == null)
+            DTO.setGuId(1); //if null set to ID 1
+
+        if(DTO.getHemeId() == null)
+            DTO.setHemeId(1); //if null set to ID 1 (No symptoms)
+
+        if(DTO.getHepaticId() == null)
+            DTO.setHepaticId(1); //if null set to ID 1 (No symptoms)
+
+        if(DTO.getLowerGIId() == null)
+            DTO.setLowerGIId(1); //if null set to ID 1 (No symptoms)
+
+        if(DTO.getUpperGIId() == null)
+            DTO.setUpperGIId(1); //if null set to ID 1 (No symptoms)
+
+        if(DTO.getSkinReactionId() == null)
+            DTO.setSkinReactionId(1); //if null set to ID 1 (No symptoms)
+
+        if(DTO.getPneumonitisId() == null)
+            DTO.setPneumonitisId(1); //if null set to ID 1 (No symptoms)
+
+        if(DTO.getTypeFUId() == null)
+            DTO.setTypeFUId(1); //if null set to ID 1 (first visit)
+
+
 
         followupRepository.save(new FollowupMapperImpl().followupDTOToFollowup(DTO)); // convert incoming DTO to DB entity and save to the DB
 
@@ -93,7 +124,7 @@ public class FollowupService {
     @SneakyThrows
     public void deleteFollowup(Integer id){
 
-        followupRepository.findById(id).orElseThrow(() -> new FollowupService.FollowupNotFound(id));
+        followupRepository.findById(id).orElseThrow(() -> new NotFoundException("Followup identified by ID:{"+id+"} was not found."));
         followupRepository.deleteById(id);
 
     }
@@ -101,7 +132,7 @@ public class FollowupService {
     @SneakyThrows
     public void updateFollowup(FollowupDTO DTO){
 
-        Followup setEntity = followupRepository.findById(DTO.getId()).orElseThrow(() -> new FollowupService.FollowupNotFound(DTO.getId()));
+        Followup setEntity = followupRepository.findById(DTO.getId()).orElseThrow(() ->  new NotFoundException("Followup identified by ID:{"+DTO.getId()+"} was not found."));
 
         if (DTO.getDate() != null)
             setEntity.setDate(DTO.getDate());
@@ -141,34 +172,5 @@ public class FollowupService {
 
         followupRepository.save(setEntity);
 
-    }
-    /* Custom exceptions for this class
-     * NotFound
-     * DuplicateFound
-     */
-    static class FollowupNotFound extends Exception{
-        public FollowupNotFound(String errorMessage){
-            super(errorMessage);
-        }
-        public FollowupNotFound(){
-            super("Followup not found");
-        }
-        public FollowupNotFound(Integer id){
-            super("Followup of ID:"+id+" not found");
-        }
-        public FollowupNotFound(Long ULI){
-            super("Followup of ULI:"+ULI+" not found");
-        }
-    }
-    static class FollowupDuplicateFound extends Exception{
-        public FollowupDuplicateFound(String errorMessage){
-            super(errorMessage);
-        }
-        public FollowupDuplicateFound(){
-            super("Followup already exists");
-        }
-        public FollowupDuplicateFound(Integer id){
-            super("Followup of ID:"+id+" already exists");
-        }
     }
 }

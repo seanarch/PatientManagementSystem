@@ -15,7 +15,7 @@ import java.util.List;
                 RequestMethod.PUT,
                 RequestMethod.DELETE,
                 RequestMethod.POST})
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("*")
 public class FollowupController {
 
     private final FollowupService followupService;
@@ -43,7 +43,7 @@ public class FollowupController {
     public String registerNewFollowup(@RequestBody FollowupDTO followupDTO){
 
         followupService.newFollowup(followupDTO);
-        return "NEW: Followup identified by ID "+followupDTO.getId()+" successfully added.";
+        return "NEW: Followup successfully added.";
     }
 
     @DeleteMapping(path = "/delete/id={id}")
