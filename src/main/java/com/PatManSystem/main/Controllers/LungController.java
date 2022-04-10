@@ -11,7 +11,7 @@ import java.util.List;
         method = {RequestMethod.GET,
                 RequestMethod.DELETE,
                 RequestMethod.POST})
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("*")
 public class LungController {
 
     private final LungService lungService;
