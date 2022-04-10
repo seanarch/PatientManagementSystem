@@ -1,10 +1,8 @@
 package com.PatManSystem.main.Services;
 
 import com.PatManSystem.main.DTO.AssessDTO;
-import com.PatManSystem.main.DTO.AssessDTO;
 import com.PatManSystem.main.Exception.DuplicateFoundException;
 import com.PatManSystem.main.Exception.NotFoundException;
-import com.PatManSystem.main.Mapper.AssessMapperImpl;
 import com.PatManSystem.main.Mapper.AssessMapperImpl;
 import com.PatManSystem.main.Models.Assess;
 import com.PatManSystem.main.Models.Patientinformation;
@@ -12,12 +10,7 @@ import com.PatManSystem.main.Repository.*;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -66,7 +59,6 @@ public class AssessService {
     }
     @SneakyThrows
     public void newAssess(AssessDTO assessDTO){
-
 
         if(assessDTO.getId() == null || assessRepository.findById(assessDTO.getId()).isEmpty())
             assessRepository.save(new AssessMapperImpl().assessDTOToAssess(assessDTO)); // convert incoming DTO to DB entity and save to the DB

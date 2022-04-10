@@ -17,7 +17,7 @@ import java.util.List;
                 RequestMethod.PUT,
                 RequestMethod.DELETE,
                 RequestMethod.POST})
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("*")
 public class AssessController {
 
     private final AssessService assessService;
@@ -44,7 +44,7 @@ public class AssessController {
     @PostMapping(path = "/new")
     public String registerNewAssess(@RequestBody AssessDTO assessDTO){
         assessService.newAssess(assessDTO);
-        return "NEW: Assess identified by ID "+assessDTO.getId()+" successfully added.";
+        return "NEW: Assess successfully added.";
     }
 
     @DeleteMapping(path = "/delete/id={id}")
