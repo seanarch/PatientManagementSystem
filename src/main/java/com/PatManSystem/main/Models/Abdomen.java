@@ -17,6 +17,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class Abdomen {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "TypeID", nullable = false)
     private Integer id;
 
