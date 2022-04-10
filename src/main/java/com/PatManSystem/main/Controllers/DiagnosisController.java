@@ -42,7 +42,7 @@ public class DiagnosisController {
     public String registerNewDiagnosis(@RequestBody DiagnosisDTO diagnosisDTO){
 
         diagnosisService.newDiagnosis(diagnosisDTO);
-        return "NEW: Diagnosis identified by ID "+diagnosisDTO.getId()+" successfully added.";
+        return "NEW: Diagnosis successfully added.";
     }
 
     @DeleteMapping(path = "/delete/id={id}")

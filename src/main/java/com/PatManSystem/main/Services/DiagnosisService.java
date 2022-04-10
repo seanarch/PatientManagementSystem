@@ -73,6 +73,9 @@ public class DiagnosisService {
         if(DTO.getId() != null && diagnosisRepository.findById(DTO.getId()).isPresent())
             throw new DuplicateFoundException("Diagnosis identified by ID:{"+DTO.getId()+"} already exists.");
 
+        if(DTO.getRecurId() == null)
+            DTO.setRecurId(14);
+
         diagnosisRepository.save(new DiagnosisMapperImpl().diagnosisDTOToDiagnosis(DTO)); // convert incoming DTO to DB entity and save to the DB
 
     }
