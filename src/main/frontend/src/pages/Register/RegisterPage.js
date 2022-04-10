@@ -4,14 +4,14 @@ import RegisterForm from './RegisterForm';
 import DeathForm from './DeathForm';
 import SearchForm from './SearchForm';
 import PatientInfo from './PatientInfo';
-import Patientanddeath from './Patientanddeath';
-import SearchBar from '../components/SearchBar';
+import Patientanddeath from './Patientanddeath'; 
+import SearchPatient from '../../components/SearchBar';
 
 /* npm install reactstrap
  */
 const Register = () => (
     <div>
-       <SearchBar/>
+       <SearchPatient />
        <Patientanddeath/>
        <RegisterForm />
     </div>
