@@ -16,7 +16,7 @@ import java.util.List;
                 RequestMethod.PUT,
                 RequestMethod.DELETE,
                 RequestMethod.POST})
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("*")
 public class ChildpughController {
 
     private final ChildpughService childpughService;
@@ -34,10 +34,15 @@ public class ChildpughController {
         return childpughService.getChildpugh(id);
     }
 
+    @GetMapping(path ="/uli={uli}")
+    public List<ChildpughDTO> getChildpughs(@PathVariable("uli") Long uli){
+        return childpughService.getByULI(uli);
+    }
+
     @PostMapping(path = "/new")
     public String createNewChildpugh(@RequestBody ChildpughDTO childpughDTO){
         childpughService.newChildpugh(childpughDTO);
-        return "NEW: Childpugh identified by ID "+childpughDTO.getId()+" successfully added.";
+        return "NEW: Childpugh successfully added.";
     }
 
     @DeleteMapping(path = "/delete/id={id}")
