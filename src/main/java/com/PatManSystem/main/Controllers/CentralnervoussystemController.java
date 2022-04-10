@@ -12,7 +12,7 @@ import java.util.List;
         method = {RequestMethod.GET,
                 RequestMethod.DELETE,
                 RequestMethod.POST})
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("*")
 public class CentralnervoussystemController {
 
     private final CentralnervoussystemService centralnervoussystemService;
