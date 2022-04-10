@@ -1,14 +1,15 @@
 package com.PatManSystem.main.Services;
 
 import com.PatManSystem.main.DTO.ExamDTO;
+import com.PatManSystem.main.Exception.DuplicateFoundException;
+import com.PatManSystem.main.Exception.NotFoundException;
 import com.PatManSystem.main.Mapper.ExamMapperImpl;
 import com.PatManSystem.main.Models.Exam;
 import com.PatManSystem.main.Models.Patientinformation;
 import com.PatManSystem.main.Repository.*;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,7 +31,6 @@ public class ExamService {
 
     @Autowired
     public ExamService(ExamRepository examRepository,
-                       PatientRepository patientRepository,
                        AbdomenRepository abdomenRepository,
                        CentralnervoussystemRepository centralnervoussystemRepository,
                        LungRepository lungRepository,
@@ -62,43 +62,46 @@ public class ExamService {
                .map(exam -> new ExamMapperImpl().examToExamDTO(exam))
                .collect(Collectors.toList());
     }
+    @SneakyThrows
     public ExamDTO getExam(Long id){
         Optional<Exam> getExam = examRepository.findById(id);
         if(getExam.isEmpty()) //check if the requested patient exists, if not; throw not found exception
-            throw new IllegalStateException("Exam identified by ID "+id+" was not found.");
+            throw new NotFoundException("Exam identified by ID:{"+id+ "} does not exist.");
 
         return new ExamMapperImpl().examToExamDTO(getExam.get());
-
     }
+    @SneakyThrows
     public List<ExamDTO> getExamByULI(Long ULI){
 
         List<Exam> getExams = examRepository.findByUli(new Patientinformation(ULI));
         if(getExams == null) //check if the requested patient exists, if not; throw not found exception
-            throw new IllegalStateException("Exam identified by ULI "+ULI+" was not found.");
+            throw new NotFoundException("Exam identified by ULI:{"+ULI+"} does not exist.");
 
         return getExams.stream()
                 .map(exam -> new ExamMapperImpl().examToExamDTO(exam))
                 .collect(Collectors.toList());
     }
 
+    @SneakyThrows
     public void newExam(ExamDTO examDTO){
 
         if(examDTO.getId() != null && examRepository.findById(examDTO.getId()).isPresent())  //check if the requested patient exists, if not; throw not found exception
-            throw new IllegalStateException("Exam identified by ID "+examDTO.getId() + " already exists. Use Post:Update at /api/patient/update instead.");
+            throw new DuplicateFoundException("Exam identified by ID:{"+examDTO.getId()+"} already exists.");
         else {
             examRepository.save(new ExamMapperImpl().examDTOToExam(examDTO)); // convert incoming DTO to DB entity and save to the DB
         }
 
     }
+    @SneakyThrows
     public void deleteExam(Long id){
 
         if(examRepository.findById(id).isEmpty()){ //check if the requested patient exists, if not; throw not found exception
-            throw new IllegalStateException("Exam identified by ID "+id+ " does not exist.");
+            throw new NotFoundException("Exam identified by ID:{"+id+ "} does not exist.");
         }else{
             examRepository.deleteById(id);
         }
     }
-
+    @SneakyThrows
     public void updateExam(ExamDTO DTO){
         Optional<Exam> getEntity = examRepository.findById(DTO.getId()); //retrieve a copy of the entity
 
@@ -152,7 +155,7 @@ public class ExamService {
             examRepository.save(setEntity);
 
         }else {
-            throw new IllegalStateException("Exam identified by ID "+DTO.getId()+ " does not exist.");
+            throw new NotFoundException("Exam identified by ID:{"+DTO.getId()+ "} does not exist.");
         }
 
 
