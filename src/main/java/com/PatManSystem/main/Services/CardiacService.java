@@ -34,7 +34,7 @@ public class CardiacService {
     @SneakyThrows
     public void newCardiac(Cardiac entity){
 
-        if(cardiacRepository.findById(entity.getId()).isPresent())
+        if(entity.getId() != null && cardiacRepository.findById(entity.getId()).isPresent())
             throw new DuplicateFoundException("Cardiac identified by ID:{"+entity.getId()+"} already exists.");
 
         cardiacRepository.save(entity);
@@ -53,27 +53,8 @@ public class CardiacService {
 
         Cardiac setEntity = cardiacRepository.findById(entity.getId()).orElseThrow(() -> new NotFoundException("Cardiac identified by id:{"+entity.getId()+"} was not found."));
 
-        for (Method getter : entity.getClass().getMethods()) {
-            Object get = "";
-            if (getter.getName().startsWith("get") && getter.getParameterTypes().length == 0) {
-                try {
-                    get = getter.invoke(entity);
-                } catch (IllegalAccessException | InvocationTargetException e) {
-                    e.printStackTrace();
-                }
-                if (get != null)
-                    for (Method setter : setEntity.getClass().getMethods()) {
-                        if (setter.getName().startsWith("set") && setter.getName().endsWith(getter.getName().substring(3)) && setter.getParameterTypes().length == 1) {
-                            try {
-                                setter.invoke(setEntity, get);
-                            } catch (IllegalAccessException | InvocationTargetException e) {
-                                e.printStackTrace();
-                            }
-                            continue;
-                        }
-                    }
-            }
-        }
+        if(entity.getDescription() != null)
+            setEntity.setDescription(entity.getDescription());
 
         cardiacRepository.save(setEntity);
 
