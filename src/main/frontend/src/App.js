@@ -12,9 +12,11 @@ import Other from './pages/Other/other';
 import Endvisit from './pages/endvisit';
 import NotFound from './pages/NotFound';
 import LoginForm from './pages/LoginForm';
+import Endvisitform from './pages/Endvisit/Endvisitform';
 import PatientDetails from './components/SeePatientDetails';
 import { useContext, useEffect } from 'react';
 import { AppContext } from './Context/AppContext';
+ 
 
 function App() {
   const { isLoggedIn, setIsLoggedIn } = useContext(AppContext);
@@ -29,6 +31,7 @@ function App() {
 
       <Navbar />
 
+ 
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
@@ -44,6 +47,7 @@ function App() {
         <Route path="/details" element={<PatientDetails />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+ 
 
     </Router>
   );

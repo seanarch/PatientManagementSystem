@@ -1,12 +1,14 @@
 import React from 'react'
-import Endvisitpage from './Endvisit/Endvisitpage'
+import Endvisitform from './Endvisit/Endvisitform' 
 
 const Endvisit = () => {
     return (
         <div style={{
             display: 'flex', justifyContent:
                 'center', alignItems: 'center', height: '50vh'
-        }}> <Endvisitpage /></div>
+        }}> 
+        <br></br>
+        <Endvisitform /></div>
     )
 }
 
