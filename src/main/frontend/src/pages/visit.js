@@ -1,9 +1,10 @@
 import React from 'react'
 import Fhxdetail from './Visit/Fhxdetail';
 import ORinfo from './Visit/ORinfo';
-import RTGIinfo from './Visit/RTGIinfo';
-import Symptons from './Visit/Symptons';
+import RTGIinfo from './Visit/RTGIinfo'; 
 import SearchBar from '../components/SearchBar';
+import Symptoms from './Visit/Symptoms';
+import Patientchallenges from './Visit/Patientchallenges';
 
 
 const visit = () => (
@@ -12,8 +13,11 @@ const visit = () => (
        
         <ORinfo />
         <Fhxdetail />
-        <RTGIinfo />
-        <Symptons />
+        <Patientchallenges />
+        <RTGIinfo />  
+        <Symptoms />
+
+    
      
     </div>
 );

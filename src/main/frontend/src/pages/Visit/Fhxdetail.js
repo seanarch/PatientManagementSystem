@@ -14,19 +14,14 @@ import 'react-toastify/dist/ReactToastify.css';
 function Fhxdetail() {
 
     const userid = -2144486835;
-    
+
+
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
             fhxDetail: "",
             smokingPackYears: 0,
             smokeQuit: "",
-            attendedFamily: false,
-            lacksSocialSupport: false,
-            languageBarrier: false,
-            financialChallenge: true,
-            psychosocialChallenge: true,
-            etohweek: true,
             detail: "",
         },
 
@@ -46,12 +41,6 @@ function Fhxdetail() {
                            "fhxDetail": "${values.fhxDetail}",
                            "smokingPackYears": "${values.smokingPackYears}",
                            "smokeQuit": "${values.smokeQuit}",
-                           "attendedFamily": "${values.attendedFamily}",
-                           "lacksSocialSupport": "${values.lacksSocialSupport}",
-                           "languageBarrier": "${values.languageBarrier}",
-                           "financialChallenge": "${values.financialChallenge}",
-                           "psychosocialChallenge": "${values.psychosocialChallenge}",
-                           "etohweek": "${values.etohweek}",
                            "detail": "${values.detail}"
                          }`
                 }
@@ -133,65 +122,7 @@ function Fhxdetail() {
                                         />
                                     </Grid>
  
-                                    <Grid item xs={6}>
 
-                                    <h5>Attended Family</h5>
-                                    <input type="checkbox" 
-                                    name="attendedFamily"
-                                    checked={formik.values.attendedFamily} 
-                                    onChange={formik.handleChange}/>
-
-                                    </Grid>
- 
-                                    <Grid item xs={6}>
-
-                                    <h5>Social Support</h5>
-                                    <input type="checkbox" 
-                                    name="lacksSocialSupport"
-                                    checked={formik.values.lacksSocialSupport} 
-                                    onChange={formik.handleChange}/>
-
-                                    </Grid>
- 
-                                    <Grid item xs={6}>
-
-                                    <h5>Language Barrier</h5>
-                                    <input type="checkbox" 
-                                    name="languageBarrier"
-                                    checked={formik.values.languageBarrier} 
-                                    onChange={formik.handleChange}/>
-
-                                    </Grid>
- 
-                                    <Grid item xs={6}>
-
-                                    <h5>Financial Challenge</h5>
-                                    <input type="checkbox" 
-                                    name="financialChallenge"
-                                    checked={formik.values.financialChallenge} 
-                                    onChange={formik.handleChange}/>
-
-                                    </Grid>
- 
-                                    <Grid item xs={6}>
-
-                                    <h5>Psychosocial Challenge</h5>
-                                    <input type="checkbox" 
-                                    name="psychosocialChallenge"
-                                    checked={formik.values.psychosocialChallenge} 
-                                    onChange={formik.handleChange}/>
-
-                                    </Grid>
- 
-                                    <Grid item xs={6}>
-
-                                    <h5>etohweek</h5>
-                                    <input type="checkbox" 
-                                    name="etohweek"
-                                    checked={formik.values.etohweek} 
-                                    onChange={formik.handleChange}/>
-
-                                    </Grid>
 
                                 <Grid item xs={12}>
                                         <TextField

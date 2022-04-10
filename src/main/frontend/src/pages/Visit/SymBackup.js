@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useFormik, Formik, Form, Field } from 'formik';
 import { Button } from 'reactstrap';
 import { Container, Grid, InputLabel, Select, MenuItem, FormControl, Checkbox } from '@material-ui/core';
@@ -10,12 +10,22 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { textAlign } from '@material-ui/system';
 
+
  
  
 
 function Symptons() {
 
     const userid = -2147216991;
+
+    const [checked, setChecked] = useState(); 
+    const [checkboxValue, setCheckboxValue] = useState(0);
+    const [intValue, setIntValue] = useState(0); 
+ 
+    const [fever, setFever] = useState(null);
+    const [feverInt, setFeverInt] = useState(null);
+
+ 
 
     const formik = useFormik({
         enableReinitialize: true,
@@ -65,7 +75,7 @@ function Symptons() {
                   body: `{
                            "id": "${userid}",
                            "date": "${values.date}",
-                           "feversChills": "${values.feversChills}",
+                           "feversChills": "${values.feversChills ? 1:0}",
                            "appetiteLoss": "${values.appetiteLoss}" ,
                            "difficultyChewing": "${values.difficultyChewing}" ,
                            "abdominalPain": "${values.abdominalPain}" ,
@@ -102,7 +112,11 @@ function Symptons() {
             }
           }
         });
-      
+
+    
+        
+       
+        // fetch data from api and prefill the form
         useEffect(() => {
           (async () => {
             try {
@@ -111,13 +125,19 @@ function Symptons() {
               );
               let content = await response.json();
               formik.setValues(content);
-              // formik.setFieldValue("email", content[0].email);
+              // formik.setFieldValue("email", content.email);
             } catch (e) {
               console.log(e);
             }
           })();
           // eslint-disable-next-line react-hooks/exhaustive-deps
         }, []);
+
+        useEffect(() => {
+          setFeverInt(fever ? 1:0);
+      
+        }, [fever])
+        
 
     const notify = () => {
      
@@ -126,6 +146,15 @@ function Symptons() {
           autoClose: 2000
         })
     }
+
+    function handleCheckbox(e) {
+        console.log('value of checkbox: ', e.target.checked);
+        setFever(e.target.checked);
+         
+         
+      }
+ 
+      
 
   return (   <Container maxWidth="md">
   <div className='container' style={{
@@ -153,8 +182,8 @@ function Symptons() {
 
                                     <h5>FeversChills</h5>
                                     <input type="checkbox" 
-                                    name="feversChills"
-                                    checked={formik.values.feversChills} 
+                                    name="feversChills" 
+                                    checked={ formik.values.feversChills ? 1:0 }
                                     onChange={formik.handleChange}/>
 
                                     </Grid>

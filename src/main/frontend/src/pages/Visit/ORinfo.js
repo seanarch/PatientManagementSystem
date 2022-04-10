@@ -61,9 +61,7 @@ function ORinfo() {
                            "nodesVe": "${values.nodesVe}",
                            "nodesTaken": "${values.nodesTaken}",
                            "m": "${values.m}",
-                           "stage": "${values.stage}",
-                           "lvsi": "${values.lvsi}",
-                           "periNeural": "${values.periNeural}",
+                           "stage": "${values.stage}", 
                            "pathologyDescription": "${values.pathologyDescription}"
                          }`
                 }
@@ -132,47 +130,7 @@ function ORinfo() {
                                 </Grid>
 
  
-
-                            {/* <Grid item xs={6}>
-                            <h5>LVSI</h5>
-                                <label>
-                                    <Field 
-                                    type="checkbox" 
-                                    name="lvsi" 
-                                    checked={formik.values.lvsi}
-                                    onChange={formik.handleChange} />
-                                </label>
-                            </Grid> */}
-
-                            <Grid item xs={6}>
-
-                            <h5>LVSI</h5>
-                            <input type="checkbox" 
-                            name="lvsi"
-                            checked={formik.values.lvsi} 
-                            onChange={formik.handleChange}/>
-
-                            </Grid>
-
-                            <Grid item xs={6}>
-
-                            <h5>periNeural</h5>
-                            <input type="checkbox" 
-                            name="periNeural"
-                            checked={formik.values.periNeural} 
-                            onChange={formik.handleChange}/>
-
-                            </Grid>
-                            {/* <Grid item xs={6}>
-                            <h5>LVSI</h5>
-                                <label>
-                                    <Field 
-                                    type="checkbox" 
-                                    name="lvsi" 
-                                    value={formik.values.lvsi}
-                                    onChange={formik.handleChange} />
-                                </label>
-                            </Grid> */}
+ 
 
                             <Grid item xs={6}>
                                     <TextField
