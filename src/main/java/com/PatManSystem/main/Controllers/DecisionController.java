@@ -4,7 +4,6 @@ import com.PatManSystem.main.DTO.DecisionDTO;
 import com.PatManSystem.main.Services.DecisionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -13,7 +12,7 @@ import java.util.List;
                 RequestMethod.PUT,
                 RequestMethod.DELETE,
                 RequestMethod.POST})
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("*")
 public class DecisionController {
 
     private final DecisionService decisionService;
@@ -41,7 +40,7 @@ public class DecisionController {
     public String registerNewDecision(@RequestBody DecisionDTO decisionDTO){
 
         decisionService.newDecision(decisionDTO);
-        return "NEW: Decision identified by ID "+decisionDTO.getId()+" successfully added.";
+        return "NEW: Decision successfully added.";
     }
 
     @DeleteMapping(path = "/delete/id={id}")
