@@ -2,6 +2,8 @@ package com.PatManSystem.main.Services;
 
 import com.PatManSystem.main.DTO.DiagnosticimagingDTO;
 import com.PatManSystem.main.DTO.DiagnosticimagingDTO;
+import com.PatManSystem.main.Exception.DuplicateFoundException;
+import com.PatManSystem.main.Exception.NotFoundException;
 import com.PatManSystem.main.Mapper.DiagnosticimagingMapperImpl;
 import com.PatManSystem.main.Mapper.DiagnosticimagingMapperImpl;
 import com.PatManSystem.main.Models.Diagnosticimaging;
@@ -37,7 +39,7 @@ public class DiagnosticimagingService {
 
     @SneakyThrows
     public DiagnosticimagingDTO getDiagnosticimaging(Integer id){
-        return new DiagnosticimagingMapperImpl().diagnosticimagingToDiagnosticimagingDTO(diagnosticimagingRepository.findById(id).orElseThrow(() -> new DiagnosticimagingService.DiagnosticimagingNotFound(id)));
+        return new DiagnosticimagingMapperImpl().diagnosticimagingToDiagnosticimagingDTO(diagnosticimagingRepository.findById(id).orElseThrow(() -> new NotFoundException("Diagnosticimaging identified by ID:{"+id+"} was not found.")));
     }
 
     @SneakyThrows
@@ -46,7 +48,7 @@ public class DiagnosticimagingService {
         List<Diagnosticimaging> getDiagnosticimagings = diagnosticimagingRepository.findByUli(new Patientinformation(ULI));
 
         if(getDiagnosticimagings.isEmpty())
-            throw new DiagnosticimagingService.DiagnosticimagingNotFound(ULI);
+            throw new NotFoundException("Diagnosticimaging identified by ID:{"+ULI+"} was not found.");
 
         return getDiagnosticimagings.stream()
                 .map(new DiagnosticimagingMapperImpl()::diagnosticimagingToDiagnosticimagingDTO)
@@ -57,8 +59,8 @@ public class DiagnosticimagingService {
     @SneakyThrows
     public void newDiagnosticimaging(DiagnosticimagingDTO DTO){
 
-        if(diagnosticimagingRepository.findById(DTO.getId()).isPresent())
-            throw new DiagnosticimagingService.DiagnosticimagingDuplicateFound(DTO.getId());
+        if(DTO.getId() != null && diagnosticimagingRepository.findById(DTO.getId()).isPresent())
+            throw new DuplicateFoundException("Diagnosticimaging identified by id:{"+DTO.getId()+"} already exists.");
 
         diagnosticimagingRepository.save(new DiagnosticimagingMapperImpl().diagnosticimagingDTOToDiagnosticimaging(DTO)); // convert incoming DTO to DB entity and save to the DB
 
@@ -67,7 +69,7 @@ public class DiagnosticimagingService {
     @SneakyThrows
     public void deleteDiagnosticimaging(Integer id){
 
-        diagnosticimagingRepository.findById(id).orElseThrow(() -> new DiagnosticimagingService.DiagnosticimagingNotFound(id));
+        diagnosticimagingRepository.findById(id).orElseThrow(() -> new NotFoundException("Diagnosticimaging identified by ID:{"+id+"} was not found."));
         diagnosticimagingRepository.deleteById(id);
 
     }
@@ -75,7 +77,7 @@ public class DiagnosticimagingService {
     @SneakyThrows
     public void updateDiagnosticimaging(DiagnosticimagingDTO DTO){
 
-        Diagnosticimaging setEntity = diagnosticimagingRepository.findById(DTO.getId()).orElseThrow(() -> new DiagnosticimagingService.DiagnosticimagingNotFound(DTO.getId()));
+        Diagnosticimaging setEntity = diagnosticimagingRepository.findById(DTO.getId()).orElseThrow(() -> new NotFoundException("Diagnosticimaging identified by ID:{"+DTO.getId()+"} was not found."));
 
         if (DTO.getDateDI() != null)
             setEntity.setDateDI(DTO.getDateDI());
@@ -89,34 +91,4 @@ public class DiagnosticimagingService {
         diagnosticimagingRepository.save(setEntity);
 
     }
-    /* Custom exceptions for this class
-     * NotFound
-     * DuplicateFound
-     */
-    static class DiagnosticimagingNotFound extends Exception{
-        public DiagnosticimagingNotFound(String errorMessage){
-            super(errorMessage);
-        }
-        public DiagnosticimagingNotFound(){
-            super("Diagnosticimaging not found");
-        }
-        public DiagnosticimagingNotFound(Integer id){
-            super("Diagnosticimaging of ID:"+id+" not found");
-        }
-        public DiagnosticimagingNotFound(Long ULI){
-            super("Diagnosticimaging of ULI:"+ULI+" not found");
-        }
-    }
-    static class DiagnosticimagingDuplicateFound extends Exception{
-        public DiagnosticimagingDuplicateFound(String errorMessage){
-            super(errorMessage);
-        }
-        public DiagnosticimagingDuplicateFound(){
-            super("Diagnosticimaging already exists");
-        }
-        public DiagnosticimagingDuplicateFound(Integer id){
-            super("Diagnosticimaging of ID:"+id+" already exists");
-        }
-    }
-
 }

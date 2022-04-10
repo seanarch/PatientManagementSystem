@@ -15,7 +15,6 @@ public class DiagnosticimagingDTO implements Serializable {
     private Long uliId;
     private LocalDate dateDI;
     private Integer typeDIId;
-    private String typeDIDescription;
     private String finding;
 
     public DiagnosticimagingDTO(Integer id, LocalDate dateDI, Integer typeDIId, String finding) {

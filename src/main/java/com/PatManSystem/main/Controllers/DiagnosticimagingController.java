@@ -15,7 +15,7 @@ import java.util.List;
                 RequestMethod.PUT,
                 RequestMethod.DELETE,
                 RequestMethod.POST})
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("*")
 public class DiagnosticimagingController {
     private final DiagnosticimagingService diagnosticimagingService;
 
@@ -42,7 +42,7 @@ public class DiagnosticimagingController {
     public String registerNewDiagnosticimaging(@RequestBody DiagnosticimagingDTO diagnosticimagingDTO){
 
         diagnosticimagingService.newDiagnosticimaging(diagnosticimagingDTO);
-        return "NEW: Diagnosticimaging identified by ID "+diagnosticimagingDTO.getId()+" successfully added.";
+        return "NEW: Diagnosticimaging successfully added.";
     }
 
     @DeleteMapping(path = "/delete/id={id}")

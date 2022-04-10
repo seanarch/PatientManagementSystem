@@ -8,7 +8,6 @@ import org.mapstruct.*;
 public interface DiagnosticimagingMapper {
     @Mapping(source = "uliId", target = "uli.id")
     @Mapping(source = "typeDIId", target = "typeDI.id")
-    @Mapping(source = "typeDIDescription", target = "typeDI.description")
     Diagnosticimaging diagnosticimagingDTOToDiagnosticimaging(DiagnosticimagingDTO diagnosticimagingDTO);
 
     @InheritInverseConfiguration(name = "diagnosticimagingDTOToDiagnosticimaging")
