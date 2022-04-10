@@ -27,5 +27,4 @@ public class Diagnosticimaging {
 
     @Column(name = "Finding", length = 5000)
     private String finding;
-
 }

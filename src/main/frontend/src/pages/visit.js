@@ -8,13 +8,11 @@ import SearchBar from '../components/SearchBar';
 
 const visit = () => (
     <div>
-        
-       <SearchBar/>
-        <ORinfo />
-        <Fhxdetail />
-        <RTGIinfo />
-        <Symptons />
-     
+        <SearchBar/>
+        <ORinfo/>
+        <Fhxdetail/>
+        <RTGIinfo/>
+        <Symptons/>
     </div>
 );
 
