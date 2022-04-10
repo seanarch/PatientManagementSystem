@@ -17,7 +17,7 @@ import javax.persistence.criteria.CriteriaBuilder;
                 RequestMethod.PUT,
                 RequestMethod.DELETE,
                 RequestMethod.POST})
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("*")
 public class ExamController {
 
     private final ExamService examService;
@@ -43,7 +43,7 @@ public class ExamController {
     @PostMapping(path = "/new")
     public String registerNewExam(@RequestBody ExamDTO examDTO){
         examService.newExam(examDTO);
-        return "NEW: Exam identified by ID "+examDTO.getId()+" successfully added.";
+        return "NEW: Exam successfully added.";
     }
 
     @DeleteMapping(path = "/delete/id={id}")
