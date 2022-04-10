@@ -15,7 +15,6 @@ import java.util.List;
 @Service
 public class BodylocationService {
 
-
     private final BodylocationRepository bodylocationRepository;
 
     @Autowired
@@ -34,7 +33,7 @@ public class BodylocationService {
     @SneakyThrows
     public void newBodylocation(Bodylocation entity){
 
-        if(bodylocationRepository.findById(entity.getId()).isPresent())
+        if(entity.getId() != null && bodylocationRepository.findById(entity.getId()).isPresent())
             throw new DuplicateFoundException("Bodylocation identified by ID:{"+entity.getId()+"} already exists.");
 
         bodylocationRepository.save(entity);
@@ -53,27 +52,8 @@ public class BodylocationService {
 
         Bodylocation setEntity = bodylocationRepository.findById(entity.getId()).orElseThrow(() -> new NotFoundException("Bodylocation identified by id:{"+entity.getId()+"} was not found."));
 
-        for (Method getter : entity.getClass().getMethods()) {
-            Object get = "";
-            if (getter.getName().startsWith("get") && getter.getParameterTypes().length == 0) {
-                try {
-                    get = getter.invoke(entity);
-                } catch (IllegalAccessException | InvocationTargetException e) {
-                    e.printStackTrace();
-                }
-                if (get != null)
-                    for (Method setter : setEntity.getClass().getMethods()) {
-                        if (setter.getName().startsWith("set") && setter.getName().endsWith(getter.getName().substring(3)) && setter.getParameterTypes().length == 1) {
-                            try {
-                                setter.invoke(setEntity, get);
-                            } catch (IllegalAccessException | InvocationTargetException e) {
-                                e.printStackTrace();
-                            }
-                            continue;
-                        }
-                    }
-            }
-        }
+        if(entity.getDescription() != null)
+            setEntity.setDescription(entity.getDescription());
 
         bodylocationRepository.save(setEntity);
 
