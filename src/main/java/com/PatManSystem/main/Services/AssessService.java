@@ -2,6 +2,8 @@ package com.PatManSystem.main.Services;
 
 import com.PatManSystem.main.DTO.AssessDTO;
 import com.PatManSystem.main.DTO.AssessDTO;
+import com.PatManSystem.main.Exception.DuplicateFoundException;
+import com.PatManSystem.main.Exception.NotFoundException;
 import com.PatManSystem.main.Mapper.AssessMapperImpl;
 import com.PatManSystem.main.Mapper.AssessMapperImpl;
 import com.PatManSystem.main.Models.Assess;
@@ -47,7 +49,7 @@ public class AssessService {
     }
     @SneakyThrows
     public AssessDTO getAssess(Integer id){
-        return new AssessMapperImpl().assessToAssessDTO(assessRepository.findById(id).orElseThrow(() -> new AssessNotFound(id)));
+        return new AssessMapperImpl().assessToAssessDTO(assessRepository.findById(id).orElseThrow(() -> new NotFoundException("Assess identified by ID:{"+id+"} was not found.")));
     }
     @SneakyThrows
     public List<AssessDTO> getAssessByULI(Long ULI){
@@ -55,7 +57,7 @@ public class AssessService {
         List<Assess> getAssesss = assessRepository.findAssessByUli(new Patientinformation(ULI));
 
         if(getAssesss.isEmpty()) //check if the requested patient exists, if not; throw not found exception
-            throw new AssessNotFound(ULI);
+            throw new NotFoundException("Assess identified by ULI:{"+ULI+"} was not found.");
 
         return getAssesss.stream()
                 .map(assess -> new AssessMapperImpl().assessToAssessDTO(assess))
@@ -65,21 +67,24 @@ public class AssessService {
     @SneakyThrows
     public void newAssess(AssessDTO assessDTO){
 
-        assessRepository.findById(assessDTO.getId()).orElseThrow(() -> new AssessDuplicateFound(assessDTO.getId()));
-        assessRepository.save(new AssessMapperImpl().assessDTOToAssess(assessDTO)); // convert incoming DTO to DB entity and save to the DB
+
+        if(assessDTO.getId() == null || assessRepository.findById(assessDTO.getId()).isEmpty())
+            assessRepository.save(new AssessMapperImpl().assessDTOToAssess(assessDTO)); // convert incoming DTO to DB entity and save to the DB
+        else
+            throw new DuplicateFoundException("Assess identified by ID:{"+assessDTO.getId()+"} already exists.");
 
     }
     @SneakyThrows
     public void deleteAssess(Integer id){
 
-        assessRepository.findById(id).orElseThrow(() -> new AssessNotFound(id));
+        assessRepository.findById(id).orElseThrow(() -> new NotFoundException("Assess identified by ID:{"+id+"} was not found."));
         assessRepository.deleteById(id);
 
     }
     @SneakyThrows
     public void updateAssess(AssessDTO DTO){
 
-        Assess setEntity = assessRepository.findById(DTO.getId()).orElseThrow(() -> new AssessNotFound(DTO.getId()));
+        Assess setEntity = assessRepository.findById(DTO.getId()).orElseThrow(() -> new NotFoundException("Assess identified by ID:{"+DTO.getId()+"} was not found."));
 
         if (DTO.getDate() != null)
             setEntity.setDate(DTO.getDate());
@@ -95,34 +100,5 @@ public class AssessService {
 
         assessRepository.save(setEntity);
 
-    }
-    /* Custom exceptions for this class
-     * NotFound
-     * DuplicateFound
-     */
-    static class AssessNotFound extends Exception{
-        public AssessNotFound(String errorMessage){
-            super(errorMessage);
-        }
-        public AssessNotFound(){
-            super("Assess not found");
-        }
-        public AssessNotFound(Integer id){
-            super("Assess of ID:"+id+" not found");
-        }
-        public AssessNotFound(Long ULI){
-            super("Assess of ULI:"+ULI+" not found");
-        }
-    }
-    static class AssessDuplicateFound extends Exception{
-        public AssessDuplicateFound(String errorMessage){
-            super(errorMessage);
-        }
-        public AssessDuplicateFound(){
-            super("Assess already exists");
-        }
-        public AssessDuplicateFound(Integer id){
-            super("Assess of ID:"+id+" already exists");
-        }
     }
 }
