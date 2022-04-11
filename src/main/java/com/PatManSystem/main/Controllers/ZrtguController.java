@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/zrtgu" ,
+@RequestMapping(path = "/api/zrtgu",
         method = {RequestMethod.GET,
                 RequestMethod.DELETE,
                 RequestMethod.POST})
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("*")
 public class ZrtguController {
 
     private final ZrtguService zrtguService;
@@ -32,9 +32,9 @@ public class ZrtguController {
     }
 
     @PostMapping(path = "/new")
-    public String registerNewZrtgu(@RequestBody Zrtgu zrtgu){
+    public String newZrtgu(@RequestBody Zrtgu zrtgu) {
         zrtguService.newZrtgu(zrtgu);
-        return "NEW: Zrtgu identified by ID "+zrtgu.getId()+" successfully added.";
+        return "NEW: Zrtgu identified by ID " + zrtgu.getId() + " successfully added.";
     }
 
     @DeleteMapping(path = "/delete/id={id}")
