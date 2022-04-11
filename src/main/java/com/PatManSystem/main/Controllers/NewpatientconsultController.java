@@ -5,14 +5,12 @@ import com.PatManSystem.main.DTO.NewpatientconsultDTO;
 import com.PatManSystem.main.Exception.DuplicateFoundException;
 import com.PatManSystem.main.Exception.NotFoundException;
 import com.PatManSystem.main.Services.NewpatientconsultService;
-
-import java.time.LocalDate;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
+import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api/newpatientconsult",
@@ -20,7 +18,7 @@ import javax.persistence.criteria.CriteriaBuilder;
                 RequestMethod.PUT,
                 RequestMethod.DELETE,
                 RequestMethod.POST})
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("*")
 
 public class NewpatientconsultController {
 

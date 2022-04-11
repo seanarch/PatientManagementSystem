@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class NewpatientconsultService {
 
 
-    private NewpatientconsultRepository newpatientconsultRepository;
+    private final NewpatientconsultRepository newpatientconsultRepository;
 
     @Autowired
     public NewpatientconsultService(NewpatientconsultRepository newpatientconsultRepository) {
@@ -28,9 +28,7 @@ public class NewpatientconsultService {
     public List<NewpatientconsultDTO> getNewpatientconsults() {
         return newpatientconsultRepository.findAll()
                 .stream()
-                .map(newpatientconsult -> {
-                    return new NewpatientconsultMapperImpl().newpatientconsultToNewpatientconsultDTO(newpatientconsult);
-                })
+                .map(newpatientconsult -> new NewpatientconsultMapperImpl().newpatientconsultToNewpatientconsultDTO(newpatientconsult))
                 .collect(Collectors.toList());
     }
 
@@ -56,7 +54,7 @@ public class NewpatientconsultService {
 
     //create new Newpatientconsult entity by passing NewpatientconsultDTO
     public void newNewpatientconsult(NewpatientconsultDTO newpatientconsultDTO) throws DuplicateFoundException {
-        if (newpatientconsultRepository.findNewpatientconsultById(newpatientconsultDTO.getId()) != null) {
+        if (newpatientconsultDTO.getId() != null && newpatientconsultRepository.findNewpatientconsultById(newpatientconsultDTO.getId()) != null) {
             throw new DuplicateFoundException(newpatientconsultDTO.getId());
         }
         newpatientconsultRepository.save(new NewpatientconsultMapperImpl().newpatientconsultDTOToNewpatientconsult(newpatientconsultDTO));
@@ -78,12 +76,7 @@ public class NewpatientconsultService {
         if (existingNewpatientconsult == null)
             throw new NotFoundException(newpatientconsultDTO.getId());
         else {
-            // newpatientconsult table's id may not need to be updated once it has been created
-           /*
-            if (newpatientconsultDTO.getId() != null) {
-                existingNewpatientconsult.setId(newpatientconsultDTO.getId());
-            }
-            */
+
             if (newpatientconsultDTO.getDate() != null) {
                 existingNewpatientconsult.setDate(newpatientconsultDTO.getDate());
 
