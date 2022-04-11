@@ -17,6 +17,7 @@ const userid = -2147216991;
  
 const [data, setData] = useState(null);
 const [date, setDate] = useState(null);
+const [dateUpdate, setDateUpdate] = useState(null);
 const [feversChills, setFeversChills] = useState(null);
 const [feversChillsUpdate, setfeversChillsUpdate] = useState(null) ;
 const [appetiteLoss, setAppetiteLoss] = useState(null);
@@ -74,6 +75,11 @@ const [badlsUpdate, setBadlsUpdate] = useState(null);
 const [iadls, setIadls] = useState(null);
 const [iadlsUpdate, setIadlsUpdate] = useState(null);
  
+ 
+ 
+useEffect(() => {
+  setDateUpdate(date);
+}, [date])
  
 useEffect(() => {
   setfeversChillsUpdate(feversChills ? 1:0);
@@ -188,6 +194,10 @@ useEffect(() => {
 }, [iadls])
 
 
+
+function handleDate(e) { 
+  setDate(e.target.value);
+}
 
 function handleFev(e) { 
   setFeversChills(e.target.checked);
@@ -315,6 +325,7 @@ let handleSubmit = async (e) => {
         },
         body: `{
                  "id" : "${userid}", 
+                 "date": "${dateUpdate}",
                  "feversChills": "${feversChillsUpdate}",
                  "appetiteLoss": "${appetiteLossUpdate}",
                  "difficultyChewing": "${difficultyChewingUpdate}" ,
@@ -358,8 +369,7 @@ let handleSubmit = async (e) => {
 function getData() {
   fetch(`http://localhost:8080/api/reviewofsymptoms/id=${userid}`).then((result) => {
     result.json().then((resp) => {
-      setData(resp)
-      console.log(resp)
+      setData(resp) 
       setDate(resp.date)
       setFeversChills(resp.feversChills)
       setAppetiteLoss(resp.appetiteLoss)
@@ -425,9 +435,10 @@ return (
                   <Grid item xs={12}>
                     <TextField
                       fullWidth
-                      label="Date"
+                      label="Date" 
                       name="date"
-                      value={date}/>
+                      value={date}
+                      onChange={handleDate} />
                   </Grid>
 
                   <Grid item xs={3}>
