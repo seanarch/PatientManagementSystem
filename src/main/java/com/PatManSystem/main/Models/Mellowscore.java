@@ -12,6 +12,7 @@ import java.util.Set;
 @Table(name = "mellowscore")
 public class Mellowscore {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "TypeID", nullable = false)
     private Integer id;
 

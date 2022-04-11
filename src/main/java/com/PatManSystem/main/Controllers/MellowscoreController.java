@@ -12,7 +12,7 @@ import java.util.List;
         method = {RequestMethod.GET,
                 RequestMethod.DELETE,
                 RequestMethod.POST})
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("*")
 public class MellowscoreController {
 
     private final MellowscoreService mellowscoreService;
