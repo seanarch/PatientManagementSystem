@@ -1,12 +1,11 @@
 package com.PatManSystem.main.Services;
 
 import com.PatManSystem.main.DTO.SymptomDTO;
-import com.PatManSystem.main.DTO.SymptomDTO;
+import com.PatManSystem.main.Exception.DuplicateFoundException;
+import com.PatManSystem.main.Exception.NotFoundException;
 import com.PatManSystem.main.Mapper.SymptomMapperImpl;
-import com.PatManSystem.main.Mapper.SymptomMapperImpl;
-import com.PatManSystem.main.Models.Symptom;
 import com.PatManSystem.main.Models.Patientinformation;
-import com.PatManSystem.main.Models.Typeofsymptom;
+import com.PatManSystem.main.Models.Symptom;
 import com.PatManSystem.main.Repository.SymptomRepository;
 import com.PatManSystem.main.Repository.TypeofsymptomRepository;
 import lombok.SneakyThrows;
@@ -39,7 +38,7 @@ public class SymptomService {
     }
     @SneakyThrows
     public SymptomDTO getSymptom(Integer id){
-        return new SymptomMapperImpl().symptomToSymptomDTO(symptomRepository.findById(id).orElseThrow(() -> new SymptomService.SymptomNotFound(id)));
+        return new SymptomMapperImpl().symptomToSymptomDTO(symptomRepository.findById(id).orElseThrow(() -> new NotFoundException("Symptom identified by ULI:{" + id + "} does not exists.")));
     }
 
     @SneakyThrows
@@ -48,7 +47,7 @@ public class SymptomService {
         List<Symptom> getSymptoms = symptomRepository.findByUli(new Patientinformation(ULI));
 
         if(getSymptoms.isEmpty())
-            throw new SymptomService.SymptomNotFound(ULI);
+            throw new NotFoundException("Symptom identified by ULI:{" + ULI + "} does not exists.");
 
         return getSymptoms.stream()
                 .map(new SymptomMapperImpl()::symptomToSymptomDTO)
@@ -56,10 +55,10 @@ public class SymptomService {
     }
 
     @SneakyThrows
-    public void newSymptom(SymptomDTO DTO){
+    public void newSymptom(SymptomDTO DTO) {
 
-        if(symptomRepository.findById(DTO.getId()).isPresent())
-            throw new SymptomService.SymptomDuplicateFound(DTO.getId());
+        if (DTO.getId() != null && symptomRepository.findById(DTO.getId()).isPresent())
+            throw new DuplicateFoundException("Symptom identified by ID:{" + DTO.getId() + "} already exists.");
 
         symptomRepository.save(new SymptomMapperImpl().symptomDTOToSymptom(DTO)); // convert incoming DTO to DB entity and save to the DB
 
@@ -68,7 +67,7 @@ public class SymptomService {
     @SneakyThrows
     public void deleteSymptom(Integer id){
 
-        symptomRepository.findById(id).orElseThrow(() -> new SymptomService.SymptomNotFound(id));
+        symptomRepository.findById(id).orElseThrow(() -> new NotFoundException("Symptom identified by ID:{" + id + "} does not exists."));
         symptomRepository.deleteById(id);
 
     }
@@ -76,7 +75,7 @@ public class SymptomService {
     @SneakyThrows
     public void updateSymptom(SymptomDTO DTO){
 
-        Symptom setEntity = symptomRepository.findById(DTO.getId()).orElseThrow(() -> new SymptomService.SymptomNotFound(DTO.getId()));
+        Symptom setEntity = symptomRepository.findById(DTO.getId()).orElseThrow(() -> new NotFoundException("Symptom identified by ID:{" + DTO.getId() + "} does not exists."));
 
         if (DTO.getSymptomId() != null)
             typeofsymptomRepository.findById(DTO.getSymptomId()).ifPresent(setEntity::setSymptom);
@@ -86,34 +85,5 @@ public class SymptomService {
 
         symptomRepository.save(setEntity);
 
-    }
-    /* Custom exceptions for this class
-     * NotFound
-     * DuplicateFound
-     */
-    static class SymptomNotFound extends Exception{
-        public SymptomNotFound(String errorMessage){
-            super(errorMessage);
-        }
-        public SymptomNotFound(){
-            super("Symptom not found");
-        }
-        public SymptomNotFound(Integer id){
-            super("Symptom of ID:"+id+" not found");
-        }
-        public SymptomNotFound(Long ULI){
-            super("Symptom of ULI:"+ULI+" not found");
-        }
-    }
-    static class SymptomDuplicateFound extends Exception{
-        public SymptomDuplicateFound(String errorMessage){
-            super(errorMessage);
-        }
-        public SymptomDuplicateFound(){
-            super("Symptom already exists");
-        }
-        public SymptomDuplicateFound(Integer id){
-            super("Symptom of ID:"+id+" already exists");
-        }
     }
 }
