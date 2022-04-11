@@ -8,7 +8,7 @@ import org.mapstruct.*;
 public interface SymptomMapper {
     @Mapping(source = "uliId", target = "uli.id")
     @Mapping(source = "symptomId", target = "symptom.id")
-    @Mapping(source = "symptomDecription", target = "symptom.decription")
+    @Mapping(source = "symptomDecription", target = "symptom.description")
     Symptom symptomDTOToSymptom(SymptomDTO symptomDTO);
 
     @InheritInverseConfiguration(name = "symptomDTOToSymptom")
