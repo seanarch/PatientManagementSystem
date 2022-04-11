@@ -32,11 +32,11 @@ function App() {
 
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/previsit" element={<Previsit />} />
-        <Route path="/visit" element={<Visit />} />
-        <Route path="/other" element={<Other />} />
-        <Route path="/endvisit" element={<Endvisit />} />
+        <Route path="/register" element={ isLoggedIn ?  <Register /> :  <Navigate  to="/" /> } />
+        <Route path="/previsit" element={isLoggedIn ?  <Previsit /> : <Navigate  to="/" /> }/>
+        <Route path="/visit" element={isLoggedIn ?  <Visit /> :  <Navigate  to="/" /> }/>
+        <Route path="/other" element={isLoggedIn ? <Other />:  <Navigate  to="/" /> } />
+        <Route path="/endvisit" element={isLoggedIn ? <Endvisit />:  <Navigate  to="/" /> } />
         <Route path="/signin" element=
           {
             //if use is logged in, link to welcome page

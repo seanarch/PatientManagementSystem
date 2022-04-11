@@ -34,9 +34,14 @@ const LoginForm = () => {
       const data = await result.json();
       //  console.log(data);
 
+     //set the login Form to dummy
+     setIsLoggedIn(true);
+
+/*
       //if data.message exist(user not found in the back end), display the message to screen
       if (data.message) {
         setloginStatus(data.message);
+
       } else if (!data) {
         setloginStatus("User name password combination is not correct. Please try again");
       } else if (data) {
@@ -46,6 +51,7 @@ const LoginForm = () => {
      //   window.localStorage.setItem("login-status", true);
       }
 
+*/
     } catch (e) {
       console.log(e);
     }
