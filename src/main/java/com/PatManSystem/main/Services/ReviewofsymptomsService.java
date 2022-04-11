@@ -1,9 +1,11 @@
 package com.PatManSystem.main.Services;
 
 import com.PatManSystem.main.DTO.ReviewofsymptomsDTO;
+import com.PatManSystem.main.Exception.DuplicateFoundException;
+import com.PatManSystem.main.Exception.NotFoundException;
 import com.PatManSystem.main.Mapper.ReviewofsymptomsMapperImpl;
-import com.PatManSystem.main.Models.Reviewofsymptoms;
 import com.PatManSystem.main.Models.Patientinformation;
+import com.PatManSystem.main.Models.Reviewofsymptoms;
 import com.PatManSystem.main.Repository.ReviewofsymptomsRepository;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +35,7 @@ public class ReviewofsymptomsService {
     }
     @SneakyThrows
     public ReviewofsymptomsDTO getReviewofsymptoms(Integer id){
-        return new ReviewofsymptomsMapperImpl().reviewofsymptomsToReviewofsymptomsDTO(reviewofsymptomsRepository.findById(id).orElseThrow(() -> new ReviewofsymptomsService.ReviewofsymptomsNotFound(id)));
+        return new ReviewofsymptomsMapperImpl().reviewofsymptomsToReviewofsymptomsDTO(reviewofsymptomsRepository.findById(id).orElseThrow(() -> new NotFoundException("Reviewofsymptoms identified by ID:{" + id + "} was not found")));
     }
 
     @SneakyThrows
@@ -42,7 +44,7 @@ public class ReviewofsymptomsService {
         List<Reviewofsymptoms> getReviewofsymptomss = reviewofsymptomsRepository.findByUli(new Patientinformation(ULI));
 
         if(getReviewofsymptomss.isEmpty())
-            throw new ReviewofsymptomsService.ReviewofsymptomsNotFound(ULI);
+            throw new NotFoundException("Reviewofsymptoms identified by ID:{" + ULI + "} was not found");
 
         return getReviewofsymptomss.stream()
                 .map(new ReviewofsymptomsMapperImpl()::reviewofsymptomsToReviewofsymptomsDTO)
@@ -50,10 +52,10 @@ public class ReviewofsymptomsService {
     }
 
     @SneakyThrows
-    public void newReviewofsymptoms(ReviewofsymptomsDTO DTO){
+    public void newReviewofsymptoms(ReviewofsymptomsDTO DTO) {
 
-        if(reviewofsymptomsRepository.findById(DTO.getId()).isPresent())
-            throw new ReviewofsymptomsService.ReviewofsymptomsDuplicateFound(DTO.getId());
+        if (DTO.getId() != null && reviewofsymptomsRepository.findById(DTO.getId()).isPresent())
+            throw new DuplicateFoundException("Reviewofsymptoms identified by ID:{" + DTO.getId() + "} already exists.");
 
         reviewofsymptomsRepository.save(new ReviewofsymptomsMapperImpl().reviewofsymptomsDTOToReviewofsymptoms(DTO)); // convert incoming DTO to DB entity and save to the DB
 
@@ -62,7 +64,7 @@ public class ReviewofsymptomsService {
     @SneakyThrows
     public void deleteReviewofsymptoms(Integer id){
 
-        reviewofsymptomsRepository.findById(id).orElseThrow(() -> new ReviewofsymptomsService.ReviewofsymptomsNotFound(id));
+        reviewofsymptomsRepository.findById(id).orElseThrow(() -> new NotFoundException("Reviewofsymptoms identified by ID:{" + id + "} was not found"));
         reviewofsymptomsRepository.deleteById(id);
 
     }
@@ -70,7 +72,7 @@ public class ReviewofsymptomsService {
     @SneakyThrows
     public void updateReviewofsymptoms(ReviewofsymptomsDTO DTO){
 
-        Reviewofsymptoms setEntity = reviewofsymptomsRepository.findById(DTO.getId()).orElseThrow(() -> new ReviewofsymptomsService.ReviewofsymptomsNotFound(DTO.getId()));
+        Reviewofsymptoms setEntity = reviewofsymptomsRepository.findById(DTO.getId()).orElseThrow(() -> new NotFoundException("Reviewofsymptoms identified by ID:{" + DTO.getId() + "} was not found"));
 
         for (Method getter : DTO.getClass().getMethods()) {
             Object get = "";
@@ -93,37 +95,7 @@ public class ReviewofsymptomsService {
                     }
             }
         }
-
         reviewofsymptomsRepository.save(setEntity);
 
-    }
-    /* Custom exceptions for this class
-     * NotFound
-     * DuplicateFound
-     */
-    static class ReviewofsymptomsNotFound extends Exception{
-        public ReviewofsymptomsNotFound(String errorMessage){
-            super(errorMessage);
-        }
-        public ReviewofsymptomsNotFound(){
-            super("Reviewofsymptoms not found");
-        }
-        public ReviewofsymptomsNotFound(Integer id){
-            super("Reviewofsymptoms of ID:"+id+" not found");
-        }
-        public ReviewofsymptomsNotFound(Long ULI){
-            super("Reviewofsymptoms of ULI:"+ULI+" not found");
-        }
-    }
-    static class ReviewofsymptomsDuplicateFound extends Exception{
-        public ReviewofsymptomsDuplicateFound(String errorMessage){
-            super(errorMessage);
-        }
-        public ReviewofsymptomsDuplicateFound(){
-            super("Reviewofsymptoms already exists");
-        }
-        public ReviewofsymptomsDuplicateFound(Integer id){
-            super("Reviewofsymptoms of ID:"+id+" already exists");
-        }
     }
 }
