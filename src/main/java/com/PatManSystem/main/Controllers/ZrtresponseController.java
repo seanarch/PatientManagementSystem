@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/zrtresponse" ,
+@RequestMapping(path = "/api/zrtresponse",
         method = {RequestMethod.GET,
                 RequestMethod.DELETE,
                 RequestMethod.POST})
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("*")
 public class ZrtresponseController {
 
     private final ZrtresponseService zrtresponseService;
