@@ -13,6 +13,7 @@ import java.time.LocalDate;
 
 public class Radiationtherapy {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "RT", nullable = false)
     private Integer id;
 

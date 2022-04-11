@@ -10,12 +10,12 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/radiationtherapy" ,
+@RequestMapping(path = "/api/radiationtherapy",
         method = {RequestMethod.GET,
                 RequestMethod.PUT,
                 RequestMethod.DELETE,
                 RequestMethod.POST})
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("*")
 public class RadiationtherapyController {
 
    private final RadiationtherapyService radiationtherapyService;
@@ -43,7 +43,7 @@ public class RadiationtherapyController {
     public String registerNewRadiationtherapy(@RequestBody RadiationtherapyDTO radiationtherapyDTO){
 
         radiationtherapyService.newRadiationtherapy(radiationtherapyDTO);
-        return "NEW: Radiationtherapy identified by ID "+radiationtherapyDTO.getId()+" successfully added.";
+        return "NEW: Radiationtherapy successfully added.";
     }
 
     @DeleteMapping(path = "/delete/id={id}")

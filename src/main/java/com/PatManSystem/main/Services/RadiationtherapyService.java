@@ -4,8 +4,8 @@ import com.PatManSystem.main.DTO.RadiationtherapyDTO;
 import com.PatManSystem.main.Exception.DuplicateFoundException;
 import com.PatManSystem.main.Exception.NotFoundException;
 import com.PatManSystem.main.Mapper.RadiationtherapyMapperImpl;
-import com.PatManSystem.main.Models.Radiationtherapy;
 import com.PatManSystem.main.Models.Patientinformation;
+import com.PatManSystem.main.Models.Radiationtherapy;
 import com.PatManSystem.main.Repository.*;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,10 +85,40 @@ public class RadiationtherapyService {
     }
 
     @SneakyThrows
-    public void newRadiationtherapy(RadiationtherapyDTO DTO){
+    public void newRadiationtherapy(RadiationtherapyDTO DTO) {
 
-        if(radiationtherapyRepository.findById(DTO.getId()).isPresent())
-            throw new DuplicateFoundException("Raditationtherapy identified by ID:{"+DTO.getId()+"} already exists.");
+        if (DTO.getId() != null && radiationtherapyRepository.findById(DTO.getId()).isPresent())
+            throw new DuplicateFoundException("Raditationtherapy identified by ID:{" + DTO.getId() + "} already exists.");
+
+        if (DTO.getTypeRTId() == null)
+            DTO.setTypeRTId(12); //null default ID 12 (Other)
+
+        if (DTO.getLocationId() == null)
+            DTO.setLocationId(92); //null default ID 92 (Unknown)
+
+        if (DTO.getPlanningId() == null)
+            DTO.setPlanningId(11); //null default ID 11 (N/A)
+
+        if (DTO.getPneumonitisId() == null)
+            DTO.setPneumonitisId(1); //null default ID 1 (No Symptoms)
+
+        if (DTO.getUpperGIId() == null)
+            DTO.setUpperGIId(1); //null default ID 1 (No Symptoms)
+
+        if (DTO.getSkinReactionId() == null)
+            DTO.setSkinReactionId(1); //null default ID 1 (No Symptoms)
+
+        if (DTO.getLowerGIId() == null)
+            DTO.setLowerGIId(1); //null default ID 1 (No Symptoms)
+
+        if (DTO.getGuId() == null)
+            DTO.setGuId(1); //null default ID 1 (No Symptoms)
+
+        if (DTO.getHemeId() == null)
+            DTO.setHemeId(1); //null default ID 1 (No Symptoms)
+
+        if (DTO.getHepaticId() == null)
+            DTO.setHepaticId(1); //null default ID 1 (No Symptoms)
 
         radiationtherapyRepository.save(new RadiationtherapyMapperImpl().radiationtherapyDTOToRadiationtherapy(DTO)); // convert incoming DTO to DB entity and save to the DB
 
