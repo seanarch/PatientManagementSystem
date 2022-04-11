@@ -12,7 +12,6 @@ public class SymptomDTO implements Serializable {
     private Integer id;
     private Long uliId;
     private Integer symptomId;
-    private String symptomDecription;
     private String detail;
 
     public SymptomDTO(Integer id, Integer symptomId, String detail) {
