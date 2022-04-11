@@ -8,8 +8,6 @@ import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.List;
 
 @Service
@@ -34,8 +32,8 @@ public class TypeofdiagnosticimagingService {
     @SneakyThrows
     public void newTypeofdiagnosticimaging(Typeofdiagnosticimaging entity){
 
-        if(typeofdiagnosticimagingRepository.findById(entity.getId()).isPresent())
-            throw new DuplicateFoundException("Typeofdiagnosticimaging identified by ID:{"+entity.getId()+"} already exists.");
+        if (entity.getId() != null && typeofdiagnosticimagingRepository.findById(entity.getId()).isPresent())
+            throw new DuplicateFoundException("Typeofdiagnosticimaging identified by ID:{" + entity.getId() + "} already exists.");
 
         typeofdiagnosticimagingRepository.save(entity);
     }
@@ -49,31 +47,12 @@ public class TypeofdiagnosticimagingService {
     }
 
     @SneakyThrows
-    public void updateTypeofdiagnosticimaging(Typeofdiagnosticimaging entity){
+    public void updateTypeofdiagnosticimaging(Typeofdiagnosticimaging entity) {
 
-        Typeofdiagnosticimaging setEntity = typeofdiagnosticimagingRepository.findById(entity.getId()).orElseThrow(() -> new NotFoundException("Typeofdiagnosticimaging identified by id:{"+entity.getId()+"} was not found."));
+        Typeofdiagnosticimaging setEntity = typeofdiagnosticimagingRepository.findById(entity.getId()).orElseThrow(() -> new NotFoundException("Typeofdiagnosticimaging identified by id:{" + entity.getId() + "} was not found."));
 
-        for (Method getter : entity.getClass().getMethods()) {
-            Object get = "";
-            if (getter.getName().startsWith("get") && getter.getParameterTypes().length == 0) {
-                try {
-                    get = getter.invoke(entity);
-                } catch (IllegalAccessException | InvocationTargetException e) {
-                    e.printStackTrace();
-                }
-                if (get != null)
-                    for (Method setter : setEntity.getClass().getMethods()) {
-                        if (setter.getName().startsWith("set") && setter.getName().endsWith(getter.getName().substring(3)) && setter.getParameterTypes().length == 1) {
-                            try {
-                                setter.invoke(setEntity, get);
-                            } catch (IllegalAccessException | InvocationTargetException e) {
-                                e.printStackTrace();
-                            }
-                            continue;
-                        }
-                    }
-            }
-        }
+        if (entity.getDescription() != null)
+            setEntity.setDescription(entity.getDescription());
 
         typeofdiagnosticimagingRepository.save(setEntity);
 
