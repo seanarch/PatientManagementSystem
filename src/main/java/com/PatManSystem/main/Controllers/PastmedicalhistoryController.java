@@ -4,20 +4,19 @@ package com.PatManSystem.main.Controllers;
 import com.PatManSystem.main.DTO.PastmedicalhistoryDTO;
 import com.PatManSystem.main.Exception.DuplicateFoundException;
 import com.PatManSystem.main.Exception.NotFoundException;
-import java.util.List;
 import com.PatManSystem.main.Services.PastmedicalhistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
+import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/pastmedicalhistory" ,
+@RequestMapping(path = "/api/pastmedicalhistory",
         method = {RequestMethod.GET,
                 RequestMethod.PUT,
                 RequestMethod.DELETE,
                 RequestMethod.POST})
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("*")
 public class PastmedicalhistoryController {
 
     private final PastmedicalhistoryService pastmedicalhistoryService;

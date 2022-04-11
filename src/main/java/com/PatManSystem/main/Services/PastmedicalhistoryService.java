@@ -51,7 +51,7 @@ public class PastmedicalhistoryService {
     }
 
     public void newPastmedicalhistory(PastmedicalhistoryDTO pastmedicalhistoryDTO) throws DuplicateFoundException{
-        if (pastmedicalhistoryRepository.findPastmedicalhistoryById(pastmedicalhistoryDTO.getId()) != null)
+        if (pastmedicalhistoryDTO.getId() != null && pastmedicalhistoryRepository.findPastmedicalhistoryById(pastmedicalhistoryDTO.getId()) != null)
             throw new DuplicateFoundException(pastmedicalhistoryDTO.getId());
 
         pastmedicalhistoryRepository.save(new PastmedicalhistoryMapperImpl().pastmedicalhistoryDTOToPastmedicalhistory(pastmedicalhistoryDTO));
