@@ -17,21 +17,19 @@ import java.util.stream.Collectors;
 @Service
 public class PasthistoryService {
 
-    private PasthistoryRepository pasthistoryRepository;
-    private GoalofcareRepository goalofcareRepository;
+    private final PasthistoryRepository pasthistoryRepository;
+    private final GoalofcareRepository goalofcareRepository;
 
     @Autowired
-    public PasthistoryService(PasthistoryRepository pasthistoryRepository, GoalofcareRepository goalofcareRepository){
+    public PasthistoryService(PasthistoryRepository pasthistoryRepository, GoalofcareRepository goalofcareRepository) {
         this.pasthistoryRepository = pasthistoryRepository;
         this.goalofcareRepository = goalofcareRepository;
     }
 
-    public List<PasthistoryDTO> getPasthistorys(){
+    public List<PasthistoryDTO> getPasthistorys() {
         return pasthistoryRepository.findAll()
                 .stream()
-                .map(pasthistory -> {
-                    return new PasthistoryMapperImpl().pasthistoryToPasthistoryDTO(pasthistory);
-                })
+                .map(pasthistory -> new PasthistoryMapperImpl().pasthistoryToPasthistoryDTO(pasthistory))
                 .collect(Collectors.toList());
     }
 
@@ -57,9 +55,13 @@ public class PasthistoryService {
 
     //create new Pasthistory entity by passing PasthistoryDTO
     public void newPasthistory(PasthistoryDTO pasthistoryDTO) throws DuplicateFoundException {
-        if(pasthistoryRepository.findPasthistoryById(pasthistoryDTO.getId()) != null){
+        if (pasthistoryDTO.getId() != null && pasthistoryRepository.findPasthistoryById(pasthistoryDTO.getId()) != null) {
             throw new DuplicateFoundException(pasthistoryDTO.getId());
         }
+
+        if (pasthistoryDTO.getGoalofcareId() == null)
+            pasthistoryDTO.setGoalofcareId(10); //null default 10 (Unknown)
+
         pasthistoryRepository.save(new PasthistoryMapperImpl().pasthistoryDTOToPasthistory(pasthistoryDTO));
     }
 

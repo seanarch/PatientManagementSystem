@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Table(name = "pasthistory")
 public class Pasthistory {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PHx", nullable = false)
     private Integer id;
 

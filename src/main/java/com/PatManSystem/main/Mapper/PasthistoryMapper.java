@@ -8,7 +8,6 @@ import org.mapstruct.*;
 public interface PasthistoryMapper {
     @Mapping(source = "uliId", target = "uli.id")
     @Mapping(source = "goalofcareId", target = "goalofcare.id")
-    @Mapping(source = "goalofcareDescription", target = "goalofcare.description")
     Pasthistory pasthistoryDTOToPasthistory(PasthistoryDTO pasthistoryDTO);
 
     @InheritInverseConfiguration(name = "pasthistoryDTOToPasthistory")

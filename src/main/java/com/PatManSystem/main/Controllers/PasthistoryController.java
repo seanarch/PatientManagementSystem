@@ -4,18 +4,18 @@ import com.PatManSystem.main.DTO.PasthistoryDTO;
 import com.PatManSystem.main.Exception.DuplicateFoundException;
 import com.PatManSystem.main.Exception.NotFoundException;
 import com.PatManSystem.main.Services.PasthistoryService;
-
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping(path = "/api/pasthistory" ,
+@RequestMapping(path = "/api/pasthistory",
         method = {RequestMethod.GET,
                 RequestMethod.PUT,
                 RequestMethod.DELETE,
                 RequestMethod.POST})
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("*")
 public class PasthistoryController {
     private final PasthistoryService pasthistoryService;
 
@@ -42,7 +42,7 @@ public class PasthistoryController {
     @PostMapping(path = "/new")
     public String registerPasthistory(@RequestBody PasthistoryDTO pasthistoryDTO) throws DuplicateFoundException {
         pasthistoryService.newPasthistory(pasthistoryDTO);
-        return "NEW: Pasthistory identified by ID "+ pasthistoryDTO.getId()+" successfully added.";
+        return "NEW: Pasthistory successfully added.";
     }
 
     @DeleteMapping(path = "/delete/id={id}")
