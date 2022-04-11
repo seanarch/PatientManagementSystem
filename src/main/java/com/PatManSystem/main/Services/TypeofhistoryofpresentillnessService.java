@@ -32,8 +32,8 @@ public class TypeofhistoryofpresentillnessService {
     @SneakyThrows
     public void newTypeofhistoryofpresentillness(Typeofhistoryofpresentillness entity){
 
-        if(typeofhistoryofpresentillnessRepository.findById(entity.getId()).isPresent())
-            throw new DuplicateFoundException("Typeofhistoryofpresentillness identified by ID:{"+entity.getId()+"} already exists.");
+        if (entity.getId() != null && typeofhistoryofpresentillnessRepository.findById(entity.getId()).isPresent())
+            throw new DuplicateFoundException("Typeofhistoryofpresentillness identified by ID:{" + entity.getId() + "} already exists.");
 
         typeofhistoryofpresentillnessRepository.save(entity);
     }
