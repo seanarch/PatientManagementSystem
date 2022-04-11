@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
                 RequestMethod.PUT,
                 RequestMethod.DELETE,
                 RequestMethod.POST})
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("*")
 public class ManagementController {
     private final ManagementService managementService;
 
@@ -43,7 +43,7 @@ public class ManagementController {
     @PostMapping(path = "/new")
     public String registerNewManagement(@RequestBody ManagementDTO managementDTO) throws DuplicateFoundException {
         managementService.newManagement(managementDTO);
-        return "NEW: Management identified by ID "+managementDTO.getId()+" successfully added.";
+        return "NEW: Management successfully added.";
     }
 
     @DeleteMapping(path = "/delete/id={id}")

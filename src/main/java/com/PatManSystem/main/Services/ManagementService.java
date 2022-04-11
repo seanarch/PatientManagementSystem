@@ -5,7 +5,6 @@ import com.PatManSystem.main.Exception.DuplicateFoundException;
 import com.PatManSystem.main.Exception.NotFoundException;
 import com.PatManSystem.main.Mapper.ManagementMapperImpl;
 import com.PatManSystem.main.Models.Management;
-
 import com.PatManSystem.main.Models.Patientinformation;
 import com.PatManSystem.main.Repository.ManagementRepository;
 import com.PatManSystem.main.Repository.TypeofmanagementRepository;
@@ -33,9 +32,7 @@ public class ManagementService {
     public List<ManagementDTO> getManagements(){
         return managementRepository.findAll()
                 .stream()
-                .map(management -> {
-                    return new ManagementMapperImpl().managementToManagementDTO(management);
-                })
+                .map(management -> new ManagementMapperImpl().managementToManagementDTO(management))
                 .collect(Collectors.toList());
     }
 
@@ -50,7 +47,7 @@ public class ManagementService {
 
     //find Mangement entity by ULI and return ManagementDTO list
     public List<ManagementDTO> getManagementByULI(Long ULI) throws NotFoundException {
-        List<Management> getManagements = managementRepository.findManagementByUli(new Patientinformation(ULI,null,null,null,null,null,null,null));
+        List<Management> getManagements = managementRepository.findManagementByUli(new Patientinformation(ULI));
         if (getManagements.isEmpty())
             throw new NotFoundException(ULI);
 
@@ -61,9 +58,13 @@ public class ManagementService {
 
     //create new Management entity by passing managementDTO
     public void newManagement(ManagementDTO managementDTO) throws DuplicateFoundException {
-        if(managementRepository.findManagementById(managementDTO.getId()) != null){
+        if(managementDTO.getId() != null && managementRepository.findManagementById(managementDTO.getId()) != null){
             throw new DuplicateFoundException(managementDTO.getId());
         }
+
+        if(managementDTO.getInterventionId() == null)
+            managementDTO.setInterventionId(21);// default null to ID 21 (None)
+
           managementRepository.save(new ManagementMapperImpl().managementDTOToManagement(managementDTO));
     }
 
@@ -87,12 +88,6 @@ public class ManagementService {
             if ( managementDTO.getInterventionId() != null ) {
                 typeofmanagementRepository.findById(managementDTO.getInterventionId()).ifPresent(existingManagement::setIntervention);
             }
-            // management table's id may not need to be updated once it has been created
-            /*
-            if ( managementDTO.getId() != null ) {
-                existingManagement.setId( managementDTO.getId() );
-            }
-             */
             if ( managementDTO.getDate() != null ) {
                 existingManagement.setDate( managementDTO.getDate() );
             }
