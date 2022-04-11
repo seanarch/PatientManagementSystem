@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/typeofhistoryofpresentillness" ,
+@RequestMapping(path = "/api/typeofhistoryofpresentillness",
         method = {RequestMethod.GET,
                 RequestMethod.DELETE,
                 RequestMethod.POST})
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("*")
 public class TypeofhistoryofpresentillnessController {
 
     private final TypeofhistoryofpresentillnessService typeofhistoryofpresentillnessService;
