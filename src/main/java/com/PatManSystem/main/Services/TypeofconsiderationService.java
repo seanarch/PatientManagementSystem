@@ -8,8 +8,6 @@ import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.List;
 
 @Service
@@ -34,8 +32,8 @@ public class TypeofconsiderationService {
     @SneakyThrows
     public void newTypeofconsideration(Typeofconsideration entity){
 
-        if(typeofconsiderationRepository.findById(entity.getId()).isPresent())
-            throw new DuplicateFoundException("Typeofconsideration identified by ID:{"+entity.getId()+"} already exists.");
+        if (entity.getId() != null && typeofconsiderationRepository.findById(entity.getId()).isPresent())
+            throw new DuplicateFoundException("Typeofconsideration identified by ID:{" + entity.getId() + "} already exists.");
 
         typeofconsiderationRepository.save(entity);
     }
@@ -49,31 +47,12 @@ public class TypeofconsiderationService {
     }
 
     @SneakyThrows
-    public void updateTypeofconsideration(Typeofconsideration entity){
+    public void updateTypeofconsideration(Typeofconsideration entity) {
 
-        Typeofconsideration setEntity = typeofconsiderationRepository.findById(entity.getId()).orElseThrow(() -> new NotFoundException("Typeofconsideration identified by id:{"+entity.getId()+"} was not found."));
+        Typeofconsideration setEntity = typeofconsiderationRepository.findById(entity.getId()).orElseThrow(() -> new NotFoundException("Typeofconsideration identified by id:{" + entity.getId() + "} was not found."));
 
-        for (Method getter : entity.getClass().getMethods()) {
-            Object get = "";
-            if (getter.getName().startsWith("get") && getter.getParameterTypes().length == 0) {
-                try {
-                    get = getter.invoke(entity);
-                } catch (IllegalAccessException | InvocationTargetException e) {
-                    e.printStackTrace();
-                }
-                if (get != null)
-                    for (Method setter : setEntity.getClass().getMethods()) {
-                        if (setter.getName().startsWith("set") && setter.getName().endsWith(getter.getName().substring(3)) && setter.getParameterTypes().length == 1) {
-                            try {
-                                setter.invoke(setEntity, get);
-                            } catch (IllegalAccessException | InvocationTargetException e) {
-                                e.printStackTrace();
-                            }
-                            continue;
-                        }
-                    }
-            }
-        }
+        if (entity.getDescription() != null)
+            setEntity.setDescription(entity.getDescription());
 
         typeofconsiderationRepository.save(setEntity);
 
