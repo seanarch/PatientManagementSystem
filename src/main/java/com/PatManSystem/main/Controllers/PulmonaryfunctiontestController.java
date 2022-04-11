@@ -3,22 +3,21 @@ package com.PatManSystem.main.Controllers;
 import com.PatManSystem.main.DTO.PulmonaryfunctiontestDTO;
 import com.PatManSystem.main.Exception.DuplicateFoundException;
 import com.PatManSystem.main.Exception.NotFoundException;
-
-import java.time.LocalDate;
-import java.util.List;
-
 import com.PatManSystem.main.Services.PulmonaryfunctiontestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @RestController
-@RequestMapping(path = "/api/pulmonaryfunctiontest" ,
+@RequestMapping(path = "/api/pulmonaryfunctiontest",
         method = {RequestMethod.GET,
                 RequestMethod.PUT,
                 RequestMethod.DELETE,
                 RequestMethod.POST})
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("*")
 public class PulmonaryfunctiontestController {
     private final PulmonaryfunctiontestService pulmonaryfunctiontestService;
 

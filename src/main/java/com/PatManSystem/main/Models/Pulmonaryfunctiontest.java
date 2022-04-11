@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @Table(name = "pulmonaryfunctiontests")
 public class Pulmonaryfunctiontest {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PFT", nullable = false)
     private Integer id;
 

@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Service
 public class PulmonaryfunctiontestService {
 
-    private PulmonaryfunctiontestRepository pulmonaryfunctiontestRepository;
+    private final PulmonaryfunctiontestRepository pulmonaryfunctiontestRepository;
 
     @Autowired
     public PulmonaryfunctiontestService(PulmonaryfunctiontestRepository pulmonaryfunctiontestRepository){
@@ -26,9 +26,7 @@ public class PulmonaryfunctiontestService {
     public List<PulmonaryfunctiontestDTO> getPulmonaryfunctiontests(){
         return pulmonaryfunctiontestRepository.findAll()
                 .stream()
-                .map(pulmonaryfunctiontest -> {
-                    return new PulmonaryfunctiontestMapperImpl().pulmonaryfunctiontestToPulmonaryfunctiontestDTO(pulmonaryfunctiontest);
-                })
+                .map(pulmonaryfunctiontest -> new PulmonaryfunctiontestMapperImpl().pulmonaryfunctiontestToPulmonaryfunctiontestDTO(pulmonaryfunctiontest))
                 .collect(Collectors.toList());
     }
 
@@ -53,7 +51,7 @@ public class PulmonaryfunctiontestService {
     }
 
     public void newPulmonaryfunctiontest(PulmonaryfunctiontestDTO pulmonaryfunctiontestDTO) throws DuplicateFoundException {
-        if(pulmonaryfunctiontestRepository.findPulmonaryfunctiontestById(pulmonaryfunctiontestDTO.getId()) != null)
+        if (pulmonaryfunctiontestDTO.getId() != null && pulmonaryfunctiontestRepository.findPulmonaryfunctiontestById(pulmonaryfunctiontestDTO.getId()) != null)
             throw new DuplicateFoundException(pulmonaryfunctiontestDTO.getId());
 
         pulmonaryfunctiontestRepository.save(new PulmonaryfunctiontestMapperImpl().pulmonaryfunctiontestDTOToPulmonaryfunctiontest(pulmonaryfunctiontestDTO));
