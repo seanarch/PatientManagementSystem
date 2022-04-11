@@ -8,8 +8,6 @@ import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.List;
 
 @Service
@@ -34,8 +32,8 @@ public class ZrthemeService {
     @SneakyThrows
     public void newZrtheme(Zrtheme entity){
 
-        if(zrthemeRepository.findById(entity.getId()).isPresent())
-            throw new DuplicateFoundException("Zrtheme identified by ID:{"+entity.getId()+"} already exists.");
+        if (entity.getId() != null && zrthemeRepository.findById(entity.getId()).isPresent())
+            throw new DuplicateFoundException("Zrtheme identified by ID:{" + entity.getId() + "} already exists.");
 
         zrthemeRepository.save(entity);
     }
@@ -49,31 +47,12 @@ public class ZrthemeService {
     }
 
     @SneakyThrows
-    public void updateZrtheme(Zrtheme entity){
+    public void updateZrtheme(Zrtheme entity) {
 
-        Zrtheme setEntity = zrthemeRepository.findById(entity.getId()).orElseThrow(() -> new NotFoundException("Zrtheme identified by id:{"+entity.getId()+"} was not found."));
+        Zrtheme setEntity = zrthemeRepository.findById(entity.getId()).orElseThrow(() -> new NotFoundException("Zrtheme identified by id:{" + entity.getId() + "} was not found."));
 
-        for (Method getter : entity.getClass().getMethods()) {
-            Object get = "";
-            if (getter.getName().startsWith("get") && getter.getParameterTypes().length == 0) {
-                try {
-                    get = getter.invoke(entity);
-                } catch (IllegalAccessException | InvocationTargetException e) {
-                    e.printStackTrace();
-                }
-                if (get != null)
-                    for (Method setter : setEntity.getClass().getMethods()) {
-                        if (setter.getName().startsWith("set") && setter.getName().endsWith(getter.getName().substring(3)) && setter.getParameterTypes().length == 1) {
-                            try {
-                                setter.invoke(setEntity, get);
-                            } catch (IllegalAccessException | InvocationTargetException e) {
-                                e.printStackTrace();
-                            }
-                            continue;
-                        }
-                    }
-            }
-        }
+        if (entity.getDescription() != null)
+            setEntity.setDescription(entity.getDescription());
 
         zrthemeRepository.save(setEntity);
 
