@@ -1,15 +1,8 @@
 package com.PatManSystem.main.Services;
 
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 import com.PatManSystem.main.DTO.PatientinformationDTO;
 import com.PatManSystem.main.Exception.NotFoundException;
-import com.PatManSystem.main.Mapper.PatientinformationMapper;
 import com.PatManSystem.main.Mapper.PatientinformationMapperImpl;
 import com.PatManSystem.main.Models.Patientinformation;
 import com.PatManSystem.main.Repository.PatientRepository;
@@ -17,17 +10,20 @@ import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PatientInformationService {
 
+    private final PatientRepository patientRepository;
+
     @Autowired
-    private PatientRepository  patientRepository;
+    public PatientInformationService(PatientRepository patientRepository) {
+        this.patientRepository = patientRepository;
+    }
 
-
-
-    public List<Patientinformation> getPatients(){
+    public List<Patientinformation> getPatients() {
 
         return patientRepository.findAll(); // return a list of all patients
 
@@ -43,12 +39,11 @@ public class PatientInformationService {
     }
     public void newPatient(PatientinformationDTO patientinformationDTO){
 
-        if(patientRepository.findById(patientinformationDTO.getId()).isPresent()){  //check if the requested patient exists, if not; throw not found exception
-            throw new IllegalStateException("Patient identified by ULI "+patientinformationDTO.getId() + " already exists. Use Post:Update at /api/patient/update instead.");
-        }else{
+        if (patientinformationDTO.getId() != null && patientRepository.existsById(patientinformationDTO.getId())) {  //check if the requested patient exists, if not; throw not found exception
+            throw new IllegalStateException("Patient identified by ULI " + patientinformationDTO.getId() + " already exists. Use Post:Update at /api/patient/update instead.");
+        } else {
             patientRepository.save(new PatientinformationMapperImpl().patientinformationDTOToPatientinformation(patientinformationDTO)); // convert incoming DTO to DB entity and save to the DB
         }
-
     }
 
     public void deletePatient(Long ULI){

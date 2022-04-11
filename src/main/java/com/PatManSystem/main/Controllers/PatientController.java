@@ -3,19 +3,19 @@ package com.PatManSystem.main.Controllers;
 import com.PatManSystem.main.DTO.PatientinformationDTO;
 import com.PatManSystem.main.Models.Patientinformation;
 import com.PatManSystem.main.Services.PatientInformationService;
-
-import java.time.LocalDate;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@RestController  
+import java.time.LocalDate;
+import java.util.List;
+
+@RestController
 @RequestMapping(path = "/api/patient",
         method = {RequestMethod.GET,
                 RequestMethod.PUT,
                 RequestMethod.DELETE,
                 RequestMethod.POST})
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("*")
 public class PatientController {
 
     private final PatientInformationService patientService;
