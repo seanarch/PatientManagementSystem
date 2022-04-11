@@ -21,10 +21,11 @@ import { AppContext } from './Context/AppContext';
 function App() {
   const { isLoggedIn, setIsLoggedIn } = useContext(AppContext);
 
-  useEffect(() => {
+  //no need to sign in again if already signed in after refresh. Due to security this function may no be in favor
+/*   useEffect(() => {
     const loginStatusInStorage = window.localStorage.getItem("login-status");
     setIsLoggedIn(loginStatusInStorage);
-  }, []); 
+  }, []);  */
 
   return (
     <Router>
