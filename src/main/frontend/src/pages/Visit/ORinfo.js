@@ -105,13 +105,13 @@ function ORinfo() {
         }}>
              
                     <form onSubmit={formik.handleSubmit}>
-                        <Collapsible trigger="OR Information" triggerTagName='h3'  overflowWhenOpen="inherit">
+                        <Collapsible trigger="OR (Operating Room Information)" triggerTagName='h3'  overflowWhenOpen="inherit">
                       <br></br>
                         <Grid container spacing={3} width={'70vw'}>
                             <Grid item xs={6}>
                                 <TextField
                                         fullWidth
-                                        label="OR date"
+                                        label="OR (Operation) date"
                                         name="ordate"
                                         value={formik.values.ordate}
                                         onChange={formik.handleChange}
@@ -135,7 +135,7 @@ function ORinfo() {
                             <Grid item xs={6}>
                                     <TextField
                                         fullWidth
-                                        label="OR ID"
+                                        label="OR (Operating Room) ID"
                                         name="orId"
                                         value={formik.values.orId}
                                         onChange={formik.handleChange}
