@@ -466,11 +466,13 @@ return (
 
                   <Grid item xs={3}>
                     <label>
+                    <div className="symptons">
                       Chewing
                     <input type="checkbox" 
                     name="chew" 
                     checked={difficultyChewing} 
-                    onChange={handleDiff}/> 
+                    onChange={handleDiff}/>
+                    </div> 
                     </label>
                   </Grid>
 
