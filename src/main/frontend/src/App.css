@@ -146,3 +146,7 @@ input.search__bar--search-box {
 .btn1, .btn2{ 
   margin: 0 2px; 
 }
+
+.symptons:hover{
+  background: #aaa7a7;
+}
