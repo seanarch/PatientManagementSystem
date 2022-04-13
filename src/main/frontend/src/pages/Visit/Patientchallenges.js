@@ -153,51 +153,61 @@ return (
 
                                 <Grid item xs={6}>
                                     <label>
+                                    <div className="symptons">
                                         Attended fmily
                                         <input type="checkbox" 
                                         name="attendedFamily"
                                         checked={attendedFamily} 
                                         onChange={handleAtt}/>
+                                       </div> 
                                     </label>
                                 </Grid>
 
                                 <Grid item xs={6}>
                                     <label>
+                                    <div className="symptons">
                                         Social support
                                         <input type="checkbox" 
                                         name="Lacks Social Support"
                                         checked={lacksSocialSupport} 
                                         onChange={handleLack}/>
+                                        </div>
                                     </label>
                                 </Grid>
 
                                 <Grid item xs={6}>
                                     <label>
+                                    <div className="symptons">
                                         Language Barrier
                                         <input type="checkbox" 
                                         name="language"
                                         checked={languageBarrier} 
                                         onChange={handleLang}/>
+                                        </div>
                                     </label>
                                 </Grid>
 
                                 <Grid item xs={6}>
                                     <label>
+                                    <div className="symptons">
                                         Financial challenge
                                         <input type="checkbox" 
                                         name="financial"
                                         checked={financialChallenge} 
                                         onChange={handleFin}/>
+                                        </div>
                                     </label>
                                 </Grid>
 
                                 <Grid item xs={6}>
                                     <label>
+                                    <div className="symptons">
                                         Psychosocial Challenges
                                         <input type="checkbox" 
                                         name="psychosocial"
                                         checked={psychosocialChallenge} 
                                         onChange={handlePsych}/>
+                                        </div>
                                     </label>
                                 </Grid>
 
