@@ -14,7 +14,7 @@ const INITIAL_VALUES = {
     GeneralInformation: {
         DateDI: "2021-02-17",
         CTchest: "1",
-        Comments: "Some comments here Some comments here Some comments here Some comments here",
+        Comments: "Enter comments here ",
     },
 }
 

@@ -87,14 +87,14 @@ function Fhxdetail() {
              
                  
                     <form onSubmit={formik.handleSubmit}>
-                        <Collapsible trigger="Fhx Information" triggerTagName='h3'  overflowWhenOpen="inherit">
+                        <Collapsible trigger="Fhx (Family History) Information" triggerTagName='h3'  overflowWhenOpen="inherit">
                       <br></br>
 
                         <Grid container spacing={3} width={'70vw'}>
 
                                 <Grid item xs={6}>
                                         <TextField
-                                            label="FHX detail"
+                                            label="FHX (Family History) detail"
                                             name="fhxDetail"
                                             value={formik.values.fhxDetail}
                                             onChange={formik.handleChange}
