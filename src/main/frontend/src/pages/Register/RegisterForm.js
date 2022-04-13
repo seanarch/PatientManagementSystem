@@ -1,38 +1,63 @@
 import React from 'react';
-import { Formik, Form } from 'formik';
+import { useFormik, Formik, Form } from 'formik';
 import { Button } from 'reactstrap';
 import { Container, Grid, InputLabel, Select, MenuItem, FormControl } from '@material-ui/core';
-import TextField from '../../components/TextField/TextField';
+import { TextField } from "@material-ui/core/";
 import DatePicker from '../../components/Date/DatePicker';
 import Collapsible from 'react-collapsible';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const today = new Date();
-const date = today.setDate(today.getDate());
-const ymddate = new Date(date).toISOString().split('T')[0] // yyyy-mm-dd
 
-const firstname = "John";
-
-const INITIAL_VALUES = {
-    PatientInformation: {
-        Lastname: "",
-        Firstname: { firstname }.firstname,
-        Sex: "",
-        Birthday: "",
-        ULI: "",
-        TG: "",
-        Location: ""
-    },
-    NewPatientConsult: {
-        Date: { ymddate }.ymddate
-    },
-}
-
-console.log(ymddate)
-console.log(firstname)
 
 function RegisterForm() {
+
+     
+
+    const formik = useFormik({
+        enableReinitialize: true,
+        initialValues: {
+            lastname: "",
+            firstname: "",
+            sex: "",
+            birthday: "",
+            id: "",
+            tg: "",
+            location: "",
+            newdate: "",
+            print: ""
+
+        },
+
+        onSubmit: async (values) => {
+            console.log(values);
+            try {
+            let result = await fetch(
+                `http://localhost:8080/api/patient/new/`,
+                {
+                  method: "post",
+                  mode: "cors",
+                  headers: {
+                    "Content-Type": "application/json"
+                  },
+                  body: `{
+                           "id": "${values.id}",
+                           "lastname": "${values.lastname}",
+                           "firstname": "${values.firstname}",
+                           "sex": "${values.sex}",
+                           "birthday": "${values.birthday}",
+                           "print": "${values.print}",
+                           "tg": "${values.tg}",
+                           "location": "${values.location}"
+                         }`
+                }
+              );
+              console.log("Submited: " + result);
+            } catch (e) {
+              console.log(e);
+            }
+          }
+        });
 
     const notify = () => {
 
@@ -47,99 +72,89 @@ function RegisterForm() {
         <Container maxWidth="md">
             <div className='container' style={{
                 display: 'flex', justifyContent:
-                    'center', alignItems: 'center', marginTop: '50px', marginBottom: '25px'
+                    'center', alignItems: 'center', marginTop: '50px'
             }}>
-                <Formik initialValues={{ ...INITIAL_VALUES }} onSubmit={values => {
-                    console.log(values)//once submit, provide value for back end
-                }}
-                >
-                    {props => (
-                        <Form>
+                <form onSubmit={formik.handleSubmit}>
+                         
                             <Collapsible  trigger="Create New Patient" triggerTagName='h3'   overflowWhenOpen="inherit">
                                 <br></br>
                                 <Grid container spacing={3} width={'70vw'}>
-                                    <Grid item xs={6}>
+                                <Grid item xs={6}>
                                         <TextField
                                             label="Lastname"
-                                            name="PatientInformation.Lastname"
+                                            name="lastname"
+                                            value={formik.values.lastname}
+                                            onChange={formik.handleChange}
                                             fullWidth
                                         />
                                     </Grid>
-                                    <Grid item xs={6}>
+                                <Grid item xs={6}>
                                         <TextField
                                             label="Firstname"
-                                            name="PatientInformation.Firstname"
-                                        />
-                                    </Grid>
-
-                                    <Grid item xs={6} >
-                                        <FormControl fullWidth>
-                                            <InputLabel id="demo-simple-select">Sex</InputLabel>
-                                            <Select
-                                                label="Sex"
-                                                name="PatientInformation.Sex"
-                                                id="demo-simple-select"
-                                                value={props.values.PatientInformation.Sex}
-                                                onChange={props.handleChange}
-                                                labelId="demo-simple-select-label"
-
-                                            >
-                                                <MenuItem value={"M"}>Male</MenuItem>
-                                                <MenuItem value={"F"}>Female</MenuItem>
-
-                                            </Select>
-                                        </FormControl>
-                                    </Grid>
-
-                                    <Grid item xs={6}>
-                                        <DatePicker
+                                            name="firstname"
+                                            value={formik.values.firstname}
+                                            onChange={formik.handleChange}
                                             fullWidth
-                                            name="PatientInformation.Birthday"
-                                            label="Birthday"
                                         />
                                     </Grid>
-
-                                    <Grid item xs={6}>
+                                <Grid item xs={6}>
+                                        <TextField
+                                            label="Sex"
+                                            name="sex"
+                                            value={formik.values.sex}
+                                            onChange={formik.handleChange}
+                                            fullWidth
+                                        />
+                                    </Grid>
+                                <Grid item xs={6}>
+                                        <TextField
+                                            label="Birthday"
+                                            name="birthday"
+                                            value={formik.values.birthday}
+                                            onChange={formik.handleChange}
+                                            fullWidth
+                                        />
+                                    </Grid>
+                                <Grid item xs={6}>
                                         <TextField
                                             label="ULI"
-                                            name="PatientInformation.ULI"
+                                            name="id"
+                                            value={formik.values.id}
+                                            onChange={formik.handleChange}
+                                            fullWidth
                                             required
                                         />
                                     </Grid>
-
-
-                                    <Grid item xs={6}>
+                                <Grid item xs={6}>
                                         <TextField
                                             label="TG"
-                                            name="PatientInformation.TG"
+                                            name="tg"
+                                            value={formik.values.tg}
+                                            onChange={formik.handleChange}
+                                            fullWidth
                                         />
                                     </Grid>
-
-                                    <Grid item xs={6}>
+                                <Grid item xs={6}>
                                         <TextField
                                             label="Location"
-                                            name="PatientInformation.Location"
-                                        />
-                                    </Grid>
-
-                                    <Grid item xs={6}>
-                                        <DatePicker
+                                            name="location"
+                                            value={formik.values.location}
+                                            onChange={formik.handleChange}
                                             fullWidth
-                                            name="NewPatientConsult.Date"
-                                            label="New Patient Date"
                                         />
                                     </Grid>
-
+          
+ 
                                     <Grid item xs={12}>
                                         <Button color='primary' type="submit" onClick={notify}>Create</Button>
                                         <ToastContainer />
                                     </Grid>
                                 </Grid>
+                                
                             </Collapsible>
 
-                        </Form>
-                    )}
-                </Formik>
+                        </form>
+                   
             </div>
         </Container>
     )
