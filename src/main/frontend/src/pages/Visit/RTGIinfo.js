@@ -108,14 +108,14 @@ function RTGIinfo() {
  
                
                         <form onSubmit={formik.handleSubmit}>
-                            <Collapsible trigger="RT(RadioTherapy) & GI(GastroIntestinal) Information" triggerTagName='h3' overflowWhenOpen="inherit">
+                            <Collapsible trigger="RT & GI Information" triggerTagName='h3' overflowWhenOpen="inherit">
                                 <br></br>
 
                                 <Grid container spacing={3} width={'70vw'}>
 
                                 <Grid item xs={6}>
                                     <TextField
-                                    label="Date RT Start"
+                                    label="DateRTStart"
                                     name="dateRTStart"
                                     value={formik.values.dateRTStart}
                                     onChange={formik.handleChange}
@@ -125,7 +125,7 @@ function RTGIinfo() {
 
                                 <Grid item xs={6}>
                                     <TextField
-                                    label="Date RT End"
+                                    label="DateRTEnd"
                                     name="dateRTEnd"
                                     value={formik.values.dateRTEnd}
                                     onChange={formik.handleChange}
@@ -135,7 +135,7 @@ function RTGIinfo() {
 
                                 <Grid item xs={6}>
                                     <TextField
-                                    label="Type RT Id"
+                                    label="TypeRTId"
                                     name="typeRTId"
                                     value={formik.values.typeRTId}
                                     onChange={formik.handleChange}
@@ -155,7 +155,7 @@ function RTGIinfo() {
 
                                 <Grid item xs={6}>
                                     <TextField
-                                    label="RT Dose"
+                                    label="RT dose"
                                     name="rtdose"
                                     value={formik.values.rtdose}
                                     onChange={formik.handleChange}
@@ -175,7 +175,7 @@ function RTGIinfo() {
 
                                 <Grid item xs={6}>
                                     <TextField
-                                    label="Planning ID"
+                                    label="PlanningId"
                                     name="planningId"
                                     value={formik.values.planningId}
                                     onChange={formik.handleChange}
@@ -185,7 +185,7 @@ function RTGIinfo() {
 
                                 <Grid item xs={12}>
                                     <TextField
-                                    label="Anatomy Detail"
+                                    label="AnatDetail"
                                     name="anatDetail"
                                     value={formik.values.anatDetail}
                                     onChange={formik.handleChange}
@@ -209,7 +209,7 @@ function RTGIinfo() {
 
                                 <Grid item xs={6}>
                                     <TextField
-                                    label="Pneumonitis ID"
+                                    label="PneumonitisId"
                                     name="pneumonitisId"
                                     value={formik.values.pneumonitisId}
                                     onChange={formik.handleChange}
@@ -219,7 +219,7 @@ function RTGIinfo() {
 
                                 <Grid item xs={6}>
                                     <TextField
-                                    label="Upper GI ID"
+                                    label="UpperGI ID"
                                     name="upperGIId"
                                     value={formik.values.upperGIId}
                                     onChange={formik.handleChange}
@@ -239,7 +239,7 @@ function RTGIinfo() {
 
                                 <Grid item xs={6}>
                                     <TextField
-                                    label="Lower GI ID"
+                                    label="LowerGI ID"
                                     name="lowerGIId"
                                     value={formik.values.lowerGIId}
                                     onChange={formik.handleChange}

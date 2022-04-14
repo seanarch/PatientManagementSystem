@@ -443,132 +443,111 @@ return (
 
                   <Grid item xs={3}>
                     <label>
-                      <div className="symptons">Fever
+                      Fever
                     <input type="checkbox" 
                     name="fever" 
                     checked={feversChills} 
                     onChange={handleFev}/> 
-                    </div>
                     </label>
                   </Grid>
-                  
+
                   <Grid item xs={3}>
                     <label>
-                    <div className="symptons">
                       Appetite
                     <input type="checkbox" 
                     name="appt" 
                     checked={appetiteLoss} 
                     onChange={handleAppt}/> 
-                    </div>
                     </label>
                   </Grid>
 
                   <Grid item xs={3}>
                     <label>
-                    <div className="symptons">
                       Chewing
                     <input type="checkbox" 
                     name="chew" 
                     checked={difficultyChewing} 
-                    onChange={handleDiff}/>
-                    </div> 
+                    onChange={handleDiff}/> 
                     </label>
                   </Grid>
 
                   <Grid item xs={3}>
                     <label>
-                    <div className="symptons">
                       Abdom
                     <input type="checkbox" 
                     name="abdom" 
                     checked={abdominalPain} 
                     onChange={handleAbdo}/> 
-                    </div>
                     </label>
                   </Grid>
 
                   <Grid item xs={3}>
                     <label>
-                    <div className="symptons">
                       NauseeVomit
                     <input type="checkbox" 
                     name="nause" 
                     checked={nauseaVomiting} 
                     onChange={handleNaus}/> 
-                    </div>
                     </label>
                   </Grid>
 
                   <Grid item xs={3}>
                     <label>
-                    <div className="symptons">
                       Heartburn
                     <input type="checkbox" 
                     name="heartburn" 
                     checked={heartburn} 
                     onChange={handleHeart}/> 
-                     </div>
                     </label>
                   </Grid>
 
                   <Grid item xs={3}>
                     <label>
-                    <div className="symptons">
                       Constipation
                     <input type="checkbox" 
                     name="Constipation" 
                     checked={constipation} 
                     onChange={handleCons}/> 
-                    </div>
                     </label>
                   </Grid>
 
                   <Grid item xs={3}>
                     <label>
-                    <div className="symptons">
                       Hemetemesis
                     <input type="checkbox" 
                     name="heme" 
                     checked={hemetemesis} 
-                    onChange={handleHeme}/>
-                    </div>
+                    onChange={handleHeme}/> 
                     </label>
                   </Grid>
 
                   <Grid item xs={3}>
                     <label>
-                    <div className="symptons">
                       Melena
                     <input type="checkbox" 
                     name="melena" 
                     checked={melena} 
                     onChange={handleMele}/> 
-                    </div>
                     </label>
                   </Grid>
 
                   <Grid item xs={3}>
                     <label>
-                    <div className="symptons">
                       RectalBleed
                     <input type="checkbox" 
                     name="rectal" 
                     checked={rectalBleed} 
                     onChange={handleRect}/> 
-                    </div>
                     </label>
                   </Grid>
 
                   <Grid item xs={3}>
                     <label>
-                    <div className="symptons">
                       Nocturea
                     <input type="checkbox" 
                     name="nocturea" 
                     checked={nocturea} 
                     onChange={handleNoct}/> 
-                    </div>
                     </label>
                   </Grid>
 
@@ -584,193 +563,161 @@ return (
 
                   <Grid item xs={3}>
                     <label>
-                    <div className="symptons">
                       Hematurea
                     <input type="checkbox" 
                     name="hematurea" 
                     checked={hematurea} 
                     onChange={handleHema}/> 
-                    </div>
                     </label>
                   </Grid>
 
                   <Grid item xs={3}>
                     <label>
-                    <div className="symptons">
                       Pneumaturea
                     <input type="checkbox" 
                     name="pneumaturea" 
                     checked={pneumaturea} 
                     onChange={handlePneu}/> 
-                    </div>
                     </label>
                   </Grid>
 
                   <Grid item xs={3}>
                     <label>
-                    <div className="symptons">
                       BackBone
                     <input type="checkbox" 
                     name="backbone" 
                     checked={backBoneJointPain} 
                     onChange={handleBack}/> 
-                    </div>
                     </label>
                   </Grid>
 
                   <Grid item xs={3}>
                     <label>
-                    <div className="symptons">
                       SOB
                     <input type="checkbox" 
                     name="sob" 
                     checked={sob} 
                     onChange={handleSob}/> 
-                    </div>
                     </label>
                   </Grid>
 
                   <Grid item xs={3}>
                     <label>
-                    <div className="symptons">
                       Cough
                     <input type="checkbox" 
                     name="cough" 
                     checked={cough} 
-                    onChange={handleCough}/>
-                    </div> 
+                    onChange={handleCough}/> 
                     </label>
                   </Grid>
 
                   <Grid item xs={3}>
                     <label>
-                    <div className="symptons">
                       Hemoptisis
                     <input type="checkbox" 
                     name="hemo" 
                     checked={hemoptisis} 
                     onChange={handleHemo}/> 
-                    </div>
                     </label>
                   </Grid>
 
                   <Grid item xs={3}>
                     <label>
-                    <div className="symptons">
                       Wheeze
                     <input type="checkbox" 
                     name="whee" 
                     checked={wheeze} 
                     onChange={handleWhee}/> 
-                    </div>
                     </label>
                   </Grid>
 
                   <Grid item xs={3}>
                     <label>
-                    <div className="symptons">
                       ChestPain
                     <input type="checkbox" 
                     name="chest" 
                     checked={chestPain} 
-                    onChange={handleChes}/>
-                    </div> 
+                    onChange={handleChes}/> 
                     </label>
                   </Grid>
 
                   <Grid item xs={3}>
                     <label>
-                    <div className="symptons">
                       Headaches
                     <input type="checkbox" 
                     name="head" 
                     checked={headaches} 
-                    onChange={handleHead}/>
-                    </div> 
+                    onChange={handleHead}/> 
                     </label>
                   </Grid>
 
                   <Grid item xs={3}>
                     <label>
-                    <div className="symptons">
                       Vision
                     <input type="checkbox" 
                     name="vision" 
                     checked={visionChanges} 
                     onChange={handleVisi}/> 
-                    </div>
                     </label>
                   </Grid>
 
                   <Grid item xs={3}>
                     <label>
-                    <div className="symptons">
                       Hearing
                     <input type="checkbox" 
                     name="hear" 
                     checked={hearing} 
                     onChange={handleHear}/> 
-                    </div>
                     </label>
                   </Grid>
 
                   <Grid item xs={3}>
                     <label>
-                    <div className="symptons">
                       Speech
                     <input type="checkbox" 
                     name="speech" 
                     checked={speechChanges} 
                     onChange={handleSpee}/> 
-                    </div>
                     </label>
                   </Grid>
 
                   <Grid item xs={3}>
                     <label>
-                    <div className="symptons">
                       Focal
                     <input type="checkbox" 
                     name="focal" 
                     checked={focalWeakness} 
                     onChange={handleFoca}/> 
-                    </div>
                     </label>
                   </Grid>
 
                   <Grid item xs={3}>
                     <label>
-                    <div className="symptons">
                       ED
                     <input type="checkbox" 
                     name="ed" 
                     checked={ed} 
-                    onChange={handleEd}/>
-                    </div> 
+                    onChange={handleEd}/> 
                     </label>
                   </Grid>
 
                   <Grid item xs={3}>
                     <label>
-                    <div className="symptons">
                       Badls
                     <input type="checkbox" 
                     name="badls" 
                     checked={badls} 
-                    onChange={handleBadl}/>
-                    </div> 
+                    onChange={handleBadl}/> 
                     </label>
                   </Grid>
 
                   <Grid item xs={3}>
                     <label>
-                    <div className="symptons">
                       Iadls
                     <input type="checkbox" 
                     name="iadls" 
                     checked={iadls} 
                     onChange={handleIadl}/> 
-                    </div>
                     </label>
                   </Grid>
 
