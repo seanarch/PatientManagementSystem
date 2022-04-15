@@ -1,391 +1,516 @@
-import React from 'react';
-import { useFormik } from 'formik';
-import { FormControl, InputLabel, Grid, Select, MenuItem, Box, Container } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
+import { FormControl, InputLabel, Grid, Select, MenuItem, Box, Container, Dialog, DialogTitle } from '@material-ui/core';
 import TextField from '@mui/material/TextField';
 import { Button } from 'reactstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SearchBar from '../../components/SearchBar';
-import { GoTrashcan, GoPencil} from "react-icons/go"
-
-/* npm install @mui/material @emotion/react @emotion/styled */
+import { GoTrashcan, GoPencil, GoDiffAdded } from "react-icons/go"
+import AddDialog from '../../components/Dialog/AddRow';
+import DeleteDialog from '../../components/Dialog/DeleteRow';
+import EditDialog from '../../components/Dialog/EditRow';
 const Other = () => {
 
     const notify = () => {
-
         toast.success('Successfully saved!', {
             position: toast.POSITION.TOP_RIGHT,
             autoClose: 2000
         })
     }
 
-    const otherForm = useFormik({
-        initialValues: {
-            CNS: { ECOG: "" },
-            Lung: { ECOG: "" },
-            HN: { ECOG: "" },
-            Oral: { ECOG: "" },
-            Cardiac: { ECOG: "" },
-            MSK: { Description: "" },
-            Skin: { ECOG: "" },
-            Adbo: { ECOG: "" },
-            ABNORMAL: { Description: "" },
-            Supine: { Setup: "" },
-            Breath: { Breath: "" },
-        },
+    //array attributes to hold data from existing tables
+    const [centralnervoussystems, setCentralnervoussystems] = useState([{}]);
+    const [lungs, setLungs] = useState([]);
+    const [hns, setHns] = useState([]);
+    const [orals, setOrals] = useState([]);
+    const [cardiacs, setCardiacs] = useState([]);
+    const [msks, setMsks] = useState([]);
+    const [skins, setSkins] = useState([]);
+    const [abdos, setAbdos] = useState([]);
+    const [supines, setSupines] = useState([]);
+    const [breaths, setBreaths] = useState([]);
 
-        /*  no validation because these fields can be null in database */
-        onSubmit: (values) => {
-            console.log(values)
-            //once submit,provide value for back end
+    //attributes to hold the selected id from user input
+    const [date, setDate] = useState("");
+    const [cnsId, setCnsId] = useState("");
+    const [lungId, setLungId] = useState("");
+    const [hnId, setHnId] = useState("");
+    const [oralId, setOralId] = useState("");
+    const [cardiacId, setCardiacId] = useState("");
+    const [mskId, setMskId] = useState("");
+    const [skinId, setSkinId] = useState("");
+    const [abdoId, setAbdoId] = useState("");
+    const [supineId, setSupineId] = useState("");
+    const [breathId, setBreathId] = useState("");
+    const [abnormal, setAbnormal] = useState("");
+    useEffect(() => {
+        (async () => {
+            try {
+                const responseCNS = await fetch(
+                    `http://localhost:8080/api/centralnervoussystem/all`
+                );
+                const dataCNS = await responseCNS.json();
+                setCentralnervoussystems(dataCNS);
+                //   console.log(centralnervoussystems);
+
+                const responseLUNG = await fetch(
+                    `http://localhost:8080/api/lung/all`
+                );
+                const dataLUNG = await responseLUNG.json();
+                setLungs(dataLUNG);
+
+                const responseHN = await fetch(
+                    `http://localhost:8080/api/headandneck/all`
+                );
+                const dataHN = await responseHN.json();
+                setHns(dataHN);
+
+                const responseORAL = await fetch(
+                    `http://localhost:8080/api/oral/all`
+                );
+                const dataORAL = await responseORAL.json();
+                setOrals(dataORAL);
+
+                const responseCARDIAC = await fetch(
+                    `http://localhost:8080/api/cardiac/all`
+                );
+                const dataCARDIAC = await responseCARDIAC.json();
+                setCardiacs(dataCARDIAC);
+
+                const responseMSK = await fetch(
+                    `http://localhost:8080/api/musculoskeletal/all`
+                );
+                const dataMSK = await responseMSK.json();
+                setMsks(dataMSK);
+
+                const responseSKIN = await fetch(
+                    `http://localhost:8080/api/skin/all`
+                );
+                const dataSKIN = await responseSKIN.json();
+                setSkins(dataSKIN);
+
+                const responseABDO = await fetch(
+                    `http://localhost:8080/api/abdomen/all`
+                );
+                const dataABDO = await responseABDO.json();
+                setAbdos(dataABDO);
+
+                const responseSUPINE = await fetch(
+                    `http://localhost:8080/api/supine/all`
+                );
+                const dataSUPINE = await responseSUPINE.json();
+                setSupines(dataSUPINE);
+
+                const responseBREATH = await fetch(
+                    `http://localhost:8080/api/breath/all`
+                );
+                const dataBREATH = await responseBREATH.json();
+                setBreaths(dataBREATH);
+
+            } catch (e) {
+                console.log(e);
+            }
+        })();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+
+    const saveExam = async (e) => {
+        e.preventDefault();
+
+        try {
+            const result = await fetch(
+                `http://localhost:8080/api/exam/new`,
+                {
+                    method: "POST",
+                    mode: "cors",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "id": null,
+                        "abdoId": abdoId,
+                        "uliId": 155063610,
+                        "date": date,
+                        "cnsId": cnsId,
+                        "lungId": lungId,
+                        "hnId": hnId,
+                        "oralId": oralId,
+                        "cardiacId": cardiacId,
+                        "mskId": mskId,
+                        "peripheralId": skinId,
+                        "abnormal": abnormal,
+                        "supineId": supineId,
+                        "breathId": breathId
+                    })
+                }
+            )
+            const data = await result.text();
+            console.log(data);
+        } catch (e) {
+            console.log(e);
         }
-    })
+    }
+
+    //button hidden status
+    const [isCNSHidden, setIsCNSHidden] = useState("");
+    const [isLungHidden, setIsLungHidden] = useState("");
+    const [isHNHidden, setIsHNHidden] = useState("");
+    const [isOralHidden, setIsOralHidden] = useState("");
+    const [isMSKHidden, setIsMSKHidden] = useState("");
+    const [isSkinHidden, setIsSkinHidden] = useState("");
+    const [isAbdoHidden, setIsAbdoHidden] = useState("");
+    const [isSupineHidden, setIsSupineHidden] = useState("");
+    const [isBreathHidden, setIsBreathHidden] = useState("");
+
+
+    //tableName Prop to the dialog and Api call
+    const [tableName, setTableName] = useState("");
+
+    // add dialog function
+    const [openAdd, setAddOpen] = useState(false);
+    const handleAddOpen = () => {
+        setAddOpen(true);
+    }
+
+    const handleAddClose = () => {
+        setAddOpen(false);
+    };
+    //delete dialog function
+    const [openDelete, setDeleteOpen] = useState(false);
+    const handleDeleteOpen = () => {
+        setDeleteOpen(true);
+    }
+
+    const handleDeleteClose = () => {
+        setDeleteOpen(false);
+    };
+
+    const [descriptionId, setDescriptionId] = useState("");
+    const [description, setDescription] = useState("");
+
+    //edit dialog function
+    const [openEdit, setEditOpen] = useState(false);
+    const handleEditOpen = () => {
+        setEditOpen(true);
+    }
+
+    const handleEditClose = () => {
+        setEditOpen(false);
+    };
+
+    //setup useEffect for synchronous update
+    useEffect(() => {
+        setTableName(tableName);
+        setDescriptionId(descriptionId);
+        setDescription(description);
+        setIsCNSHidden(isCNSHidden);
+    }, [tableName, descriptionId, description, isCNSHidden, isLungHidden, isHNHidden, isOralHidden, isMSKHidden, isSkinHidden, isAbdoHidden, isSupineHidden, isBreathHidden])
+    // UI 
     return (
         <Container maxWidth="md" >
             <div className='container' style={{
                 display: 'flex', justifyContent:
                     'center', alignItems: 'center', marginTop: '70px', marginBottom: '25px'
             }}>
-                <form onSubmit={otherForm.handleSubmit}>
+                <form onSubmit={saveExam}>
                     <h3>Patient Exam</h3>
                     <Grid container spacing={3} width={'70vw'}>
-                        <Grid item xs={12}>
-                            <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Central Nervous System (CNS)</InputLabel>
 
+                        <Grid item xs={12}>
+                            <TextField fullWidth type="date" name="date" label="Exam Date" InputLabelProps={{ shrink: true }} onChange={(e) => setDate(e.target.value)} />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <FormControl fullWidth required >
+                                <InputLabel id="demo-simple-select-label">Central Nervous System (CNS)</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    name="CNS.ECOG"
+                                    name="cnsId"
+                                    required
                                     label="Central Nervous System (CNS)"
-                                    onChange={otherForm.handleChange}
-                                    value={otherForm.values.CNS.ECOG}
-
+                                    onChange={(e) => { setCnsId(e.target.value) }}
+                                    value={cnsId}
+                                    onClose={() => setIsCNSHidden("none")}
+                                    onOpen={() => setIsCNSHidden("")}
                                 >
-                                    <MenuItem value={7}>ABNORMALITY NOTED SEE DETAIL</MenuItem>
-                                    <div className="ml-auto ml-auto">
-                                        <Button className="btn1 btn-warning ml-1"> <GoPencil /> </Button>
-                                        <Button className="btn2" color="danger"> <GoTrashcan /></Button>
-                                    </div>
-                                    <MenuItem value={8}>CN 2-12, EOM, PERLA, Speech and Facial symmetry were normal</MenuItem>
-                                    <div className="ml-auto ml-auto">
-                                        <Button className="btn1 btn-warning ml-1"> <GoPencil /> </Button>
-                                        <Button className="btn2" color="danger"> <GoTrashcan /></Button>
-                                    </div>
-                                    <MenuItem value={9}>Not performed</MenuItem>
-                                    <div className="ml-auto ml-auto">
-                                        <Button className="btn1 btn-warning ml-1"> <GoPencil /> </Button>
-                                        <Button className="btn2" color="danger"> <GoTrashcan /></Button>
-                                    </div>
+                                    {centralnervoussystems.map((centralnervoussystem, i) => (
+                                        <MenuItem style={{ display: "flex", justifyContent: "space-between" }} value={`${centralnervoussystem.id}`} key={i} >{centralnervoussystem.description}
+                                            <div id="menuItemButton" style={{ display: `${isCNSHidden}` }}>
+                                                <Button className="btn1 btn-warning ml-1"
+                                                    onClick={() => { setDescriptionId(centralnervoussystem.id); setDescription(centralnervoussystem.description); setTableName("centralnervoussystem"); handleEditOpen(); }}><GoPencil /></Button>
+                                                <Button className="btn2" color="danger"
+                                                    onClick={() => { setDescriptionId(centralnervoussystem.id); setDescription(centralnervoussystem.description); setTableName("centralnervoussystem"); handleDeleteOpen(); }}> <GoTrashcan /></Button>
+                                            </div></MenuItem>)
+                                    )}
+                                    <MenuItem onClick={() => { setTableName("centralnervoussystem"); handleAddOpen() }}><Button className="btn2" color="info"> <GoDiffAdded /></Button></MenuItem>
                                 </Select>
                             </FormControl>
                         </Grid>
 
                         <Grid item xs={12}>
-                            <FormControl fullWidth >
+                            <FormControl fullWidth required >
                                 <InputLabel id="demo-simple-select-label">Lung</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    name='Lung.ECOG'
+                                    name="lungId"
                                     label="Lung"
-                                    onChange={otherForm.handleChange}
-                                    value={otherForm.values.Lung.ECOG}
+                                    onChange={(e) => setLungId(e.target.value)}
+                                    value={lungId}
+                                    required
+                                    onClose={() => setIsLungHidden("none")}
+                                    onOpen={() => setIsLungHidden("")}
                                 >
-                                    <MenuItem value={7}>ABNORMALITY NOTED SEE DETAIL</MenuItem>
-                                    <div className="ml-auto ml-auto">
-                                        <Button className="btn1 btn-warning ml-1"> <GoPencil /> </Button>
-                                        <Button className="btn2" color="danger"> <GoTrashcan /></Button>
-                                    </div>
-                                    <MenuItem value={8}>Good AE Bilat  no crackles / wheezes / dullness / accessory muscle / cyanosis</MenuItem>
-                                    <div className="ml-auto ml-auto">
-                                        <Button className="btn1 btn-warning ml-1"> <GoPencil /> </Button>
-                                        <Button className="btn2" color="danger"> <GoTrashcan /></Button>
-                                    </div>
-                                    <MenuItem value={9}>Not performed</MenuItem>
-                                    <div className="ml-auto ml-auto">
-                                        <Button className="btn1 btn-warning ml-1"> <GoPencil /> </Button>
-                                        <Button className="btn2" color="danger"> <GoTrashcan /></Button>
-                                    </div>
+                                    {lungs.map((lung, i) => (
+                                        <MenuItem style={{ display: "flex", justifyContent: "space-between" }} value={`${lung.id}`} key={i} >{lung.description}
+                                            <div id="menuItemButton" style={{ display: `${isLungHidden}` }}>
+                                                <Button className="btn1 btn-warning ml-1"
+                                                    onClick={() => { setDescriptionId(lung.id); setDescription(lung.description); setTableName("lung"); handleEditOpen(); }}><GoPencil /></Button>
+                                                <Button className="btn2" color="danger"
+                                                    onClick={() => { setDescriptionId(lung.id); setDescription(lung.description); setTableName("lung"); handleDeleteOpen(); }}> <GoTrashcan /></Button>
+                                            </div></MenuItem>)
+                                    )}
+                                    <MenuItem onClick={() => { setTableName("lung"); handleAddOpen() }}><Button className="btn2" color="info"> <GoDiffAdded /></Button></MenuItem>
                                 </Select>
                             </FormControl>
                         </Grid>
 
                         <Grid item xs={12}>
-                            <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Hemagglutinin-Neuraminidase (HN)</InputLabel>
+                            <FormControl fullWidth required>
+                                <InputLabel id="demo-simple-select-label" >Hemagglutinin-Neuraminidase (HN)</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    name='HN.ECOG'
+                                    name="hnId"
                                     label="Hemagglutinin-Neuraminidase (HN)"
-                                    onChange={otherForm.handleChange}
-                                    value={otherForm.values.HN.ECOG}
+                                    onChange={(e) => setHnId(e.target.value)}
+                                    value={hnId}
+                                    required
+                                    onClose={() => setIsHNHidden("none")}
+                                    onOpen={() => setIsHNHidden("")}
                                 >
-                                    <MenuItem value={7}>ABNORMALITY NOTED SEE DETAIL</MenuItem>
-                                    <div className="ml-auto ml-auto">
-                                        <Button className="btn1 btn-warning ml-1"> <GoPencil /> </Button>
-                                        <Button className="btn2" color="danger"> <GoTrashcan /></Button>
-                                    </div>
-                                    <MenuItem value={8}>No cervical or supra-clavicular lymphadenopathy, no scleral icterus or jaundice</MenuItem>
-                                    <div className="ml-auto ml-auto">
-                                        <Button className="btn1 btn-warning ml-1"> <GoPencil /> </Button>
-                                        <Button className="btn2" color="danger"> <GoTrashcan /></Button>
-                                    </div>
-                                    <MenuItem value={9}>Not performed</MenuItem>
-                                    <div className="ml-auto ml-auto">
-                                        <Button className="btn1 btn-warning ml-1"> <GoPencil /> </Button>
-                                        <Button className="btn2" color="danger"> <GoTrashcan /></Button>
-                                    </div>
+                                    {hns.map((hn, i) => (
+                                        <MenuItem style={{ display: "flex", justifyContent: "space-between" }} value={`${hn.id}`} key={i} >{hn.description}
+                                            <div id="menuItemButton" style={{ display: `${isHNHidden}` }}>
+                                                <Button className="btn1 btn-warning ml-1"
+                                                    onClick={() => { setDescriptionId(hn.id); setDescription(hn.description); setTableName("hn"); handleEditOpen(); }}><GoPencil /></Button>
+                                                <Button className="btn2" color="danger"
+                                                    onClick={() => { setDescriptionId(hn.id); setDescription(hn.description); setTableName("hn"); handleDeleteOpen(); }}> <GoTrashcan /></Button>
+                                            </div></MenuItem>)
+                                    )}
+                                    <MenuItem onClick={() => { setTableName("hn"); handleAddOpen() }}><Button className="btn2" color="info"> <GoDiffAdded /></Button></MenuItem>
                                 </Select>
                             </FormControl>
                         </Grid>
 
                         <Grid item xs={12}>
-                            <FormControl fullWidth>
+                            <FormControl fullWidth required>
                                 <InputLabel id="demo-simple-select-label">Oral</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    name='Oral.ECOG'
+                                    name="oralId"
                                     label="Oral"
-                                    onChange={otherForm.handleChange}
-                                    value={otherForm.values.Oral.ECOG}
+                                    onChange={(e) => setOralId(e.target.value)}
+                                    value={oralId}
+                                    required
+                                    onClose={() => setIsOralHidden("none")}
+                                    onOpen={() => setIsOralHidden("")}
                                 >
-                                    <MenuItem value={7}>ABNORMALITY NOTED SEE DETAIL</MenuItem>
-                                    <div className="ml-auto ml-auto">
-                                        <Button className="btn1 btn-warning ml-1"> <GoPencil /> </Button>
-                                        <Button className="btn2" color="danger"> <GoTrashcan /></Button>
-                                    </div>
-                                    <MenuItem value={8}>Gait, strength and reflexes - Normal. No bony tenderness in spine</MenuItem>
-                                    <div className="ml-auto ml-auto">
-                                        <Button className="btn1 btn-warning ml-1"> <GoPencil /> </Button>
-                                        <Button className="btn2" color="danger"> <GoTrashcan /></Button>
-                                    </div>
-                                    <MenuItem value={9}>Not performed</MenuItem>
-                                    <div className="ml-auto ml-auto">
-                                        <Button className="btn1 btn-warning ml-1"> <GoPencil /> </Button>
-                                        <Button className="btn2" color="danger"> <GoTrashcan /></Button>
-                                    </div>
+                                    {orals.map((oral, i) => (
+                                        <MenuItem style={{ display: "flex", justifyContent: "space-between" }} value={`${oral.id}`} key={i}>{oral.description}
+                                            <div id="menuItemButton" style={{ display: `${isOralHidden}` }}>
+                                                <Button className="btn1 btn-warning ml-1"
+                                                    onClick={() => { setDescriptionId(oral.id); setDescription(oral.description); setTableName("oral"); handleEditOpen(); }}><GoPencil /></Button>
+                                                <Button className="btn2" color="danger"
+                                                    onClick={() => { setDescriptionId(oral.id); setDescription(oral.description); setTableName("oral"); handleDeleteOpen(); }}> <GoTrashcan /></Button>
+                                            </div></MenuItem>)
+                                    )}
+                                    <MenuItem onClick={() => { setTableName("oral"); handleAddOpen() }}><Button className="btn2" color="info"> <GoDiffAdded /></Button></MenuItem>
                                 </Select>
                             </FormControl>
                         </Grid>
 
                         <Grid item xs={12}>
-                            <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Cardiac</InputLabel>
-                                <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    name='Cardiac.ECOG'
-                                    label="Cardiac"
-                                    onChange={otherForm.handleChange}
-                                    value={otherForm.values.Cardiac.ECOG}
-                                >
-                                    <MenuItem value={7}>ABNORMALITY NOTED SEE DETAIL</MenuItem>
-                                    <div className="ml-auto ml-auto">
-                                        <Button className="btn1 btn-warning ml-1"> <GoPencil /> </Button>
-                                        <Button className="btn2" color="danger"> <GoTrashcan /></Button>
-                                    </div>
-                                    <MenuItem value={8}>Heart sounds Normal. Regular pulse, good peripheral pulses and capillary refills</MenuItem>
-                                    <div className="ml-auto ml-auto">
-                                        <Button className="btn1 btn-warning ml-1"> <GoPencil /> </Button>
-                                        <Button className="btn2" color="danger"> <GoTrashcan /></Button>
-                                    </div>
-                                    <MenuItem value={9}>Not performed</MenuItem>
-                                    <div className="ml-auto ml-auto">
-                                        <Button className="btn1 btn-warning ml-1"> <GoPencil /> </Button>
-                                        <Button className="btn2" color="danger"> <GoTrashcan /></Button>
-                                    </div>
-                                </Select>
-                            </FormControl>
-                        </Grid>
-
-                        <Grid item xs={12}>
-                            <FormControl fullWidth>
+                            <FormControl fullWidth required>
                                 <InputLabel id="demo-simple-select-label">Musculoskeletal (MSK)</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    name='MSK.Description'
+                                    name="mskId"
                                     label="Musculoskeletal (MSK)"
-                                    onChange={otherForm.handleChange}
-                                    value={otherForm.values.MSK.Description}
+                                    onChange={(e) => setMskId(e.target.value)}
+                                    value={mskId}
+                                    onClose={() => setIsMSKHidden("none")}
+                                    onOpen={() => setIsMSKHidden("")}
                                 >
-                                    <MenuItem value={7}>ABNORMALITY NOTED SEE DETAIL</MenuItem>
-                                    <div className="ml-auto ml-auto">
-                                        <Button className="btn1 btn-warning ml-1"> <GoPencil /> </Button>
-                                        <Button className="btn2" color="danger"> <GoTrashcan /></Button>
-                                    </div>
-                                    <MenuItem value={8}>Gait, strength and reflexes - Normal. No bony tenderness in spine</MenuItem>
-                                    <div className="ml-auto ml-auto">
-                                        <Button className="btn1 btn-warning ml-1"> <GoPencil /> </Button>
-                                        <Button className="btn2" color="danger"> <GoTrashcan /></Button>
-                                    </div>
-                                    <MenuItem value={9}>Not performed</MenuItem>
-                                    <div className="ml-auto ml-auto">
-                                        <Button className="btn1 btn-warning ml-1"> <GoPencil /> </Button>
-                                        <Button className="btn2" color="danger"> <GoTrashcan /></Button>
-                                    </div>
+                                    {msks.map((msk, i) => (
+                                        <MenuItem style={{ display: "flex", justifyContent: "space-between" }} value={`${msk.id}`} key={i} >{msk.description}
+                                            <div id="menuItemButton" style={{ display: `${isMSKHidden}` }}>
+                                                <Button className="btn1 btn-warning ml-1"
+                                                    onClick={() => { setDescriptionId(msk.id); setDescription(msk.description); setTableName("msk"); handleEditOpen(); }}><GoPencil /></Button>
+                                                <Button className="btn2" color="danger"
+                                                    onClick={() => { setDescriptionId(msk.id); setDescription(msk.description); setTableName("msk"); handleDeleteOpen(); }}> <GoTrashcan /></Button>
+                                            </div></MenuItem>)
+                                    )}
+                                    <MenuItem onClick={() => { setTableName("msk"); handleAddOpen() }}><Button className="btn2" color="info"> <GoDiffAdded /></Button></MenuItem>
                                 </Select>
                             </FormControl>
                         </Grid>
 
-                        {/* Peripheral is displayed according to doctor's existing UI, however it's only the foreign key, instead of table name, which should be Skin */}
                         <Grid item xs={12}>
-                            <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Peripheral / Skin </InputLabel>
+                            <FormControl fullWidth required>
+                                <InputLabel id="demo-simple-select-label">Peripheral / Skin</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    name="Skin.ECOG"
+                                    name="skinsId"
                                     label="Peripheral / Skin"
-                                    onChange={otherForm.handleChange}
-                                    value={otherForm.values.Skin.ECOG}
+                                    onChange={(e) => setSkinId(e.target.value)}
+                                    value={skinId}
+                                    onClose={() => setIsSkinHidden("none")}
+                                    onOpen={() => setIsSkinHidden("")}
                                 >
-                                    <MenuItem value={7}>ABNORMALITY NOTED SEE DETAIL</MenuItem>
-                                    <div className="ml-auto ml-auto">
-                                        <Button className="btn1 btn-warning ml-1"> <GoPencil /> </Button>
-                                        <Button className="btn2" color="danger"> <GoTrashcan /></Button>
-                                    </div>
-                                    <MenuItem value={8}>No obvious skin metastasis on back or face. No edema was noted in legs</MenuItem>
-                                    <div className="ml-auto ml-auto">
-                                        <Button className="btn1 btn-warning ml-1"> <GoPencil /> </Button>
-                                        <Button className="btn2" color="danger"> <GoTrashcan /></Button>
-                                    </div>
-                                    <MenuItem value={9}>Not performed</MenuItem>
-                                    <div className="ml-auto ml-auto">
-                                        <Button className="btn1 btn-warning ml-1"> <GoPencil /> </Button>
-                                        <Button className="btn2" color="danger"> <GoTrashcan /></Button>
-                                    </div>
+                                    {skins.map((skin, i) => (
+                                        <MenuItem style={{ display: "flex", justifyContent: "space-between" }} value={`${skin.id}`} key={i}>{skin.description}
+                                            <div id="menuItemButton" style={{ display: `${isSkinHidden}` }}>
+                                                <Button className="btn1 btn-warning ml-1"
+                                                    onClick={() => { setDescriptionId(skin.id); setDescription(skin.description); setTableName("skin"); handleEditOpen(); }}><GoPencil /></Button>
+                                                <Button className="btn2" color="danger"
+                                                    onClick={() => { setDescriptionId(skin.id); setDescription(skin.description); setTableName("skin"); handleDeleteOpen(); }}> <GoTrashcan /></Button>
+                                            </div></MenuItem>)
+                                    )}
+                                    <MenuItem onClick={() => { setTableName("skin"); handleAddOpen() }}><Button className="btn2" color="info"> <GoDiffAdded /></Button></MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Grid>
+
+
+                        <Grid item xs={12}>
+                            <FormControl fullWidth required>
+                                <InputLabel id="demo-simple-select-label">Abdominal (Abdo)</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    name="abdoId"
+                                    label="Abdominal (Abdo)"
+                                    onChange={(e) => setAbdoId(e.target.value)}
+                                    value={abdoId}
+                                    onClose={() => setIsAbdoHidden("none")}
+                                    onOpen={() => setIsAbdoHidden("")}
+                                >
+                                    {abdos.map((abdo, i) => (
+                                        <MenuItem style={{ display: "flex", justifyContent: "space-between" }} value={`${abdo.id}`} key={i}>{abdo.description}
+                                            <div id="menuItemButton" style={{ display: `${isAbdoHidden}` }}>
+                                                <Button className="btn1 btn-warning ml-1"
+                                                    onClick={() => { setDescriptionId(abdo.id); setDescription(abdo.description); setTableName("abdo"); handleEditOpen(); }}><GoPencil /></Button>
+                                                <Button className="btn2" color="danger"
+                                                    onClick={() => { setDescriptionId(abdo.id); setDescription(abdo.description); setTableName("abdo"); handleDeleteOpen(); }}> <GoTrashcan /></Button>
+                                            </div></MenuItem>)
+                                    )}
+                                    <MenuItem onClick={() => { setTableName("abdo"); handleAddOpen() }}><Button className="btn2" color="info"> <GoDiffAdded /></Button></MenuItem>
                                 </Select>
                             </FormControl>
                         </Grid>
 
                         <Grid item xs={12}>
-                            <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Abdominal (Adbo)</InputLabel>
-                                <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    name='Adbo.ECOG'
-                                    label="Abdominal (Adbo)"
-                                    onChange={otherForm.handleChange}
-                                    value={otherForm.values.Adbo.ECOG}
-                                >
-                                    <MenuItem value={7}>ABNORMALITY NOTED SEE DETAIL</MenuItem>
-                                    <div className="ml-auto ml-auto">
-                                        <Button className="btn1 btn-warning ml-1"> <GoPencil /> </Button>
-                                        <Button className="btn2" color="danger"> <GoTrashcan /></Button>
-                                    </div>
-                                    <MenuItem value={8}>No visual changes, Abd soft, liver not enlarged. No mass ascites or inguinal LN,</MenuItem>
-                                    <div className="ml-auto ml-auto">
-                                        <Button className="btn1 btn-warning ml-1"> <GoPencil /> </Button>
-                                        <Button className="btn2" color="danger"> <GoTrashcan /></Button>
-                                    </div>
-                                    <MenuItem value={9}>Not performed</MenuItem>
-                                    <div className="ml-auto ml-auto">
-                                        <Button className="btn1 btn-warning ml-1"> <GoPencil /> </Button>
-                                        <Button className="btn2" color="danger"> <GoTrashcan /></Button>
-                                    </div>
-                                </Select>
-                            </FormControl>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <FormControl fullWidth>
+                            <FormControl fullWidth required>
                                 <InputLabel id="demo-simple-select-label">Supine</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    name='Supine.Setup'
+                                    name="supineId"
                                     label="Supine"
-                                    onChange={otherForm.handleChange}
-                                    value={otherForm.values.Supine.Setup}
+                                    onChange={(e) => setSupineId(e.target.value)}
+                                    value={supineId}
+                                    onClose={() => setIsSupineHidden("none")}
+                                    onOpen={() => setIsSupineHidden("")}
                                 >
-                                    <MenuItem value={1}>Able to lay flat Supine or Prone
-                                    </MenuItem>
-                                    <MenuItem value={2}>Cannot Lay Prone</MenuItem>
-                                    <div className="ml-auto ml-auto">
-                                        <Button className="btn1 btn-warning ml-1"> <GoPencil /> </Button>
-                                        <Button className="btn2" color="danger"> <GoTrashcan /></Button>
-                                    </div>
-                                    <MenuItem value={3}>Cannot Lay Supine</MenuItem>
-                                    <div className="ml-auto ml-auto">
-                                        <Button className="btn1 btn-warning ml-1"> <GoPencil /> </Button>
-                                        <Button className="btn2" color="danger"> <GoTrashcan /></Button>
-                                    </div>
-                                    <MenuItem value={4}>Not performed</MenuItem>
-                                    <div className="ml-auto ml-auto">
-                                        <Button className="btn1 btn-warning ml-1"> <GoPencil /> </Button>
-                                        <Button className="btn2" color="danger"> <GoTrashcan /></Button>
-                                    </div>
+                                    {supines.map((supine, i) => (
+                                        <MenuItem style={{ display: "flex", justifyContent: "space-between" }} value={`${supine.id}`} key={i}>{supine.description}
+                                            <div id="menuItemButton" style={{ display: `${isSupineHidden}` }}>
+                                                <Button className="btn1 btn-warning ml-1"
+                                                    onClick={() => { setDescriptionId(supine.id); setDescription(supine.description); setTableName("supine"); handleEditOpen(); }}><GoPencil /></Button>
+                                                <Button className="btn2" color="danger"
+                                                    onClick={() => { setDescriptionId(supine.id); setDescription(supine.description); setTableName("supine"); handleDeleteOpen(); }}> <GoTrashcan /></Button>
+                                            </div></MenuItem>)
+                                    )}
+                                    <MenuItem onClick={() => { setTableName("supine"); handleAddOpen() }}><Button className="btn2" color="info"> <GoDiffAdded /></Button></MenuItem>
                                 </Select>
                             </FormControl>
                         </Grid>
 
                         <Grid item xs={12}>
-                            <FormControl fullWidth>
+                            <FormControl fullWidth required>
                                 <InputLabel id="demo-simple-select-label">Breath</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    name='Breath.Breath'
+                                    name="breathId"
                                     label="Breath"
-                                    onChange={otherForm.handleChange}
-                                    value={otherForm.values.Breath.Breath}
+                                    onChange={(e) => setBreathId(e.target.value)}
+                                    value={breathId}
+                                    onClose={() => setIsBreathHidden("none")}
+                                    onOpen={() => setIsBreathHidden("")}
                                 >
-                                    <MenuItem value={1}>Reg breathing. Tolerates Compression
-
-                                    </MenuItem>
-                                    {/* MenuItem value match database, which is missing number 2 */}
-                                    <MenuItem value={3}>Reg breathing, CANNOT Tolerate Compression
-                                    </MenuItem>
-                                    <div className="ml-auto ml-auto">
-                                        <Button className="btn1 btn-warning ml-1"> <GoPencil /> </Button>
-                                        <Button className="btn2" color="danger"> <GoTrashcan /></Button>
-                                    </div>
-                                    <MenuItem value={4}>Irreg breathing, Tolerates Compress
-                                    </MenuItem>
-                                    <div className="ml-auto ml-auto">
-                                        <Button className="btn1 btn-warning ml-1"> <GoPencil /> </Button>
-                                        <Button className="btn2" color="danger"> <GoTrashcan /></Button>
-                                    </div>
-                                    <MenuItem value={5}>Did non assess breathing
-                                    </MenuItem>
-                                    <div className="ml-auto ml-auto">
-                                        <Button className="btn1 btn-warning ml-1"> <GoPencil /> </Button>
-                                        <Button className="btn2" color="danger"> <GoTrashcan /></Button>
-                                    </div>
-                                    <MenuItem value={6}>Irreg breath, CANNOT Tolerate Compression
-                                    </MenuItem>
-                                    <div className="ml-auto ml-auto">
-                                        <Button className="btn1 btn-warning ml-1"> <GoPencil /> </Button>
-                                        <Button className="btn2" color="danger"> <GoTrashcan /></Button>
-                                    </div>
+                                    {breaths.map((breath, i) => (
+                                        <MenuItem style={{ display: "flex", justifyContent: "space-between" }} value={`${breath.id}`} key={i} >{breath.description}
+                                            <div id="menuItemButton" style={{ display: `${isBreathHidden}` }}>
+                                                <Button className="btn1 btn-warning ml-1"
+                                                    onClick={() => { setDescriptionId(breath.id); setDescription(breath.description); setTableName("breath"); handleEditOpen(); }}><GoPencil /></Button>
+                                                <Button className="btn2" color="danger"
+                                                    onClick={() => { setDescriptionId(breath.id); setDescription(breath.description); setTableName("breath"); handleDeleteOpen(); }}> <GoTrashcan /></Button>
+                                            </div></MenuItem>)
+                                    )}
+                                    <MenuItem onClick={() => { setTableName("breath"); handleAddOpen() }}><Button className="btn2" color="info"> <GoDiffAdded /></Button></MenuItem>
                                 </Select>
                             </FormControl>
                         </Grid>
 
+
                         <Grid item xs={12}>
                             <TextField fullWidth
                                 id="outlined-multiline-static"
-                                name="ABNORMAL.Description"
+                                name="abnormal"
                                 label="ABNORMAL"
                                 multiline
                                 rows={5}
-                                onChange={otherForm.handleChange}
-                                value={otherForm.values.ABNORMAL.Description}
+                                onChange={(e) => setAbnormal(e.target.value)}
+                                value={abnormal}
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <Button onClick={notify} color="primary" type="submit" >Save</Button>
+                            <Button color="primary" type="submit" onSubmit={saveExam} >Save</Button>
                             <ToastContainer />
                         </Grid>
+
+                        <AddDialog
+                            onClose={handleAddClose}
+                            open={openAdd}
+                            tableName={tableName}
+                        />
+                        <DeleteDialog
+                            onClose={handleDeleteClose}
+                            open={openDelete}
+                            tableName={tableName}
+                            descriptionId={descriptionId}
+                            description={description}
+                        />
+
+                        <EditDialog
+                            onClose={handleEditClose}
+                            open={openEdit}
+                            tableName={tableName}
+                            descriptionId={descriptionId}
+                            description={description}
+                        />
+
                     </Grid>
                 </form>
             </div>
 
-        </Container>
+        </Container >
 
     )
 }

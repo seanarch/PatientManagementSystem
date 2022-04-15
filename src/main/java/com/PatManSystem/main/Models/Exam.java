@@ -23,7 +23,7 @@ public class Exam {
     private Abdomen abdo;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "ULI", nullable = false)
+    @JoinColumn(name = "ULI",  nullable = false)
     private Patientinformation uli;
 
     @Column(name = "Date")
