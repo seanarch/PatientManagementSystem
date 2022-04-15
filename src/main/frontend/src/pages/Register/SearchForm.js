@@ -8,28 +8,38 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Collapsible from 'react-collapsible';
 import 'react-toastify/dist/ReactToastify.css';
+import Searchfirstname from '../../components/Searchfirstname';
+ 
 
+ 
 
 
 const INITIAL_VALUES = {
   Search: {
-    PatientName: "",
+    PatientId: "",
+    PatientName: ""
   }
 };
 
 function SearchForm() {
 
+  var selectedUserId = 0;
   const [patientDetails, setPatient] = useState([]);
-  const [filteredData, setFilteredData] = useState([]);
-  const [wordEntered, setWordEntered] = useState("");
+  const [patientDetailsName, setPatientName] = useState([]);
+  const [filteredData, setFilteredData] = useState([]); 
+  const [filteredDataName, setFilteredDataName] = useState([]);
+  const [wordEnteredId, setWordEnteredId] = useState("");
+  const [wordEnteredName, setWordEnteredName] = useState("");
 
   const notify = () => {
 
-    toast.success('Successfully saved!', {
+    toast.success('Record selected!', {
       position: toast.POSITION.TOP_RIGHT,
       autoClose: 2000
     })
   }
+
+ 
 
   const SearchFilter = async () => {
     const patientResponse = await fetch(`http://localhost:8080/api/patient/all`);
@@ -42,25 +52,58 @@ function SearchForm() {
     SearchFilter();
   }, [])
 
-  const handleFilter = (event) => {
-    const searchWord = event.target.value;
-    setWordEntered(searchWord);
-    const newFilter = patientDetails.filter(value => {
-      console.log(value);
-      return value.id.toString().startsWith(searchWord);
+  const SearchFilterName = async () => {
+    const patientResponse = await fetch(`http://localhost:8080/api/patient/all`);
+    const patientResponseData = await patientResponse.json();
+    setPatientName(patientResponseData);
+    console.log(patientResponseData);
+  }
+
+  useEffect(() => {
+    SearchFilterName();
+  }, [])
+
+  const handleFilterId = (event) => {
+    const searchWordId = event.target.value;
+    setWordEnteredId(searchWordId);
+    const newFilterId = patientDetails.filter(value => {
+ 
+      if(value.id) {
+
+        return value.id.toString().startsWith(searchWordId);
+      }
+      
     });
 
-    if (searchWord === "") {
+    if (searchWordId === "") {
       setFilteredData([]);
     } else {
-      setFilteredData(newFilter);
+      setFilteredData(newFilterId);
     }
   };
 
-  // const clearInput = () => {
-  //   setFilteredData([]);
-  //   setWordEntered("");
-  // };
+  const handleFilterName = (event) => {
+    const searchWordName = event.target.value;
+    setWordEnteredName(searchWordName);
+    const newFilterName = patientDetailsName.filter(value => {
+ 
+      if(value.firstname) {
+
+        return value.firstname.toString().startsWith(searchWordName);
+      }
+      
+    });
+
+    if (searchWordName === "") {
+      setFilteredDataName([]);
+    } else {
+      setFilteredDataName(newFilterName);
+    }
+  };
+
+ 
+
+  
 
   return (
     <>
@@ -71,31 +114,34 @@ function SearchForm() {
         }}>
           <Formik initialValues={{ ...INITIAL_VALUES }} onSubmit={values => {
             // console.log(values.Search.PatientName);
-            SearchFilter(values.Search.PatientName)
+            SearchFilter(values.Search.PatientId)
 
             //once submit, provide value for back end
           }}
           >
-            <Form>
-              <h3>Search Existing Patient</h3>
-              <Collapsible trigger="[+]">
+            <Form> 
+              <Collapsible trigger="Search Existing Patient" triggerTagName='h3'  overflowWhenOpen="inherit">
                 <br></br>
                 <Grid container spacing={3} width={'70vw'}>
-                  <Grid item xs={12}>
+                  <Grid item xs={6}>
                     <TextField
                       fullWidth
-                      label="Search By Patient First Name, Last Name or ULI"
+                      label="Search By Patient ULI"
+                      name="Search.PatientId"
+                      onChange={handleFilterId}
+                      value={wordEnteredId}
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <TextField
+                      fullWidth
+                      label="Search By Patient First Name"
                       name="Search.PatientName"
-                      onChange={handleFilter}
-                      value={wordEntered}
+                      onChange={handleFilterName}
+                      value={wordEnteredName}
                     />
                   </Grid>
 
-
-                  {/* <Grid item xs={12}>
-                  <Button color='primary' type="submit" onClick={notify}>Search</Button>
-                  <ToastContainer />
-                </Grid> */}
 
                 </Grid>
               </Collapsible>
@@ -103,14 +149,62 @@ function SearchForm() {
           </Formik>
         </div>
       </Container>
-      <div className="search">
+      <div className="searchId">
         {filteredData.length != 0 && (
-          <div className="dataResult">
+          <div className="dataIdResult">                
+
             {filteredData.slice(0, 15).map((value, key) => {
               return (
-                <a className="dataItem" href={value.link} target="_blank">
-                  <p>{value.firstname} </p>
-                </a>
+                 
+                 
+                <div key={value.id}>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         
+                
+                ID:{value.id}&nbsp;&nbsp;&nbsp;&nbsp;
+                {value.firstname}&nbsp;&nbsp;&nbsp;&nbsp;
+                {value.lastname}&nbsp;&nbsp;&nbsp;&nbsp;
+                Birthday:{value.birthday}
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <Button color='primary' type="button" onClick={()=> {selectedUserId = value.id; console.log(value.id)}} >Select</Button>
+                <ToastContainer />
+                <br></br>
+                  
+                </div>
+                 
+              );
+            })}
+          </div>
+        )}
+      </div>
+      <div className="searchName">
+        {filteredDataName.length != 0 && (
+          <div className="dataNameResult">                
+
+            {filteredDataName.slice(0, 15).map((value, key) => {
+              return (
+                 
+                 
+                <div key={value.firstname}>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         
+                
+                ID:{value.id}&nbsp;&nbsp;&nbsp;&nbsp;
+                {value.firstname}&nbsp;&nbsp;&nbsp;&nbsp;
+                {value.lastname}&nbsp;&nbsp;&nbsp;&nbsp;
+                Birthday:{value.birthday}
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <Button color='primary' type="button" onClick={()=> {selectedUserId = value.id; console.log(selectedUserId)}} >Select</Button>
+                <br></br>
+                  
+                </div>
+                 
               );
             })}
           </div>

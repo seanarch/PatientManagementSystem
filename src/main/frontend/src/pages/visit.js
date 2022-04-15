@@ -5,13 +5,14 @@ import RTGIinfo from './Visit/RTGIinfo';
 import SearchBar from '../components/SearchBar';
 import Symptoms from './Visit/Symptoms';
 import Patientchallenges from './Visit/Patientchallenges';
+import SearchForm from './Register/SearchForm';
 
 
 const visit = () => (
     <div>
  
         
-        <SearchBar/>
+        <SearchForm/>
         <ORinfo />
         <Fhxdetail />
         <Patientchallenges />

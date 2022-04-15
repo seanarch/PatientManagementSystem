@@ -11,7 +11,7 @@ import SearchPatient from '../../components/SearchBar';
  */
 const Register = () => (
     <div>
-       <SearchPatient />
+       <SearchForm />
        <Patientanddeath/>
        <RegisterForm />
     </div>
