@@ -6,11 +6,10 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 @NoArgsConstructor
-@AllArgsConstructor
+
 @Getter
 @Setter
 @Data
-
 public class ExamDTO implements Serializable {
     private Long id;
     private Integer abdoId;
@@ -27,9 +26,10 @@ public class ExamDTO implements Serializable {
     private Integer supineId;
     private Integer breathId;
 
-	public ExamDTO(Long id, Integer abdoId, LocalDate date, Integer cnsId, Integer lungId, Integer hnId, Integer oralId, Integer cardiacId, Integer mskId, Integer peripheralId, String abnormal, Integer supineId, Integer breathId) {
+	public ExamDTO(Long id, Integer abdoId, Long uliId, LocalDate date, Integer cnsId, Integer lungId, Integer hnId, Integer oralId, Integer cardiacId, Integer mskId, Integer peripheralId, String abnormal, Integer supineId, Integer breathId) {
         this.id = id;
         this.abdoId = abdoId;
+        this.uliId = uliId;
         this.date = date;
         this.cnsId = cnsId;
         this.lungId = lungId;

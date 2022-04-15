@@ -64,6 +64,7 @@ public class ExamController {
     public String updateExam(
         @PathVariable("id") Long id,
         @RequestParam(required = false) Integer abdoId,
+        @RequestParam(required = false) Long uliId,
         @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date, // date parsed from JSON is STRING, addition formatting required to convert to LocalDate Obj
         @RequestParam(required = false) Integer cnsId,
         @RequestParam(required = false) Integer lungId,
@@ -76,7 +77,7 @@ public class ExamController {
         @RequestParam(required = false) Integer supineId,
         @RequestParam(required = false) Integer breathId
     ){
-        examService.updateExam(new ExamDTO(id,abdoId,date,cnsId,
+        examService.updateExam(new ExamDTO(id,abdoId,uliId, date,cnsId,
                 lungId,hnId,oralId,cardiacId,
                 mskId,peripheralId,abnormal,supineId,breathId));
 
