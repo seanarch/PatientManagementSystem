@@ -8,10 +8,11 @@ import Collapsible from 'react-collapsible';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+import { useGlobalState } from '../../components/Globalstate';
   
 function PatientInfo() {
 
-    const userid = 172867100;
+    const userid = useGlobalState("userid");
 
     const formik = useFormik({
         enableReinitialize: true,
@@ -91,6 +92,7 @@ function PatientInfo() {
                      
                         <form onSubmit={formik.handleSubmit}>
                             <h3>Patient Information</h3>
+                            <h3>id: {userid}</h3>
                              
                                 <br></br>
                                 <Grid container spacing={3} width={'70vw'}>
