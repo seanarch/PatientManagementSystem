@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Collapsible from 'react-collapsible';
 import 'react-toastify/dist/ReactToastify.css';
 import Searchfirstname from '../../components/Searchfirstname';
- 
+import { setGlobalState, useGlobalState } from '../../components/Globalstate';
 
  
 
@@ -169,7 +169,7 @@ function SearchForm() {
                 {value.lastname}&nbsp;&nbsp;&nbsp;&nbsp;
                 Birthday:{value.birthday}
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <Button color='primary' type="button" onClick={()=> {selectedUserId = value.id; console.log(value.id)}} >Select</Button>
+                <Button color='primary' type="button" onClick={()=> {setGlobalState("userid", value.id); console.log(value.id)}} >Select</Button>
                 <ToastContainer />
                 <br></br>
                   
@@ -200,7 +200,7 @@ function SearchForm() {
                 {value.lastname}&nbsp;&nbsp;&nbsp;&nbsp;
                 Birthday:{value.birthday}
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <Button color='primary' type="button" onClick={()=> {selectedUserId = value.id; console.log(selectedUserId)}} >Select</Button>
+                <Button color='primary' type="button" onClick={()=> {selectedUserId = value.id; console.log(value.id)}} >Select</Button>
                 <br></br>
                   
                 </div>
