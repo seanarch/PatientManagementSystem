@@ -188,7 +188,7 @@ function SearchForm() {
               return (
                  
                  
-                <div key={value.firstname}>
+                <div key={value.id}>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -200,7 +200,7 @@ function SearchForm() {
                 {value.lastname}&nbsp;&nbsp;&nbsp;&nbsp;
                 Birthday:{value.birthday}
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <Button color='primary' type="button" onClick={()=> {selectedUserId = value.id; console.log(value.id)}} >Select</Button>
+                <Button color='primary' type="button" onClick={()=> {setGlobalState("userid", value.id); console.log(value.id)}} >Select</Button>
                 <br></br>
                   
                 </div>
