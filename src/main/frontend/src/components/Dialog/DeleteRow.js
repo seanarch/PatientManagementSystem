@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 
 
 
-export default function DeleteDialog({ onClose, open, tableName,descriptionId, description }) {
+export default function DeleteDialog({ onClose, open, tableName,descriptionId, description, setIsChanged }) {
 
   const notify = () => {
     toast.success('Successfully Deleted! Refresh to see changes', {
@@ -39,6 +39,7 @@ export default function DeleteDialog({ onClose, open, tableName,descriptionId, d
       console.log("Submited: " + result);
       onClose();
       notify();
+      setIsChanged();
     } catch (e) {
       console.log(e);
     }
