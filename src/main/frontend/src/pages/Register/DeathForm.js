@@ -8,19 +8,14 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Collapsible from 'react-collapsible';
 import 'react-toastify/dist/ReactToastify.css';
+import { useGlobalState } from '../../components/Globalstate';
 
 
-
-const INITIAL_VALUES = {
-  Death: {
-    Date: "",
-    Detail: "Details",
-  }
-};
+ 
 
 function DeathForm() {
 
-  const userid = -2088258034;
+  const userid = parseInt(useGlobalState("userid"));
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -42,7 +37,7 @@ function DeathForm() {
               "Content-Type": "application/json"
             },
             body: `{
-                     "id": -2088258034,
+                     "uliId": ${userid},
                      "date": "${values.date}",
                      "detail": "${values.detail}" 
                    }`
@@ -56,20 +51,23 @@ function DeathForm() {
   });
 
   useEffect(() => {
-    (async () => {
+     
+    (async () => { 
       try {
         let response = await fetch(
-          `http://localhost:8080/api/death/id=${userid}`
+          `http://localhost:8080/api/death/uli=${userid}`
         );
-        let content = await response.json();
-        formik.setValues(content);
-        // formik.setFieldValue("email", content[0].email);
-      } catch (e) {
+        let content = await response.json(); 
+        console.log(content);
+        formik.setValues(content[0]);
+         
+      }
+      catch (e) {
         console.log(e);
       }
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  
+  }, [userid])
 
   const notify = () => {
 
