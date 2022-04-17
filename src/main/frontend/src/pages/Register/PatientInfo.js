@@ -12,7 +12,7 @@ import { useGlobalState } from '../../components/Globalstate';
   
 function PatientInfo() {
 
-    const userid = useGlobalState("userid");
+    const userid = parseInt(useGlobalState("userid"));
 
     const formik = useFormik({
         enableReinitialize: true,
@@ -39,7 +39,7 @@ function PatientInfo() {
                     "Content-Type": "application/json"
                   },
                   body: `{
-                           "id": 172867100,
+                           "id": ${userid},
                            "lastname": "${values.lastname}",
                            "firstname": "${values.firstname}",
                            "sex": "${values.sex}",
@@ -58,20 +58,23 @@ function PatientInfo() {
         });
 
         useEffect(() => {
-            (async () => {
+     
+            (async () => { 
               try {
                 let response = await fetch(
                   `http://localhost:8080/api/patient/id=${userid}`
                 );
-                let content = await response.json();
+                let content = await response.json(); 
+                console.log(content);
                 formik.setValues(content);
-                // formik.setFieldValue("email", content[0].email);
-              } catch (e) {
+                 
+              }
+              catch (e) {
                 console.log(e);
               }
             })();
-            // eslint-disable-next-line react-hooks/exhaustive-deps
-          }, []);
+          
+          }, [userid])
 
     const notify = () => {
 
@@ -92,7 +95,7 @@ function PatientInfo() {
                      
                         <form onSubmit={formik.handleSubmit}>
                             <h3>Patient Information</h3>
-                            <h3>id: {userid}</h3>
+                             
                              
                                 <br></br>
                                 <Grid container spacing={3} width={'70vw'}>
