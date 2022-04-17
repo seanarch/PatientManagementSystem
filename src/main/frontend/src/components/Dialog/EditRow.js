@@ -8,7 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import DialogContentText from '@mui/material/DialogContentText';
 
 
-export default function EditDialog({ onClose, open, tableName, descriptionId, description }) {
+export default function EditDialog({ onClose, open, tableName, descriptionId, description,setIsChanged }) {
 
   const notify = () => {
     toast.success('Successfully Edited! Refresh to see changes', {
@@ -45,6 +45,7 @@ export default function EditDialog({ onClose, open, tableName, descriptionId, de
       console.log("Submited: " + result);
       onClose();
       notify();
+      setIsChanged();
     } catch (e) {
       console.log(e);
     }

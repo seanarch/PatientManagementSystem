@@ -18,6 +18,8 @@ const Other = () => {
         })
     }
 
+    //
+    const [isChanged, setIsChanged] = useState("false");
     //array attributes to hold data from existing tables
     const [centralnervoussystems, setCentralnervoussystems] = useState([{}]);
     const [lungs, setLungs] = useState([]);
@@ -43,8 +45,12 @@ const Other = () => {
     const [supineId, setSupineId] = useState("");
     const [breathId, setBreathId] = useState("");
     const [abnormal, setAbnormal] = useState("");
+
+    const loadData =()=>{
+    }
     useEffect(() => {
         (async () => {
+
             try {
                 const responseCNS = await fetch(
                     `http://localhost:8080/api/centralnervoussystem/all`
@@ -112,8 +118,11 @@ const Other = () => {
             }
         })();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [isChanged]);
 
+
+    const handleIsChanged=()=>{
+    setIsChanged(!isChanged);}
 
     const saveExam = async (e) => {
         e.preventDefault();
@@ -147,6 +156,7 @@ const Other = () => {
             )
             const data = await result.text();
             console.log(data);
+            notify();
         } catch (e) {
             console.log(e);
         }
@@ -157,6 +167,7 @@ const Other = () => {
     const [isLungHidden, setIsLungHidden] = useState("");
     const [isHNHidden, setIsHNHidden] = useState("");
     const [isOralHidden, setIsOralHidden] = useState("");
+    const [isCardiacHidden, setIsCardiacHidden] = useState("");
     const [isMSKHidden, setIsMSKHidden] = useState("");
     const [isSkinHidden, setIsSkinHidden] = useState("");
     const [isAbdoHidden, setIsAbdoHidden] = useState("");
@@ -205,7 +216,9 @@ const Other = () => {
         setDescriptionId(descriptionId);
         setDescription(description);
         setIsCNSHidden(isCNSHidden);
-    }, [tableName, descriptionId, description, isCNSHidden, isLungHidden, isHNHidden, isOralHidden, isMSKHidden, isSkinHidden, isAbdoHidden, isSupineHidden, isBreathHidden])
+        setIsChanged(isChanged);
+    }, [tableName, descriptionId, description, isCNSHidden, isLungHidden, isHNHidden, isOralHidden, isMSKHidden, isSkinHidden, isAbdoHidden, isSupineHidden, isBreathHidden, isCardiacHidden, isChanged])
+
     // UI 
     return (
         <Container maxWidth="md" >
@@ -328,6 +341,33 @@ const Other = () => {
                                             </div></MenuItem>)
                                     )}
                                     <MenuItem onClick={() => { setTableName("oral"); handleAddOpen() }}><Button className="btn2" color="info"> <GoDiffAdded /></Button></MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Grid>
+
+                        <Grid item xs={12}>
+                            <FormControl fullWidth required>
+                                <InputLabel id="demo-simple-select-label">Cardiac</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    name="cardiacId"
+                                    label="Cardiac"
+                                    onChange={(e) => setCardiacId(e.target.value)}
+                                    value={cardiacId}
+                                    onClose={() => setIsCardiacHidden("none")}
+                                    onOpen={() => setIsCardiacHidden("")}
+                                >
+                                    {cardiacs.map((cardiac, i) => (
+                                        <MenuItem style={{ display: "flex", justifyContent: "space-between" }} value={`${cardiac.id}`} key={i} >{cardiac.description}
+                                            <div id="menuItemButton" style={{ display: `${isCardiacHidden}` }}>
+                                                <Button className="btn1 btn-warning ml-1"
+                                                    onClick={() => { setDescriptionId(cardiac.id); setDescription(cardiac.description); setTableName("cardiac"); handleEditOpen(); }}><GoPencil /></Button>
+                                                <Button className="btn2" color="danger"
+                                                    onClick={() => { setDescriptionId(cardiac.id); setDescription(cardiac.description); setTableName("msk"); handleDeleteOpen(); }}> <GoTrashcan /></Button>
+                                            </div></MenuItem>)
+                                    )}
+                                    <MenuItem onClick={() => { setTableName("cardiac"); handleAddOpen() }}><Button className="btn2" color="info"> <GoDiffAdded /></Button></MenuItem>
                                 </Select>
                             </FormControl>
                         </Grid>
@@ -489,6 +529,7 @@ const Other = () => {
                             onClose={handleAddClose}
                             open={openAdd}
                             tableName={tableName}
+                            setIsChanged={handleIsChanged}
                         />
                         <DeleteDialog
                             onClose={handleDeleteClose}
@@ -496,6 +537,7 @@ const Other = () => {
                             tableName={tableName}
                             descriptionId={descriptionId}
                             description={description}
+                            setIsChanged={handleIsChanged}
                         />
 
                         <EditDialog
@@ -504,6 +546,7 @@ const Other = () => {
                             tableName={tableName}
                             descriptionId={descriptionId}
                             description={description}
+                            setIsChanged={handleIsChanged}
                         />
 
                     </Grid>

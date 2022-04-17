@@ -46,7 +46,7 @@ export default function AddDialog({ onClose, open, tableName, setIsChanged }) {
       console.log("Submited: " + result);
       onClose();
       notify();
-      
+    setIsChanged();
     } catch (e) {
       console.log(e);
     }
