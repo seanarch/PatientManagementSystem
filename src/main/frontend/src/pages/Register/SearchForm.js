@@ -153,8 +153,7 @@ function SearchForm() {
           }}
           >
             <Form> 
-              <Collapsible trigger="Search Existing Patient" triggerTagName='h3'  overflowWhenOpen="inherit">
-                <br></br>
+               
                 <Grid container spacing={3} width={'70vw'}>
                   <Grid item xs={4}>
                     <TextField
@@ -186,7 +185,7 @@ function SearchForm() {
 
 
                 </Grid>
-              </Collapsible>
+        
             </Form>
           </Formik>
         </div>
