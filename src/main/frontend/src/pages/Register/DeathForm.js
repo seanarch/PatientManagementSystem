@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useFormik, Formik, Form } from 'formik';
 import { Button } from 'reactstrap';
 import { Container, Grid } from '@material-ui/core';
@@ -15,7 +15,15 @@ import { useGlobalState } from '../../components/Globalstate';
 
 function DeathForm() {
 
-  const userid = 836686110;
+  const searchresult = parseInt(useGlobalState("userid"));
+
+  const [useridforquery, setUseridforquery] = useState(836686110);
+
+  useEffect(() => {
+    setUseridforquery(searchresult); 
+
+  }, [searchresult]);
+   
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -37,7 +45,7 @@ function DeathForm() {
               "Content-Type": "application/json"
             },
             body: `{
-                     "uliId": ${userid},
+                     "uliId": ${useridforquery},
                      "date": "${values.date}",
                      "detail": "${values.detail}" 
                    }`
@@ -55,10 +63,10 @@ function DeathForm() {
     (async () => { 
       try {
         let response = await fetch(
-          `http://localhost:8080/api/death/uli=${userid}`
+          `http://localhost:8080/api/death/uli=${useridforquery}`
         );
         let content = await response.json(); 
-        console.log(content);
+        console.log(content[0]);
         formik.setValues(content[0]);
          
       }
@@ -84,8 +92,9 @@ function DeathForm() {
           'center', alignItems: 'center', marginTop: '50px'
       }}>
         <form onSubmit={formik.handleSubmit}>
- 
-           
+               
+              <h3>{searchresult}</h3>
+              <h3>{useridforquery}</h3>
               <br></br>
               <Grid container spacing={3} width={'70vw'}>
 

@@ -23,7 +23,7 @@ function PatientInfo() {
             birthday: "",
             print: "",
             tg: "",
-            location: "",
+            location: ""
  
         }, 
 

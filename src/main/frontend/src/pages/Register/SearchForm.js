@@ -26,10 +26,13 @@ function SearchForm() {
   var selectedUserId = 0;
   const [patientDetails, setPatient] = useState([]);
   const [patientDetailsName, setPatientName] = useState([]);
+  const [patientDetailsLast, setPatientLast] = useState([]);
   const [filteredData, setFilteredData] = useState([]); 
   const [filteredDataName, setFilteredDataName] = useState([]);
+  const [filteredDataLast, setFilteredDataLast] = useState([]);
   const [wordEnteredId, setWordEnteredId] = useState("");
   const [wordEnteredName, setWordEnteredName] = useState("");
+  const [wordEnteredLast, setWordEnteredLast] = useState("");
 
   const notify = () => {
 
@@ -59,8 +62,19 @@ function SearchForm() {
     console.log(patientResponseData);
   }
 
+  const SearchFilterLast = async () => {
+    const patientResponse = await fetch(`http://localhost:8080/api/patient/all`);
+    const patientResponseData = await patientResponse.json();
+    setPatientLast(patientResponseData);
+    console.log(patientResponseData);
+  }
+
   useEffect(() => {
     SearchFilterName();
+  }, [])
+
+  useEffect(() => {
+    SearchFilterLast();
   }, [])
 
   const handleFilterId = (event) => {
@@ -101,6 +115,25 @@ function SearchForm() {
     }
   };
 
+  const handleFilterLast = (event) => {
+    const searchWordLast = event.target.value;
+    setWordEnteredLast(searchWordLast);
+    const newFilterLast = patientDetailsLast.filter(value => {
+ 
+      if(value.lastname) {
+
+        return value.lastname.toString().startsWith(searchWordLast);
+      }
+      
+    });
+
+    if (searchWordLast === "") {
+      setFilteredDataLast([]);
+    } else {
+      setFilteredDataLast(newFilterLast);
+    }
+  };
+
  
 
   
@@ -123,7 +156,7 @@ function SearchForm() {
               <Collapsible trigger="Search Existing Patient" triggerTagName='h3'  overflowWhenOpen="inherit">
                 <br></br>
                 <Grid container spacing={3} width={'70vw'}>
-                  <Grid item xs={6}>
+                  <Grid item xs={4}>
                     <TextField
                       fullWidth
                       label="Search By Patient ULI"
@@ -132,13 +165,22 @@ function SearchForm() {
                       value={wordEnteredId}
                     />
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={4}>
                     <TextField
                       fullWidth
                       label="Search By Patient First Name"
                       name="Search.PatientName"
                       onChange={handleFilterName}
                       value={wordEnteredName}
+                    />
+                  </Grid>
+                  <Grid item xs={4}>
+                    <TextField
+                      fullWidth
+                      label="Search By Patient Last Name"
+                      name="Search.PatientLast"
+                      onChange={handleFilterLast}
+                      value={wordEnteredLast}
                     />
                   </Grid>
 
@@ -185,6 +227,36 @@ function SearchForm() {
           <div className="dataNameResult">                
 
             {filteredDataName.slice(0, 15).map((value, key) => {
+              return (
+                 
+                 
+                <div key={value.id}>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         
+                
+                ID:{value.id}&nbsp;&nbsp;&nbsp;&nbsp;
+                {value.firstname}&nbsp;&nbsp;&nbsp;&nbsp;
+                {value.lastname}&nbsp;&nbsp;&nbsp;&nbsp;
+                Birthday:{value.birthday}
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <Button color='primary' type="button" onClick={()=> {setGlobalState("userid", value.id); console.log(value.id)}} >Select</Button>
+                <br></br>
+                  
+                </div>
+                 
+              );
+            })}
+          </div>
+        )}
+      </div>
+      <div className="searchLast">
+        {filteredDataLast.length != 0 && (
+          <div className="dataNameResult">                
+
+            {filteredDataLast.slice(0, 15).map((value, key) => {
               return (
                  
                  
