@@ -15,16 +15,8 @@ import { useGlobalState } from '../../components/Globalstate';
 
 function DeathForm() {
 
-  const searchresult = parseInt(useGlobalState("userid"));
-
-  const [useridforquery, setUseridforquery] = useState(836686110);
-
-  useEffect(() => {
-    setUseridforquery(searchresult); 
-
-  }, [searchresult]);
-   
-
+  const userid = parseInt(useGlobalState("userid"));
+ 
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
@@ -45,7 +37,7 @@ function DeathForm() {
               "Content-Type": "application/json"
             },
             body: `{
-                     "uliId": ${useridforquery},
+                     "uliId": ${userid},
                      "date": "${values.date}",
                      "detail": "${values.detail}" 
                    }`
@@ -61,21 +53,27 @@ function DeathForm() {
   useEffect(() => {
      
     (async () => { 
-      try {
-        let response = await fetch(
-          `http://localhost:8080/api/death/uli=${useridforquery}`
-        );
-        let content = await response.json(); 
-        console.log(content[0]);
-        formik.setValues(content[0]);
-         
-      }
-      catch (e) {
-        console.log(e);
-      }
+ 
+        try {
+        
+          let response = await fetch(
+            `http://localhost:8080/api/death/uli=${userid}`
+          );
+
+          if (!response) {
+            let content = await response.json(); 
+            console.log(content[0]);
+            formik.setValues(content[0]);
+          } 
+           
+        }
+        catch (e) {
+          console.log(e);
+        }
+      
     })();
   
-  }, [])
+  }, [userid])
 
   const notify = () => {
 
@@ -93,8 +91,8 @@ function DeathForm() {
       }}>
         <form onSubmit={formik.handleSubmit}>
                
-              <h3>{searchresult}</h3>
-              <h3>{useridforquery}</h3>
+              <h3>{userid}</h3>
+            
               <br></br>
               <Grid container spacing={3} width={'70vw'}>
 
