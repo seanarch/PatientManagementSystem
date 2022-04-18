@@ -15,7 +15,7 @@ import { useGlobalState } from '../../components/Globalstate';
 
 function DeathForm() {
 
-  const userid = parseInt(useGlobalState("userid"));
+  const userid = 836686110;
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -67,7 +67,7 @@ function DeathForm() {
       }
     })();
   
-  }, [userid])
+  }, [])
 
   const notify = () => {
 
