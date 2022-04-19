@@ -10,14 +10,14 @@ import { useGlobalState } from '../../components/Globalstate';
 
  
 
-function FVCFEVInfo() {
+function GeneralInfo() {
 
     const userid = parseInt(useGlobalState("userid"));
 
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
-            datedi: "",
+            date: "",
             ctchest: "",
             comments: "",
         },
@@ -35,9 +35,9 @@ function FVCFEVInfo() {
                   },
                   body: `{
                            "uliId": "${userid}",
-                           "dateDI": "${values.datedi}",
-                           "finding": "${values.comments}",
-                           "typeDIId": "${values.ctchest}" 
+                           "dateDI": "${values.date}",
+                           "typeDIId": "${values.ctchest}", 
+                           "finding": "${values.comments}"
                          }`
                 }
               );
@@ -105,8 +105,8 @@ function FVCFEVInfo() {
                         <Grid item xs={6}>
                                         <TextField
                                             label="Date Diagnosed"
-                                            name="dateDI"
-                                            value={formik.values.datedi}
+                                            name="date"
+                                            value={formik.values.date}
                                             onChange={formik.handleChange}
                                             fullWidth
                                         />
@@ -149,4 +149,4 @@ function FVCFEVInfo() {
     )
 }
 
-export default FVCFEVInfo;
+export default GeneralInfo;

@@ -104,16 +104,13 @@ function FVCFEVInfo() {
         }}>
 
              <form onSubmit={formik.handleSubmit}>
-                     
-                     
- 
-                
+
                         <Collapsible trigger="FVC FEV Information" triggerTagName='h3'  overflowWhenOpen="inherit">
                          <br></br>
                         <Grid container spacing={3} width={'70vw'}>
                         <Grid item xs={6}>
                                         <TextField
-                                            label="date"
+                                            label="Date"
                                             name="date"
                                             value={formik.values.date}
                                             onChange={formik.handleChange}
