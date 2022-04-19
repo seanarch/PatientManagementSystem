@@ -95,8 +95,6 @@ function PatientInfo() {
                      
                         <form onSubmit={formik.handleSubmit}>
                             <h3>Patient Information</h3>
-                             
-                             
                                 <br></br>
                                 <Grid container spacing={3} width={'70vw'}>
                                     <Grid item xs={6}>
