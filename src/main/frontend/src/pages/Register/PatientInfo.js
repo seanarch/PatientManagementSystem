@@ -87,11 +87,7 @@ function PatientInfo() {
         })
     }
 
-    let naviage = useNavigate();
-
-    function handleClick() {
-        naviage("/register");
-    }
+ 
  
 
     return (
@@ -187,8 +183,7 @@ function PatientInfo() {
  
                                 
                                     <Grid item xs={12}>
-                                        <Button color='primary' type="submit" onClick={handleClick} >
-                                        Create</Button>
+                                        <Button color='primary' type="submit"  >Create</Button>
                                         <ToastContainer />
                                     </Grid>
                                 </Grid>
