@@ -1,18 +1,18 @@
-import React, {useEffect} from 'react';
+import React, { useState, useEffect} from 'react';
 import { useFormik, Formik, Form } from 'formik';
 import { Button } from 'reactstrap';
 import { Container, Grid, InputLabel, Select, MenuItem, FormControl } from '@material-ui/core';
 import { TextareaAutosize } from '@mui/base';
 import { TextField } from "@material-ui/core/";  
-import axios from "axios"; 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useGlobalState } from '../../components/Globalstate';
 
 
 
 const Decision = () => {
 
-    const userid = 5;
+    const userid = parseInt(useGlobalState("userid"));
 
     const formik = useFormik({
         enableReinitialize: true,
@@ -46,20 +46,35 @@ const Decision = () => {
         });
 
         useEffect(() => {
-            (async () => {
+     
+          (async () => { 
+       
               try {
+              
                 let response = await fetch(
-                  `http://localhost:8080/api/decision/id=${userid}`
+                  `http://localhost:8080/api/decision/uli=${userid}`
                 );
-                let content = await response.json();
-                formik.setValues(content);
-                // formik.setFieldValue("email", content[0].email);
-              } catch (e) {
+      
+                if (response.ok) {
+                  let content = await response.json(); 
+                  console.log(content[0]);
+                  formik.setValues(content[0]);
+                } else {
+                  let response = await fetch(
+                    `http://localhost:8080/api/decision/uli=612399531`);
+                  let content = await response.json(); 
+                  console.log(content[0]);
+                  formik.setValues(content[0]);
+                } 
+                 
+              }
+              catch (e) {
                 console.log(e);
               }
-            })();
-            // eslint-disable-next-line react-hooks/exhaustive-deps
-          }, []);
+            
+          })();
+        
+        }, [userid]);
 
     const notify = () => {
      

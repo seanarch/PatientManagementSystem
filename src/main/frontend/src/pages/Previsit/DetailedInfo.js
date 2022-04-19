@@ -1,29 +1,94 @@
-import React from 'react';
-import { Formik, Form } from 'formik';
+import React, {useState, useEffect} from 'react';
+import { useFormik, Formik, Form } from 'formik';
 import { Button } from 'reactstrap';
 import { Container, Grid, InputLabel, Select, MenuItem, FormControl, Slider } from '@material-ui/core';
-import TextField from '../../components/TextField/TextField';
-import DatePicker from '../../components/Date/DatePicker';
-import axios from "axios"; 
+import { TextField } from "@material-ui/core/"; 
 import Collapsible from 'react-collapsible';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useGlobalState } from '../../components/Globalstate';
 
 
-const INITIAL_VALUES = {
-    DetailedInformation: {
-        Date1: "2021-03-17",
-        Bili: "10.1",
-        Alb: "10.1",
-        PTINR: "10.1",
-        Ascites: 10.10,
-        HepaticEnch: "String",
-        CPScore: 3,
-        ChildPugh: "S",
-    },
-}
+ 
 
 function DetailedInfo() {
+
+    const userid = parseInt(useGlobalState("userid"));
+
+    const formik = useFormik({
+        enableReinitialize: true,
+        initialValues: {
+            date: "",
+            bili: "",
+            alb: "",
+            PTINR: "",
+            ascites: "",
+            hepaticEnch: "",
+            cpscore: "",
+            childpugh: "",
+        }, 
+
+        onSubmit: async (values) => {
+            console.log(values);
+            try {
+            let result = await fetch(
+                `http://localhost:8080/api/childpugh/update/`,
+                {
+                  method: "post",
+                  mode: "cors",
+                  headers: {
+                    "Content-Type": "application/json"
+                  },
+                  body: `{
+                           "uliId": ${userid},
+                           "date": "${values.date}",
+                           "totalBiliUmolL": "${values.bili}",
+                           "serumAlbGL": "${values.alb}",
+                           "PTINR": "${values.PTINR}",
+                           "ascites": "${values.ascites}",
+                           "hepaticEnch": "${values.hepaticEnch}",
+                           "childPughScore": "${values.cpscore}",
+                           "childPugh": "${values.childpugh}"
+                         }`
+                }
+              );
+              console.log("Submited: " + result);
+            } catch (e) {
+              console.log(e);
+            }
+          }
+        });
+
+        useEffect(() => {
+     
+            (async () => { 
+         
+                try {
+                
+                  let response = await fetch(
+                    `http://localhost:8080/api/childpugh/uli=${userid}`
+                  );
+        
+                  if (response.ok) {
+                    let content = await response.json(); 
+                    console.log(content[0]);
+                    formik.setValues(content[0]);
+                  } else {
+                    let response = await fetch(
+                      `http://localhost:8080/api/childpugh/uli=711531521`);
+                    let content = await response.json(); 
+                    console.log(content[0]);
+                    formik.setValues(content[0]);
+                  } 
+                   
+                }
+                catch (e) {
+                  console.log(e);
+                }
+              
+            })();
+          
+          }, [userid])
 
     const notify = () => {
      
@@ -39,82 +104,43 @@ function DetailedInfo() {
             display: 'flex', justifyContent:
                 'center', alignItems: 'center', marginTop: '50px'
         }}>
-            <Formik initialValues={{ ...INITIAL_VALUES }} onSubmit={values => {
-                console.log(values) 
-            }}
->
-                {props => (
-                    <Form>
+            <form onSubmit={formik.handleSubmit}>
+                  
                         <Collapsible trigger="Detailed Information" triggerTagName='h3'  overflowWhenOpen="inherit">
                         <br></br>
                         <Grid container spacing={3} width={'70vw'} >
-                            <Grid item xs={6}>
-                                <DatePicker
-                                        fullWidth
-                                        name="DetailedInformation.Date1"
-                                        label="Date"
-                                    />
-                                </Grid>
 
-                                <Grid item xs={6}>
-                                    <TextField
-                                        name="DetailedInformation.Bili"
-                                        label="Bilirubin (BR)"
-                                    />
-                                </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                            label="Date"
+                            name="date"
+                            value={formik.values.date}
+                            onChange={formik.handleChange}
+                            fullWidth
+                            />
+                        </Grid>
 
-                                <Grid item xs={6}>
-                                    <TextField
-                                        name="DetailedInformation.Alb"
-                                        label="Albumin (Alb)"
-                                    />
-                                </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                            label="Total BiliUmolL"
+                            name="Total BiliUmolL"
+                            value={formik.values.bili}
+                            onChange={formik.handleChange}
+                            fullWidth
+                            />
+                        </Grid>
 
-                                <Grid item xs={6}>
-                                    <TextField
-                                        name="DetailedInformation.PTINR"
-                                        label="Prothrombin time (PTINR)"
-                                    />
-                                </Grid>
-
-
-                            <Grid item xs={6}>
-                                    <TextField
-                                        name="DetailedInformation.HepaticEnch"
-                                        label="Hepatic Encephalopathy (HepaticEnch)"
-                                    />
-                                </Grid>
-                            {/* <Grid item xs={12}>
-                                    <TextField
-                                        name="DetailedInformation.CPScore"
-                                        label="Cognitive Performance Scale"
-                                    />
-                                </Grid> */}
-
-                            <Grid item xs={6}>
-                                    <TextField
-                                        name="DetailedInformation.ChildPugh"
-                                        label="ChildPugh"
-                                    />
-                                </Grid>
-
-                            <Grid item xs={12} >
-                                <h5>Cognitive Performance Scale</h5>
-                                <br/><br/>
-                                <Slider
-                                    
-                                    valueLabelDisplay="on"
-                                    step={1}
-                                    marks
-                                    min={0}
-                                    max={10}
-                                    name="DetailedInformation.CPScore"
-                                    label="CPScore"
-                                    
-                                    />
-                                                                    
-                                </Grid>
-                                <hr></hr>
+                        <Grid item xs={6}>
+                            <TextField
+                            label="Serum AlbGL"
+                            name="Serum AlbGL"
+                            value={formik.values.alb}
+                            onChange={formik.handleChange}
+                            fullWidth
+                            />
+                        </Grid>
+ 
+ 
 
                                 <Grid item xs={12}>
                                     <Button color='primary' type="submit"  onClick={notify}>Save</Button>
@@ -122,9 +148,8 @@ function DetailedInfo() {
                                 </Grid>
                             </Grid>
                         </Collapsible>
-                    </Form>
-                )}
-            </Formik>
+                    </form>
+                
         </div>
     </Container>
     )

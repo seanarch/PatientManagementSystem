@@ -3,17 +3,16 @@ import { useFormik, Formik, Form, Field } from 'formik';
 import { Button } from 'reactstrap';
 import { Container, Grid, InputLabel, Select, MenuItem, FormControl } from '@material-ui/core';
 import { TextField } from '@material-ui/core'; 
-import DatePicker from '../../components/Date/DatePicker';
-import axios from "axios"; 
 import Collapsible from 'react-collapsible';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useGlobalState } from '../../components/Globalstate';
   
  
 
 export default function Symptoms() { 
 
-const userid = -2147216991;
+const userid = parseInt(useGlobalState("userid"));
  
 const [data, setData] = useState(null);
 const [date, setDate] = useState(null);
@@ -324,7 +323,7 @@ let handleSubmit = async (e) => {
           "Content-Type": "application/json"
         },
         body: `{
-                 "id" : "${userid}", 
+                 "uliId" : "${userid}", 
                  "date": "${dateUpdate}",
                  "feversChills": "${feversChillsUpdate}",
                  "appetiteLoss": "${appetiteLossUpdate}",
@@ -367,38 +366,38 @@ let handleSubmit = async (e) => {
  
 
 function getData() {
-  fetch(`http://localhost:8080/api/reviewofsymptoms/id=${userid}`).then((result) => {
+  fetch(`http://localhost:8080/api/reviewofsymptoms/uli=${userid}`).then((result) => {
     result.json().then((resp) => {
-      setData(resp) 
-      setDate(resp.date)
-      setFeversChills(resp.feversChills)
-      setAppetiteLoss(resp.appetiteLoss)
-      setDifficultyChewing(resp.difficultyChewing)
-      setAbdominalPain(resp.abdominalPain)
-      setNauseaVomiting(resp.nauseaVomiting)
-      setHeartburn(resp.heartburn)
-      setConstipation(resp.constipation)
-      setHemetemesis(resp.hemetemesis)
-      setMelena(resp.melena)
-      setRectalBleed(resp.rectalBleed)
-      setNocturea(resp.nocturea)
-      setHesitancy(resp.hesitancy)
-      setHematurea(resp.hematurea)
-      setPneumaturea(resp.pneumaturea)
-      setBackBoneJointPain(resp.backBoneJointPain)
-      setSob(resp.sob)
-      setCough(resp.cough)
-      setHemoptisis(resp.hemoptisis)
-      setWheeze(resp.wheeze)
-      setChestPain(resp.chestPain)
-      setHeadaches(resp.headaches)
-      setVisionChanges(resp.visionChanges)
-      setHearing(resp.hearing)
-      setSpeechChanges(resp.speechChanges)
-      setFocalWeakness(resp.focalWeakness)
-      setEd(resp.ed)
-      setBadls(resp.badls)
-      setIadls(resp.iadls)
+      setData(resp[0]) 
+      setDate(resp[0].date)
+      setFeversChills(resp[0].feversChills)
+      setAppetiteLoss(resp[0].appetiteLoss)
+      setDifficultyChewing(resp[0].difficultyChewing)
+      setAbdominalPain(resp[0].abdominalPain)
+      setNauseaVomiting(resp[0].nauseaVomiting)
+      setHeartburn(resp[0].heartburn)
+      setConstipation(resp[0].constipation)
+      setHemetemesis(resp[0].hemetemesis)
+      setMelena(resp[0].melena)
+      setRectalBleed(resp[0].rectalBleed)
+      setNocturea(resp[0].nocturea)
+      setHesitancy(resp[0].hesitancy)
+      setHematurea(resp[0].hematurea)
+      setPneumaturea(resp[0].pneumaturea)
+      setBackBoneJointPain(resp[0].backBoneJointPain)
+      setSob(resp[0].sob)
+      setCough(resp[0].cough)
+      setHemoptisis(resp[0].hemoptisis)
+      setWheeze(resp[0].wheeze)
+      setChestPain(resp[0].chestPain)
+      setHeadaches(resp[0].headaches)
+      setVisionChanges(resp[0].visionChanges)
+      setHearing(resp[0].hearing)
+      setSpeechChanges(resp[0].speechChanges)
+      setFocalWeakness(resp[0].focalWeakness)
+      setEd(resp[0].ed)
+      setBadls(resp[0].badls)
+      setIadls(resp[0].iadls)
        
     })
      
@@ -407,7 +406,7 @@ function getData() {
 
 useEffect(() => {
   getData();
-}, [])
+}, [userid])
 
  
 const notify = () => {

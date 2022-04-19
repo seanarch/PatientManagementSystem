@@ -1,18 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFormik, Formik, Form, Field } from 'formik';
 import { Button } from 'reactstrap';
 import { Container, Grid, InputLabel, Select, MenuItem, FormControl, Checkbox } from '@material-ui/core';
 import { TextField } from "@material-ui/core/";
-import DatePicker from '../../components/Date/DatePicker';
-import axios from "axios";
 import Collapsible from 'react-collapsible';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useGlobalState } from '../../components/Globalstate';
 
  
 function RTGIinfo() {
 
-    const userid = -2144449451;
+    const userid = parseInt(useGlobalState("userid"));
 
     const formik = useFormik({
         enableReinitialize: true,
@@ -47,7 +46,7 @@ function RTGIinfo() {
                     "Content-Type": "application/json"
                   },
                   body: `{
-                           "id": "${userid}",
+                           "uliId": "${userid}",
                            "dateRTStart": "${values.dateRTStart}",
                            "dateRTEnd": "${values.dateRTEnd}",
                            "typeRTId": "${values.typeRTId}",
@@ -73,6 +72,37 @@ function RTGIinfo() {
             }
           }
         });
+
+        useEffect(() => {
+     
+            (async () => { 
+         
+                try {
+                
+                  let response = await fetch(
+                    `http://localhost:8080/api/radiationtherapy/uli=${userid}`
+                  );
+        
+                  if (response.ok) {
+                    let content = await response.json(); 
+                    console.log(content[0]);
+                    formik.setValues(content[0]);
+                  } else {
+                    let response = await fetch(
+                      `http://localhost:8080/api/radiationtherapy/uli=158861710`);
+                    let content = await response.json(); 
+                    console.log(content[0]);
+                    formik.setValues(content[0]);
+                  } 
+                   
+                }
+                catch (e) {
+                  console.log(e);
+                }
+              
+            })();
+          
+          }, [userid])
 
         useEffect(() => {
             (async () => {
@@ -117,6 +147,7 @@ function RTGIinfo() {
                                     <TextField
                                     label="DateRTStart"
                                     name="dateRTStart"
+                                    InputLabelProps={{ shrink: true}}
                                     value={formik.values.dateRTStart}
                                     onChange={formik.handleChange}
                                     fullWidth
@@ -127,6 +158,7 @@ function RTGIinfo() {
                                     <TextField
                                     label="DateRTEnd"
                                     name="dateRTEnd"
+                                    InputLabelProps={{ shrink: true}}
                                     value={formik.values.dateRTEnd}
                                     onChange={formik.handleChange}
                                     fullWidth
@@ -137,6 +169,7 @@ function RTGIinfo() {
                                     <TextField
                                     label="TypeRTId"
                                     name="typeRTId"
+                                    InputLabelProps={{ shrink: true}}
                                     value={formik.values.typeRTId}
                                     onChange={formik.handleChange}
                                     fullWidth
@@ -147,6 +180,7 @@ function RTGIinfo() {
                                     <TextField
                                     label="LocationId"
                                     name="locationId"
+                                    InputLabelProps={{ shrink: true}}
                                     value={formik.values.locationId}
                                     onChange={formik.handleChange}
                                     fullWidth
@@ -157,6 +191,7 @@ function RTGIinfo() {
                                     <TextField
                                     label="RT dose"
                                     name="rtdose"
+                                    InputLabelProps={{ shrink: true}}
                                     value={formik.values.rtdose}
                                     onChange={formik.handleChange}
                                     fullWidth
@@ -167,6 +202,7 @@ function RTGIinfo() {
                                     <TextField
                                     label="Fraction"
                                     name="fraction"
+                                    InputLabelProps={{ shrink: true}}
                                     value={formik.values.fraction}
                                     onChange={formik.handleChange}
                                     fullWidth
@@ -177,6 +213,7 @@ function RTGIinfo() {
                                     <TextField
                                     label="PlanningId"
                                     name="planningId"
+                                    InputLabelProps={{ shrink: true}}
                                     value={formik.values.planningId}
                                     onChange={formik.handleChange}
                                     fullWidth
@@ -187,6 +224,7 @@ function RTGIinfo() {
                                     <TextField
                                     label="AnatDetail"
                                     name="anatDetail"
+                                    InputLabelProps={{ shrink: true}}
                                     value={formik.values.anatDetail}
                                     onChange={formik.handleChange}
                                     fullWidth
@@ -199,6 +237,7 @@ function RTGIinfo() {
                                     <TextField
                                     label="General"
                                     name="general"
+                                    InputLabelProps={{ shrink: true}}
                                     value={formik.values.general}
                                     onChange={formik.handleChange}
                                     fullWidth
@@ -211,6 +250,7 @@ function RTGIinfo() {
                                     <TextField
                                     label="PneumonitisId"
                                     name="pneumonitisId"
+                                    InputLabelProps={{ shrink: true}}
                                     value={formik.values.pneumonitisId}
                                     onChange={formik.handleChange}
                                     fullWidth
@@ -221,6 +261,7 @@ function RTGIinfo() {
                                     <TextField
                                     label="UpperGI ID"
                                     name="upperGIId"
+                                    InputLabelProps={{ shrink: true}}
                                     value={formik.values.upperGIId}
                                     onChange={formik.handleChange}
                                     fullWidth
@@ -231,6 +272,7 @@ function RTGIinfo() {
                                     <TextField
                                     label="Skin Reaction ID"
                                     name="skinReactionId"
+                                    InputLabelProps={{ shrink: true}}
                                     value={formik.values.skinReactionId}
                                     onChange={formik.handleChange}
                                     fullWidth
@@ -241,6 +283,7 @@ function RTGIinfo() {
                                     <TextField
                                     label="LowerGI ID"
                                     name="lowerGIId"
+                                    InputLabelProps={{ shrink: true}}
                                     value={formik.values.lowerGIId}
                                     onChange={formik.handleChange}
                                     fullWidth
@@ -251,6 +294,7 @@ function RTGIinfo() {
                                     <TextField
                                     label="Gu Id"
                                     name="guId"
+                                    InputLabelProps={{ shrink: true}}
                                     value={formik.values.guId}
                                     onChange={formik.handleChange}
                                     fullWidth
@@ -261,6 +305,7 @@ function RTGIinfo() {
                                     <TextField
                                     label="Hepatic Id"
                                     name="hepaticId"
+                                    InputLabelProps={{ shrink: true}}
                                     value={formik.values.hepaticId}
                                     onChange={formik.handleChange}
                                     fullWidth
@@ -271,6 +316,7 @@ function RTGIinfo() {
                                     <TextField
                                     label="Heme ID"
                                     name="hemeId"
+                                    InputLabelProps={{ shrink: true}}
                                     value={formik.values.hemeId}
                                     onChange={formik.handleChange}
                                     fullWidth

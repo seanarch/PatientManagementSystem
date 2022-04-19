@@ -97,9 +97,7 @@ function DeathForm() {
       }}>
         <form onSubmit={formik.handleSubmit}>
                
-              <h3>{userid}</h3>
-            
-              <br></br>
+                
               <Grid container spacing={3} width={'70vw'}>
 
               <Grid item xs={6}>
