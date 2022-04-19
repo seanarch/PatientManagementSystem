@@ -9,6 +9,8 @@ import { GoTrashcan, GoPencil, GoDiffAdded } from "react-icons/go"
 import AddDialog from '../../components/Dialog/AddRow';
 import DeleteDialog from '../../components/Dialog/DeleteRow';
 import EditDialog from '../../components/Dialog/EditRow';
+import { useGlobalState } from '../../components/Globalstate';
+
 const Other = () => {
 
     const notify = () => {
@@ -18,6 +20,7 @@ const Other = () => {
         })
     }
 
+    const userid = parseInt(useGlobalState("userid"));
     //
     const [isChanged, setIsChanged] = useState("false");
     //array attributes to hold data from existing tables
@@ -139,7 +142,7 @@ const Other = () => {
                     body: JSON.stringify({
                         "id": null,
                         "abdoId": abdoId,
-                        "uliId": 155063610,
+                        "uliId": userid,
                         "date": date,
                         "cnsId": cnsId,
                         "lungId": lungId,
