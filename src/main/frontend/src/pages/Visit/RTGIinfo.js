@@ -224,6 +224,7 @@ function RTGIinfo() {
                                     <TextField
                                     label="AnatDetail"
                                     name="anatDetail"
+                                    InputLabelProps={{ shrink: true}}
                                     value={formik.values.anatDetail}
                                     onChange={formik.handleChange}
                                     fullWidth
@@ -236,6 +237,7 @@ function RTGIinfo() {
                                     <TextField
                                     label="General"
                                     name="general"
+                                    InputLabelProps={{ shrink: true}}
                                     value={formik.values.general}
                                     onChange={formik.handleChange}
                                     fullWidth
