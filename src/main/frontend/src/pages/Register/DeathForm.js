@@ -60,7 +60,13 @@ function DeathForm() {
             `http://localhost:8080/api/death/uli=${userid}`
           );
 
-          if (!response) {
+          if (response.ok) {
+            let content = await response.json(); 
+            console.log(content[0]);
+            formik.setValues(content[0]);
+          } else {
+            let response = await fetch(
+              `http://localhost:8080/api/death/uli=836686110`);
             let content = await response.json(); 
             console.log(content[0]);
             formik.setValues(content[0]);
