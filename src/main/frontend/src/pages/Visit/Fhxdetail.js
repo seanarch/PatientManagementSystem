@@ -109,6 +109,7 @@ function Fhxdetail() {
                                         <TextField
                                             label="FHX detail"
                                             name="fhxDetail"
+                                            InputLabelProps={{ shrink: true}}
                                             value={formik.values.fhxDetail}
                                             onChange={formik.handleChange}
                                             fullWidth
@@ -119,6 +120,7 @@ function Fhxdetail() {
                                         <TextField
                                             label="Smoking Pack Years"
                                             name="smokingPackYears"
+                                            InputLabelProps={{ shrink: true}}
                                             value={formik.values.smokingPackYears}
                                             onChange={formik.handleChange}
                                             fullWidth
@@ -129,6 +131,7 @@ function Fhxdetail() {
                                         <TextField
                                             label="Smoke quit"
                                             name="smokeQuit"
+                                            InputLabelProps={{ shrink: true}}
                                             value={formik.values.smokeQuit}
                                             onChange={formik.handleChange}
                                             fullWidth
@@ -141,6 +144,7 @@ function Fhxdetail() {
                                         <TextField
                                             label="Detail"
                                             name="detail"
+                                            InputLabelProps={{ shrink: true}}
                                             value={formik.values.detail}
                                             onChange={formik.handleChange}
                                             multiline

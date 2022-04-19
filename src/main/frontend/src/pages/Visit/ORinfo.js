@@ -129,6 +129,7 @@ function ORinfo() {
                                         fullWidth
                                         label="OR date"
                                         name="ordate"
+                                        InputLabelProps={{ shrink: true}}
                                         value={formik.values.ordate}
                                         onChange={formik.handleChange}
                                          
@@ -140,6 +141,7 @@ function ORinfo() {
                                         fullWidth
                                         label="Location ID"
                                         name="locationId"
+                                        InputLabelProps={{ shrink: true}}
                                         value={formik.values.locationId}
                                         onChange={formik.handleChange}
                                     />
@@ -153,6 +155,7 @@ function ORinfo() {
                                         fullWidth
                                         label="OR ID"
                                         name="orId"
+                                        InputLabelProps={{ shrink: true}}
                                         value={formik.values.orId}
                                         onChange={formik.handleChange}
                                     />
@@ -163,6 +166,7 @@ function ORinfo() {
                                         fullWidth
                                         label="Size Primary MM"
                                         name="sizePrimaryMm"
+                                        InputLabelProps={{ shrink: true}}
                                         value={formik.values.sizePrimaryMm}
                                         onChange={formik.handleChange}
                                     />
@@ -183,6 +187,7 @@ function ORinfo() {
                                         fullWidth
                                         label="Grade"
                                         name="grade"
+                                        InputLabelProps={{ shrink: true}}
                                         value={formik.values.grade}
                                         onChange={formik.handleChange}
                                     />
@@ -193,6 +198,7 @@ function ORinfo() {
                                         fullWidth
                                         label="Margin"
                                         name="margin"
+                                        InputLabelProps={{ shrink: true}}
                                         value={formik.values.margin}
                                         onChange={formik.handleChange}
                                     />
@@ -203,6 +209,7 @@ function ORinfo() {
                                         fullWidth
                                         label="T"
                                         name="t"
+                                        InputLabelProps={{ shrink: true}}
                                         value={formik.values.t}
                                         onChange={formik.handleChange}
                                     />
@@ -213,6 +220,7 @@ function ORinfo() {
                                         fullWidth
                                         label="N"
                                         name="n"
+                                        InputLabelProps={{ shrink: true}}
                                         value={formik.values.n}
                                         onChange={formik.handleChange}
                                     />
@@ -223,6 +231,7 @@ function ORinfo() {
                                         fullWidth
                                         label="nodesVe"
                                         name="nodesVe"
+                                        InputLabelProps={{ shrink: true}}
                                         value={formik.values.nodesVe}
                                         onChange={formik.handleChange}
                                     />
@@ -233,6 +242,7 @@ function ORinfo() {
                                         fullWidth
                                         label="nodesTaken"
                                         name="nodesTaken"
+                                        InputLabelProps={{ shrink: true}}
                                         value={formik.values.nodesTaken}
                                         onChange={formik.handleChange}
                                     />
@@ -243,6 +253,7 @@ function ORinfo() {
                                         fullWidth
                                         label="M"
                                         name="m"
+                                        InputLabelProps={{ shrink: true}}
                                         value={formik.values.m}
                                         onChange={formik.handleChange}
                                     />
@@ -253,6 +264,7 @@ function ORinfo() {
                                         fullWidth
                                         label="Stage"
                                         name="stage"
+                                        InputLabelProps={{ shrink: true}}
                                         value={formik.values.stage}
                                         onChange={formik.handleChange}
                                     />
