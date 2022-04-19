@@ -1,18 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFormik, Formik, Form } from 'formik';
 import { Button } from 'reactstrap';
 import { Container, Grid, InputLabel, Select, MenuItem, FormControl } from '@material-ui/core';
 import { TextField } from "@material-ui/core/";
-import DatePicker from '../../components/Date/DatePicker';
-import axios from "axios"; 
 import Collapsible from 'react-collapsible';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useGlobalState } from '../../components/Globalstate';
+
 
 
 function FVCFEVInfo() {
 
-    const userid = -2077191396;
+    const userid = parseInt(useGlobalState("userid"));
 
     const formik = useFormik({
         enableReinitialize: true,
@@ -39,7 +39,7 @@ function FVCFEVInfo() {
                     "Content-Type": "application/json"
                   },
                   body: `{
-                           "id": "${userid}",
+                           "uliId": "${userid}",
                            "date": "${values.date}",
                            "fvc": "${values.fvc}",
                            "fvc1": "${values.fvc1}",
@@ -58,21 +58,35 @@ function FVCFEVInfo() {
         });
 
         useEffect(() => {
-            (async () => {
-              try {
-                let response = await fetch(
-                  `http://localhost:8080/api/pulmonaryfunctiontest/id=${userid}`
-                );
-                let content = await response.json();
-                formik.setValues(content);
-                // formik.setFieldValue("email", content[0].email);
-              } catch (e) {
-                console.log(e);
-              }
+     
+            (async () => { 
+         
+                try {
+                
+                  let response = await fetch(
+                    `http://localhost:8080/api/pulmonaryfunctiontest/uli=${userid}`
+                  );
+        
+                  if (response.ok) {
+                    let content = await response.json(); 
+                    console.log(content[0]);
+                    formik.setValues(content[0]);
+                  } else {
+                    let response = await fetch(
+                      `http://localhost:8080/api/pulmonaryfunctiontest/uli=638000910`);
+                    let content = await response.json(); 
+                    console.log(content[0]);
+                    formik.setValues(content[0]);
+                  } 
+                   
+                }
+                catch (e) {
+                  console.log(e);
+                }
+              
             })();
-            // eslint-disable-next-line react-hooks/exhaustive-deps
-          }, []);
-
+          
+          }, [userid])
 
     const notify = () => {
      

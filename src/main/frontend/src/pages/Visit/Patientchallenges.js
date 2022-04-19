@@ -3,15 +3,14 @@ import { useFormik, Formik, Form, Field } from 'formik';
 import { Button } from 'reactstrap';
 import { Container, Grid, InputLabel, Select, MenuItem, FormControl, Checkbox } from '@material-ui/core';
 import { TextField } from "@material-ui/core/";
-import DatePicker from '../../components/Date/DatePicker';
-import axios from "axios"; 
 import Collapsible from 'react-collapsible';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useGlobalState } from '../../components/Globalstate';
  
 export default function Patientchallenges() {
 
-    const userid = -2144486835;
+  const userid = parseInt(useGlobalState("userid"));
     
     const [data, setData] = useState(null);
     const [attendedFamily, setAttendedFamily] = useState(null);
@@ -89,7 +88,7 @@ useEffect(() => {
             "Content-Type": "application/json"
           },
           body: `{
-                  "id": "${userid}",
+                  "uliId": "${userid}",
                   "attendedFamily": "${attendedFamilyUpdate}",
                   "lacksSocialSupport": "${lacksSocialSupportUpdate}",
                   "languageBarrier": "${languageBarrierUpdate}",
@@ -106,16 +105,16 @@ useEffect(() => {
   } 
 
   function getData() {
-    fetch(`http://localhost:8080/api/pasthistory/id=${userid}`).then((result) => {
+    fetch(`http://localhost:8080/api/pasthistory/uli=${userid}`).then((result) => {
       result.json().then((resp) => {
-        setData(resp)
+        setData(resp[0])
         console.log(resp)
-        setAttendedFamily(resp.attendedFamily)
-        setLacksSocialSupport(resp.lacksSocialSupport)
-        setLanguageBarrier(resp.languageBarrier)
-        setFinancialChallenge(resp.financialChallenge)
-        setPsychosocialChallenge(resp.psychosocialChallenge)
-        setEtohweek(resp.etohweek)
+        setAttendedFamily(resp[0].attendedFamily)
+        setLacksSocialSupport(resp[0].lacksSocialSupport)
+        setLanguageBarrier(resp[0].languageBarrier)
+        setFinancialChallenge(resp[0].financialChallenge)
+        setPsychosocialChallenge(resp[0].psychosocialChallenge)
+        setEtohweek(resp[0].etohweek)
          
       })
        
@@ -124,7 +123,7 @@ useEffect(() => {
   
   useEffect(() => {
     getData();
-  }, [])
+  }, [userid])
 
 
   const notify = () => {

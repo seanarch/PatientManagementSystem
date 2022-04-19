@@ -1,19 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFormik, Formik, Form, Field } from 'formik';
 import { Button } from 'reactstrap';
 import { Container, Grid, InputLabel, Select, MenuItem, FormControl, Checkbox } from '@material-ui/core';
 import { TextField } from "@material-ui/core/";
-import DatePicker from '../../components/Date/DatePicker';
-import axios from "axios"; 
 import Collapsible from 'react-collapsible';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useGlobalState } from '../../components/Globalstate';
  
  
 
 function Fhxdetail() {
 
-    const userid = -2144486835;
+    const userid = parseInt(useGlobalState("userid"));
 
 
     const formik = useFormik({
@@ -53,22 +52,36 @@ function Fhxdetail() {
         });
 
         useEffect(() => {
-            (async () => {
+     
+          (async () => { 
+       
               try {
+              
                 let response = await fetch(
-                  `http://localhost:8080/api/pasthistory/id=${userid}`
+                  `http://localhost:8080/api/pasthistory/uli=${userid}`
                 );
-                let content = await response.json();
-                formik.setValues(content);
-                // formik.setFieldValue("email", content[0].email);
-              } catch (e) {
+      
+                if (response.ok) {
+                  let content = await response.json(); 
+                  console.log(content[0]);
+                  formik.setValues(content[0]);
+                } else {
+                  let response = await fetch(
+                    `http://localhost:8080/api/pasthistory/uli=123456789`);
+                  let content = await response.json(); 
+                  console.log(content[0]);
+                  formik.setValues(content[0]);
+                } 
+                 
+              }
+              catch (e) {
                 console.log(e);
               }
-            })();
-            // eslint-disable-next-line react-hooks/exhaustive-deps
-          }, []);
+            
+          })();
+        
+        }, [userid])
 
- 
     
     const notify = () => {
      

@@ -1,19 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFormik, Formik, Form, Field } from 'formik';
 import { Button } from 'reactstrap';
 import { Container, Grid, InputLabel, Select, MenuItem, FormControl, Checkbox } from '@material-ui/core';
 import { TextField } from "@material-ui/core/";
-import DatePicker from '../../components/Date/DatePicker';
-import axios from "axios"; 
 import Collapsible from 'react-collapsible'; 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useGlobalState } from '../../components/Globalstate';
+
  
  
 
 function ORinfo() {
 
-    const userid = -2145721333;
+    const userid = parseInt(useGlobalState("userid"));
 
     const formik = useFormik({
         enableReinitialize: true,
@@ -48,7 +48,7 @@ function ORinfo() {
                     "Content-Type": "application/json"
                   },
                   body: `{
-                           "id": "${userid}",
+                           "uliId": "${userid}",
                            "ordate": "${values.ordate}",
                            "locationId": "${values.locationId}",
                            "orId": "${values.orId}",
@@ -73,21 +73,37 @@ function ORinfo() {
           }
         });
 
-        useEffect(() => {
-            (async () => {
-              try {
-                let response = await fetch(
-                  `http://localhost:8080/api/diagnosis/id=${userid}`
-                );
-                let content = await response.json();
-                formik.setValues(content);
-                // formik.setFieldValue("email", content[0].email);
-              } catch (e) {
-                console.log(e);
-              }
+
+          useEffect(() => {
+     
+            (async () => { 
+         
+                try {
+                
+                  let response = await fetch(
+                    `http://localhost:8080/api/diagnosis/uli=${userid}`
+                  );
+        
+                  if (response.ok) {
+                    let content = await response.json(); 
+                    console.log(content[0]);
+                    formik.setValues(content[0]);
+                  } else {
+                    let response = await fetch(
+                      `http://localhost:8080/api/diagnosis/uli=145509461`);
+                    let content = await response.json(); 
+                    console.log(content[0]);
+                    formik.setValues(content[0]);
+                  } 
+                   
+                }
+                catch (e) {
+                  console.log(e);
+                }
+              
             })();
-            // eslint-disable-next-line react-hooks/exhaustive-deps
-          }, []);
+          
+          }, [userid])
     
     const notify = () => {
      

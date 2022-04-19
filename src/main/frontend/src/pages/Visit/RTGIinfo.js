@@ -1,18 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFormik, Formik, Form, Field } from 'formik';
 import { Button } from 'reactstrap';
 import { Container, Grid, InputLabel, Select, MenuItem, FormControl, Checkbox } from '@material-ui/core';
 import { TextField } from "@material-ui/core/";
-import DatePicker from '../../components/Date/DatePicker';
-import axios from "axios";
 import Collapsible from 'react-collapsible';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useGlobalState } from '../../components/Globalstate';
 
  
 function RTGIinfo() {
 
-    const userid = -2144449451;
+    const userid = parseInt(useGlobalState("userid"));
 
     const formik = useFormik({
         enableReinitialize: true,
@@ -47,7 +46,7 @@ function RTGIinfo() {
                     "Content-Type": "application/json"
                   },
                   body: `{
-                           "id": "${userid}",
+                           "uliId": "${userid}",
                            "dateRTStart": "${values.dateRTStart}",
                            "dateRTEnd": "${values.dateRTEnd}",
                            "typeRTId": "${values.typeRTId}",
@@ -73,6 +72,37 @@ function RTGIinfo() {
             }
           }
         });
+
+        useEffect(() => {
+     
+            (async () => { 
+         
+                try {
+                
+                  let response = await fetch(
+                    `http://localhost:8080/api/radiationtherapy/uli=${userid}`
+                  );
+        
+                  if (response.ok) {
+                    let content = await response.json(); 
+                    console.log(content[0]);
+                    formik.setValues(content[0]);
+                  } else {
+                    let response = await fetch(
+                      `http://localhost:8080/api/radiationtherapy/uli=158861710`);
+                    let content = await response.json(); 
+                    console.log(content[0]);
+                    formik.setValues(content[0]);
+                  } 
+                   
+                }
+                catch (e) {
+                  console.log(e);
+                }
+              
+            })();
+          
+          }, [userid])
 
         useEffect(() => {
             (async () => {
