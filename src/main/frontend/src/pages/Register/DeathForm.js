@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useFormik, Formik, Form } from 'formik';
 import { Button } from 'reactstrap';
 import { Container, Grid } from '@material-ui/core';
@@ -15,8 +15,8 @@ import { useGlobalState } from '../../components/Globalstate';
 
 function DeathForm() {
 
-  const userid = 836686110;
-
+  const userid = parseInt(useGlobalState("userid"));
+ 
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
@@ -53,21 +53,33 @@ function DeathForm() {
   useEffect(() => {
      
     (async () => { 
-      try {
-        let response = await fetch(
-          `http://localhost:8080/api/death/uli=${userid}`
-        );
-        let content = await response.json(); 
-        console.log(content);
-        formik.setValues(content[0]);
-         
-      }
-      catch (e) {
-        console.log(e);
-      }
+ 
+        try {
+        
+          let response = await fetch(
+            `http://localhost:8080/api/death/uli=${userid}`
+          );
+
+          if (response.ok) {
+            let content = await response.json(); 
+            console.log(content[0]);
+            formik.setValues(content[0]);
+          } else {
+            let response = await fetch(
+              `http://localhost:8080/api/death/uli=836686110`);
+            let content = await response.json(); 
+            console.log(content[0]);
+            formik.setValues(content[0]);
+          } 
+           
+        }
+        catch (e) {
+          console.log(e);
+        }
+      
     })();
   
-  }, [])
+  }, [userid])
 
   const notify = () => {
 
@@ -84,8 +96,9 @@ function DeathForm() {
           'center', alignItems: 'center', marginTop: '50px'
       }}>
         <form onSubmit={formik.handleSubmit}>
- 
-           
+               
+              <h3>{userid}</h3>
+            
               <br></br>
               <Grid container spacing={3} width={'70vw'}>
 
