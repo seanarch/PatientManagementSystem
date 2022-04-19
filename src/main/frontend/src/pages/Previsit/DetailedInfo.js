@@ -22,9 +22,9 @@ function DetailedInfo() {
             bili: "",
             alb: "",
             PTINR: "",
-            ascites: 0,
+            ascites: "",
             hepaticEnch: "",
-            cpscore: 0,
+            cpscore: "",
             childpugh: "",
         }, 
 

@@ -10,7 +10,7 @@ import { useGlobalState } from '../../components/Globalstate';
 
  
 
-function GeneralInfo() {
+function FVCFEVInfo() {
 
     const userid = parseInt(useGlobalState("userid"));
 
@@ -20,8 +20,7 @@ function GeneralInfo() {
             datedi: "",
             ctchest: "",
             comments: "",
-    
-        }, 
+        },
 
         onSubmit: async (values) => {
             console.log(values);
@@ -35,10 +34,10 @@ function GeneralInfo() {
                     "Content-Type": "application/json"
                   },
                   body: `{
-                           "uliId": ${userid},
+                           "uliId": "${userid}",
                            "dateDI": "${values.datedi}",
-                           "typeDIId": "${values.ctchest}",
-                           "finding": "${values.comments}" 
+                           "finding": "${values.comments}",
+                           "typeDIId": "${values.ctchest}" 
                          }`
                 }
               );
@@ -65,7 +64,7 @@ function GeneralInfo() {
                     formik.setValues(content[0]);
                   } else {
                     let response = await fetch(
-                      `http://localhost:8080/api/diagnosticimaging/uli=836686110`);
+                      `http://localhost:8080/api/diagnosticimaging/uli=846205410`);
                     let content = await response.json(); 
                     console.log(content[0]);
                     formik.setValues(content[0]);
@@ -88,66 +87,66 @@ function GeneralInfo() {
         })
     }
 
-
     return (
         <Container maxWidth="md">
         <div className='container' style={{
             display: 'flex', justifyContent:
-                'center', alignItems: 'center', marginTop: '50px'
+                'center', alignItems: 'center', marginTop: '50px',marginBottom: '25px'
         }}>
-            <form onSubmit={formik.handleSubmit}>
-                 
-                        <Collapsible  trigger="General Information" triggerTagName='h3'  overflowWhenOpen="inherit" >
-                        <br></br>
-                        <Grid container spacing={3} width={'70vw'} >
 
+             <form onSubmit={formik.handleSubmit}>
+                     
+                     
+ 
+                
+                        <Collapsible trigger="General Information" triggerTagName='h3'  overflowWhenOpen="inherit">
+                         <br></br>
+                        <Grid container spacing={3} width={'70vw'}>
                         <Grid item xs={6}>
-                            <TextField
-                            label="Date Diagnosed"
-                            name="datedi"
-                            value={formik.values.datedi}
-                            onChange={formik.handleChange}
-                            fullWidth
-                            />
-                        </Grid>
-
-                        <Grid item xs={6}>
-                            <TextField
-                            label="Computed Tomography (CT) Chest"
-                            name="ctchest"
-                            value={formik.values.ctchest}
-                            onChange={formik.handleChange}
-                            fullWidth
-                            />
-                        </Grid>
-
-                               
-                                <Grid item xs={12}>
-                                    <TextField
-                                        fullWidth
-                                        label="Comments"
-                                        name="comments"
-                                        value={formik.values.comments}
-                                        onChange={formik.handleChange}
-                                        multiline
-                                        rows={4}
-                                    />
+                                        <TextField
+                                            label="Date Diagnosed"
+                                            name="dateDI"
+                                            value={formik.values.datedi}
+                                            onChange={formik.handleChange}
+                                            fullWidth
+                                        />
                                     </Grid>
-                                 
+                        
+                                    <Grid item xs={6}>
+                                        <TextField
+                                            label="Computed Tomography (CT) Chest"
+                                             
+                                            value={formik.values.ctchest}
+                                            onChange={formik.handleChange}
+                                            fullWidth
+                                        />
+                                    </Grid>
 
-                                <Grid item xs={12}>
-                                    <Button color='primary' type="submit" onClick={notify}>Save</Button>
-                                    <ToastContainer />
-                                </Grid>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            label="Finding"
+                                            name="comments"
+                                            value={formik.values.comments}
+                                            onChange={formik.handleChange}
+                                            fullWidth
+                                            multiline
+                                            rows={3}
+                                        />
+                                    </Grid>
+  
+                                    <Grid item xs={12}>
+                                        <Button color='primary' type="submit" onClick={notify}>Update</Button>
+                                        <ToastContainer />
+                                    </Grid>
+
                             </Grid>
                         </Collapsible>
                     </form>
-           
+
+
         </div>
     </Container>
     )
 }
 
-export default GeneralInfo;
-
- 
+export default FVCFEVInfo;
