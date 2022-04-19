@@ -9,11 +9,14 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { useGlobalState } from '../../components/Globalstate';
+import { useNavigate } from 'react-router-dom';
+ 
   
 function PatientInfo() {
 
     const userid = parseInt(useGlobalState("userid"));
-
+ 
+     
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
@@ -83,6 +86,13 @@ function PatientInfo() {
             autoClose: 2000
         })
     }
+
+    let naviage = useNavigate();
+
+    function handleClick() {
+        naviage("/register");
+    }
+ 
 
     return (
 
@@ -177,7 +187,8 @@ function PatientInfo() {
  
                                 
                                     <Grid item xs={12}>
-                                        <Button color='primary' type="submit" onClick={notify}>Update</Button>
+                                        <Button color='primary' type="submit" onClick={handleClick} >
+                                        Create</Button>
                                         <ToastContainer />
                                     </Grid>
                                 </Grid>

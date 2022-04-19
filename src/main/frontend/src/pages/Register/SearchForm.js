@@ -10,7 +10,6 @@ import Collapsible from 'react-collapsible';
 import 'react-toastify/dist/ReactToastify.css';
 import Searchfirstname from '../../components/Searchfirstname';
 import { setGlobalState, useGlobalState } from '../../components/Globalstate';
-
  
 
 
@@ -51,17 +50,14 @@ function SearchForm() {
     console.log(patientResponseData);
   }
 
-  useEffect(() => {
-    SearchFilter();
-  }, [])
-
+  
   const SearchFilterName = async () => {
     const patientResponse = await fetch(`http://localhost:8080/api/patient/all`);
     const patientResponseData = await patientResponse.json();
     setPatientName(patientResponseData);
     console.log(patientResponseData);
   }
-
+  
   const SearchFilterLast = async () => {
     const patientResponse = await fetch(`http://localhost:8080/api/patient/all`);
     const patientResponseData = await patientResponse.json();
@@ -70,13 +66,17 @@ function SearchForm() {
   }
 
   useEffect(() => {
+    SearchFilter();
+  }, [])
+
+  useEffect(() => {
     SearchFilterName();
   }, [])
 
   useEffect(() => {
     SearchFilterLast();
   }, [])
-
+ 
   const handleFilterId = (event) => {
     const searchWordId = event.target.value;
     setWordEnteredId(searchWordId);
