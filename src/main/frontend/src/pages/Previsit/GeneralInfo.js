@@ -17,9 +17,9 @@ function GeneralInfo() {
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
-            date: "",
-            ctchest: "",
-            comments: "",
+            dateDI: "",
+            typeDIId: "",
+            finding: "",
         },
 
         onSubmit: async (values) => {
@@ -35,9 +35,9 @@ function GeneralInfo() {
                   },
                   body: `{
                            "uliId": "${userid}",
-                           "dateDI": "${values.date}",
-                           "typeDIId": "${values.ctchest}", 
-                           "finding": "${values.comments}"
+                           "dateDI": "${values.dateDI}",
+                           "typeDIId": "${values.typeDIId}", 
+                           "finding": "${values.finding}"
                          }`
                 }
               );
@@ -106,7 +106,7 @@ function GeneralInfo() {
                                         <TextField
                                             label="Date Diagnosed"
                                             name="date"
-                                            value={formik.values.date}
+                                            value={formik.values.dateDI}
                                             onChange={formik.handleChange}
                                             fullWidth
                                         />
@@ -115,8 +115,8 @@ function GeneralInfo() {
                                     <Grid item xs={6}>
                                         <TextField
                                             label="Computed Tomography (CT) Chest"
-                                             
-                                            value={formik.values.ctchest}
+                                            name="typeDIId"
+                                            value={formik.values.typeDIId}
                                             onChange={formik.handleChange}
                                             fullWidth
                                         />
@@ -126,7 +126,7 @@ function GeneralInfo() {
                                         <TextField
                                             label="Finding"
                                             name="comments"
-                                            value={formik.values.comments}
+                                            value={formik.values.finding}
                                             onChange={formik.handleChange}
                                             fullWidth
                                             multiline

@@ -97,7 +97,7 @@ function DeathForm() {
       }}>
         <form onSubmit={formik.handleSubmit}>
                
-                
+        <Collapsible  trigger="Death Information" triggerTagName='h3'   overflowWhenOpen="inherit">  
               <Grid container spacing={3} width={'70vw'}>
 
               <Grid item xs={6}>
@@ -128,7 +128,7 @@ function DeathForm() {
                 </Grid>
 
               </Grid>
-            
+              </Collapsible>
           </form>
          
       </div>

@@ -19,8 +19,8 @@ function DetailedInfo() {
         enableReinitialize: true,
         initialValues: {
             date: "",
-            bili: "",
-            alb: "",
+            totalBiliUmolL: "",
+            serumAlbGL: "",
             PTINR: "",
             ascites: "",
             hepaticEnch: "",
@@ -42,7 +42,7 @@ function DetailedInfo() {
                   body: `{
                            "uliId": ${userid},
                            "date": "${values.date}",
-                           "totalBiliUmolL": "${values.bili}",
+                           "totalBiliUmolL": "${values.totalBiliUmolL}",
                            "serumAlbGL": "${values.alb}",
                            "PTINR": "${values.PTINR}",
                            "ascites": "${values.ascites}",
@@ -124,7 +124,7 @@ function DetailedInfo() {
                             <TextField
                             label="Total BiliUmolL"
                             name="Total BiliUmolL"
-                            value={formik.values.bili}
+                            value={formik.values.totalBiliUmolL}
                             onChange={formik.handleChange}
                             fullWidth
                             />
@@ -134,7 +134,7 @@ function DetailedInfo() {
                             <TextField
                             label="Serum AlbGL"
                             name="Serum AlbGL"
-                            value={formik.values.alb}
+                            value={formik.values.serumAlbGL}
                             onChange={formik.handleChange}
                             fullWidth
                             />
