@@ -83,6 +83,7 @@ function RegisterForm() {
                                         <TextField
                                             label="Lastname"
                                             name="lastname"
+                                            InputLabelProps={{ shrink: true}}
                                             value={formik.values.lastname}
                                             onChange={formik.handleChange}
                                             fullWidth
@@ -92,6 +93,7 @@ function RegisterForm() {
                                         <TextField
                                             label="Firstname"
                                             name="firstname"
+                                            InputLabelProps={{ shrink: true}}
                                             value={formik.values.firstname}
                                             onChange={formik.handleChange}
                                             fullWidth
@@ -101,6 +103,7 @@ function RegisterForm() {
                                         <TextField
                                             label="Sex"
                                             name="sex"
+                                            InputLabelProps={{ shrink: true}}
                                             value={formik.values.sex}
                                             onChange={formik.handleChange}
                                             fullWidth
@@ -110,6 +113,7 @@ function RegisterForm() {
                                         <TextField
                                             label="Birthday"
                                             name="birthday"
+                                            InputLabelProps={{ shrink: true}}
                                             value={formik.values.birthday}
                                             onChange={formik.handleChange}
                                             fullWidth
@@ -129,6 +133,7 @@ function RegisterForm() {
                                         <TextField
                                             label="TG"
                                             name="tg"
+                                            InputLabelProps={{ shrink: true}}
                                             value={formik.values.tg}
                                             onChange={formik.handleChange}
                                             fullWidth
@@ -138,6 +143,7 @@ function RegisterForm() {
                                         <TextField
                                             label="Location"
                                             name="location"
+                                            InputLabelProps={{ shrink: true}}
                                             value={formik.values.location}
                                             onChange={formik.handleChange}
                                             fullWidth

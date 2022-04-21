@@ -18,7 +18,7 @@ const Navbar = () => {
         <>
             <Nav>
                 <NavLink to='/'>
-                    Logo
+                     
                 </NavLink>
                 <Bars />
 
