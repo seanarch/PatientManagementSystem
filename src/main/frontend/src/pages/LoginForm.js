@@ -35,10 +35,10 @@ const LoginForm = () => {
       //  console.log(data);
 
      //set the login Form to dummy
-     setIsLoggedIn(true);
-    window.localStorage.setItem("login-status", true);
+     //setIsLoggedIn(true);
+    //window.localStorage.setItem("login-status", true);
 
-/*
+
       //if data.message exist(user not found in the back end), display the message to screen
       if (data.message) {
         setloginStatus(data.message);
@@ -49,10 +49,10 @@ const LoginForm = () => {
         setloginStatus("Successfully logged in.");
 
         setIsLoggedIn(true);
-     //   window.localStorage.setItem("login-status", true);
+        window.localStorage.setItem("login-status", true);
       }
 
-*/
+
     } catch (e) {
       console.log(e);
     }
